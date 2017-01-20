@@ -1,55 +1,45 @@
 package db;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Properties;
 
+
 /**
- * Created by rrose on 21.11.2016.
+ * Created by ajanzen on 16.12.2016.
  */
 public class DBConnect {
+    private static Connection connection;
 
-    private static Connection CON;
+    public static boolean verbindungAufbauen(String url, Properties info) throws SQLException {
+        connection = DriverManager.getConnection(url, info);
+        if (verbindungSteht()) {
 
-    public DBConnect(String sql) {
-
-    }
-
-    public void verbindungAufbauen(String url, Properties properties) {
-
-    }
-
-    public void schliessen() {
-
-    }
-
-    public static Properties datenEinlesen(String dateipfad) {
-        Properties properties = null;
-        return properties;
-    }
-
-    public PreparedStatement preparedStatement(String sql) {
-        PreparedStatement pstm = null;
-        try {
-            pstm = CON.prepareStatement(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return true;
+        } else {
+            System.exit(-1);
+            return false;
         }
+    }
+
+    public static boolean verbindungSteht() throws SQLException {
+        if (connection != null && connection.isValid(0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void schliessen() throws SQLException {
+        if (connection != null && connection.isValid(0)) {
+            connection.close();
+        }
+    }
+
+    public static PreparedStatement preparedStatement(String sql) throws SQLException {
+        PreparedStatement pstm = connection.prepareStatement(sql);
         return pstm;
     }
-
-    public Statement getStatement(String sql) {
-        Statement st = null;
-        try {
-            st = CON.createStatement();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return st;
-    }
-
-
 }

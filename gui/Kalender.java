@@ -1,7 +1,170 @@
 package gui;
 
+import javax.swing.*;
+import javax.swing.table.TableColumn;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.IsoFields;
+import java.util.*;
+import java.util.List;
+
 /**
- * Created by rrose on 01.12.2016.
+ * Created by mwaldau on 21.11.2016.
  */
-public class Kalender {
+public class Kalender extends JPanel {
+    public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
+    private final JTabbedPane kalenderPane = new JTabbedPane();
+    private final JPanel monat = new JPanel(new BorderLayout());
+    private final JPanel woche = new JPanel(new BorderLayout());
+    private final String[] wochenAnzeige = {"Dienstgrad", "Name", "1", "2", "3", "4", "5", "6", "7"};
+    public static LocalDate datum = LocalDate.now();
+
+    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
+    private String[][] wochenDaten = {{"H", "Pimpelhuber", "A", "N", "", "", "", "", ""}};
+
+    public Kalender() {
+        this.setLayout(new BorderLayout());
+
+
+        monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
+        woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
+
+
+
+        monatsAnzeigeBauen();
+
+
+
+
+
+
+
+
+
+
+
+
+        monat.add(createKalender(monatDaten,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
+        woche.add(createKalender(wochenDaten,wochenAnzeige),BorderLayout.CENTER);
+
+
+        kalenderPane.add("Monat", monat);
+        kalenderPane.add("Woche", woche);
+    }
+
+    private List<String> monatsAnzeigeBauen() {
+        List<String> monatsAnzeige = new ArrayList<>();
+
+        monatsAnzeige.clear();
+        monatsAnzeige.add("Dienstgrad");
+        monatsAnzeige.add("Name");
+        for (int i = 1; i < datum.getMonth().length(datum.isLeapYear())+1; i++) {
+            monatsAnzeige.add(Integer.toString(i));
+        }
+        return monatsAnzeige;
+    }
+
+
+    private JScrollPane createKalender(String[][] daten, String[] anzeige) {
+        JTable kalender = new JTable();
+        kalender.setModel(new KalenderModel(daten,anzeige));
+        kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
+        JScrollPane halter = new JScrollPane(kalender);
+        kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        halter.setPreferredSize(new Dimension(1200,400));
+
+        halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        halter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+//   Zeilenbreiten setzen
+        TableColumn zeile = null;
+        for (int i = 0; i < anzeige.length; i++) {
+            zeile = kalender.getColumnModel().getColumn(i);
+            if (i < 2) {
+                zeile.setPreferredWidth(100);
+                zeile.setMinWidth(100);
+            } else {
+                zeile.setPreferredWidth(40);
+                zeile.setMinWidth(40);
+            }
+        }
+        return halter;
+    }
+
+    public JPanel anzeigen() {
+
+        this.add(kalenderPane);
+        return this;
+    }
+
+
+    private JPanel monatsAnzeigePanel() {
+        JPanel anzeigePanel = new JPanel();
+        JLabel label = new JLabel( String.format("%s", MONATJAHRFORMATTER.format(datum)), JLabel.CENTER);
+        label.setPreferredSize(new Dimension(500,60));
+        JButton zurueck = new JButton("<");
+        zurueck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                datum = datum.minusMonths(1);
+                label.setText( String.format("%s", MONATJAHRFORMATTER.format(datum)));
+                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
+                monat.remove(1);
+                monat.add(createKalender(buffer,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
+            }
+        });
+        JButton weiter = new JButton(">");
+        weiter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                datum = datum.plusMonths(1);
+                label.setText( String.format("%s", MONATJAHRFORMATTER.format(datum)));
+                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
+                monat.remove(1);
+                monat.add(createKalender(buffer,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
+            }
+        });
+
+        label.setFont(new Font(label.getFont().getName(),Font.CENTER_BASELINE, 35));
+
+        anzeigePanel.add(zurueck);
+        anzeigePanel.add(label);
+        anzeigePanel.add(weiter);
+
+        return anzeigePanel;
+    }
+    private JPanel wochenAnzeigePanel() {
+        JPanel anzeigePanel = new JPanel();
+        JLabel label = new JLabel(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()), JLabel.CENTER);
+        label.setPreferredSize(new Dimension(500,60));
+        JButton zurueck = new JButton("<");
+        zurueck.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                datum = datum.minusWeeks(1);
+                label.setText(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
+            }
+        });
+        JButton weiter = new JButton(">");
+        weiter.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                datum = datum.plusWeeks(1);
+                label.setText(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
+            }
+        });
+
+
+        label.setFont(new Font(label.getFont().getName(),Font.CENTER_BASELINE, 35));
+
+        anzeigePanel.add(zurueck);
+        anzeigePanel.add(label);
+        anzeigePanel.add(weiter);
+
+        return anzeigePanel;
+    }
+
 }

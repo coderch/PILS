@@ -1,23 +1,13 @@
 package db;
 
-import datenmodell.Nutzer;
-import javafx.scene.control.TreeView;
+import ress.Nutzer;
 
 /**
- * Created by rrose on 21.11.2016.
+ * Created by ajanzen on 16.12.2016.
  */
-public class NutzerDao {
+public class NutzerDAO {
 
-    private NutzerDao() {
+    public static void speichern(Nutzer nutzer){
+        //String sqlState = "INSERT INTO t_nutzer(pk_personalnummer, dienstgrad, name, vorname, kennwort, fk_t_rolle_ok_id) "
     }
-
-    private void speichern(Nutzer nutzer) {
-
-    }
-
-    private TreeView<Nutzer> alleNutzerLaden() {
-        TreeView<Nutzer> nutzerbaum = null;
-        return nutzerbaum;
-    }
-
 }

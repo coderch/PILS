@@ -1,5 +1,6 @@
 package einrichtung;
 
+import einrichtung.db.DBVerbindung;
 import einrichtung.gui.Frameholder;
 
 /**
@@ -7,6 +8,7 @@ import einrichtung.gui.Frameholder;
  */
 public class Runner {
     public static void main(String[] args) {
+        DBVerbindung.verbinden();
         new Frameholder();
     }
 }
