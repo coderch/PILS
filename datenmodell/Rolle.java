@@ -1,20 +1,17 @@
-package ress;
+package datenmodell;
 
 /**
  * Created by ajanzen on 16.12.2016.
  */
-public class Vorhaben {
-    private final String name;
+public class Rolle {
+
     private final String beschreibung;
 
-    public Vorhaben(String name, String beschreibung) {
-        this.name = name;
+    public Rolle(String beschreibung) {
+
         this.beschreibung = beschreibung;
     }
 
-    public String getName() {
-        return name;
-    }
 
     public String getBeschreibung() {
         return beschreibung;
@@ -22,6 +19,6 @@ public class Vorhaben {
 
     @Override
     public String toString() {
-        return name;
+        return "Rolle: "+beschreibung;
     }
 }

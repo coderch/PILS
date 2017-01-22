@@ -1,13 +1,49 @@
 package db;
 
-import ress.Nutzer;
+import datenmodell.Nutzer;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by ajanzen on 16.12.2016.
  */
 public class NutzerDAO {
+    
+    private NutzerDAO(){}
 
-    public static void speichern(Nutzer nutzer){
-        //String sqlState = "INSERT INTO t_nutzer(pk_personalnummer, dienstgrad, name, vorname, kennwort, fk_t_rolle_ok_id) "
+    public static void nutzerSpeichern(Nutzer nutzer) {
+        String sqlStatement = "INSERT INTO t_nutzer(pk_personalnummer, dienstgrad, name, vorname, kennwort, fk_t_rolle_pk_beschreibung) VALUES (?,?,?,?,?,?)";
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setString(2, nutzer.getDienstgrad());
+            pstm.setString(3, nutzer.getName());
+            pstm.setString(4, nutzer.getVorname());
+            pstm.setString(5, nutzer.getKennwort());
+            pstm.setString(6, nutzer.getRolle());
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+    }
+
+    public static List<Nutzer> nutzerHolen() {
+        String sqlStatement = "SELECT pk_personalnummer, dienstgrad,name, vorname, kennwort, fk_t_rolle_pk_beschreibung FROM t_nutzer";
+        List<Nutzer> alleNutzer = new LinkedList<>();
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                Nutzer nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                alleNutzer.add(nutzer);
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return alleNutzer;
     }
 }

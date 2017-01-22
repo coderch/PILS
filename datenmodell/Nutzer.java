@@ -1,6 +1,6 @@
 package datenmodell;
 
-import java.time.LocalDateTime;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by rrose on 21.11.2016.
@@ -8,27 +8,31 @@ import java.time.LocalDateTime;
 public class Nutzer {
 
     private final int personalnummer;
-    private String password;
+    private String kennwort;
     private String name;
     private String vorname;
     private String dienstgrad;
-    private LocalDateTime geburtstag;
+    private String rolle;
 
-    public Nutzer(int personalnummer, String password, String name, String vorname, String dienstgrad, LocalDateTime gebursttag) {
+    public Nutzer(int personalnummer, String password, String name, String vorname, String dienstgrad, String rolle) {
         this.personalnummer = personalnummer;
-        this.password = password;
+        try {
+            this.kennwort = PasswordHash.createHash(password);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
         this.name = name;
         this.vorname = vorname;
         this.dienstgrad = dienstgrad;
-        this.geburtstag = gebursttag;
+        this.rolle = rolle;
     }
 
     public int getPersonalnummer() {
         return personalnummer;
     }
 
-    public String getPassword() {
-        return password;
+    public String getKennwort() {
+        return kennwort;
     }
 
     public String getName() {
@@ -43,34 +47,7 @@ public class Nutzer {
         return dienstgrad;
     }
 
-    public LocalDateTime getGebursttag() {
-        return geburtstag;
+    public String getRolle() {
+        return rolle;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setVorname(String vorname) {
-        this.vorname = vorname;
-    }
-
-    public void setDienstgrad(String dienstgrad) {
-        this.dienstgrad = dienstgrad;
-    }
-
-    public void setGeburtstag(LocalDateTime gebursttag) {
-        this.geburtstag = geburtstag;
-    }
-
-    public String passwordHash(String password) {
-        String hash = "";
-        return hash;
-    }
-
-
 }

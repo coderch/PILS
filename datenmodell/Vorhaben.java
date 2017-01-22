@@ -1,5 +1,6 @@
 package datenmodell;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -7,22 +8,20 @@ import java.time.LocalDateTime;
  */
 public class Vorhaben {
 
-    private final int id;
     private String name;
     private String beschreibung;
-    private LocalDateTime start;
-    private LocalDateTime ende;
+    private LocalDate start;
+    private LocalDate ende;
 
-    public Vorhaben(int id, String name, String beschreibung, LocalDateTime start, LocalDateTime ende) {
-        this.id = id;
+    public Vorhaben(String name, String beschreibung, LocalDate start, LocalDate ende) {
         this.name = name;
         this.beschreibung = beschreibung;
         this.start = start;
         this.ende = ende;
     }
-
-    public int getId() {
-        return id;
+    public Vorhaben(String name, String beschreibung){
+        this.name = name;
+        this.beschreibung = beschreibung;
     }
 
     public String getName() {
@@ -41,19 +40,19 @@ public class Vorhaben {
         this.beschreibung = beschreibung;
     }
 
-    public LocalDateTime getStart() {
+    public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(LocalDate start) {
         this.start = start;
     }
 
-    public LocalDateTime getEnde() {
+    public LocalDate getEnde() {
         return ende;
     }
 
-    public void setEnde(LocalDateTime ende) {
+    public void setEnde(LocalDate ende) {
         this.ende = ende;
     }
 }

@@ -1,6 +1,6 @@
 package db;
 
-import ress.Rolle;
+import datenmodell.Rolle;
 
 import javax.swing.*;
 import java.sql.PreparedStatement;

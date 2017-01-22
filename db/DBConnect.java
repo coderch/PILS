@@ -13,23 +13,23 @@ import java.util.Properties;
 public class DBConnect {
     private static Connection connection;
 
-    public static boolean verbindungAufbauen(String url, Properties info) throws SQLException {
+    public static void verbindungAufbauen(String url, Properties info) throws SQLException {
         connection = DriverManager.getConnection(url, info);
-        if (verbindungSteht()) {
-
-            return true;
-        } else {
+        if (!verbindungSteht()) {
             System.exit(-1);
-            return false;
         }
     }
 
-    public static boolean verbindungSteht() throws SQLException {
-        if (connection != null && connection.isValid(0)) {
-            return true;
-        } else {
-            return false;
+    public static boolean verbindungSteht() {
+        boolean steht = false;
+        if (connection != null) {
+            try {
+                if (connection.isValid(0)) steht = true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        return steht;
     }
 
     public static void schliessen() throws SQLException {

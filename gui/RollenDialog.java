@@ -1,15 +1,12 @@
 package gui;
 
-
+import datenmodell.Rolle;
 import db.RolleDAO;
-import ress.Rolle;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created by ajanzen on 16.12.2016.

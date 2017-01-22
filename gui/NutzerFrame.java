@@ -1,13 +1,11 @@
 package gui;
-
+import datenmodell.Rolle;
 import db.RolleDAO;
-import ress.Rolle;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
-import java.util.*;
 
 /**
  * Created by ajanzen on 09.01.2017.

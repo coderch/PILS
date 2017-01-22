@@ -1,6 +1,6 @@
 import db.DBConnect;
 import gui.Frameholder2;
-import ress.Nutzer;
+import datenmodell.Nutzer;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -19,15 +19,11 @@ public class Runner2 {
         config = readConfigFile();
 
         try {
-            if (DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config)) {
-                System.out.println("Verbunden");
-                new Frameholder2();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
+        } catch (SQLException e1) {
+            e1.printStackTrace();
         }
-
-        System.out.println();
+        new Frameholder2();
     }
 
     private static Properties readConfigFile() {
