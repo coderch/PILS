@@ -14,10 +14,10 @@ public class Nutzer {
     private String dienstgrad;
     private String rolle;
 
-    public Nutzer(int personalnummer, String password, String name, String vorname, String dienstgrad, String rolle) {
+    public Nutzer(int personalnummer, String kennwort, String name, String vorname, String dienstgrad, String rolle) {
         this.personalnummer = personalnummer;
         try {
-            this.kennwort = PasswordHash.createHash(password);
+            this.kennwort = PasswordHash.createHash(kennwort);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }

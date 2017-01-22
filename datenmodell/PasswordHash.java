@@ -10,9 +10,9 @@ public class PasswordHash {
 
     private PasswordHash(){}
 
-   public static String createHash(String password) throws NoSuchAlgorithmException {
+   public static String createHash(String kennwort) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
-        byte[] result = mDigest.digest(password.getBytes());
+        byte[] result = mDigest.digest(kennwort.getBytes());
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < result.length; i++) {
             sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
