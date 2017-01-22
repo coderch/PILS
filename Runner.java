@@ -13,7 +13,7 @@ public class Runner {
 
         System.out.println(nutzer.getKennwort());
         try {
-            System.out.println(PasswordHash.createHash("password"));
+            System.out.println(PasswordHash.createHash("Password"));
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
