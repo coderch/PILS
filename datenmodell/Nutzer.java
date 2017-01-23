@@ -50,4 +50,8 @@ public class Nutzer {
     public String getRolle() {
         return rolle;
     }
+
+    public String toString(){
+        return personalnummer + " " + name + " " + vorname;
+    }
 }
