@@ -9,8 +9,10 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,8 +21,8 @@ import java.util.List;
 public class VorhabenAnlegen extends JDialog{
     private final JTextField name = new JTextField(35);
     private final JTextArea beschreibung = new JTextArea(5,35);
-    private final JDateChooser beginn = new JDateChooser();
-    private final JDateChooser ende = new JDateChooser();
+    private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
+    private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> soldaten;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben = null;

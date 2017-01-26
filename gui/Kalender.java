@@ -1,4 +1,5 @@
 package gui;
+
 import gui.img.Imagehelper;
 
 import javax.swing.*;
@@ -25,8 +26,9 @@ public class Kalender extends JPanel {
     private final String[] wochenAnzeige = {"Dienstgrad", "Name", "1", "2", "3", "4", "5", "6", "7"};
     public static LocalDate datum = LocalDate.now();
 
-    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
-    private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""}};
+    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
+    private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""},
+            {"SU", "Meier", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""}};
 
     public Kalender() {
         this.setLayout(new BorderLayout());
@@ -35,8 +37,8 @@ public class Kalender extends JPanel {
         monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
         monatsAnzeigeBauen();
-        monat.add(createKalender(monatDaten,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
-        woche.add(createKalender(wochenDaten,wochenAnzeige),BorderLayout.CENTER);
+        monat.add(createKalender(monatDaten, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+        woche.add(createKalender(wochenDaten, wochenAnzeige), BorderLayout.CENTER);
 
 
         kalenderPane.add("Monat", monat);
@@ -49,7 +51,7 @@ public class Kalender extends JPanel {
         monatsAnzeige.clear();
         monatsAnzeige.add("Dienstgrad");
         monatsAnzeige.add("Name");
-        for (int i = 1; i < datum.getMonth().length(datum.isLeapYear())+1; i++) {
+        for (int i = 1; i < datum.getMonth().length(datum.isLeapYear()) + 1; i++) {
             monatsAnzeige.add(Integer.toString(i));
         }
         return monatsAnzeige;
@@ -58,13 +60,13 @@ public class Kalender extends JPanel {
 
     private JScrollPane createKalender(String[][] daten, String[] anzeige) {
         JTable kalender = new JTable();
-        kalender.setModel(new KalenderModel(daten,anzeige));
+        kalender.setModel(new KalenderModel(daten, anzeige));
         kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
         kalender.getTableHeader().setReorderingAllowed(false);
         JScrollPane halter = new JScrollPane(kalender);
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         kalender.setRowHeight(20);
-        halter.setPreferredSize(new Dimension(1200,400));
+        halter.setPreferredSize(new Dimension(1200, 400));
 
         halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         halter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -94,17 +96,17 @@ public class Kalender extends JPanel {
 
     private JPanel monatsAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();
-        JLabel label = new JLabel( String.format("%s", MONATJAHRFORMATTER.format(datum)), JLabel.CENTER);
-        label.setPreferredSize(new Dimension(500,60));
+        JLabel label = new JLabel(String.format("%s", MONATJAHRFORMATTER.format(datum)), JLabel.CENTER);
+        label.setPreferredSize(new Dimension(500, 60));
         JButton zurueck = new JButton("<");
         zurueck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 datum = datum.minusMonths(1);
-                label.setText( String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
+                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
+                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
                 monat.remove(1);
-                monat.add(createKalender(buffer,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
+                monat.add(createKalender(buffer, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
         JButton weiter = new JButton(">");
@@ -112,14 +114,14 @@ public class Kalender extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 datum = datum.plusMonths(1);
-                label.setText( String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
+                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
+                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
                 monat.remove(1);
-                monat.add(createKalender(buffer,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
+                monat.add(createKalender(buffer, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
 
-        label.setFont(new Font(label.getFont().getName(),Font.CENTER_BASELINE, 35));
+        label.setFont(new Font(label.getFont().getName(), Font.CENTER_BASELINE, 35));
 
         anzeigePanel.add(zurueck);
         anzeigePanel.add(label);
@@ -127,16 +129,17 @@ public class Kalender extends JPanel {
 
         return anzeigePanel;
     }
+
     private JPanel wochenAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();
-        JLabel label = new JLabel(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()), JLabel.CENTER);
-        label.setPreferredSize(new Dimension(500,60));
+        JLabel label = new JLabel(String.format("%s. Kalenderwoche %s", datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()), JLabel.CENTER);
+        label.setPreferredSize(new Dimension(500, 60));
         JButton zurueck = new JButton("<");
         zurueck.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 datum = datum.minusWeeks(1);
-                label.setText(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
+                label.setText(String.format("%s. Kalenderwoche %s", datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
             }
         });
         JButton weiter = new JButton(">");
@@ -144,12 +147,12 @@ public class Kalender extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 datum = datum.plusWeeks(1);
-                label.setText(String.format("%s. Kalenderwoche %s",datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
+                label.setText(String.format("%s. Kalenderwoche %s", datum.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR), datum.getYear()));
             }
         });
 
 
-        label.setFont(new Font(label.getFont().getName(),Font.CENTER_BASELINE, 35));
+        label.setFont(new Font(label.getFont().getName(), Font.CENTER_BASELINE, 35));
 
         anzeigePanel.add(zurueck);
         anzeigePanel.add(label);

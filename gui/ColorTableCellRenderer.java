@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Created by pacmaniac on 23.12.2016.
@@ -21,7 +24,7 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
 
         JLabel zelle = new JLabel((String) value);
 
-        if (value != null) {
+        if (value != null && value instanceof String) {
             switch ((String) value) {
                 default:
                     break;
@@ -39,6 +42,16 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
                     break;
             }
 
+        }
+
+        if (column >= 2) {
+            DayOfWeek dayOfWeek = LocalDate.of(Kalender.datum.getYear(), Kalender.datum.getMonth(), column - 1).getDayOfWeek();
+
+            if (dayOfWeek.equals(DayOfWeek.SATURDAY) || dayOfWeek.equals(DayOfWeek.SUNDAY)) {
+                zelle.setBackground(Color.lightGray);
+                zelle.setOpaque(true);
+
+            }
         }
 
 
