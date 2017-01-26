@@ -1,10 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
+package gui;
 
 /**
- * Created by mwaldau on 21.11.2016.
+ * Created by mwaldau on 26.01.2017.
  */
-public class Runner {
+public class WaldauRunner {
     public static void main(String[] args) {
         new Frameholder(3);
 //        List<String> vorhabenListe = new ArrayList<>();

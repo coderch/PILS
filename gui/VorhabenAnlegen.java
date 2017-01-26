@@ -1,4 +1,6 @@
+package gui;
 import com.toedter.calendar.JDateChooser;
+import datenmodell.Vorhaben;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -20,6 +22,7 @@ public class VorhabenAnlegen extends JDialog{
     private final List<String> soldaten;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben = null;
+
 
 
     public VorhabenAnlegen(List<String> soldaten, List<String> vorhabenListe){
