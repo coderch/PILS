@@ -1,5 +1,6 @@
 package gui;
 import com.toedter.calendar.JDateChooser;
+import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +21,19 @@ public class VorhabenAnlegen extends JDialog{
     private final JTextArea beschreibung = new JTextArea(5,35);
     private final JDateChooser beginn = new JDateChooser();
     private final JDateChooser ende = new JDateChooser();
-    private final List<String> soldaten;
+    private final List<Nutzer> soldaten;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben = null;
 
 
 
-    public VorhabenAnlegen(List<String> soldaten, List<String> vorhabenListe){
+    public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe){
         this.setTitle("Vorhaben erstellen");
         this.soldaten = soldaten;
         this.vorhabenListe = vorhabenListe;
         dialogBauen();
     }
-    public VorhabenAnlegen(List<String> soldaten, List<String> vorhabenListe, Vorhaben vorhaben){
+    public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe, Vorhaben vorhaben){
         this.setTitle("Vorhaben bearbeiten");
         this.soldaten = soldaten;
         this.vorhabenListe = vorhabenListe;
@@ -49,11 +51,12 @@ public class VorhabenAnlegen extends JDialog{
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    private void inDBschreiben(){
-        //TODO mit DAO verheiraten
+    private void inDBschreiben(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten){
+//        VorhabenDAO.vorhabenSpeichern(vorhaben);
+        //TODO Soldaten Liste übergeben an DAO
     }
 
-    private JPanel createContent(List<String> vorhaben, List<String> soldatenListe) {
+    private JPanel createContent(List<String> vorhaben, List<Nutzer> soldatenListe) {
         JPanel contentPanel = new JPanel(new GridBagLayout());
 
         //--------------left Panel---------------------
@@ -131,8 +134,8 @@ public class VorhabenAnlegen extends JDialog{
 
         //-------------center4-------------------------
 
-        List<String> eingeteilteSoldaten = new ArrayList<>();
-        JList<String> soldatenJlist1 = new JList(soldatenListe.toArray(new String[0]));
+        List<Nutzer> eingeteilteSoldaten = new ArrayList<>();
+        JList<Nutzer> soldatenJlist1 = new JList(soldatenListe.toArray(new Nutzer[0]));
         soldatenJlist1.setBorder(name.getBorder());
         soldatenJlist1.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten1Panel = new JPanel();
@@ -144,7 +147,7 @@ public class VorhabenAnlegen extends JDialog{
         soldatenJList1Contraint.gridx = 0;
         soldatenJList1Contraint.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        JList<String> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new String[0]));
+        JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new String[0]));
         soldatenJlist2.setBorder(name.getBorder());
         soldatenJlist2.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
@@ -161,13 +164,13 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (!soldatenJlist1.isSelectionEmpty()) {
-                    for (String s : soldatenJlist1.getSelectedValuesList()) {
-                        soldatenListe.remove(s);
-                        eingeteilteSoldaten.add(s);
+                    for (Nutzer nutzer : soldatenJlist1.getSelectedValuesList()) {
+                        soldatenListe.remove(nutzer);
+                        eingeteilteSoldaten.add(nutzer);
                     }
                     soldatenJlist1.removeAll();
-                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new String[0]));
-                    soldatenJlist1.setListData(soldatenListe.toArray(new String[0]));
+                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
+                    soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
                 }
             }
         });
@@ -177,13 +180,13 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 if (!soldatenJlist2.isSelectionEmpty()) {
-                    for (String s : soldatenJlist2.getSelectedValuesList()) {
-                        eingeteilteSoldaten.remove(s);
-                        soldatenListe.add(s);
+                    for (Nutzer nutzer : soldatenJlist2.getSelectedValuesList()) {
+                        eingeteilteSoldaten.remove(nutzer);
+                        soldatenListe.add(nutzer);
                     }
                     soldatenJlist2.removeAll();
-                    soldatenJlist1.setListData(soldatenListe.toArray(new String[0]));
-                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new String[0]));
+                    soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
+                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
                 }
             }
         });
@@ -214,15 +217,18 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                inDBschreiben();
+                Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                inDBschreiben(vorhaben, eingeteilteSoldaten);
                 dispose();
+
             }
         });
         JButton uebernehmen = new JButton("Übernehmen");
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                inDBschreiben();
+                Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                inDBschreiben(vorhaben, eingeteilteSoldaten);
             }
         });
         JButton abbrechen = new JButton("Abbrechen");

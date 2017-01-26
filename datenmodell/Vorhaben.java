@@ -55,4 +55,14 @@ public class Vorhaben {
     public void setEnde(LocalDate ende) {
         this.ende = ende;
     }
+
+    @Override
+    public String toString() {
+        return "Vorhaben{" +
+                "name='" + name + '\'' +
+                ", beschreibung='" + beschreibung + '\'' +
+                ", start=" + start +
+                ", ende=" + ende +
+                '}';
+    }
 }

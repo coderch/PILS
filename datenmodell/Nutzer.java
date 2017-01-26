@@ -52,6 +52,6 @@ public class Nutzer {
     }
 
     public String toString(){
-        return personalnummer + " " + name + " " + vorname;
+        return dienstgrad + " " + name;
     }
 }
