@@ -1,4 +1,6 @@
 package gui;
+import gui.img.Imagehelper;
+
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -56,24 +58,26 @@ public class Kalender extends JPanel {
         JTable kalender = new JTable();
         kalender.setModel(new KalenderModel(daten,anzeige));
         kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
+        kalender.getTableHeader().setReorderingAllowed(false);
         JScrollPane halter = new JScrollPane(kalender);
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        kalender.setRowHeight(50);
+        kalender.setRowHeight(20);
         halter.setPreferredSize(new Dimension(1200,400));
 
         halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         halter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 //   Zeilenbreiten setzen
-        TableColumn zeile = null;
+        TableColumn spalte = null;
         for (int i = 0; i < anzeige.length; i++) {
-            zeile = kalender.getColumnModel().getColumn(i);
+            spalte = kalender.getColumnModel().getColumn(i);
+            spalte.setResizable(false);
             if (i < 2) {
-                zeile.setPreferredWidth(100);
-                zeile.setMinWidth(100);
+                spalte.setPreferredWidth(100);
+                spalte.setMinWidth(100);
             } else {
-                zeile.setPreferredWidth(50);
-                zeile.setMinWidth(50);
+                spalte.setPreferredWidth(20);
+                spalte.setMinWidth(20);
             }
         }
         return halter;

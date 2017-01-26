@@ -89,7 +89,7 @@ public class NutzerFrame extends JDialog {
 
         jPanelDGZusatz.setBorder(BorderFactory.createTitledBorder("Dienstgradzusatz"));
         JComboBox<String> jComboBoxDG = new JComboBox<>();
-        String [] diensgrade = {"S", "G", "OG", "HG", "SG", "OSG", "U", "SU", "F", "OF", "HF", "SF", "OSF", "L", "OL", "H", "SH", "M"};
+        String [] diensgrade = {"S", "G", "OG", "HG", "SG", "OSG", "U", "SU", "F", "OF", "HF", "OFR", "SF", "OSF", "L", "OL", "H", "SH", "M"};
         for (String s : diensgrade) {
             jComboBoxDG.addItem(s);
         }

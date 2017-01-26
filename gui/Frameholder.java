@@ -12,7 +12,7 @@ import java.util.List;
 public class Frameholder {
     private final JFrame frame;
     private final Kalender kalender;
-    private int userlevel;
+    private String userlevel;
     private final JMenuBar menuBar;
     private final JMenu nutzerReiter;
     private final JMenu hilfeReiter;
@@ -20,7 +20,7 @@ public class Frameholder {
     private final JMenu uebersichtenReiter;
 
 
-    public Frameholder(int userlevel) {
+    public Frameholder(String userlevel) {
         frame = new JFrame("PILS");
         kalender = new Kalender();
         this.userlevel = userlevel;
@@ -48,12 +48,12 @@ public class Frameholder {
         menuBar.add(nutzerReiter);
 
 
-        if (userlevel > 1) {
+        if (userlevel.equalsIgnoreCase("zugführer")) {
             JMenuItem soldatAnlegen = new JMenuItem("Soldat anlegen");
             soldatAnlegen.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //TODO Soldatanlegen Klasse einplegen
+                    new NutzerFrame();
                 }
             });
             JMenuItem soldatenVerwalten = new JMenuItem("Soldaten verwalten");

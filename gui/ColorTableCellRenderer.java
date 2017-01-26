@@ -22,15 +22,15 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
         JLabel zelle = new JLabel((String) value);
         InputStream sonne = Imagehelper.class.getResourceAsStream("sonne.jpg");
         InputStream haken = Imagehelper.class.getResourceAsStream("haken.png");
-        InputStream kreuz = Imagehelper.class.getResourceAsStream("kreuz.jpg");
-        InputStream arzt = Imagehelper.class.getResourceAsStream("Arzt.jpg");
+        InputStream wolke = Imagehelper.class.getResourceAsStream("wolke.jpg");
+        InputStream krank = Imagehelper.class.getResourceAsStream("krank.png");
         InputStream inputStream = null;
         if (value != null) {
             switch ((String) value) {
                 default:
                     break;
                 case "krank":
-                    inputStream = arzt;
+                    inputStream = krank;
                     break;
                 case "anwesend":
                     inputStream = haken;
@@ -39,7 +39,7 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
                     inputStream = sonne;
                     break;
                 case "vorhaben":
-                    inputStream = kreuz;
+                    inputStream = wolke;
                     break;
             }
             if (inputStream != null) {
