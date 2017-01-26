@@ -1,43 +1,60 @@
 package gui;
 
+import
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by pacmaniac on 23.12.2016.
  */
-class ColorTableCellRenderer extends DefaultTableCellRenderer{
+class ColorTableCellRenderer extends DefaultTableCellRenderer {
 
 
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
 
-        JComboBox<String> p = new JComboBox();
-        p.addItem("Anwesend");
-        p.addItem("Abwesend");
-
-
-//        JPanel p = new JPanel();
-        p.setPreferredSize(new Dimension(30,30));
-        p.setOpaque(true);
-//        if (isSelected) p.setBackground(Color.BLUE);
-//        if (!isSelected) p.setBackground(Color.WHITE);
-
+        JLabel zelle = new JLabel((String) value);
+        InputStream sonne = Imagehelper.class.getResourceAsStream("sonne.jpg");
+        InputStream haken = Imagehelper.class.getResourceAsStream("haken.png");
+        InputStream kreuz = Imagehelper.class.getResourceAsStream("kreuz.jpg");
+        InputStream arzt = Imagehelper.class.getResourceAsStream("Arzt.jpg");
+        InputStream inputStream = null;
         if (value != null) {
-
-
-
-
-            if (((String) value).equalsIgnoreCase("n")) {
-                p.setBackground(Color.red);
-                return p;
+            switch ((String) value) {
+                default:
+                    break;
+                case "krank":
+                    inputStream = arzt;
+                    break;
+                case "anwesend":
+                    inputStream = haken;
+                    break;
+                case "urlaub":
+                    inputStream = sonne;
+                    break;
+                case "vorhaben":
+                    inputStream = kreuz;
+                    break;
             }
+            if (inputStream != null) {
+                try {
 
+                    BufferedImage bi = ImageIO.read(inputStream);
+                    ImageIcon imageIcon = new ImageIcon(bi);
+                    zelle.setIcon(imageIcon);
+                    zelle.setText("");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
 
-
-        return null;
+        return zelle;
     }
 }

@@ -1,9 +1,9 @@
-package gui;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by mwaldau on 21.11.2016.
@@ -52,16 +52,32 @@ public class Frameholder {
             soldatAnlegen.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    new SoldatAnlegen();
+                    //TODO Soldatanlegen Klasse einplegen
                 }
             });
             JMenuItem soldatenVerwalten = new JMenuItem("Soldaten verwalten");
             JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");
-            JMenuItem vorhabenVerwalten = new JMenuItem("Vorhaben verwalten");
+            vorhabenAnlegen.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    List<String> vorhabenListe = new ArrayList<>();
+                    vorhabenListe.add("Schießen");
+                    vorhabenListe.add("IGF");
+                    vorhabenListe.add("Blonder Vogel");
+                    vorhabenListe.add("Alte Flunder");
+                    vorhabenListe.add("UvD");
+                    vorhabenListe.add("GvD");
+                    // TODO Spieldaten entfernen und um Datenbankabfragen ergänzen
+                    List<String> soldaten = new ArrayList<>();
+                    soldaten.add("H Pimpelhuber");
+                    soldaten.add("SU Meier");
+                    new VorhabenAnlegen(soldaten, vorhabenListe);
+                }
+            });
+
             verwaltungReiter.add(soldatAnlegen);
             verwaltungReiter.add(soldatenVerwalten);
             verwaltungReiter.add(vorhabenAnlegen);
-            verwaltungReiter.add(vorhabenVerwalten);
             menuBar.add(verwaltungReiter);
 
 

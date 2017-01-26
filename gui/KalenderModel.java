@@ -1,5 +1,3 @@
-package gui;
-
 import javax.swing.table.DefaultTableModel;
 import java.time.LocalDate;
 import java.util.Vector;
@@ -63,14 +61,7 @@ public class KalenderModel extends DefaultTableModel {
      */
     @Override
     public boolean isCellEditable(int row, int column) {
-        LocalDate datum = Kalender.datum;
-        if (!datum.isEqual(LocalDate.now()))
-        {
-            return false;
-        }
-
-
-        return true;
+        return false;
     }
 }
 

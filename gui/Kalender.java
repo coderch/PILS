@@ -1,5 +1,3 @@
-package gui;
-
 import javax.swing.*;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -23,7 +21,7 @@ public class Kalender extends JPanel {
     public static LocalDate datum = LocalDate.now();
 
     private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear())+2];
-    private String[][] wochenDaten = {{"H", "Pimpelhuber", "A", "N", "", "", "", "", ""}};
+    private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""}};
 
     public Kalender() {
         this.setLayout(new BorderLayout());
@@ -31,22 +29,7 @@ public class Kalender extends JPanel {
 
         monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
-
-
-
         monatsAnzeigeBauen();
-
-
-
-
-
-
-
-
-
-
-
-
         monat.add(createKalender(monatDaten,monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])),BorderLayout.CENTER);
         woche.add(createKalender(wochenDaten,wochenAnzeige),BorderLayout.CENTER);
 
@@ -74,6 +57,7 @@ public class Kalender extends JPanel {
         kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
         JScrollPane halter = new JScrollPane(kalender);
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        kalender.setRowHeight(50);
         halter.setPreferredSize(new Dimension(1200,400));
 
         halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -87,8 +71,8 @@ public class Kalender extends JPanel {
                 zeile.setPreferredWidth(100);
                 zeile.setMinWidth(100);
             } else {
-                zeile.setPreferredWidth(40);
-                zeile.setMinWidth(40);
+                zeile.setPreferredWidth(50);
+                zeile.setMinWidth(50);
             }
         }
         return halter;
