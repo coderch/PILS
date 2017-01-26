@@ -59,6 +59,9 @@ public class Frameholder {
                     List<Nutzer> soldaten = new ArrayList<>();
                     soldaten.add(new Nutzer(101,"passwort","Pimpelhuber","Max","H","Zugführer"));
                     soldaten.add(new Nutzer(101,"passwort","Meier","Friedrich","SU","Zugführer"));
+                    soldaten.add(new Nutzer(101,"passwort","Müller","Friedrich","SU","Zugführer"));
+                    soldaten.add(new Nutzer(101,"passwort","Zapf","Friedrich","SU","Zugführer"));
+                    soldaten.add(new Nutzer(101,"passwort","Portsdch","Friedrich","SU","Zugführer"));
                     new StaerkeMeldung(soldaten);
                     //TODO Spieldaten entfernen und um Datenbankabfragen ergänzen
                 }

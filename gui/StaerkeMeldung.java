@@ -5,6 +5,8 @@ import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
@@ -21,6 +23,7 @@ public class StaerkeMeldung extends JDialog{
     }
     private void dialogBauen() {
         this.setModal(true);
+        this.setTitle("Stärkemeldung");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.add(createContent());
@@ -41,11 +44,20 @@ public class StaerkeMeldung extends JDialog{
         GridBagConstraints krank = new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         GridBagConstraints urlaub = new GridBagConstraints(3,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         GridBagConstraints vorhaben = new GridBagConstraints(4,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        contentPanel.add(new JLabel("anwesend"), anwesend);
-        contentPanel.add(new JLabel("krank"), krank);
-        contentPanel.add(new JLabel("urlaub"), urlaub);
-        contentPanel.add(new JLabel("vorhaben"), vorhaben);
+        JLabel anwesendLabel = new JLabel(IconHandler.HAKEN);
+        anwesendLabel.setToolTipText("Anwesend");
+        JLabel krankLabel = new JLabel(IconHandler.KRANK);
+        krankLabel.setToolTipText("KzH");
+        JLabel urlaubLabel = new JLabel(IconHandler.SONNE);
+        urlaubLabel.setToolTipText("Urlaub");
+        JLabel vorhabenLabel = new JLabel(IconHandler.WOLKE);
+        vorhabenLabel.setToolTipText("Übung/verplant");
+        contentPanel.add(anwesendLabel, anwesend);
+        contentPanel.add(krankLabel, krank);
+        contentPanel.add(urlaubLabel, urlaub);
+        contentPanel.add(vorhabenLabel, vorhaben);
         int i = 1;
+
         for (Nutzer nutzer : soldaten) {
 
             GridBagConstraints labelConstraint = new GridBagConstraints();
@@ -73,6 +85,26 @@ public class StaerkeMeldung extends JDialog{
             contentPanel.add(radioButtonvorhaben, rbVorhabenConstr);
             i++;
         }
+        JPanel buttonPanel = new JPanel();
+        GridBagConstraints buttonPanelConstr = new GridBagConstraints(0,i+1,5,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        JButton melden = new JButton("Melden");
+        melden.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                //TODO in Datenbank schreiben
+                dispose();
+            }
+        });
+        JButton abbrechen = new JButton("Abbrechen");
+        abbrechen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                dispose();
+            }
+        });
+        buttonPanel.add(melden);
+        buttonPanel.add(abbrechen);
+        contentPanel.add(buttonPanel, buttonPanelConstr);
         return contentPanel;
     }
 }

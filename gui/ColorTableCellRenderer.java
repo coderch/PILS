@@ -20,39 +20,25 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
 
         JLabel zelle = new JLabel((String) value);
-        InputStream sonne = Imagehelper.class.getResourceAsStream("sonne.jpg");
-        InputStream haken = Imagehelper.class.getResourceAsStream("haken.png");
-        InputStream wolke = Imagehelper.class.getResourceAsStream("wolke.jpg");
-        InputStream krank = Imagehelper.class.getResourceAsStream("krank.png");
-        InputStream inputStream = null;
+
         if (value != null) {
             switch ((String) value) {
                 default:
                     break;
                 case "krank":
-                    inputStream = krank;
+                    zelle.setIcon(IconHandler.KRANK);
                     break;
                 case "anwesend":
-                    inputStream = haken;
+                    zelle.setIcon(IconHandler.HAKEN);
                     break;
                 case "urlaub":
-                    inputStream = sonne;
+                    zelle.setIcon(IconHandler.SONNE);
                     break;
                 case "vorhaben":
-                    inputStream = wolke;
+                    zelle.setIcon(IconHandler.WOLKE);
                     break;
             }
-            if (inputStream != null) {
-                try {
 
-                    BufferedImage bi = ImageIO.read(inputStream);
-                    ImageIcon imageIcon = new ImageIcon(bi);
-                    zelle.setIcon(imageIcon);
-                    zelle.setText("");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
 
 
