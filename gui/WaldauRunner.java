@@ -13,7 +13,7 @@ public class WaldauRunner {
 //        vorhabenListe.add("Alte Flunder");
 //        vorhabenListe.add("UvD");
 //        vorhabenListe.add("GvD");
-//        // TODO Spieldaten entfernen und leeren Konstruktor entfernen
+//        // TODO Spieldaten entfernen
 //        List<String> soldaten = new ArrayList<>();
 //        soldaten.add("H Pimpelhuber");
 //        soldaten.add("SU Meier");
