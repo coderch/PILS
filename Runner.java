@@ -27,6 +27,7 @@ public class Runner {
         config = readConfigFile();
         Nutzer nutzer = new Nutzer(131313131, "password", "Rose", "Richard", "OFR", "Zugführer");
 
+
         System.out.println(nutzer.getKennwort());
         try {
             System.out.println(PasswordHash.createHash("Password"));
@@ -39,7 +40,6 @@ public class Runner {
             e.printStackTrace();
         }
 
-        NutzerDAO.nutzerSpeichern(nutzer);
         List<Nutzer> nutzers = NutzerDAO.nutzerHolen();
         List<String> vorhabenNamen = VorhabenDAO.holeVorhabenNamen();
         for (String s : vorhabenNamen) {
@@ -48,8 +48,12 @@ public class Runner {
         for (Nutzer n : nutzers) {
             System.out.println(n.toString());
         }
-        Vorhaben vorhaben = new Vorhaben("Test", "Tut das gut", LocalDate.now(),LocalDate.now());
+        Vorhaben vorhaben = new Vorhaben("Test", "Tut das gut", LocalDate.now(), LocalDate.now());
         VorhabenDAO.vorhabenSpeichern(vorhaben);
+
+        NutzerDAO.loginSpeichern(nutzer);
+        NutzerDAO.nutzerLöschen(nutzer);
+        NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
     }
 
 
