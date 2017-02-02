@@ -91,6 +91,9 @@ public class StaerkeMeldung extends JDialog{
         melden.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                for (Nutzer nutzer : soldaten) {
+
+                }
                 //TODO in Datenbank schreiben
                 dispose();
             }
