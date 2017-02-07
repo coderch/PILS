@@ -30,11 +30,5 @@ public class VorhabenEditor extends VorhabenAnlegen {
     private JButton abbrechen;
 
 
-    public VorhabenEditor(List<Nutzer> soldaten, List<String> vorhabenListe) {
-        super(soldaten, vorhabenListe);
-    }
 
-    public VorhabenEditor(List<Nutzer> soldaten, List<String> vorhabenListe, Vorhaben vorhaben) {
-        super(soldaten, vorhabenListe, vorhaben);
-    }
 }

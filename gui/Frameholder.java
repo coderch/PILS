@@ -83,18 +83,7 @@ public class Frameholder {
                 vorhabenAnlegen.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        List<String> vorhabenListe = new ArrayList<>();
-                        vorhabenListe.add("Schießen");
-                        vorhabenListe.add("IGF");
-                        vorhabenListe.add("Blonder Vogel");
-                        vorhabenListe.add("Alte Flunder");
-                        vorhabenListe.add("UvD");
-                        vorhabenListe.add("GvD");
-                        // TODO Spieldaten entfernen und um Datenbankabfragen ergänzen
-                        List<Nutzer> soldaten = new ArrayList<>();
-                        soldaten.add(new Nutzer(101,"passwort","Pimpelhuber","Max","H","Zugführer"));
-                        soldaten.add(new Nutzer(101,"passwort","Meier","Friedrich","SU","Zugführer"));
-                        new VorhabenAnlegen(soldaten, vorhabenListe);
+                        new VorhabenAnlegen();
                     }
                 });
                 verwaltungReiter.add(soldatenVerwalten);

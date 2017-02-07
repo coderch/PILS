@@ -31,16 +31,16 @@ public class VorhabenAnlegen extends JDialog{
 
 
 
-    public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe){
+    public VorhabenAnlegen(){
         this.setTitle("Vorhaben erstellen");
         this.soldaten = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         dialogBauen();
     }
-    public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe, Vorhaben vorhaben){
+    public VorhabenAnlegen(Vorhaben vorhaben){
         this.setTitle("Vorhaben bearbeiten");
-        this.soldaten = soldaten;
-        this.vorhabenListe = vorhabenListe;
+        this.soldaten = NutzerDAO.nutzerHolen();
+        this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         this.vorhaben = vorhaben;
         dialogBauen();
     }
@@ -140,11 +140,11 @@ public class VorhabenAnlegen extends JDialog{
 
         List<Nutzer> eingeteilteSoldaten = new ArrayList<>();
         JList<Nutzer> soldatenJlist1 = new JList(soldatenListe.toArray(new Nutzer[0]));
-        soldatenJlist1.setBorder(name.getBorder());
-        soldatenJlist1.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten1Panel = new JPanel();
+        JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane1.setPreferredSize(new Dimension(150,150));
         soldaten1Panel.setBorder(BorderFactory.createTitledBorder("Soldat zuweisen"));
-        soldaten1Panel.add(soldatenJlist1);
+        soldaten1Panel.add(scrollPane1);
 
         GridBagConstraints soldatenJList1Contraint = new GridBagConstraints();
         soldatenJList1Contraint.gridy = 3;
@@ -152,11 +152,11 @@ public class VorhabenAnlegen extends JDialog{
         soldatenJList1Contraint.anchor = GridBagConstraints.FIRST_LINE_START;
 
         JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new Nutzer[0]));
-        soldatenJlist2.setBorder(name.getBorder());
-        soldatenJlist2.setPreferredSize(new Dimension(150, 150));
+        JScrollPane scrollPane2 = new JScrollPane(soldatenJlist2,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane2.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
         soldaten2Panel.setBorder(BorderFactory.createTitledBorder("zugewiesene Soldaten"));
-        soldaten2Panel.add(soldatenJlist2);
+        soldaten2Panel.add(scrollPane2);
 
         GridBagConstraints soldatenJList2Contraint = new GridBagConstraints();
         soldatenJList2Contraint.gridy = 3;
