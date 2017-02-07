@@ -85,8 +85,7 @@ public class NutzerDAO {
     public static List<Integer> holeLogins() {
         String sqlStatement = "SELECT pk_personalnummer FROM t_login";
         List<Integer> logins = new ArrayList<>();
-        try (
-                PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
                 ResultSet rs = pstm.executeQuery()) {
             while (rs.next()) {
                 logins.add(rs.getInt(1));
@@ -99,8 +98,7 @@ public class NutzerDAO {
 
     public static void loginLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_login WHERE pk_personalnummer = ?";
-        try (
-                PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, personalnummer);
             pstm.executeUpdate();
         } catch (SQLException e) {
