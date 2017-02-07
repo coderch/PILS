@@ -4,14 +4,12 @@ import datenmodell.Vorhaben;
 import db.DBConnect;
 import db.NutzerDAO;
 import db.VorhabenDAO;
-import gui.Frameholder;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -49,7 +47,7 @@ public class Runner {
             System.out.println(n.toString());
         }
         Vorhaben vorhaben = new Vorhaben("Test", "Tut das gut", LocalDate.now(), LocalDate.now());
-        VorhabenDAO.vorhabenSpeichern(vorhaben);
+        VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
 
         NutzerDAO.loginSpeichern(nutzer);
         NutzerDAO.nutzerLöschen(nutzer);

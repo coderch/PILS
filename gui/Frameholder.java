@@ -56,14 +56,7 @@ public class Frameholder {
             staerkeMeldung.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    List<Nutzer> soldaten = new ArrayList<>();
-                    soldaten.add(new Nutzer(101,"passwort","Pimpelhuber","Max","H","Zugführer"));
-                    soldaten.add(new Nutzer(101,"passwort","Meier","Friedrich","SU","Zugführer"));
-                    soldaten.add(new Nutzer(101,"passwort","Müller","Friedrich","SU","Zugführer"));
-                    soldaten.add(new Nutzer(101,"passwort","Zapf","Friedrich","SU","Zugführer"));
-                    soldaten.add(new Nutzer(101,"passwort","Portsdch","Friedrich","SU","Zugführer"));
-                    new StaerkeMeldung(soldaten);
-                    //TODO Spieldaten entfernen und um Datenbankabfragen ergänzen
+                    new StaerkeMeldung();
                 }
             });
 
@@ -92,6 +85,12 @@ public class Frameholder {
 
 
                 JMenuItem personalUebersicht = new JMenuItem("Personalübersicht");
+                personalUebersicht.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new PersonalUebersicht();
+                    }
+                });
                 JMenuItem vorhabenUebersicht = new JMenuItem("Vorhabenübersicht");
                 uebersichtenReiter.add(personalUebersicht);
                 uebersichtenReiter.add(vorhabenUebersicht);

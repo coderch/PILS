@@ -25,7 +25,7 @@ public class VorhabenAnlegen extends JDialog{
     private final JTextArea beschreibung = new JTextArea(5,35);
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
-    private final List<Nutzer> soldaten;
+    private final List<Nutzer> soldatenListe;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben = null;
 
@@ -33,13 +33,13 @@ public class VorhabenAnlegen extends JDialog{
 
     public VorhabenAnlegen(){
         this.setTitle("Vorhaben erstellen");
-        this.soldaten = NutzerDAO.nutzerHolen();
+        this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         dialogBauen();
     }
     public VorhabenAnlegen(Vorhaben vorhaben){
         this.setTitle("Vorhaben bearbeiten");
-        this.soldaten = NutzerDAO.nutzerHolen();
+        this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         this.vorhaben = vorhaben;
         dialogBauen();
@@ -50,18 +50,19 @@ public class VorhabenAnlegen extends JDialog{
         this.setModal(true);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
-        this.add(createContent(vorhabenListe, soldaten));
+        this.add(createContent());
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
     private void inDBschreiben(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten){
-//        VorhabenDAO.vorhabenSpeichern(vorhaben);
-        //TODO Soldaten Liste übergeben an DAO
+        VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
     }
 
-    private JPanel createContent(List<String> vorhaben, List<Nutzer> soldatenListe) {
+    private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
+
+        System.out.println(VorhabenDAO.holeVorhabenNamen());
 
         //--------------left Panel---------------------
         JPanel leftPanel = new JPanel();
@@ -71,16 +72,18 @@ public class VorhabenAnlegen extends JDialog{
         leftConstraint.gridx = 0;
         leftConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         platzhalter.setBorder(BorderFactory.createTitledBorder("Vorhaben"));
-        JList<String> vorhabenListe = new JList(vorhaben.toArray());
-        vorhabenListe.setBorder(name.getBorder());
-        vorhabenListe.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        vorhabenListe.addListSelectionListener(new ListSelectionListener() {
+        JList<String> vorhabenJList = new JList(this.vorhabenListe.toArray(new String[0]));
+
+
+        vorhabenJList.setBorder(name.getBorder());
+        vorhabenJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        vorhabenJList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                name.setText(vorhabenListe.getSelectedValue());
+                name.setText(vorhabenJList.getSelectedValue());
             }
         });
-        platzhalter.add(vorhabenListe);
+        platzhalter.add(vorhabenJList);
         leftPanel.add(platzhalter);
 
         //-------------Center Panel--------------------
@@ -139,7 +142,7 @@ public class VorhabenAnlegen extends JDialog{
         //-------------center4-------------------------
 
         List<Nutzer> eingeteilteSoldaten = new ArrayList<>();
-        JList<Nutzer> soldatenJlist1 = new JList(soldatenListe.toArray(new Nutzer[0]));
+        JList<Nutzer> soldatenJlist1 = new JList(this.soldatenListe.toArray(new Nutzer[0]));
         JPanel soldaten1Panel = new JPanel();
         JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane1.setPreferredSize(new Dimension(150,150));

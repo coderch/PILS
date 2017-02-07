@@ -1,6 +1,7 @@
 package gui;
 
 import datenmodell.Nutzer;
+import db.NutzerDAO;
 import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
@@ -16,9 +17,9 @@ public class StaerkeMeldung extends JDialog{
 
     private List<Nutzer> soldaten;
 
-    public StaerkeMeldung(List<Nutzer> soldaten) {
+    public StaerkeMeldung() {
 
-        this.soldaten = soldaten;
+        this.soldaten = NutzerDAO.nutzerHolen();
         dialogBauen();
     }
     private void dialogBauen() {

@@ -16,8 +16,7 @@ import java.util.List;
  * Created by mwaldau on 07.02.2017.
  */
 public class PersonalUebersicht extends JDialog {
-    private final JTextField name = new JTextField(35);
-    private final JTextArea beschreibung = new JTextArea(5,35);
+
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> soldaten;
@@ -31,6 +30,7 @@ public class PersonalUebersicht extends JDialog {
     }
     private void dialogBauen() {
         this.setModal(true);
+        this.setTitle("Personalübersicht");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.add(createContent(vorhabenListe, soldaten));
@@ -41,6 +41,11 @@ public class PersonalUebersicht extends JDialog {
 
     private JPanel createContent(List<Vorhaben> vorhabenListe, List<Nutzer> soldaten) {
         JPanel contentPanel = new JPanel(new BorderLayout());
+        System.out.println();
+
+        // left Panel
+        JPanel leftPanel = new JPanel(new GridBagLayout());
+
 
 
 

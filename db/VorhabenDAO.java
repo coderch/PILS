@@ -1,10 +1,9 @@
 package db;
 
+import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -47,7 +46,7 @@ public class VorhabenDAO {
     }
 
 
-    public static void vorhabenSpeichern(Vorhaben vorhaben) {
+    public static void vorhabenSpeichern(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten) {
 
         try {
             PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_name FROM t_vorhaben WHERE pk_name = ?");
