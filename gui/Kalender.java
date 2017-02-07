@@ -20,11 +20,11 @@ import java.util.List;
  */
 public class Kalender extends JPanel {
     public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
+    public static LocalDate datum = LocalDate.now();
     private final JTabbedPane kalenderPane = new JTabbedPane();
     private final JPanel monat = new JPanel(new BorderLayout());
     private final JPanel woche = new JPanel(new BorderLayout());
     private final String[] wochenAnzeige = {"Dienstgrad", "Name", "1", "2", "3", "4", "5", "6", "7"};
-    public static LocalDate datum = LocalDate.now();
 
     private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
     private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""},
