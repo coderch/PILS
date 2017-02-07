@@ -14,9 +14,7 @@ public class Nutzer implements Comparable<Nutzer>{
     private String dienstgradgruppe;
     private String rolle;
 
-    public String getDienstgradgruppe() {
-        return dienstgradgruppe;
-    }
+
 
     public Nutzer(int personalnummer, String dienstgrad, String dienstgradgruppe, String name, String vorname, String rolle) {
         this.personalnummer = personalnummer;
@@ -39,6 +37,9 @@ public class Nutzer implements Comparable<Nutzer>{
         return personalnummer;
     }
 
+    public String getDienstgradgruppe() {
+        return dienstgradgruppe;
+    }
 
     public String getName() {
         return name;
