@@ -47,7 +47,7 @@ public class Runner {
             System.out.println(n.toString());
         }
         Vorhaben vorhaben = new Vorhaben("Test", "Tut das gut", LocalDate.now(), LocalDate.now());
-//        VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+        ///VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
 
         NutzerDAO.loginSpeichern(nutzer);
         NutzerDAO.nutzerLöschen(nutzer);

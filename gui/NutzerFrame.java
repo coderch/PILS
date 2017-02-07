@@ -1,11 +1,16 @@
 package gui;
 import datenmodell.Rolle;
+import datenmodell.Nutzer;
+import db.NutzerDAO;
 import db.RolleDAO;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
+import java.util.*;
 
 /**
  * Created by ajanzen on 09.01.2017.
@@ -129,6 +134,26 @@ public class NutzerFrame extends JDialog {
 
         jPanelTextFelder.add(jPanelEingaben);
 
+        //TODO in Reales Projekt einfügen
+
+        java.util.List<Nutzer> nutzers = NutzerDAO.nutzerHolen();
+        jListNutzer.setListData(nutzers.toArray(new Nutzer[0]));
+        jListNutzer.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+
+                zeigeDaten((Nutzer) jListNutzer.getSelectedValue(),
+                        jTextFieldPersNr,
+                        rollenComboBox,
+                        jTextFieldVorname,
+                        jTextFieldNachname,
+                        jComboBoxDG,
+                        jComboBoxDGZusatz);
+
+            }
+        });
+
+
 
 
         jPanelRechts.add(jPanelTextFelder, BorderLayout.NORTH);
@@ -138,6 +163,28 @@ public class NutzerFrame extends JDialog {
         jPanel.add(jPanelRechts, BorderLayout.EAST);
 
         return jPanel;
+
+    }
+    private void zeigeDaten(Nutzer selectedValue,
+                            JFormattedTextField jTextFieldPersNr,
+                            JComboBox<String> rollenComboBox,
+                            JTextField jTextFieldVorname,
+                            JTextField jTextFieldNachname,
+                            JComboBox<String> jComboBoxDG,
+                            JComboBox<String> jPanelDGZusatz) {
+
+        jTextFieldPersNr.setText(String.valueOf(selectedValue.getPersonalnummer()));
+        rollenComboBox.setSelectedItem(selectedValue.getRolle());
+        jTextFieldNachname.setText(selectedValue.getName());
+        jTextFieldVorname.setText(selectedValue.getVorname());
+
+
+
+            for (String s: selectedValue.getDienstgrad().split(" ") ) {
+                jComboBoxDG.setSelectedItem(s);
+                jPanelDGZusatz.setSelectedItem(s);
+
+            }
 
     }
 }
