@@ -22,9 +22,8 @@ public class NutzerDAO {
 
     public static void nutzerSpeichern(Nutzer nutzer) {
         String sqlStatement = "INSERT INTO t_nutzer(dienstgrad, name, vorname,fk_t_rolle_pk_beschreibung,pk_personalnummer) VALUES (?,?,?,?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (dienstgrad, name, vorname, fk_t_rolle_pk_beschreibung) = (?,?,?,?)";
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-            CallableStatement cstm = DBConnect.callableStatement("{call update_dienstgradgruppe_bei_update()}");
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+             CallableStatement cstm = DBConnect.callableStatement("{call update_dienstgradgruppe_bei_update()}")) {
 
             pstm.setString(1, nutzer.getDienstgrad());
             pstm.setString(2, nutzer.getName());
@@ -38,8 +37,6 @@ public class NutzerDAO {
             pstm.setString(9, nutzer.getRolle());
             pstm.executeUpdate();
             cstm.execute();
-            pstm.close();
-            cstm.close();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
@@ -47,12 +44,12 @@ public class NutzerDAO {
 
     public static void loginSpeichern(int personalnummer, String passwort) {
         String sqlStatement = "INSERT INTO t_login (pk_personalnummer, passwort) VALUES (?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (passwort) = (?)";
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, personalnummer);
             pstm.setString(2, passwort);
             pstm.setString(3, passwort);
             pstm.executeUpdate();
+            pstm.close();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
@@ -62,9 +59,8 @@ public class NutzerDAO {
     public static List<Nutzer> nutzerHolen() {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer";
         List<Nutzer> alleNutzer = new LinkedList<>();
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-            ResultSet rs = pstm.executeQuery();
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+             ResultSet rs = pstm.executeQuery()) {
             while (rs.next()) {
                 Nutzer nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
                 alleNutzer.add(nutzer);
@@ -77,8 +73,7 @@ public class NutzerDAO {
 
     public static void nutzerLöschen(Nutzer nutzer) {
         String sqlStatement = "DELETE FROM t_nutzer WHERE pk_personalnummer = ?";
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, nutzer.getPersonalnummer());
             pstm.executeUpdate();
         } catch (SQLException e) {
@@ -90,10 +85,10 @@ public class NutzerDAO {
     public static List<Integer> holeLogins() {
         String sqlStatement = "SELECT pk_personalnummer FROM t_login";
         List<Integer> logins = new ArrayList<>();
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-            ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
+        try (
+                PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+                ResultSet rs = pstm.executeQuery()) {
+            while (rs.next()) {
                 logins.add(rs.getInt(1));
             }
         } catch (SQLException e) {
@@ -104,8 +99,8 @@ public class NutzerDAO {
 
     public static void loginLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_login WHERE pk_personalnummer = ?";
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+        try (
+                PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, personalnummer);
             pstm.executeUpdate();
         } catch (SQLException e) {
