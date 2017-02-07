@@ -5,16 +5,21 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by rrose on 21.11.2016.
  */
-public class Nutzer {
+public class Nutzer implements Comparable<Nutzer>{
 
     private final int personalnummer;
     private String kennwort;
     private String name;
     private String vorname;
     private String dienstgrad;
+    private String dienstgradgruppe;
     private String rolle;
 
-    public Nutzer(int personalnummer, String dienstgrad, String name, String vorname, String kennwort, String rolle) {
+    public String getDienstgradgruppe() {
+        return dienstgradgruppe;
+    }
+
+    public Nutzer(int personalnummer, String dienstgrad, String dienstgradgruppe, String name, String vorname, String kennwort, String rolle) {
         this.personalnummer = personalnummer;
         try {
             this.kennwort = PasswordHash.createHash(kennwort);
@@ -24,6 +29,7 @@ public class Nutzer {
         this.name = name;
         this.vorname = vorname;
         this.dienstgrad = dienstgrad;
+        this.dienstgradgruppe = dienstgradgruppe;
         this.rolle = rolle;
     }
 
@@ -54,4 +60,10 @@ public class Nutzer {
     public String toString(){
         return dienstgrad + " " + name;
     }
+
+    @Override
+    public int compareTo(Nutzer nutzer) {
+        return this.name.compareTo(nutzer.name);
+    }
 }
+
