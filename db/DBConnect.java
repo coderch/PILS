@@ -1,9 +1,6 @@
 package db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 
@@ -41,5 +38,9 @@ public class DBConnect {
     public static PreparedStatement preparedStatement(String sql) throws SQLException {
         PreparedStatement pstm = connection.prepareStatement(sql);
         return pstm;
+    }
+    public static CallableStatement callableStatement(String sql) throws SQLException {
+        CallableStatement cstm = connection.prepareCall(sql);
+        return cstm;
     }
 }

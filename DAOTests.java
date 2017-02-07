@@ -28,8 +28,17 @@ public class DAOTests {
         for (String s : vorhabenListe) {
             System.out.println(s);
         }
-        Nutzer nutzer = new Nutzer(11111111, "H", "Penis", "Rose", "Richard", "Zugführer");
+        Nutzer nutzer = new Nutzer(11111111, "H", "Rose", "Richard", "Soldat");
         NutzerDAO.nutzerSpeichern(nutzer);
+        NutzerDAO.loginSpeichern(nutzer.getPersonalnummer(), "dummbeutel");
+
+        List<Nutzer> nutzerListe= NutzerDAO.nutzerHolen();
+        for (Nutzer n : nutzerListe){
+            System.out.println(n.toString());
+        }
+        NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
+        NutzerDAO.nutzerLöschen(nutzer);
+
 
     }
 

@@ -4,6 +4,7 @@ import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ public class NutzerDAO {
         String sqlStatement = "INSERT INTO t_nutzer(dienstgrad, name, vorname,fk_t_rolle_pk_beschreibung,pk_personalnummer) VALUES (?,?,?,?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (dienstgrad, name, vorname, fk_t_rolle_pk_beschreibung) = (?,?,?,?)";
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+            CallableStatement cstm = DBConnect.callableStatement("{call update_dienstgradgruppe_bei_update()}");
 
             pstm.setString(1, nutzer.getDienstgrad());
             pstm.setString(2, nutzer.getName());
@@ -29,43 +31,27 @@ public class NutzerDAO {
             pstm.setString(4, nutzer.getRolle());
             pstm.setInt(5, nutzer.getPersonalnummer());
 
-            pstm.setString(6,nutzer.getDienstgrad());
-            pstm.setString(7,nutzer.getName());
-            pstm.setString(8,nutzer.getVorname());
-            pstm.setString(9,nutzer.getRolle());
+            pstm.setString(6, nutzer.getDienstgrad());
+            pstm.setString(7, nutzer.getName());
+            pstm.setString(8, nutzer.getVorname());
+            pstm.setString(9, nutzer.getRolle());
             pstm.executeUpdate();
+            cstm.execute();
+            pstm.close();
+            cstm.close();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
     }
 
     public static void loginSpeichern(int personalnummer, String passwort) {
-        String sqlStatement = "SELECT * FROM t_login WHERE pk_personalnummer = ?";
+        String sqlStatement = "INSERT INTO t_login (pk_personalnummer, passwort) VALUES (?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (passwort) = (?)";
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
             pstm.setInt(1, personalnummer);
-            ResultSet rs = pstm.executeQuery();
-            if (rs.next()) {
-                sqlStatement = "UPDATE t_login SET passwort = ? WHERE pk_personalnummer = ?";
-                pstm = DBConnect.preparedStatement(sqlStatement);
-                try {
-                    pstm.setString(1, PasswordHash.createHash(passwort));
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-                pstm.setInt(2, personalnummer);
-                pstm.executeUpdate();
-            } else {
-                sqlStatement = "INSERT INTO t_login(pk_personalnummer, passwort) VALUES (?,?)";
-                pstm = DBConnect.preparedStatement(sqlStatement);
-                pstm.setInt(1, personalnummer);
-                try {
-                    pstm.setString(2, PasswordHash.createHash(passwort));
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
-                pstm.executeUpdate();
-            }
+            pstm.setString(2, passwort);
+            pstm.setString(3, passwort);
+            pstm.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
