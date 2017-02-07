@@ -26,6 +26,14 @@ public class Nutzer implements Comparable<Nutzer>{
         this.dienstgradgruppe = dienstgradgruppe;
         this.rolle = rolle;
     }
+    public Nutzer(int personalnummer, String dienstgrad, String name, String vorname, String rolle) {
+        this.personalnummer = personalnummer;
+        this.name = name;
+        this.vorname = vorname;
+        this.dienstgrad = dienstgrad;
+        this.rolle = rolle;
+    }
+
 
     public int getPersonalnummer() {
         return personalnummer;
