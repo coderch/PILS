@@ -30,9 +30,11 @@ class ColorTableCellRenderer extends DefaultTableCellRenderer {
                     break;
                 case "krank":
                     zelle.setIcon(IconHandler.KRANK);
+                    zelle.setBackground(new Color(204,0,102));
                     break;
                 case "anwesend":
-                    zelle.setIcon(IconHandler.HAKEN);
+                    zelle.setIcon(IconHandler.HAKEN2);
+                    zelle.setBackground(Color.green);
                     break;
                 case "urlaub":
                     zelle.setIcon(IconHandler.SONNE);
