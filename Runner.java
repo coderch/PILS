@@ -23,7 +23,7 @@ public class Runner {
 
     public static void main(String[] args) {
         config = readConfigFile();
-        Nutzer nutzer = new Nutzer(131313131, "password", "Rose", "Richard", "OFR", "Zugführer");
+        Nutzer nutzer = new Nutzer(131313131, "UmP","password", "Rose", "Richard", "OFR", "Zugführer");
 
 
         System.out.println(nutzer.getKennwort());

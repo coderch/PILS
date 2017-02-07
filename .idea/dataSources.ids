@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="PostgreSQL - db_PILS@localhost" uuid="3f3121c1-0de9-45e5-9504-b6c98cf93230">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="PostgreSQL" version="9.5.4" jdbc-version="4.0" driver-name="PostgreSQL Native Driver" driver-version="PostgreSQL 9.4 JDBC4 (build 1201)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
     <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.6">
       <database id="1" name="db_PILS">
         <object-id>17635</object-id>
