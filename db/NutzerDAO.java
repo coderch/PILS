@@ -58,13 +58,13 @@ public class NutzerDAO {
 
 
     public static List<Nutzer> nutzerHolen() {
-        String sqlStatement = "SELECT pk_personalnummer, dienstgrad,name, vorname, kennwort, fk_t_rolle_pk_beschreibung FROM t_nutzer";
+        String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, kennwort, fk_t_rolle_pk_beschreibung FROM t_nutzer";
         List<Nutzer> alleNutzer = new LinkedList<>();
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Nutzer nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+                Nutzer nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
                 alleNutzer.add(nutzer);
             }
         } catch (SQLException e) {
