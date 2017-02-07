@@ -69,16 +69,16 @@ public class Frameholder {
 
 
             if (userlevel.equalsIgnoreCase("zugführer")) {
-                JMenuItem soldatAnlegen = new JMenuItem("Soldat anlegen");
 
-                verwaltungReiter.add(soldatAnlegen);
-                soldatAnlegen.addActionListener(new ActionListener() {
+
+                JMenuItem soldatenVerwalten = new JMenuItem("Teileinheit verwalten");
+                verwaltungReiter.add(soldatenVerwalten);
+                soldatenVerwalten.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         new NutzerFrame();
                     }
                 });
-                JMenuItem soldatenVerwalten = new JMenuItem("Soldaten verwalten");
                 JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");
                 vorhabenAnlegen.addActionListener(new ActionListener() {
                     @Override

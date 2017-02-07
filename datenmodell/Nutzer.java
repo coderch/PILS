@@ -14,7 +14,7 @@ public class Nutzer {
     private String dienstgrad;
     private String rolle;
 
-    public Nutzer(int personalnummer, String kennwort, String name, String vorname, String dienstgrad, String rolle) {
+    public Nutzer(int personalnummer, String dienstgrad, String name, String vorname, String kennwort, String rolle) {
         this.personalnummer = personalnummer;
         try {
             this.kennwort = PasswordHash.createHash(kennwort);

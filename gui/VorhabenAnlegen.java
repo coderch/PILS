@@ -2,6 +2,8 @@ package gui;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
+import db.NutzerDAO;
+import db.VorhabenDAO;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -31,8 +33,8 @@ public class VorhabenAnlegen extends JDialog{
 
     public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe){
         this.setTitle("Vorhaben erstellen");
-        this.soldaten = soldaten;
-        this.vorhabenListe = vorhabenListe;
+        this.soldaten = NutzerDAO.nutzerHolen();
+        this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         dialogBauen();
     }
     public VorhabenAnlegen(List<Nutzer> soldaten, List<String> vorhabenListe, Vorhaben vorhaben){
@@ -149,7 +151,7 @@ public class VorhabenAnlegen extends JDialog{
         soldatenJList1Contraint.gridx = 0;
         soldatenJList1Contraint.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new String[0]));
+        JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new Nutzer[0]));
         soldatenJlist2.setBorder(name.getBorder());
         soldatenJlist2.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
