@@ -8,6 +8,7 @@ import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -84,6 +85,21 @@ public class NutzerDAO {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
 
+    }
+
+    public static List<Integer> holeLogins() {
+        String sqlStatement = "SELECT pk_personalnummer FROM t_login";
+        List<Integer> logins = new ArrayList<>();
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()){
+                logins.add(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return logins;
     }
 
     public static void loginLöschen(int personalnummer) {
