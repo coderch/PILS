@@ -62,7 +62,6 @@ public class VorhabenAnlegen extends JDialog{
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
 
-        System.out.println(VorhabenDAO.holeVorhabenNamen());
 
         //--------------left Panel---------------------
         JPanel leftPanel = new JPanel();
@@ -73,9 +72,9 @@ public class VorhabenAnlegen extends JDialog{
         leftConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         platzhalter.setBorder(BorderFactory.createTitledBorder("Vorhaben"));
         JList<String> vorhabenJList = new JList(this.vorhabenListe.toArray(new String[0]));
+        JScrollPane scP = new JScrollPane(vorhabenJList,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scP.setPreferredSize(new Dimension(150,388));
 
-
-        vorhabenJList.setBorder(name.getBorder());
         vorhabenJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         vorhabenJList.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -83,7 +82,7 @@ public class VorhabenAnlegen extends JDialog{
                 name.setText(vorhabenJList.getSelectedValue());
             }
         });
-        platzhalter.add(vorhabenJList);
+        platzhalter.add(scP);
         leftPanel.add(platzhalter);
 
         //-------------Center Panel--------------------
