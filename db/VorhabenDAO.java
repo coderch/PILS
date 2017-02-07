@@ -17,8 +17,8 @@ public class VorhabenDAO {
 
     public static List<String> holeVorhabenNamen() {
         List<String> vorhabenNamen = new LinkedList<>();
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_name FROM t_vorhaben");
+        try (
+            PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_name FROM t_vorhaben")){
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 vorhabenNamen.add(rs.getString(1));
