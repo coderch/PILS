@@ -1,7 +1,9 @@
 package db;
 
 import datenmodell.Nutzer;
+import datenmodell.PasswordHash;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,38 +19,51 @@ public class NutzerDAO {
     }
 
     public static void nutzerSpeichern(Nutzer nutzer) {
-        String sqlStatement = "INSERT INTO t_nutzer(pk_personalnummer, dienstgrad, name, vorname, kennwort, fk_t_rolle_pk_beschreibung) VALUES (?,?,?,?,?,?)";
+        String sqlStatement = "INSERT INTO t_nutzer(dienstgrad, name, vorname,fk_t_rolle_pk_beschreibung,pk_personalnummer) VALUES (?,?,?,?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (dienstgrad, name, vorname, fk_t_rolle_pk_beschreibung) = (?,?,?,?)";
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-            pstm.setInt(1, nutzer.getPersonalnummer());
-            pstm.setString(2, nutzer.getDienstgrad());
-            pstm.setString(3, nutzer.getName());
-            pstm.setString(4, nutzer.getVorname());
-            pstm.setString(5, nutzer.getKennwort());
-            pstm.setString(6, nutzer.getRolle());
+
+            pstm.setString(1, nutzer.getDienstgrad());
+            pstm.setString(2, nutzer.getName());
+            pstm.setString(3, nutzer.getVorname());
+            pstm.setString(4, nutzer.getRolle());
+            pstm.setInt(5, nutzer.getPersonalnummer());
+
+            pstm.setString(6,nutzer.getDienstgrad());
+            pstm.setString(7,nutzer.getName());
+            pstm.setString(8,nutzer.getVorname());
+            pstm.setString(9,nutzer.getRolle());
             pstm.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
     }
 
-    public static void loginSpeichern(Nutzer nutzer) {
+    public static void loginSpeichern(int personalnummer, String passwort) {
         String sqlStatement = "SELECT * FROM t_login WHERE pk_personalnummer = ?";
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setInt(1, personalnummer);
             ResultSet rs = pstm.executeQuery();
             if (rs.next()) {
                 sqlStatement = "UPDATE t_login SET passwort = ? WHERE pk_personalnummer = ?";
                 pstm = DBConnect.preparedStatement(sqlStatement);
-                pstm.setString(1, nutzer.getKennwort());
-                pstm.setInt(2, nutzer.getPersonalnummer());
+                try {
+                    pstm.setString(1, PasswordHash.createHash(passwort));
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
+                pstm.setInt(2, personalnummer);
                 pstm.executeUpdate();
             } else {
                 sqlStatement = "INSERT INTO t_login(pk_personalnummer, passwort) VALUES (?,?)";
                 pstm = DBConnect.preparedStatement(sqlStatement);
-                pstm.setInt(1, nutzer.getPersonalnummer());
-                pstm.setString(2, nutzer.getKennwort());
+                pstm.setInt(1, personalnummer);
+                try {
+                    pstm.setString(2, PasswordHash.createHash(passwort));
+                } catch (NoSuchAlgorithmException e) {
+                    e.printStackTrace();
+                }
                 pstm.executeUpdate();
             }
         } catch (SQLException e) {
@@ -58,7 +73,7 @@ public class NutzerDAO {
 
 
     public static List<Nutzer> nutzerHolen() {
-        String sqlStatement = "SELECT pk_personalnummer, dienstgrad,name, vorname, kennwort, fk_t_rolle_pk_beschreibung FROM t_nutzer";
+        String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer";
         List<Nutzer> alleNutzer = new LinkedList<>();
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
@@ -84,6 +99,7 @@ public class NutzerDAO {
         }
 
     }
+
     public static void loginLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_login WHERE pk_personalnummer = ?";
         try {

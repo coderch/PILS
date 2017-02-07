@@ -1,4 +1,6 @@
+import datenmodell.Nutzer;
 import db.DBConnect;
+import db.NutzerDAO;
 import db.VorhabenDAO;
 
 import java.io.BufferedInputStream;
@@ -23,12 +25,13 @@ public class DAOTests {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
         List<String> vorhabenListe = VorhabenDAO.holeVorhabenNamen();
+        for (String s : vorhabenListe) {
+            System.out.println(s);
+        }
+        Nutzer nutzer = new Nutzer(11111111, "H", "Penis", "Rose", "Richard", "Zugführer");
+        NutzerDAO.nutzerSpeichern(nutzer);
 
     }
-
-
-
-
 
 
     private static Properties readConfigFile() {
