@@ -45,11 +45,11 @@ public class DAOTests {
         for(int i : logins){
             System.out.println(i);
         }
-        NutzerDAO.loginLöschen(11111112);
-        List<Integer> logneu = NutzerDAO.holeLogins();
-        for(int i : logins){
-            System.out.println(i);
-        }
+//        NutzerDAO.loginLöschen(11111112);
+//        List<Integer> logneu = NutzerDAO.holeLogins();
+//        for(int i : logins){
+//            System.out.println(i);
+//        }
 
     }
 
