@@ -2,6 +2,7 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
+import db.VorhabenDAO;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -23,7 +24,8 @@ public class Kalender extends JPanel {
     private final JTabbedPane kalenderPane = new JTabbedPane();
     private final JPanel monat = new JPanel(new BorderLayout());
     private final JPanel woche = new JPanel(new BorderLayout());
-    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
+//    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
+    private Object[][] monatDaten;
 
     private final String[] wochenAnzeige = {"Dienstgrad", "Name", "1", "2", "3", "4", "5", "6", "7"};
     private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""},
@@ -31,7 +33,7 @@ public class Kalender extends JPanel {
 
     public Kalender() {
         this.setLayout(new BorderLayout());
-
+        monatDaten = datenerzeugen();
 
         monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
@@ -66,7 +68,7 @@ public class Kalender extends JPanel {
      * @param anzeige
      * @return
      */
-    private JScrollPane createKalender(String[][] daten, String[] anzeige) {
+    private JScrollPane createKalender(Object[][] daten, String[] anzeige) {
         JTable kalender = new JTable();
         kalender.setModel(new KalenderModel(daten, anzeige));
         kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
@@ -112,9 +114,8 @@ public class Kalender extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 datum = datum.minusMonths(1);
                 label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
                 monat.remove(1);
-                monat.add(createKalender(buffer, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+                monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
         JButton weiter = new JButton(">");
@@ -124,9 +125,8 @@ public class Kalender extends JPanel {
                 datum = datum.plusMonths(1);
                 datenerzeugen();
                 label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                String[][] buffer = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
                 monat.remove(1);
-                monat.add(createKalender(buffer, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+                monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
 
@@ -172,13 +172,14 @@ public class Kalender extends JPanel {
     private Object[][] datenerzeugen() {
         List<Nutzer> soldatenListe = new ArrayList<>(NutzerDAO.nutzerHolen());
         List<Object[]> objectList = new ArrayList<>();
-//        Object[][] datenArray = new Object[soldatenListe.size()][datum.getMonth().length(datum.isLeapYear()) + 1];
         for (Nutzer nutzer : soldatenListe) {
             List<Object> soldatAnwesenheit = new ArrayList<>();
-            soldatAnwesenheit.add(nutzer.toString());
+            soldatAnwesenheit.add(nutzer.getDienstgrad());
+            soldatAnwesenheit.add(nutzer.getName());
             for (int i = 1; i < datum.getMonth().length(datum.isLeapYear()) + 1; i++) {
-
+                soldatAnwesenheit.add(NutzerDAO.hatAnwesenheit(nutzer,LocalDate.of(datum.getYear(),datum.getMonth(),i)));
             }
+            objectList.add(soldatAnwesenheit.toArray(new Object[0]));
         }
         return objectList.toArray(new Object[0][0]);
     }

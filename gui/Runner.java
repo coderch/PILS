@@ -27,7 +27,7 @@ public class Runner {
             e1.printStackTrace();
         }
 
-        new Frameholder("zugdienst");
+        new Frameholder("Zugführer");
 
 
     }
