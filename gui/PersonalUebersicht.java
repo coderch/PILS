@@ -123,6 +123,7 @@ public class PersonalUebersicht extends JDialog {
 
                 ausgNutzer.clear();
                 centerPanel.removeAll();
+                centerPanel.add("Übersicht",uebersichtPanel());
 
 
                 if (tree.getSelectionPath().getPath().length == 1) {
@@ -192,5 +193,10 @@ public class PersonalUebersicht extends JDialog {
         centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
         ausgNutzer.add(nutzer);
         System.out.println(ausgNutzer);
+    }
+    private JPanel uebersichtPanel() {
+        JPanel uebersichtPane = new JPanel();
+
+        return uebersichtPane;
     }
 }
