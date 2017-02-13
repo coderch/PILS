@@ -15,7 +15,7 @@ import java.util.Properties;
 /**
  * Created by mwaldau on 26.01.2017.
  */
-public class WaldauRunner {
+public class Runner {
 
     public static Properties config;
 
@@ -27,7 +27,7 @@ public class WaldauRunner {
             e1.printStackTrace();
         }
 
-        new Frameholder("Zugführer");
+        new Frameholder("zugdienst");
 
 
     }
