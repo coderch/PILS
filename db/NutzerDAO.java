@@ -1,18 +1,16 @@
 package db;
 
 import datenmodell.Nutzer;
+import datenmodell.PasswordHash;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by ajanzen on 16.12.2016.
- */
+
 public class NutzerDAO {
 
     private NutzerDAO() {
@@ -53,6 +51,14 @@ public class NutzerDAO {
         }
     }
 
+    public static void passwordZurücksetzen(int personalnummer) {
+        try {
+            loginSpeichern(personalnummer, PasswordHash.createHash("password"));
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static List<Nutzer> nutzerHolen() {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer";
@@ -84,7 +90,7 @@ public class NutzerDAO {
         String sqlStatement = "SELECT pk_personalnummer FROM t_login";
         List<Integer> logins = new ArrayList<>();
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-                ResultSet rs = pstm.executeQuery()) {
+             ResultSet rs = pstm.executeQuery()) {
             while (rs.next()) {
                 logins.add(rs.getInt(1));
             }
@@ -104,4 +110,23 @@ public class NutzerDAO {
         }
 
     }
+
+    public static String hatAnwesenheit(Nutzer nutzer, LocalDate date) {
+        String anwesenheit = "";
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement("SELECT fk_t_anwesenheitstatus_beschreibung FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setDate(2, Date.valueOf(date));
+            pstm.setDate(3, Date.valueOf(date));
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                anwesenheit = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+
+        return anwesenheit;
+    }
+
 }
