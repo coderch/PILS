@@ -28,18 +28,6 @@ public class WaldauRunner {
         }
 
         new Frameholder("Zugführer");
-//        List<String> vorhabenListe = new ArrayList<>();
-//        vorhabenListe.add("Schießen");
-//        vorhabenListe.add("IGF");
-//        vorhabenListe.add("Blonder Vogel");
-//        vorhabenListe.add("Alte Flunder");
-//        vorhabenListe.add("UvD");
-//        vorhabenListe.add("GvD");
-//        // TODO Spieldaten entfernen
-//        List<String> soldaten = new ArrayList<>();
-//        soldaten.add("H Pimpelhuber");
-//        soldaten.add("SU Meier");
-//        new VorhabenAnlegen(soldaten, vorhabenListe);
 
 
     }

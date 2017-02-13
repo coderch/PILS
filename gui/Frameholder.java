@@ -49,7 +49,6 @@ public class Frameholder {
         nutzerReiter.add(ausloggen);
         nutzerReiter.add(pwaendern);
         menuBar.add(nutzerReiter);
-
         if (userlevel.equalsIgnoreCase("zugdienst") || userlevel.equalsIgnoreCase("zugführer")) {
             JMenuItem staerkeMeldung = new JMenuItem("Stärkemeldung");
             verwaltungReiter.add(staerkeMeldung);
