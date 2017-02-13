@@ -1,10 +1,6 @@
 package gui;
 
-import gui.img.Imagehelper;
-
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +12,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by mwaldau on 21.11.2016.
+ * Created by mwaldau on 12.12.2016.
  */
 public class Kalender extends JPanel {
     public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
