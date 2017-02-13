@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="07.02.2017 - 09:55">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="" />
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -606,7 +604,7 @@
       <workItem from="1486465404691" duration="15123000" />
       <workItem from="1486494388229" duration="7045000" />
       <workItem from="1486711598826" duration="2638000" />
-      <workItem from="1486973919973" duration="261000" />
+      <workItem from="1486973919973" duration="276000" />
     </task>
     <task id="LOCAL-00001" summary="26.01.2017">
       <created>1485426966297</created>
@@ -678,11 +676,18 @@
       <option name="project" value="LOCAL" />
       <updated>1486974020240</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="07.02.2017 - 09:55">
+      <created>1486974200038</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1486974200038</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41166000" />
+    <option name="totallyTimeSpent" value="41181000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -753,9 +758,9 @@
     <MESSAGE value="26.01.2017" />
     <MESSAGE value="07.02.2017 - 08:35" />
     <MESSAGE value="07.02.2017 - 09:35" />
-    <MESSAGE value="07.02.2017 - 09:55" />
     <MESSAGE value="13.02.2017 - 09:20" />
-    <option name="LAST_COMMIT_MESSAGE" value="13.02.2017 - 09:20" />
+    <MESSAGE value="07.02.2017 - 09:55" />
+    <option name="LAST_COMMIT_MESSAGE" value="07.02.2017 - 09:55" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
