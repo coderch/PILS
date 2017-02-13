@@ -42,7 +42,7 @@ public class Kalender extends JPanel {
 
 
         kalenderPane.add("Monat", monat);
-        kalenderPane.add("Woche", woche);
+//        kalenderPane.add("Woche", woche);
     }
 
     private List<String> monatsAnzeigeBauen() {

@@ -119,19 +119,18 @@ public class PersonalUebersicht extends JDialog {
         uebersicht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+
                 ausgNutzer.clear();
                 centerPanel.removeAll();
-//                for (TreePath treePath : tree.getSelectionPaths()) {
-//
-//                    System.out.println(treePath.isDescendant(tree.get);
-//                }
+
+
                 if (tree.getSelectionPath().getPath().length == 1) {
 
                     for (Nutzer nutzer : soldaten) {
                         neuerTab(nutzer);
                     }
-                }
-                else if (tree.getSelectionPath().getPath().length == 2) {
+                } else if (tree.getSelectionPath().getPath().length == 2) {
                     String dienstgradGruppe = "";
                     for (TreePath treePath : tree.getSelectionPaths()) {
                         switch (treePath.getPath()[1].toString()) {
@@ -156,8 +155,7 @@ public class PersonalUebersicht extends JDialog {
                             }
                         }
                     }
-                }
-                else if (tree.getSelectionPath().getPath().length == 3) {
+                } else if (tree.getSelectionPath().getPath().length == 3) {
                     for (TreePath treePath : tree.getSelectionPaths()) {
                         for (Nutzer nutzer : soldaten) {
                             if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
@@ -165,11 +163,16 @@ public class PersonalUebersicht extends JDialog {
                             }
                         }
                     }
+
                 }
+
+
             }
         });
         JButton pdfExport = new JButton("PDF Export");
-        buttonPanel.add(new JLabel());
+        buttonPanel.add(new
+
+                JLabel());
         buttonPanel.add(uebersicht);
         buttonPanel.add(pdfExport);
 
