@@ -1,9 +1,7 @@
 package db;
 
 import datenmodell.Nutzer;
-import datenmodell.PasswordHash;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
