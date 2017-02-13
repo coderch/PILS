@@ -11,4 +11,6 @@ public class IconHandler {
     public static ImageIcon HAKEN2 = new ImageIcon("gui/img/haken.png", "haken2");
     public static ImageIcon WOLKE = new ImageIcon("gui/img/wolke.jpg", "wolke");
     public static ImageIcon KRANK = new ImageIcon("gui/img/krank.jpg", "krank");
+    public static ImageIcon REFRESH = new ImageIcon("gui/img/refresh.png", "refresh");
+    public static ImageIcon PDF = new ImageIcon("gui/img/pdf.png", "pdf");
 }

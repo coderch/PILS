@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -41,10 +42,10 @@ public class StaerkeMeldung extends JDialog{
         leer.gridx = 0;
         leer.gridy = 0;
         contentPanel.add(leeresPanel,leer);
-        GridBagConstraints anwesend = new GridBagConstraints(1,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints krank = new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints urlaub = new GridBagConstraints(3,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints vorhaben = new GridBagConstraints(4,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints anwesendConstraint = new GridBagConstraints(1,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints krankConstraint = new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints urlaubConstraint = new GridBagConstraints(3,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints vorhabenConstraint = new GridBagConstraints(4,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         JLabel anwesendLabel = new JLabel(IconHandler.HAKEN);
         anwesendLabel.setToolTipText("Anwesend");
         JLabel krankLabel = new JLabel(IconHandler.KRANK);
@@ -53,10 +54,10 @@ public class StaerkeMeldung extends JDialog{
         urlaubLabel.setToolTipText("Urlaub");
         JLabel vorhabenLabel = new JLabel(IconHandler.WOLKE);
         vorhabenLabel.setToolTipText("Übung/verplant");
-        contentPanel.add(anwesendLabel, anwesend);
-        contentPanel.add(krankLabel, krank);
-        contentPanel.add(urlaubLabel, urlaub);
-        contentPanel.add(vorhabenLabel, vorhaben);
+        contentPanel.add(anwesendLabel, anwesendConstraint);
+        contentPanel.add(krankLabel, krankConstraint);
+        contentPanel.add(urlaubLabel, urlaubConstraint);
+        contentPanel.add(vorhabenLabel, vorhabenConstraint);
         int i = 1;
 
         for (Nutzer nutzer : soldaten) {
@@ -79,6 +80,7 @@ public class StaerkeMeldung extends JDialog{
             gruppe.add(radioButtonurlaub);
             gruppe.add(radioButtonvorhaben);
 
+
             contentPanel.add(label, labelConstraint);
             contentPanel.add(radioButtonanwesend, rbAnwesendConstr);
             contentPanel.add(radioButtonkrank, rbKrankConstr);
@@ -93,7 +95,7 @@ public class StaerkeMeldung extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Nutzer nutzer : soldaten) {
-
+//                    NutzerDAO.anwesenheitEintragen(nutzer, LocalDate.now(),);
                 }
                 //TODO in Datenbank schreiben
                 dispose();
