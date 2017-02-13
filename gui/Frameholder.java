@@ -52,6 +52,7 @@ public class Frameholder {
         if (userlevel.equalsIgnoreCase("zugdienst") || userlevel.equalsIgnoreCase("zugführer")) {
             JMenuItem staerkeMeldung = new JMenuItem("Stärkemeldung");
             verwaltungReiter.add(staerkeMeldung);
+            menuBar.add(verwaltungReiter);
             staerkeMeldung.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -95,7 +96,7 @@ public class Frameholder {
                 uebersichtenReiter.add(vorhabenUebersicht);
                 menuBar.add(uebersichtenReiter);
             }
-            menuBar.add(verwaltungReiter);
+
         }
 
 
