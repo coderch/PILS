@@ -114,7 +114,7 @@ public class NutzerDAO {
     public static String hatAnwesenheit(Nutzer nutzer, LocalDate date) {
         String anwesenheit = "";
         try {
-            PreparedStatement pstm = DBConnect.preparedStatement("SELECT fk_t_anwesenheitstatus_beschreibung FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+            PreparedStatement pstm = DBConnect.preparedStatement("SELECT fk_t_anwesenheitstatus_pk_beschreibung FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
             pstm.setInt(1, nutzer.getPersonalnummer());
             pstm.setDate(2, Date.valueOf(date));
             pstm.setDate(3, Date.valueOf(date));
@@ -127,6 +127,26 @@ public class NutzerDAO {
         }
 
         return anwesenheit;
+    }
+
+    public static void anwesenheitEintragen(Nutzer nutzer, LocalDate date, String status) {
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");
+            pstm.setDate(1, Date.valueOf(date));
+            pstm.setDate(2, Date.valueOf(date));
+            pstm.executeUpdate();
+
+            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_status_im_zeitraum (fk_t_soldat_pk_personalnummer, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, fk_t_anwesenheitstatus_pk_beschreibung) VALUES (?,?,?,?)ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET fk_t_anwesenheitstatus_pk_beschreibung = ?");
+            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setDate(2, Date.valueOf(date));
+            pstm.setDate(3, Date.valueOf(date));
+            pstm.setString(4, status);
+            pstm.setString(5, status);
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
     }
 
 }
