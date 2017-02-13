@@ -80,7 +80,7 @@ public class Frameholder {
                 });
                 verwaltungReiter.add(soldatenVerwalten);
                 verwaltungReiter.add(vorhabenAnlegen);
-                menuBar.add(verwaltungReiter);
+
 
 
                 JMenuItem personalUebersicht = new JMenuItem("Personalübersicht");
@@ -95,6 +95,7 @@ public class Frameholder {
                 uebersichtenReiter.add(vorhabenUebersicht);
                 menuBar.add(uebersichtenReiter);
             }
+            menuBar.add(verwaltungReiter);
         }
 
 
