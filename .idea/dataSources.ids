@@ -49,8 +49,8 @@
       <schema id="14" parent="1" name="public">
         <object-id>2200</object-id>
         <visible>1</visible>
-        <introspection-state-number>63148</introspection-state-number>
-        <introspection-timestamp>2017-02-07.09:24:09.324</introspection-timestamp>
+        <introspection-state-number>63221</introspection-state-number>
+        <introspection-timestamp>2017-02-13.17:13:23.547</introspection-timestamp>
       </schema>
       <schema id="15" parent="1" name="pg_catalog">
         <object-id>11</object-id>
@@ -67,304 +67,294 @@
       <schema id="19" parent="1" name="information_schema">
         <object-id>12081</object-id>
       </schema>
-      <sequence id="20" parent="14" name="t_anwesenheit_pk_id_seq">
-        <object-id>17950</object-id>
-        <state-number>63139</state-number>
-      </sequence>
-      <table id="21" parent="14" name="t_anwesenheit">
-        <object-id>17952</object-id>
-        <state-number>63143</state-number>
+      <table id="20" parent="14" name="t_anwesenheit">
+        <object-id>18094</object-id>
+        <state-number>63216</state-number>
       </table>
-      <table id="22" parent="14" name="t_geplant">
-        <object-id>17969</object-id>
-        <state-number>63141</state-number>
+      <table id="21" parent="14" name="t_geplant">
+        <object-id>18110</object-id>
+        <state-number>63214</state-number>
       </table>
-      <table id="23" parent="14" name="t_hat_status_im_zeitraum">
-        <object-id>18015</object-id>
-        <state-number>63143</state-number>
+      <table id="22" parent="14" name="t_hat_status_im_zeitraum">
+        <object-id>18156</object-id>
+        <state-number>63216</state-number>
       </table>
-      <table id="24" parent="14" name="t_hat_vorhaben_im_zeitraum">
-        <object-id>18035</object-id>
-        <state-number>63144</state-number>
+      <table id="23" parent="14" name="t_hat_vorhaben_im_zeitraum">
+        <object-id>18179</object-id>
+        <state-number>63217</state-number>
       </table>
-      <table id="25" parent="14" name="t_login">
-        <object-id>18053</object-id>
-        <state-number>63145</state-number>
+      <table id="24" parent="14" name="t_login">
+        <object-id>18197</object-id>
+        <state-number>63218</state-number>
       </table>
-      <table id="26" parent="14" name="t_nimmt_teil_am_vorhaben">
-        <object-id>17992</object-id>
-        <state-number>63142</state-number>
+      <table id="25" parent="14" name="t_nimmt_teil_am_vorhaben">
+        <object-id>18133</object-id>
+        <state-number>63215</state-number>
       </table>
-      <table id="27" parent="14" name="t_nutzer">
-        <object-id>17930</object-id>
-        <state-number>63147</state-number>
+      <table id="26" parent="14" name="t_nutzer">
+        <object-id>18074</object-id>
+        <state-number>63220</state-number>
       </table>
-      <table id="28" parent="14" name="t_rolle">
-        <object-id>17921</object-id>
-        <state-number>63137</state-number>
+      <table id="27" parent="14" name="t_rolle">
+        <object-id>18065</object-id>
+        <state-number>63210</state-number>
       </table>
-      <table id="29" parent="14" name="t_vorhaben">
-        <object-id>17961</object-id>
-        <state-number>63144</state-number>
+      <table id="28" parent="14" name="t_vorhaben">
+        <object-id>18102</object-id>
+        <state-number>63217</state-number>
       </table>
-      <table id="30" parent="14" name="t_zeitraum">
-        <object-id>17945</object-id>
-        <state-number>63144</state-number>
+      <table id="29" parent="14" name="t_zeitraum">
+        <object-id>18089</object-id>
+        <state-number>63217</state-number>
       </table>
-      <routine id="31" parent="14" name="update_dienstgradgruppe_bei_insert_trigger">
-        <object-id>18061</object-id>
-        <state-number>63146</state-number>
+      <routine id="30" parent="14" name="update_dienstgradgruppe_bei_insert_trigger">
+        <object-id>18205</object-id>
+        <state-number>63219</state-number>
         <routine-kind>FUNCTION</routine-kind>
       </routine>
-      <routine id="32" parent="14" name="update_dienstgradgruppe_bei_update">
-        <object-id>18063</object-id>
-        <state-number>63148</state-number>
+      <routine id="31" parent="14" name="update_dienstgradgruppe_bei_update">
+        <object-id>18207</object-id>
+        <state-number>63221</state-number>
         <routine-kind>FUNCTION</routine-kind>
       </routine>
-      <column id="33" parent="21" name="pk_id">
-        <state-number>63139</state-number>
-        <mandatory>1</mandatory>
-        <data-type>integer|0</data-type>
-        <default-expression>nextval(&apos;t_anwesenheit_pk_id_seq&apos;::regclass)</default-expression>
-      </column>
-      <column id="34" parent="21" name="beschreibung">
-        <state-number>63139</state-number>
+      <column id="32" parent="20" name="pk_beschreibung">
+        <state-number>63212</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <index id="35" parent="21" name="pk_t_anwesenheit">
-        <object-id>17959</object-id>
-        <columns>pk_id</columns>
+      <index id="33" parent="20" name="pk_t_anwesenheit">
+        <object-id>18100</object-id>
+        <columns>pk_beschreibung</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="36" parent="21" name="pk_t_anwesenheit">
-        <object-id>17960</object-id>
-        <columns>pk_id</columns>
+      <key id="34" parent="20" name="pk_t_anwesenheit">
+        <object-id>18101</object-id>
+        <columns>pk_beschreibung</columns>
         <underlying-index>pk_t_anwesenheit</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="37" parent="22" name="fk_t_soldat_pk_personalnummer">
-        <state-number>63141</state-number>
+      <column id="35" parent="21" name="fk_t_soldat_pk_personalnummer">
+        <state-number>63214</state-number>
         <mandatory>1</mandatory>
         <data-type>integer|0</data-type>
       </column>
-      <column id="38" parent="22" name="fk_t_vorhaben_pk_t_name">
-        <state-number>63141</state-number>
+      <column id="36" parent="21" name="fk_t_vorhaben_pk_t_name">
+        <state-number>63214</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="39" parent="22" name="fk_t_zeitraum_pk_von">
-        <state-number>63141</state-number>
+      <column id="37" parent="21" name="fk_t_zeitraum_pk_von">
+        <state-number>63214</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="40" parent="22" name="fk_t_zeitraum_pk_bis">
-        <state-number>63141</state-number>
+      <column id="38" parent="21" name="fk_t_zeitraum_pk_bis">
+        <state-number>63214</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="41" parent="22" name="sonderdienst">
-        <state-number>63141</state-number>
+      <column id="39" parent="21" name="sonderdienst">
+        <state-number>63214</state-number>
         <mandatory>1</mandatory>
         <data-type>boolean|0</data-type>
       </column>
-      <index id="42" parent="22" name="pk_t_geplant">
-        <object-id>17975</object-id>
+      <index id="40" parent="21" name="pk_t_geplant">
+        <object-id>18116</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="43" parent="22" name="pk_t_geplant">
-        <object-id>17976</object-id>
+      <key id="41" parent="21" name="pk_t_geplant">
+        <object-id>18117</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <underlying-index>pk_t_geplant</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="44" parent="22" name="fk_t_soldat_pk_personalnummer">
-        <object-id>17977</object-id>
+      <foreign-key id="42" parent="21" name="fk_t_soldat_pk_personalnummer">
+        <object-id>18118</object-id>
         <columns>fk_t_soldat_pk_personalnummer</columns>
         <ref-key>~.t_nutzer.pk_t_nutzer</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="45" parent="22" name="fk_t_vorhaben_pk_t_name">
-        <object-id>17982</object-id>
+      <foreign-key id="43" parent="21" name="fk_t_vorhaben_pk_t_name">
+        <object-id>18123</object-id>
         <columns>fk_t_vorhaben_pk_t_name</columns>
         <ref-key>~.t_vorhaben.pk_t_vorhaben</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="46" parent="22" name="fk_t_zeitraum_pk_von">
-        <object-id>17987</object-id>
+      <foreign-key id="44" parent="21" name="fk_t_zeitraum_pk_von">
+        <object-id>18128</object-id>
         <columns>fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <ref-key>~.t_zeitraum.pk_t_zeitraum</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="47" parent="23" name="fk_t_soldat_pk_personalnummer">
-        <state-number>63143</state-number>
+      <column id="45" parent="22" name="fk_t_soldat_pk_personalnummer">
+        <state-number>63216</state-number>
         <mandatory>1</mandatory>
         <data-type>integer|0</data-type>
       </column>
-      <column id="48" parent="23" name="fk_t_zeitraum_pk_von">
-        <state-number>63143</state-number>
+      <column id="46" parent="22" name="fk_t_zeitraum_pk_von">
+        <state-number>63216</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="49" parent="23" name="fk_t_zeitraum_pk_bis">
-        <state-number>63143</state-number>
+      <column id="47" parent="22" name="fk_t_zeitraum_pk_bis">
+        <state-number>63216</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="50" parent="23" name="fk_t_anwesenheitstatus_pk_id">
-        <state-number>63143</state-number>
+      <column id="48" parent="22" name="fk_t_anwesenheitstatus_pk_beschreibung">
+        <state-number>63216</state-number>
         <mandatory>1</mandatory>
-        <data-type>integer|0</data-type>
+        <data-type>text|0</data-type>
       </column>
-      <index id="51" parent="23" name="t_hat_status_im_zeitraum_1">
-        <object-id>18018</object-id>
+      <index id="49" parent="22" name="t_hat_status_im_zeitraum_1">
+        <object-id>18162</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="52" parent="23" name="t_hat_status_im_zeitraum_1">
-        <object-id>18019</object-id>
+      <key id="50" parent="22" name="t_hat_status_im_zeitraum_1">
+        <object-id>18163</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <underlying-index>t_hat_status_im_zeitraum_1</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="53" parent="23" name="fk_t_soldat_pk_personalnummer">
-        <object-id>18020</object-id>
+      <foreign-key id="51" parent="22" name="fk_t_soldat_pk_personalnummer">
+        <object-id>18164</object-id>
         <columns>fk_t_soldat_pk_personalnummer</columns>
         <ref-key>~.t_nutzer.pk_t_nutzer</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="54" parent="23" name="fk_t_zeitraum_pk_von">
-        <object-id>18025</object-id>
+      <foreign-key id="52" parent="22" name="fk_t_zeitraum_pk_von">
+        <object-id>18169</object-id>
         <columns>fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <ref-key>~.t_zeitraum.pk_t_zeitraum</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="55" parent="23" name="fk_t_anwesenheitstatus_pk_id">
-        <object-id>18030</object-id>
-        <columns>fk_t_anwesenheitstatus_pk_id</columns>
+      <foreign-key id="53" parent="22" name="fk_t_anwesenheitstatus_pk_beschreibung">
+        <object-id>18174</object-id>
+        <columns>fk_t_anwesenheitstatus_pk_beschreibung</columns>
         <ref-key>~.t_anwesenheit.pk_t_anwesenheit</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="56" parent="24" name="fk_t_vorhaben_pk_t_name">
-        <state-number>63144</state-number>
+      <column id="54" parent="23" name="fk_t_vorhaben_pk_t_name">
+        <state-number>63217</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="57" parent="24" name="fk_t_zeitraum_pk_von">
-        <state-number>63144</state-number>
+      <column id="55" parent="23" name="fk_t_zeitraum_pk_von">
+        <state-number>63217</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="58" parent="24" name="fk_t_zeitraum_pk_bis">
-        <state-number>63144</state-number>
+      <column id="56" parent="23" name="fk_t_zeitraum_pk_bis">
+        <state-number>63217</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="59" parent="24" name="beschreibung">
-        <state-number>63144</state-number>
+      <column id="57" parent="23" name="beschreibung">
+        <state-number>63217</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <index id="60" parent="24" name="pk_t_hat_vorhaben_im_zeitraum">
-        <object-id>18041</object-id>
+      <index id="58" parent="23" name="pk_t_hat_vorhaben_im_zeitraum">
+        <object-id>18185</object-id>
         <columns>fk_t_vorhaben_pk_t_name
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="61" parent="24" name="pk_t_hat_vorhaben_im_zeitraum">
-        <object-id>18042</object-id>
+      <key id="59" parent="23" name="pk_t_hat_vorhaben_im_zeitraum">
+        <object-id>18186</object-id>
         <columns>fk_t_vorhaben_pk_t_name
 fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <underlying-index>pk_t_hat_vorhaben_im_zeitraum</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="62" parent="24" name="fk_t_vorhaben_pk_t_name">
-        <object-id>18043</object-id>
+      <foreign-key id="60" parent="23" name="fk_t_vorhaben_pk_t_name">
+        <object-id>18187</object-id>
         <columns>fk_t_vorhaben_pk_t_name</columns>
         <ref-key>~.t_vorhaben.pk_t_vorhaben</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="63" parent="24" name="fk_t_zeitraum_pk_von">
-        <object-id>18048</object-id>
+      <foreign-key id="61" parent="23" name="fk_t_zeitraum_pk_von">
+        <object-id>18192</object-id>
         <columns>fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <ref-key>~.t_zeitraum.pk_t_zeitraum</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="64" parent="25" name="pk_personalnummer">
-        <state-number>63145</state-number>
+      <column id="62" parent="24" name="pk_personalnummer">
+        <state-number>63218</state-number>
         <mandatory>1</mandatory>
         <data-type>integer|0</data-type>
       </column>
-      <column id="65" parent="25" name="passwort">
-        <state-number>63145</state-number>
+      <column id="63" parent="24" name="passwort">
+        <state-number>63218</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <index id="66" parent="25" name="pk_personalnummer">
-        <object-id>18059</object-id>
+      <index id="64" parent="24" name="pk_personalnummer">
+        <object-id>18203</object-id>
         <columns>pk_personalnummer</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="67" parent="25" name="pk_personalnummer">
-        <object-id>18060</object-id>
+      <key id="65" parent="24" name="pk_personalnummer">
+        <object-id>18204</object-id>
         <columns>pk_personalnummer</columns>
         <underlying-index>pk_personalnummer</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="68" parent="26" name="fk_t_soldat_pk_personalnummer">
-        <state-number>63142</state-number>
+      <column id="66" parent="25" name="fk_t_soldat_pk_personalnummer">
+        <state-number>63215</state-number>
         <mandatory>1</mandatory>
         <data-type>integer|0</data-type>
       </column>
-      <column id="69" parent="26" name="fk_t_vorhaben_pk_t_name">
-        <state-number>63142</state-number>
+      <column id="67" parent="25" name="fk_t_vorhaben_pk_t_name">
+        <state-number>63215</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="70" parent="26" name="fk_t_zeitraum_pk_von">
-        <state-number>63142</state-number>
+      <column id="68" parent="25" name="fk_t_zeitraum_pk_von">
+        <state-number>63215</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="71" parent="26" name="fk_t_zeitraum_pk_bis">
-        <state-number>63142</state-number>
+      <column id="69" parent="25" name="fk_t_zeitraum_pk_bis">
+        <state-number>63215</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="72" parent="26" name="sonderdienst">
-        <state-number>63142</state-number>
+      <column id="70" parent="25" name="sonderdienst">
+        <state-number>63215</state-number>
         <mandatory>1</mandatory>
         <data-type>boolean|0</data-type>
       </column>
-      <index id="73" parent="26" name="t_nimmt_teil">
-        <object-id>17998</object-id>
+      <index id="71" parent="25" name="t_nimmt_teil">
+        <object-id>18139</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_vorhaben_pk_t_name
 fk_t_zeitraum_pk_von
@@ -372,8 +362,8 @@ fk_t_zeitraum_pk_bis</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="74" parent="26" name="t_nimmt_teil">
-        <object-id>17999</object-id>
+      <key id="72" parent="25" name="t_nimmt_teil">
+        <object-id>18140</object-id>
         <columns>fk_t_soldat_pk_personalnummer
 fk_t_vorhaben_pk_t_name
 fk_t_zeitraum_pk_von
@@ -381,159 +371,154 @@ fk_t_zeitraum_pk_bis</columns>
         <underlying-index>t_nimmt_teil</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="75" parent="26" name="fk_t_soldat_pk_personalnummer">
-        <object-id>18000</object-id>
+      <foreign-key id="73" parent="25" name="fk_t_soldat_pk_personalnummer">
+        <object-id>18141</object-id>
         <columns>fk_t_soldat_pk_personalnummer</columns>
         <ref-key>~.t_nutzer.pk_t_nutzer</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="76" parent="26" name="fk_t_vorhaben_pk_t_name">
-        <object-id>18005</object-id>
+      <foreign-key id="74" parent="25" name="fk_t_vorhaben_pk_t_name">
+        <object-id>18146</object-id>
         <columns>fk_t_vorhaben_pk_t_name</columns>
         <ref-key>~.t_vorhaben.pk_t_vorhaben</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <foreign-key id="77" parent="26" name="fk_t_zeitraum_pk_von_bis">
-        <object-id>18010</object-id>
+      <foreign-key id="75" parent="25" name="fk_t_zeitraum_pk_von_bis">
+        <object-id>18151</object-id>
         <columns>fk_t_zeitraum_pk_von
 fk_t_zeitraum_pk_bis</columns>
         <ref-key>~.t_zeitraum.pk_t_zeitraum</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <column id="78" parent="27" name="pk_personalnummer">
-        <state-number>63137</state-number>
+      <column id="76" parent="26" name="pk_personalnummer">
+        <state-number>63210</state-number>
         <mandatory>1</mandatory>
         <data-type>integer|0</data-type>
       </column>
-      <column id="79" parent="27" name="dienstgrad">
-        <state-number>63137</state-number>
+      <column id="77" parent="26" name="dienstgrad">
+        <state-number>63210</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="80" parent="27" name="dienstgradgruppe">
-        <state-number>63137</state-number>
+      <column id="78" parent="26" name="dienstgradgruppe">
+        <state-number>63210</state-number>
         <data-type>text|0</data-type>
       </column>
-      <column id="81" parent="27" name="name">
-        <state-number>63137</state-number>
+      <column id="79" parent="26" name="name">
+        <state-number>63210</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="82" parent="27" name="vorname">
-        <state-number>63137</state-number>
+      <column id="80" parent="26" name="vorname">
+        <state-number>63210</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="83" parent="27" name="kennwort">
-        <state-number>63137</state-number>
+      <column id="81" parent="26" name="fk_t_rolle_pk_beschreibung">
+        <state-number>63210</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <column id="84" parent="27" name="fk_t_rolle_pk_beschreibung">
-        <state-number>63137</state-number>
-        <mandatory>1</mandatory>
-        <data-type>text|0</data-type>
-      </column>
-      <index id="85" parent="27" name="pk_t_nutzer">
-        <object-id>17938</object-id>
+      <index id="82" parent="26" name="pk_t_nutzer">
+        <object-id>18082</object-id>
         <columns>pk_personalnummer</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="86" parent="27" name="pk_t_nutzer">
-        <object-id>17939</object-id>
+      <key id="83" parent="26" name="pk_t_nutzer">
+        <object-id>18083</object-id>
         <columns>pk_personalnummer</columns>
         <underlying-index>pk_t_nutzer</underlying-index>
         <primary>1</primary>
       </key>
-      <foreign-key id="87" parent="27" name="fk_t_rolle_pk_beschreibung">
-        <object-id>17940</object-id>
+      <foreign-key id="84" parent="26" name="fk_t_rolle_pk_beschreibung">
+        <object-id>18084</object-id>
         <columns>fk_t_rolle_pk_beschreibung</columns>
         <ref-key>~.t_rolle.pk_t_rolle</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
-      <check id="88" parent="27" name="dienstgrade">
-        <object-id>17933</object-id>
+      <check id="85" parent="26" name="dienstgrade">
+        <object-id>18077</object-id>
         <columns>dienstgrad</columns>
         <predicate>dienstgrad = ANY (ARRAY[&apos;S&apos;::text, &apos;S UA&apos;::text, &apos;S FA&apos;::text, &apos;S MA&apos;::text, &apos;S BA&apos;::text, &apos;S OA&apos;::text, &apos;G&apos;::text, &apos;G UA&apos;::text, &apos;G MA&apos;::text, &apos;G FA&apos;::text, &apos;G BA&apos;::text, &apos;G OA&apos;::text, &apos;OG&apos;::text, &apos;OG UA&apos;::text, &apos;OG MA&apos;::text, &apos;OG FA&apos;::text, &apos;OG BA&apos;::text, &apos;OG OA&apos;::text, &apos;HG&apos;::text, &apos;HG UA&apos;::text, &apos;HG MA&apos;::text, &apos;HG FA&apos;::text, &apos;HG BA&apos;::text, &apos;HG OA&apos;::text, &apos;SG&apos;::text, &apos;SG UA&apos;::text, &apos;SG MA&apos;::text, &apos;SG FA&apos;::text, &apos;SG BA&apos;::text, &apos;SG OA&apos;::text, &apos;OSG&apos;::text, &apos;OSG UA&apos;::text, &apos;OSG MA&apos;::text, &apos;OSG FA&apos;::text, &apos;OSG BA&apos;::text, &apos;OSG OA&apos;::text, &apos;U&apos;::text, &apos;U FA&apos;::text, &apos;MT BA&apos;::text, &apos;FJ&apos;::text, &apos;SK&apos;::text, &apos;SU&apos;::text, &apos;SU FA&apos;::text, &apos;SU OA&apos;::text, &apos;OMT&apos;::text, &apos;OMT BA&apos;::text, &apos;OMT OA&apos;::text, &apos;F&apos;::text, &apos;B&apos;::text, &apos;FRZS&apos;::text, &apos;FR&apos;::text, &apos;OF&apos;::text, &apos;OB&apos;::text, &apos;OF OA&apos;::text, &apos;OB OA&apos;::text, &apos;HF&apos;::text, &apos;HB&apos;::text, &apos;OFR&apos;::text, &apos;OFRZS&apos;::text, &apos;SF&apos;::text, &apos;SB&apos;::text, &apos;SB OA&apos;::text, &apos;SF OA&apos;::text, &apos;OSF&apos;::text, &apos;OSB&apos;::text, &apos;L&apos;::text, &apos;LZS&apos;::text, &apos;OL&apos;::text, &apos;OLZS&apos;::text, &apos;H&apos;::text, &apos;KL&apos;::text, &apos;SH&apos;::text, &apos;SKL&apos;::text, &apos;M&apos;::text, &apos;KK&apos;::text, &apos;OTL&apos;::text, &apos;FK&apos;::text])</predicate>
       </check>
-      <check id="89" parent="27" name="dienstgradgruppe">
-        <object-id>17934</object-id>
+      <check id="86" parent="26" name="dienstgradgruppe">
+        <object-id>18078</object-id>
         <columns>dienstgradgruppe</columns>
         <predicate>dienstgradgruppe = ANY (ARRAY[&apos;Offz&apos;::text, &apos;Uffz.m.P&apos;::text, &apos;Uffz.o.P&apos;::text, &apos;Mnsch&apos;::text])</predicate>
       </check>
-      <column id="90" parent="28" name="pk_beschreibung">
-        <state-number>63136</state-number>
+      <column id="87" parent="27" name="pk_beschreibung">
+        <state-number>63209</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <index id="91" parent="28" name="pk_t_rolle">
-        <object-id>17928</object-id>
+      <index id="88" parent="27" name="pk_t_rolle">
+        <object-id>18072</object-id>
         <columns>pk_beschreibung</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="92" parent="28" name="pk_t_rolle">
-        <object-id>17929</object-id>
+      <key id="89" parent="27" name="pk_t_rolle">
+        <object-id>18073</object-id>
         <columns>pk_beschreibung</columns>
         <underlying-index>pk_t_rolle</underlying-index>
         <primary>1</primary>
       </key>
-      <check id="93" parent="28" name="rollen">
-        <object-id>17924</object-id>
+      <check id="90" parent="27" name="rollen">
+        <object-id>18068</object-id>
         <columns>pk_beschreibung</columns>
         <predicate>pk_beschreibung = ANY (ARRAY[&apos;Zugführer&apos;::text, &apos;Zugdienst&apos;::text, &apos;Soldat&apos;::text])</predicate>
       </check>
-      <column id="94" parent="29" name="pk_name">
-        <state-number>63140</state-number>
+      <column id="91" parent="28" name="pk_name">
+        <state-number>63213</state-number>
         <mandatory>1</mandatory>
         <data-type>text|0</data-type>
       </column>
-      <index id="95" parent="29" name="pk_t_vorhaben">
-        <object-id>17967</object-id>
+      <index id="92" parent="28" name="pk_t_vorhaben">
+        <object-id>18108</object-id>
         <columns>pk_name</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="96" parent="29" name="pk_t_vorhaben">
-        <object-id>17968</object-id>
+      <key id="93" parent="28" name="pk_t_vorhaben">
+        <object-id>18109</object-id>
         <columns>pk_name</columns>
         <underlying-index>pk_t_vorhaben</underlying-index>
         <primary>1</primary>
       </key>
-      <column id="97" parent="30" name="pk_von">
-        <state-number>63138</state-number>
+      <column id="94" parent="29" name="pk_von">
+        <state-number>63211</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <column id="98" parent="30" name="pk_bis">
-        <state-number>63138</state-number>
+      <column id="95" parent="29" name="pk_bis">
+        <state-number>63211</state-number>
         <mandatory>1</mandatory>
         <data-type>date|0</data-type>
       </column>
-      <index id="99" parent="30" name="pk_t_zeitraum">
-        <object-id>17948</object-id>
+      <index id="96" parent="29" name="pk_t_zeitraum">
+        <object-id>18092</object-id>
         <columns>pk_von
 pk_bis</columns>
         <desc-columns></desc-columns>
         <unique>1</unique>
       </index>
-      <key id="100" parent="30" name="pk_t_zeitraum">
-        <object-id>17949</object-id>
+      <key id="97" parent="29" name="pk_t_zeitraum">
+        <object-id>18093</object-id>
         <columns>pk_von
 pk_bis</columns>
         <underlying-index>pk_t_zeitraum</underlying-index>
         <primary>1</primary>
       </key>
-      <argument id="101" parent="31">
+      <argument id="98" parent="30">
         <direction>RETURN</direction>
         <data-type>trigger|0</data-type>
       </argument>
-      <argument id="102" parent="32">
+      <argument id="99" parent="31">
         <direction>RETURN</direction>
         <data-type>void|0</data-type>
       </argument>

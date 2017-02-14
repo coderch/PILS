@@ -10,5 +10,6 @@ import java.time.LocalDate;
  */
 public class SoldatUebersichtPane extends JPanel{
     public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende) {
+        //TODO SoldatUbersichtPane erstellen
     }
 }
