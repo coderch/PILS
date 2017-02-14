@@ -6,6 +6,7 @@ import db.NutzerDAO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  * Created by ajanzen on 14.02.2017.
@@ -44,17 +45,20 @@ public class NutzerLoeschenListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (!jListNutzer.isSelectionEmpty()) {
             java.util.Set<Integer> integerList = NutzerDAO.holeLogins();
-            System.out.println(integerList);
-            if (integerList.contains(Integer.parseInt(jTextFieldPersNr.getText()))) {
-                NutzerDAO.loginLöschen(Integer.parseInt(jTextFieldPersNr.getText()));
-                NutzerDAO.nutzerLöschen(Integer.parseInt(jTextFieldPersNr.getText()));
-                aktualliesieren();
+            List<Nutzer> nutzerList = jListNutzer.getSelectedValuesList();
+            for (Nutzer nutzer : nutzerList) {
+                if (integerList.contains(nutzer.getPersonalnummer())) {
+                    NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
+                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
 
-            } else {
-                NutzerDAO.nutzerLöschen(Integer.parseInt(jTextFieldPersNr.getText()));
-                aktualliesieren();
+                } else {
+                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
+
+                }
+
             }
 
+            aktualliesieren();
         } else {
             JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.WARNING_MESSAGE);
         }

@@ -58,7 +58,7 @@ public class NutzerFrame extends JDialog {
 
         //JList erzeugen
         JList jListNutzer = new JList();
-        jListNutzer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        jListNutzer.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jPanelJListNutzer.setBorder(BorderFactory.createTitledBorder("Nutzer Übesicht"));
         JScrollPane jScrollPaneNutzer = new JScrollPane(jListNutzer,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
