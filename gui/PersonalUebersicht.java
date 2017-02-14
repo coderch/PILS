@@ -170,7 +170,7 @@ public class PersonalUebersicht extends JDialog {
 
             }
         });
-        JButton pdfExport = new JButton("PDF Export");
+        JButton pdfExport = new JButton(IconHandler.PDF);
         buttonPanel.add(new
 
                 JLabel());

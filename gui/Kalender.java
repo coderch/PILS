@@ -3,6 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
 import db.VorhabenDAO;
+import export.PDFExport;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -18,7 +19,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by mwaldau on 12.12.2016.
+ * Kalender ist ein JPanel das den Kalender in einer JTable zur Verfügung stellt
+ * @see javax.swing.JPanel
+ * @author mwaldau
  */
 public class Kalender extends JPanel {
     public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
@@ -26,9 +29,10 @@ public class Kalender extends JPanel {
     private final JTabbedPane kalenderPane = new JTabbedPane();
     private final JPanel monat = new JPanel(new BorderLayout());
     private final JPanel woche = new JPanel(new BorderLayout());
-    //    private String[][] monatDaten = new String[1][datum.getMonth().length(datum.isLeapYear()) + 2];
+    private final JTable kalender = new JTable();
     private Object[][] monatDaten;
 
+    //Zu testzwecken
     private final String[] wochenAnzeige = {"Dienstgrad", "Name", "1", "2", "3", "4", "5", "6", "7"};
     private String[][] wochenDaten = {{"H", "Pimpelhuber", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""},
             {"SU", "Meier", "krank", "anwesend", "urlaub", "vorhaben", "", "", ""}};
@@ -40,10 +44,12 @@ public class Kalender extends JPanel {
         monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
         monatsAnzeigeBauen();
-        monat.add(createKalender(monatDaten, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
-        woche.add(createKalender(wochenDaten, wochenAnzeige), BorderLayout.CENTER);
 
+        monat.add(createKalender(monatDaten, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
         kalenderPane.add("Monat", monat);
+
+        // Woche zu Demonstrationszwecken
+        woche.add(createKalender(wochenDaten, wochenAnzeige), BorderLayout.CENTER);
 //        kalenderPane.add("Woche", woche);
     }
 
@@ -65,14 +71,13 @@ public class Kalender extends JPanel {
     }
 
     /**
-     * Erstellt einen ScrollPane der eine JTable beinhaltet
+     * Erstellt einen ScrollPane die eine JTable beinhaltet
      *
-     * @param daten
-     * @param anzeige
-     * @return
+     * @param daten 2-dimensionales ObjectArray das die Daten der JTable darstellt
+     * @param anzeige Array zur Darstellung der Headerzeile
+     * @return Scrollpane mit Jtable
      */
     private JScrollPane createKalender(Object[][] daten, String[] anzeige) {
-        JTable kalender = new JTable();
         kalender.setModel(new KalenderModel(daten, anzeige));
         kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
         kalender.getTableHeader().setReorderingAllowed(false);
@@ -107,13 +112,19 @@ public class Kalender extends JPanel {
         return halter;
     }
 
+    /**
+     * Öffentliche Methode zum Anzeigen des Panels
+     * @return Panel mit TabPanel zur Darstellung des Kalenders im Monatsformat
+     */
     public JPanel anzeigen() {
-
         this.add(kalenderPane);
         return this;
     }
 
-
+    /**
+     * Monatsanzeigepanel stellt das Menü des Kalenders zur Verfügung
+     * @return Panel mit weiter, zurück, refresh und PDFExport Button
+     */
     private JPanel monatsAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();
         JLabel label = new JLabel(String.format("%s", MONATJAHRFORMATTER.format(datum)), JLabel.CENTER);
@@ -146,9 +157,22 @@ public class Kalender extends JPanel {
         JButton refresh = new JButton(IconHandler.REFRESH);
         refresh.setToolTipText("Aktualisieren");
         refresh.setPreferredSize(zurueck.getPreferredSize());
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                datenerzeugen();
+            }
+        });
         JButton pdf = new JButton(IconHandler.PDF);
+        pdf.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new PDFExport(kalender);
+            }
+        });
         pdf.setToolTipText("PDF Export");
         pdf.setPreferredSize(zurueck.getPreferredSize());
+
         anzeigePanel.add(refresh);
         anzeigePanel.add(zurueck);
         anzeigePanel.add(label);
@@ -190,6 +214,10 @@ public class Kalender extends JPanel {
         return anzeigePanel;
     }
 
+    /**
+     * Erstellen/Aktualisieren der in der JTable angezeigten Daten
+     * @return 2Dimensionales ObjectArray mit Dienstgrad, Name und Anwesenheitsdaten des Monats
+     */
     private Object[][] datenerzeugen() {
         List<Nutzer> soldatenListe = new ArrayList<>(NutzerDAO.nutzerHolen());
         List<Object[]> objectList = new ArrayList<>();

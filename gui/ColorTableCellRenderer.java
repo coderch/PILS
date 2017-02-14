@@ -7,7 +7,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 
 /**
- * Created by pacmaniac on 23.12.2016.
+ * @
+ * @author mwaldau
  */
 class ColorTableCellRenderer extends DefaultTableCellRenderer {
 
