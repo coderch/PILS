@@ -58,15 +58,19 @@ public class NutzerLoeschenListener implements ActionListener {
 
             }
 
-            aktualliesieren();
+            aktualliesieren(nutzerList);
         } else {
             JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.WARNING_MESSAGE);
         }
 
     }
 
-    private void aktualliesieren() {
-        JOptionPane.showMessageDialog(null, "Nutzer gelöscht", "Fertig", JOptionPane.INFORMATION_MESSAGE);
+    private void aktualliesieren(List<Nutzer> nutzerList) {
+        StringBuilder sb = new StringBuilder();
+        for (Nutzer nutzer : nutzerList) {
+            sb.append(nutzer + "\n");
+        }
+        JOptionPane.showMessageDialog(null, sb.toString()+"\ngelöscht", "Fertig", JOptionPane.INFORMATION_MESSAGE);
         this.jTextFieldPersNr.setText(null);
         this.jCheckBox.setSelected(false);
         this.rollenComboBox.setSelectedIndex(0);

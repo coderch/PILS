@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/jcalendar_1_4.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/postgresql_9_4_1212.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/IconHandler.java" afterPath="$PROJECT_DIR$/gui/IconHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Kalender.java" afterPath="$PROJECT_DIR$/gui/Kalender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/KalenderModel.java" afterPath="$PROJECT_DIR$/gui/KalenderModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PersonalUebersicht.java" afterPath="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" afterPath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/StaerkeMeldung.java" afterPath="$PROJECT_DIR$/gui/StaerkeMeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" afterPath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/gui/ColorTableCellRenderer.java" afterPath="$PROJECT_DIR$/gui/KalenderTableCellRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" afterPath="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -66,89 +55,163 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Frameholder.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Frameholder.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/Frameholder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-509">
-              <caret line="57" column="66" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+            <state relative-caret-position="1462">
+              <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Kalender.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/Kalender.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="701">
-              <caret line="164" column="151" selection-start-line="164" selection-start-column="151" selection-end-line="164" selection-end-column="151" />
-              <folding>
-                <element signature="e#3266#3473#0" expanded="true" />
-                <element signature="e#3472#3473#0" expanded="true" />
-                <element signature="e#6826#6827#0" expanded="true" />
-                <element signature="e#6878#6879#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="JAVA/datenmodell" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/datenmodell">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>datenmodell</OriginalElement>
+              <nodes>
+                <node x="0.0" y="225.0">datenmodell.Rolle</node>
+                <node x="0.0" y="0.0">datenmodell.DienstgradSort</node>
+                <node x="0.0" y="75.0">datenmodell.PasswordHash</node>
+                <node x="130.0" y="150.0">datenmodell.Nutzer</node>
+                <node x="0.0" y="150.0">datenmodell.Vorhaben</node>
+              </nodes>
+              <notes />
+              <edges />
+              <settings layout="Hierarchic Group" zoom="1.0" x="-128.0" y="129.5" />
+              <SelectedNodes>
+                <node>datenmodell.Rolle</node>
+              </SelectedNodes>
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StaerkeMeldung.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/StaerkeMeldung.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-340">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
-              <folding>
-                <element signature="e#5586#5587#0" expanded="true" />
-                <element signature="e#5627#5628#0" expanded="true" />
-              </folding>
+      <file leaf-file-name="JAVA/db" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/db">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>db</OriginalElement>
+              <nodes>
+                <node x="0.0" y="75.0">db.NutzerDAO</node>
+                <node x="0.0" y="225.0">db.RolleDAO</node>
+                <node x="0.0" y="150.0">db.DBConnect</node>
+                <node x="0.0" y="0.0">db.VorhabenDAO</node>
+                <node x="130.0" y="225.0">db.DBExport</node>
+              </nodes>
+              <notes />
+              <edges />
+              <settings layout="Hierarchic Group" zoom="1.0" x="-121.5" y="129.5" />
+              <SelectedNodes>
+                <node>db.NutzerDAO</node>
+                <node>db.RolleDAO</node>
+                <node>db.DBConnect</node>
+                <node>db.VorhabenDAO</node>
+                <node>db.DBExport</node>
+              </SelectedNodes>
+              <Categories />
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IconHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/IconHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
-              <folding />
+      <file leaf-file-name="JAVA/gui" pinned="false" current-in-tab="false">
+        <entry file="uml://JAVA/gui">
+          <provider selected="true" editor-type-id="UmlEditorProvider">
+            <state>
+              <ID>JAVA</ID>
+              <OriginalElement>gui</OriginalElement>
+              <nodes>
+                <node x="0.0" y="877.0">gui.IconHandler</node>
+                <node x="298.0" y="55.0">gui.SoldatUebersichtPane</node>
+                <node x="658.0" y="212.0">gui.Kalender</node>
+                <node x="650.0" y="0.0">gui.KalenderModel</node>
+                <node x="1139.0" y="289.0">gui.StaerkeMeldung</node>
+                <node x="1351.0" y="300.5">gui.NutzerFrame</node>
+                <node x="587.0" y="877.0">gui.LoginFrame</node>
+                <node x="318.0" y="877.0">gui.Anwesenheit</node>
+                <node x="0.0" y="212.0">gui.VorhabenAnlegen</node>
+                <node x="745.4999999999999" y="501.0">gui.Frameholder</node>
+                <node x="916.0" y="66.0">gui.KalenderTableCellRenderer</node>
+                <node x="815.9999999999999" y="780.0">gui.Runner</node>
+                <node x="318.99999999999994" y="245.0">gui.PersonalUebersicht</node>
+              </nodes>
+              <notes />
+              <edges>
+                <edge source="gui.Frameholder" target="gui.PersonalUebersicht">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Kalender" target="gui.KalenderModel">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.PersonalUebersicht" target="gui.SoldatUebersichtPane">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Frameholder" target="gui.NutzerFrame">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Frameholder" target="gui.StaerkeMeldung">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Runner" target="gui.Frameholder">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Frameholder" target="gui.Kalender">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Kalender" target="gui.KalenderTableCellRenderer">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+                <edge source="gui.Frameholder" target="gui.VorhabenAnlegen">
+                  <point x="0.0" y="0.0" />
+                  <point x="0.0" y="0.0" />
+                </edge>
+              </edges>
+              <settings layout="Hierarchic Group" zoom="0.8" x="410.0" y="393.0" />
+              <SelectedNodes>
+                <node>gui.IconHandler</node>
+                <node>gui.SoldatUebersichtPane</node>
+                <node>gui.Kalender</node>
+                <node>gui.KalenderModel</node>
+                <node>gui.StaerkeMeldung</node>
+                <node>gui.NutzerFrame</node>
+                <node>gui.LoginFrame</node>
+                <node>gui.Anwesenheit</node>
+                <node>gui.VorhabenAnlegen</node>
+                <node>gui.Frameholder</node>
+                <node>gui.KalenderTableCellRenderer</node>
+                <node>gui.Runner</node>
+                <node>gui.PersonalUebersicht</node>
+              </SelectedNodes>
+              <Categories>
+                <Category>Constructors</Category>
+                <Category>Fields</Category>
+              </Categories>
+              <SCOPE>All</SCOPE>
+              <VISIBILITY>private</VISIBILITY>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonalUebersicht.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
+      <file leaf-file-name="NutzerLoeschenListener.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/listener/NutzerLoeschenListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="42" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VorhabenAnlegen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/VorhabenAnlegen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-416">
-              <caret line="225" column="42" selection-start-line="225" selection-start-column="42" selection-end-line="225" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KalenderModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/KalenderModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="6" column="33" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Runner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/Runner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="29" column="34" selection-start-line="29" selection-start-column="34" selection-end-line="29" selection-end-column="34" />
+            <state relative-caret-position="290">
+              <caret line="72" column="61" selection-start-line="72" selection-start-column="61" selection-end-line="72" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -191,6 +254,7 @@
         <option value="$PROJECT_DIR$/gui/Kalender.java" />
         <option value="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
         <option value="$PROJECT_DIR$/gui/KalenderModel.java" />
+        <option value="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" />
       </list>
     </option>
   </component>
@@ -265,67 +329,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="gui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="export" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="db" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PILS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="datenmodell" />
+              <option name="myItemId" value="listener" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -362,6 +366,9 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/PILS.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/gui/NutzerFrame.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/listener/NutzerLoeschenListener.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -369,7 +376,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/datenmodell/DienstgradSort.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -697,7 +703,7 @@
       <workItem from="1486711598826" duration="2638000" />
       <workItem from="1486973919973" duration="2177000" />
       <workItem from="1486984115405" duration="7257000" />
-      <workItem from="1486996950959" duration="35414000" />
+      <workItem from="1486996950959" duration="37219000" />
     </task>
     <task id="LOCAL-00001" summary="26.01.2017">
       <created>1485426966297</created>
@@ -867,11 +873,18 @@
       <option name="project" value="LOCAL" />
       <updated>1487102218984</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="14.02.2017 - vieles Kommentiert ;D&#10;&#10;">
+      <created>1487109945852</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1487109945852</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85753000" />
+    <option name="totallyTimeSpent" value="87558000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -887,17 +900,19 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.50268096" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14405595" sideWeight="0.48927614" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16223776" sideWeight="0.48927614" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25734267" sideWeight="0.48927614" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.14405595" sideWeight="0.49731904" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20375335" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16957104" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.49463806" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -907,7 +922,6 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.49463806" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -979,51 +993,14 @@
     <MESSAGE value="13.02.2017 - Kalender Object Arry eingefügt, Ubersichttab inzugefügt, &#10;&#10;" />
     <MESSAGE value="13.02.2017 - Buttons im kalender hinzugefügt und PNG's bearbeitet&#10;&#10;" />
     <MESSAGE value="14.02.2017 - Kalender kommentiert&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.02.2017 - Kalender kommentiert&#10;&#10;" />
+    <MESSAGE value="14.02.2017 - vieles Kommentiert ;D&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="14.02.2017 - vieles Kommentiert ;D&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/datenmodell/Rolle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Runner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/VorhabenAnlegen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="19" column="50" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Runner2.java" />
-    <entry file="file://$PROJECT_DIR$/gui/Anwesenheit.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/NutzerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datenmodell/Nutzer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1198,13 +1175,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="16" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1272,22 +1242,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/IconHandler.java">
+    <entry file="file://$PROJECT_DIR$/gui/SoldatUebersichtPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+        <state relative-caret-position="153">
+          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/StaerkeMeldung.java">
+    <entry file="uml://JAVA/">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement />
+          <nodes>
+            <node x="" y="">com</node>
+            <node x="" y="">netscape</node>
+            <node x="" y="">oracle</node>
+            <node x="" y="">org</node>
+            <node x="" y="">DAOTests</node>
+            <node x="" y="">sun</node>
+            <node x="" y="">META-INF</node>
+            <node x="" y="">jdk</node>
+            <node x="" y="">java</node>
+            <node x="" y="">javax</node>
+            <node x="" y="">datenmodell</node>
+            <node x="" y="">gui</node>
+            <node x="" y="">javafx</node>
+            <node x="" y="">export</node>
+            <node x="" y="">db</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="202.0" y="202.5" />
+          <SelectedNodes />
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listener/NutzerAendernListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-340">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
-          <folding>
-            <element signature="e#5586#5587#0" expanded="true" />
-            <element signature="e#5627#5628#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-153">
+          <caret line="29" column="40" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4584">
+          <caret line="66" column="43" selection-start-line="66" selection-start-column="43" selection-end-line="66" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1304,10 +1311,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/SoldatUebersichtPane.java">
+    <entry file="file://$PROJECT_DIR$/gui/StaerkeMeldung.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" column="44" selection-start-line="12" selection-start-column="44" selection-end-line="12" selection-end-column="44" />
+        <state relative-caret-position="-340">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="30" selection-end-column="7" />
+          <folding>
+            <element signature="e#5586#5587#0" expanded="true" />
+            <element signature="e#5627#5628#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/IconHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -1336,10 +1354,154 @@
         </state>
       </provider>
     </entry>
+    <entry file="uml://JAVA/datenmodell">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>datenmodell</OriginalElement>
+          <nodes>
+            <node x="0.0" y="225.0">datenmodell.Rolle</node>
+            <node x="0.0" y="0.0">datenmodell.DienstgradSort</node>
+            <node x="0.0" y="75.0">datenmodell.PasswordHash</node>
+            <node x="130.0" y="150.0">datenmodell.Nutzer</node>
+            <node x="0.0" y="150.0">datenmodell.Vorhaben</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-128.0" y="129.5" />
+          <SelectedNodes>
+            <node>datenmodell.Rolle</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/db">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>db</OriginalElement>
+          <nodes>
+            <node x="0.0" y="75.0">db.NutzerDAO</node>
+            <node x="0.0" y="225.0">db.RolleDAO</node>
+            <node x="0.0" y="150.0">db.DBConnect</node>
+            <node x="0.0" y="0.0">db.VorhabenDAO</node>
+            <node x="130.0" y="225.0">db.DBExport</node>
+          </nodes>
+          <notes />
+          <edges />
+          <settings layout="Hierarchic Group" zoom="1.0" x="-121.5" y="129.5" />
+          <SelectedNodes>
+            <node>db.NutzerDAO</node>
+            <node>db.RolleDAO</node>
+            <node>db.DBConnect</node>
+            <node>db.VorhabenDAO</node>
+            <node>db.DBExport</node>
+          </SelectedNodes>
+          <Categories />
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JAVA/gui">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>gui</OriginalElement>
+          <nodes>
+            <node x="0.0" y="877.0">gui.IconHandler</node>
+            <node x="298.0" y="55.0">gui.SoldatUebersichtPane</node>
+            <node x="658.0" y="212.0">gui.Kalender</node>
+            <node x="650.0" y="0.0">gui.KalenderModel</node>
+            <node x="1139.0" y="289.0">gui.StaerkeMeldung</node>
+            <node x="1351.0" y="300.5">gui.NutzerFrame</node>
+            <node x="587.0" y="877.0">gui.LoginFrame</node>
+            <node x="318.0" y="877.0">gui.Anwesenheit</node>
+            <node x="0.0" y="212.0">gui.VorhabenAnlegen</node>
+            <node x="745.4999999999999" y="501.0">gui.Frameholder</node>
+            <node x="916.0" y="66.0">gui.KalenderTableCellRenderer</node>
+            <node x="815.9999999999999" y="780.0">gui.Runner</node>
+            <node x="318.99999999999994" y="245.0">gui.PersonalUebersicht</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="gui.Frameholder" target="gui.PersonalUebersicht">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Kalender" target="gui.KalenderModel">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.PersonalUebersicht" target="gui.SoldatUebersichtPane">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Frameholder" target="gui.NutzerFrame">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Frameholder" target="gui.StaerkeMeldung">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Runner" target="gui.Frameholder">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Frameholder" target="gui.Kalender">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Kalender" target="gui.KalenderTableCellRenderer">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="gui.Frameholder" target="gui.VorhabenAnlegen">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.8" x="410.0" y="393.0" />
+          <SelectedNodes>
+            <node>gui.IconHandler</node>
+            <node>gui.SoldatUebersichtPane</node>
+            <node>gui.Kalender</node>
+            <node>gui.KalenderModel</node>
+            <node>gui.StaerkeMeldung</node>
+            <node>gui.NutzerFrame</node>
+            <node>gui.LoginFrame</node>
+            <node>gui.Anwesenheit</node>
+            <node>gui.VorhabenAnlegen</node>
+            <node>gui.Frameholder</node>
+            <node>gui.KalenderTableCellRenderer</node>
+            <node>gui.Runner</node>
+            <node>gui.PersonalUebersicht</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Constructors</Category>
+            <Category>Fields</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gui/Frameholder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-509">
-          <caret line="57" column="66" selection-start-line="57" selection-start-column="66" selection-end-line="57" selection-end-column="66" />
+        <state relative-caret-position="1462">
+          <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/listener/NutzerLoeschenListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="72" column="61" selection-start-line="72" selection-start-column="61" selection-end-line="72" selection-end-column="61" />
           <folding />
         </state>
       </provider>
