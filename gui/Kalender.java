@@ -2,7 +2,6 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import db.VorhabenDAO;
 import export.PDFExport;
 
 import javax.swing.*;
@@ -29,7 +28,7 @@ public class Kalender extends JPanel {
     private final JTabbedPane kalenderPane = new JTabbedPane();
     private final JPanel monat = new JPanel(new BorderLayout());
     private final JPanel woche = new JPanel(new BorderLayout());
-    private final JTable kalender = new JTable();
+
     private Object[][] monatDaten;
 
     //Zu testzwecken
@@ -45,6 +44,7 @@ public class Kalender extends JPanel {
         woche.add(wochenAnzeigePanel(), BorderLayout.NORTH);
         monatsAnzeigeBauen();
 
+
         monat.add(createKalender(monatDaten, monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
         kalenderPane.add("Monat", monat);
 
@@ -56,7 +56,7 @@ public class Kalender extends JPanel {
     /**
      * Erstellt eine String Liste die von der JTable als Headerzeile verwendet wird
      *
-     * @return
+     * @return Liste mit Name, Dienstgrad und Tagen im Monat
      */
     private List<String> monatsAnzeigeBauen() {
         List<String> monatsAnzeige = new ArrayList<>();
@@ -78,8 +78,9 @@ public class Kalender extends JPanel {
      * @return Scrollpane mit Jtable
      */
     private JScrollPane createKalender(Object[][] daten, String[] anzeige) {
+        JTable kalender = new JTable();;
         kalender.setModel(new KalenderModel(daten, anzeige));
-        kalender.setDefaultRenderer(Object.class, new ColorTableCellRenderer());
+        kalender.setDefaultRenderer(Object.class, new KalenderTableCellRenderer());
         kalender.getTableHeader().setReorderingAllowed(false);
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         kalender.setRowHeight(30);
@@ -160,14 +161,15 @@ public class Kalender extends JPanel {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                datenerzeugen();
+                monat.remove(1);
+                monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
         JButton pdf = new JButton(IconHandler.PDF);
         pdf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new PDFExport(kalender);
+                new PDFExport(monat);
             }
         });
         pdf.setToolTipText("PDF Export");

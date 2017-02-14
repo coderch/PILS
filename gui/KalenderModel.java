@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.Vector;
 
 /**
- * Created by pacmaniac on 23.12.2016.
+ * kalenderModel nicht editierbar
+ * @see javax.swing.table.DefaultTableModel
+ * @author mwaldau copyright Major Müller
  */
 public class KalenderModel extends DefaultTableModel {
 

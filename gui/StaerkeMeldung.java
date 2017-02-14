@@ -12,7 +12,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 /**
- * Created by mwaldau on 26.01.2017.
+ * Fenster zum Eintragen der taeglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern
+ * @see javax.swing.JDialog
+ * @author mwaldau
  */
 public class StaerkeMeldung extends JDialog{
 
@@ -23,6 +25,10 @@ public class StaerkeMeldung extends JDialog{
         this.soldaten = NutzerDAO.nutzerHolen();
         dialogBauen();
     }
+
+    /**
+     * Setzt die Umgebungsvariablen für den Dialog
+     */
     private void dialogBauen() {
         this.setModal(true);
         this.setTitle("Stärkemeldung");
@@ -34,6 +40,10 @@ public class StaerkeMeldung extends JDialog{
         this.setVisible(true);
     }
 
+    /**
+     * Erstellt ein JPanel das variabel aufgrund der Anzahl an Nutzern in der Datenbank Zeilen mit Name, dienstgrad und 4 auswählbaren Statuus
+     * @return JPanel mit dem Inhalt des Fensters
+     */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
         JPanel leeresPanel = new JPanel();
@@ -71,6 +81,7 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbKrankConstr = new GridBagConstraints(2,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+            //TODO @mwaldau Abändern des Models um Button ansprechbar zu machen.
             JRadioButton radioButtonanwesend = new JRadioButton();
             JRadioButton radioButtonkrank = new JRadioButton();
             JRadioButton radioButtonurlaub = new JRadioButton();
@@ -96,8 +107,8 @@ public class StaerkeMeldung extends JDialog{
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Nutzer nutzer : soldaten) {
 //                    NutzerDAO.anwesenheitEintragen(nutzer, LocalDate.now(),);
+                    //TODO @mwaldau in Datenbank schreiben
                 }
-                //TODO in Datenbank schreiben
                 dispose();
             }
         });

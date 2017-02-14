@@ -3,7 +3,8 @@ package gui;
 import javax.swing.*;
 
 /**
- * Created by mwaldau on 26.01.2017.
+ * Stellt Icons als Konstante im Programm zur Verfügung
+ * @author mwaldau
  */
 public class IconHandler {
     public static ImageIcon SONNE = new ImageIcon("gui/img/sonne.jpg", "sonne");

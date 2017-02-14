@@ -18,7 +18,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by mwaldau on 23.01.2017.
+ * Erstellt ein Fenster das Vorhaben aus der Datenbank einliest und diese in einer JList darstellt,
+ * dem Vorhaben kann ein individuller Name und eine Beschreibung gegeben werden sowie ein Start, Enddatum und
+ * Soldaten zugewiesen werden.
+ * @see javax.swing.JDialog
+ * @author mwaldau
  */
 public class VorhabenAnlegen extends JDialog{
     private final JTextField name = new JTextField(35);
@@ -30,13 +34,14 @@ public class VorhabenAnlegen extends JDialog{
     private Vorhaben vorhaben = null;
 
 
-
+    // Konstruktor zum Anlegen aus dem Framholder heraus
     public VorhabenAnlegen(){
         this.setTitle("Vorhaben erstellen");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         dialogBauen();
     }
+    //Konstruktor zum Editieren
     public VorhabenAnlegen(Vorhaben vorhaben){
         this.setTitle("Vorhaben bearbeiten");
         this.soldatenListe = NutzerDAO.nutzerHolen();
@@ -44,8 +49,9 @@ public class VorhabenAnlegen extends JDialog{
         this.vorhaben = vorhaben;
         dialogBauen();
     }
-
-
+    /**
+     * Setzt die Umgebungsvariablen für den Dialog
+     */
     private void dialogBauen() {
         this.setModal(true);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -55,15 +61,17 @@ public class VorhabenAnlegen extends JDialog{
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-    private void inDBschreiben(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten){
-        VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
-    }
+
+    /**
+     * Erstellt den ContentPane mit einem GridBagLayout
+     * @return
+     */
 
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
 
 
-        //--------------left Panel---------------------
+        //--------------left Panel mit JLIST---------------------
         JPanel leftPanel = new JPanel();
         JPanel platzhalter = new JPanel();
         GridBagConstraints leftConstraint = new GridBagConstraints();
@@ -85,14 +93,14 @@ public class VorhabenAnlegen extends JDialog{
         platzhalter.add(scP);
         leftPanel.add(platzhalter);
 
-        //-------------Center Panel--------------------
+        //-------------Center Panel untergliedert in Teilbereiche --------------------
         JPanel centerPanel = new JPanel(new GridBagLayout());
         GridBagConstraints centerConstraint = new GridBagConstraints();
         centerConstraint.gridy = 0;
         centerConstraint.gridx = 1;
         centerConstraint.anchor = GridBagConstraints.PAGE_START;
 
-        //-------------center1-------------------------
+        //-------------center1 mit Textfeld Name-------------------------
 
         JPanel center1 = new JPanel();
         GridBagConstraints center1Constraint = new GridBagConstraints();
@@ -105,7 +113,7 @@ public class VorhabenAnlegen extends JDialog{
         namePanel.add(name);
         center1.add(namePanel);
 
-        //-------------center2-------------------------
+        //-------------center2 mit Textarea Beschreibung-------------------------
 
         JPanel center2 = new JPanel();
         GridBagConstraints center2Constraint = new GridBagConstraints();
@@ -119,7 +127,7 @@ public class VorhabenAnlegen extends JDialog{
         beschreibungPanel.add(beschreibung);
         center2.add(beschreibungPanel);
 
-        //-------------center3-------------------------
+        //-------------center3 mit DateChooser beginn und ende-------------------------
 
         JPanel beginnPanel = new JPanel();
         beginnPanel.setBorder(BorderFactory.createTitledBorder("Beginn"));
@@ -138,7 +146,7 @@ public class VorhabenAnlegen extends JDialog{
         endeconstraint.gridx = 2;
         endeconstraint.anchor = GridBagConstraints.FIRST_LINE_END;
 
-        //-------------center4-------------------------
+        //-------------center4 mit 2 Jlists und 2 JButtons um soldaten zuzuweisen-------------------------
 
         List<Nutzer> eingeteilteSoldaten = new ArrayList<>();
         JList<Nutzer> soldatenJlist1 = new JList(this.soldatenListe.toArray(new Nutzer[0]));
@@ -166,6 +174,8 @@ public class VorhabenAnlegen extends JDialog{
         soldatenJList2Contraint.anchor = GridBagConstraints.FIRST_LINE_END;
 
         JButton zu = new JButton(">>");
+        // wenn Selection nicht leer, Selektierte durchgehen, aus SoldatenListe entfernen und den eingeteilten zuweisen
+        //danach die JLists mit den Lists<Nutzer> abgleichen
         zu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -180,6 +190,7 @@ public class VorhabenAnlegen extends JDialog{
                 }
             }
         });
+        // sinsgemäß umgekehrt zu >>
         JButton ab = new JButton("<<");
         ab.setPreferredSize(new Dimension(80,20));
         ab.addActionListener(new ActionListener() {
@@ -204,7 +215,7 @@ public class VorhabenAnlegen extends JDialog{
         buttonPanelContraint.gridy = 3;
         buttonPanelContraint.gridx = 1;
 
-        //-------------center5-------------------------
+        //-------------center5  Platzhalter -------------------------
         JPanel center5 = new JPanel();
         center5.setPreferredSize(new Dimension(0,50));
         GridBagConstraints center5Constraint = new GridBagConstraints();
@@ -212,7 +223,7 @@ public class VorhabenAnlegen extends JDialog{
         center5Constraint.gridx = 0;
         center5Constraint.gridwidth = 3;
 
-        //-------------center6-------------------------
+        //-------------center6 mit Buttons-------------------------
         JPanel center6 = new JPanel();
         GridBagConstraints center6Constraint = new GridBagConstraints();
         center6Constraint.gridy = 5;
@@ -224,7 +235,7 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                inDBschreiben(vorhaben, eingeteilteSoldaten);
+                VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
                 dispose();
 
             }
@@ -234,7 +245,7 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                inDBschreiben(vorhaben, eingeteilteSoldaten);
+                VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
             }
         });
         JButton abbrechen = new JButton("Abbrechen");
@@ -257,7 +268,6 @@ public class VorhabenAnlegen extends JDialog{
         centerPanel.add(soldaten2Panel, soldatenJList2Contraint);
         centerPanel.add(center5, center5Constraint);
         centerPanel.add(center6, center6Constraint);
-
 
         contentPanel.add(leftPanel, leftConstraint);
         contentPanel.add(centerPanel, centerConstraint);
