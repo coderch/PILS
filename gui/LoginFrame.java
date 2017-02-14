@@ -7,16 +7,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 /**
- * Created by ajanzen on 09.01.2017.
+ * Klasse für das Login GUI - Element
+ * @author ajanzen
  */
 public class LoginFrame {
     public static int userName;
     public static String passWord;
 
+    /**
+     * Konstruktor für das LoginFrame
+     */
     public LoginFrame(){
         loginDialog();
     }
 
+    /**
+     * Methode zur herstellung des GUI - Elements als JComponent
+     */
     private static void loginDialog() {
         JLabel title = new JLabel("Login Benutzername und Password");
         JTextField username = new JTextField();
@@ -38,6 +45,10 @@ public class LoginFrame {
         }
     }
 
+    /**
+     * Methode zur prüfung ob die Eingaben im LoginFrame mit den eintragunfen in der Datenbank übereinstimmen
+     * @return wahr oder falsch
+     */
     private static boolean getLogin() {
         boolean status = false;
 

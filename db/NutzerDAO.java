@@ -5,10 +5,9 @@ import datenmodell.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class NutzerDAO {
@@ -75,10 +74,10 @@ public class NutzerDAO {
         return alleNutzer;
     }
 
-    public static void nutzerLöschen(Nutzer nutzer) {
+    public static void nutzerLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_nutzer WHERE pk_personalnummer = ?";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
-            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setInt(1, personalnummer);
             pstm.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
@@ -86,9 +85,9 @@ public class NutzerDAO {
 
     }
 
-    public static List<Integer> holeLogins() {
+    public static Set<Integer> holeLogins() {
         String sqlStatement = "SELECT pk_personalnummer FROM t_login";
-        List<Integer> logins = new ArrayList<>();
+        Set<Integer> logins = new HashSet<>();
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
              ResultSet rs = pstm.executeQuery()) {
             while (rs.next()) {

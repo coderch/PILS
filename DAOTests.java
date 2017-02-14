@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * Created by rrose on 07.02.2017.
@@ -38,10 +39,10 @@ public class DAOTests {
         }
         NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
         NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
-        NutzerDAO.nutzerLöschen(nutzer);
+        NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
         NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
 
-        List<Integer> logins = NutzerDAO.holeLogins();
+        Set<Integer> logins = NutzerDAO.holeLogins();
         for(int i : logins){
             System.out.println(i);
         }

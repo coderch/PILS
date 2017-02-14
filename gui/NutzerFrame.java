@@ -1,10 +1,12 @@
 package gui;
 
 import datenmodell.Nutzer;
-import datenmodell.PasswordHash;
 import datenmodell.Rolle;
 import db.NutzerDAO;
 import db.RolleDAO;
+import listener.NutzerAendernListener;
+import listener.NutzerLoeschenListener;
+import listener.NutzerSpeicherListener;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -13,16 +15,26 @@ import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by ajanzen on 09.01.2017.
  */
+
+/**
+ * Klasse NutzerFrame. Erstellt ein GUI - element zum erstellung neuer Nutzer sowie die änderung der Informationen der Nutzer
+ *
+ * @author ajanzen
+ * @version 1.0
+ * @see JDialog
+ */
+
 public class NutzerFrame extends JDialog {
 
+
+    /**
+     * Konstruktor für die Klasse NutzerFrame
+     */
     public NutzerFrame() {
         super(new JFrame(), "Soldat erstellen / bearbeiten");
 
@@ -34,12 +46,19 @@ public class NutzerFrame extends JDialog {
         this.setVisible(true);
     }
 
+    /**
+     * Methode zur Dartsellung des Inhalts
+     *
+     * @return JPanel für die Darstellung des Inhaltes
+     */
     private JPanel createContent() {
-        JPanel jPanel = new JPanel(new BorderLayout());
+        // Haupt JPanel
+        JPanel jPanelMaster = new JPanel(new BorderLayout());
+        JPanel jPanelJListNutzer = new JPanel();
 
+        //JList erzeugen
         JList jListNutzer = new JList();
         jListNutzer.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        JPanel jPanelJListNutzer = new JPanel();
         jPanelJListNutzer.setBorder(BorderFactory.createTitledBorder("Nutzer Übesicht"));
         JScrollPane jScrollPaneNutzer = new JScrollPane(jListNutzer,
                 ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
@@ -48,6 +67,7 @@ public class NutzerFrame extends JDialog {
         jPanelJListNutzer.add(jScrollPaneNutzer);
 
         JPanel jPanelRechts = new JPanel(new BorderLayout());
+
         JPanel jPanelTextFelder = new JPanel();
         jPanelTextFelder.setBorder(BorderFactory.createTitledBorder("Eingabe..."));
         JPanel jPanelEingaben = new JPanel(new GridLayout(3, 1));
@@ -55,6 +75,7 @@ public class NutzerFrame extends JDialog {
         JPanel jPanelPersNr = new JPanel();
         JPanel jPanelNummer = new JPanel();
         JPanel jPanelRolle = new JPanel();
+
         jPanelNummer.setBorder(BorderFactory.createTitledBorder("PersNr"));
         MaskFormatter maskFormatter = null;
         try {
@@ -83,6 +104,11 @@ public class NutzerFrame extends JDialog {
         jPanelBox.add(jCheckBox);
         jPanelPersNr.add(jPanelBox);
 
+        JPanel jPanelresetButton = new JPanel();
+        JButton jButtonReset = new JButton("Reset");
+
+        jPanelPersNr.add(jButtonReset);
+
 
         JPanel jPanelName = new JPanel();
         JPanel jPanelNachname = new JPanel();
@@ -97,7 +123,7 @@ public class NutzerFrame extends JDialog {
         jPanelName.add(jPanelVorname);
 
 
-        JPanel jPanelDG = new JPanel();
+        JPanel jPanelDienstgradeUebersicht = new JPanel();
         JPanel jPanelDienstgrad = new JPanel();
         JPanel jPanelDGZusatz = new JPanel();
         jPanelDienstgrad.setBorder(BorderFactory.createTitledBorder("Dienstgrad"));
@@ -109,8 +135,78 @@ public class NutzerFrame extends JDialog {
         jPanelDienstgrad.add(jComboBoxDG);
         jPanelDGZusatz.add(jComboBoxDGZusatz);
 
-        jPanelDG.add(jPanelDienstgrad);
-        jPanelDG.add(jPanelDGZusatz);
+        jPanelDienstgradeUebersicht.add(jPanelDienstgrad);
+
+        jPanelEingaben.add(jPanelPersNr);
+        jPanelEingaben.add(jPanelName);
+        jPanelEingaben.add(jPanelDienstgradeUebersicht);
+
+        jPanelTextFelder.add(jPanelEingaben);
+        jPanelDienstgradeUebersicht.add(jPanelDGZusatz);
+
+
+        // Jlist anzeigen
+        jListAnzeiger(
+                jListNutzer,
+                jTextFieldPersNr,
+                rollenComboBox,
+                jTextFieldNachname,
+                jTextFieldVorname,
+                jComboBoxDG,
+                jComboBoxDGZusatz);
+
+        // Buttons anzeigen
+        JPanel jPanelButtons = getjPanelButtons(
+                jListNutzer,
+                jTextFieldPersNr,
+                rollenComboBox,
+                jCheckBox,
+                jTextFieldNachname,
+                jTextFieldVorname,
+                jComboBoxDG,
+                jComboBoxDGZusatz);
+
+        jPanelRechts.add(jPanelTextFelder, BorderLayout.NORTH);
+        jPanelRechts.add(jPanelButtons, BorderLayout.SOUTH);
+
+        jPanelMaster.add(jPanelJListNutzer, BorderLayout.WEST);
+        jPanelMaster.add(jPanelRechts, BorderLayout.EAST);
+
+        jButtonReset.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                jTextFieldPersNr.setText(null);
+                jCheckBox.setSelected(false);
+                rollenComboBox.setSelectedIndex(0);
+                jTextFieldNachname.setText("");
+                jTextFieldVorname.setText("");
+                jComboBoxDG.setSelectedIndex(0);
+                jComboBoxDGZusatz.setSelectedIndex(0);
+            }
+        });
+        return jPanelMaster;
+
+    }
+
+    /**
+     * Methode zur Darstellung der Nutzerinformationen aus der Datenbank
+     *
+     * @param jListNutzer        JListe mit den Nutzer
+     * @param jTextFieldPersNr   JTextField für die Personalnummer
+     * @param rollenComboBox     Drop-Down Menü für die Rollen
+     * @param jTextFieldNachname JTextField für die Nachnamen
+     * @param jTextFieldVorname  JTextField für die Vorname
+     * @param jComboBoxDG        Drop-Down Menü für die Dienstgrade
+     * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze
+     */
+    private void jListAnzeiger(
+            final JList jListNutzer,
+            final JFormattedTextField jTextFieldPersNr,
+            final JComboBox<String> rollenComboBox,
+            final JTextField jTextFieldNachname,
+            final JTextField jTextFieldVorname,
+            final JComboBox<String> jComboBoxDG,
+            final JComboBox<String> jComboBoxDGZusatz) {
 
         java.util.List<Nutzer> nutzers = NutzerDAO.nutzerHolen();
         jListNutzer.setListData(nutzers.toArray(new Nutzer[0]));
@@ -126,12 +222,33 @@ public class NutzerFrame extends JDialog {
                             jTextFieldNachname,
                             jComboBoxDG,
                             jComboBoxDGZusatz);
-
                 }
-
             }
         });
+    }
 
+    /**
+     * Methode zur Darstellung der Buttons
+     *
+     * @param jListNutzer        Liste mit den Nutzern
+     * @param jTextFieldPersNr   JTextField für die Personalnummer
+     * @param rollenComboBox     Drop-Down Menü für die Rollen
+     * @param jCheckBox          Auswahl Box on ein Login erstellt werden soll
+     * @param jTextFieldNachname JTextField für die Nachrname
+     * @param jTextFieldVorname  JTextField für die Vornamen
+     * @param jComboBoxDG        Drop-Down Menü für die Dienstgrade
+     * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze
+     * @return JPanel mit Buttons
+     */
+    private JPanel getjPanelButtons(
+            JList jListNutzer,
+            JFormattedTextField jTextFieldPersNr,
+            JComboBox<String> rollenComboBox,
+            JCheckBox jCheckBox,
+            JTextField jTextFieldNachname,
+            JTextField jTextFieldVorname,
+            JComboBox<String> jComboBoxDG,
+            JComboBox<String> jComboBoxDGZusatz) {
         JPanel jPanelButtons = new JPanel();
         jPanelButtons.setBorder(BorderFactory.createTitledBorder("Nutzer..."));
 
@@ -145,32 +262,49 @@ public class NutzerFrame extends JDialog {
                 jComboBoxDG,
                 jComboBoxDGZusatz,
                 jListNutzer));
-        JButton jButtonLoeschen = new JButton("Löschen");
         JButton jButtonAendern = new JButton("Ändern");
+        jButtonAendern.addActionListener(new NutzerAendernListener(
+                jTextFieldPersNr,
+                rollenComboBox,
+                jCheckBox,
+                jTextFieldVorname,
+                jTextFieldNachname,
+                jComboBoxDG,
+                jComboBoxDGZusatz,
+                jListNutzer));
+        JButton jButtonLoeschen = new JButton("Löschen");
+        jButtonLoeschen.addActionListener(new NutzerLoeschenListener(
+                jTextFieldPersNr,
+                rollenComboBox,
+                jCheckBox,
+                jTextFieldVorname,
+                jTextFieldNachname,
+                jComboBoxDG,
+                jComboBoxDGZusatz,
+                jListNutzer
+        ));
         JButton jButtonAbbruch = new JButton("Abbrechen");
+        jButtonAbbruch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+
+                setVisible(false);
+                dispose();
+            }
+        });
 
         jPanelButtons.add(jButtonSpeichern);
-        jPanelButtons.add(jButtonLoeschen);
         jPanelButtons.add(jButtonAendern);
+        jPanelButtons.add(jButtonLoeschen);
         jPanelButtons.add(jButtonAbbruch);
-
-        jPanelEingaben.add(jPanelPersNr);
-        jPanelEingaben.add(jPanelName);
-        jPanelEingaben.add(jPanelDG);
-
-
-        jPanelTextFelder.add(jPanelEingaben);
-
-        jPanelRechts.add(jPanelTextFelder, BorderLayout.NORTH);
-        jPanelRechts.add(jPanelButtons, BorderLayout.SOUTH);
-
-        jPanel.add(jPanelJListNutzer, BorderLayout.WEST);
-        jPanel.add(jPanelRechts, BorderLayout.EAST);
-
-        return jPanel;
-
+        return jPanelButtons;
     }
 
+    /**
+     * Methode um die JComboBox mit Informationen zu befüllen
+     *
+     * @return JComboBox mit Dienstgradzusätzen
+     */
     private JComboBox<String> getStringJComboBoxDienstgradZusatz() {
         JComboBox<String> jComboBoxDGZusatz = new JComboBox<>();
         String[] dgzusatz = {" ", "UA", "FA", "MA", "BA", "OA"};
@@ -181,6 +315,11 @@ public class NutzerFrame extends JDialog {
         return jComboBoxDGZusatz;
     }
 
+    /**
+     * Methode um die JComboBox mit Informationen zu befüllen
+     *
+     * @return JComboBox mit den Dienstgraden
+     */
     private JComboBox<String> getStringJComboBoxDienstgrad() {
         JComboBox<String> jComboBoxDG = new JComboBox<>();
         String[] diensgrade = {"S", "G", "OG", "HG", "SG", "OSG", "U",
@@ -195,13 +334,22 @@ public class NutzerFrame extends JDialog {
         return jComboBoxDG;
     }
 
+    /**
+     * @param selectedValue      Nutzerinformationen
+     * @param jTextFieldPersNr   JTextField für die Personalnummer
+     * @param rollenComboBox     Drop-Down Menü für die Rollen
+     * @param jTextFieldNachname JTextField für die Nachnamen
+     * @param jTextFieldVorname  JTextField für die Vorname
+     * @param jComboBoxDG        Drop-Down Menü für die Dienstgrade
+     * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze
+     */
     private void zeigeDaten(Nutzer selectedValue,
                             JFormattedTextField jTextFieldPersNr,
                             JComboBox<String> rollenComboBox,
                             JTextField jTextFieldVorname,
                             JTextField jTextFieldNachname,
                             JComboBox<String> jComboBoxDG,
-                            JComboBox<String> jPanelDGZusatz) {
+                            JComboBox<String> jComboBoxDGZusatz) {
 
 
         jTextFieldPersNr.setText(Integer.toString(selectedValue.getPersonalnummer()));
@@ -215,108 +363,14 @@ public class NutzerFrame extends JDialog {
                 selectedValue.getDienstgrad().endsWith("OA")) {
             for (String s : selectedValue.getDienstgrad().split(" ")) {
                 jComboBoxDG.setSelectedItem(s);
-                jPanelDGZusatz.setSelectedItem(s);
+                jComboBoxDGZusatz.setSelectedItem(s);
 
             }
         } else {
-            jPanelDGZusatz.setSelectedIndex(0);
+            jComboBoxDGZusatz.setSelectedIndex(0);
             jComboBoxDG.setSelectedItem(selectedValue.getDienstgrad());
         }
     }
 
-    private class NutzerSpeicherListener implements ActionListener {
-        private final JFormattedTextField jTextFieldPersNr;
-        private final JComboBox<String> rollenComboBox;
-        private final JCheckBox jCheckBox;
-        private final JTextField jTextFieldVorname;
-        private final JTextField jTextFieldNachname;
-        private final JComboBox<String> jComboBoxDG;
-        private final JComboBox<String> jComboBoxDGZusatz;
-        private JList jListNutzer;
-
-        public NutzerSpeicherListener(JFormattedTextField jTextFieldPersNr,
-                                      JComboBox<String> rollenComboBox,
-                                      JCheckBox jCheckBox,
-                                      JTextField jTextFieldVorname,
-                                      JTextField jTextFieldNachname,
-                                      JComboBox<String> jComboBoxDG,
-                                      JComboBox<String> jComboBoxDGZusatz,
-                                      JList jListNutzer) {
-
-            this.jTextFieldPersNr = jTextFieldPersNr;
-            this.rollenComboBox = rollenComboBox;
-            this.jCheckBox = jCheckBox;
-            this.jTextFieldVorname = jTextFieldVorname;
-            this.jTextFieldNachname = jTextFieldNachname;
-            this.jComboBoxDG = jComboBoxDG;
-            this.jComboBoxDGZusatz = jComboBoxDGZusatz;
-            this.jListNutzer = jListNutzer;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            String dienstgrad;
-
-            java.util.List<Nutzer> nutzerList = NutzerDAO.nutzerHolen();
-            Set<String> stringSet = new TreeSet<>();
-            for (Nutzer nutzer : nutzerList) {
-                stringSet.add(String.valueOf(nutzer.getPersonalnummer()));
-
-            }
-            if (!stringSet.contains(jTextFieldPersNr.getText())) {
-                if (jComboBoxDGZusatz.getSelectedItem().toString().endsWith("UA") ||
-                        jComboBoxDGZusatz.getSelectedItem().toString().endsWith("MA") ||
-                        jComboBoxDGZusatz.getSelectedItem().toString().endsWith("FA") ||
-                        jComboBoxDGZusatz.getSelectedItem().toString().endsWith("BA") ||
-                        jComboBoxDGZusatz.getSelectedItem().toString().endsWith("OA")) {
-                    dienstgrad = jComboBoxDG.getSelectedItem().toString() + " " + jComboBoxDGZusatz.getSelectedItem().toString();
-
-                } else {
-                    dienstgrad = jComboBoxDG.getSelectedItem().toString();
-                }
-
-                if (jCheckBox.isSelected()) {
-                    NutzerDAO.nutzerSpeichern(new Nutzer(
-                            Integer.parseInt(jTextFieldPersNr.getText()),
-                            dienstgrad,
-                            jTextFieldNachname.getText(),
-                            jTextFieldVorname.getText(),
-                            rollenComboBox.getSelectedItem().toString()));
-                    try {
-                        NutzerDAO.loginSpeichern(
-                                Integer.parseInt(jTextFieldPersNr.getText()), PasswordHash.createHash("password"));
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
-                    aktualliesieren();
-               } else {
-                    NutzerDAO.nutzerSpeichern(new Nutzer(
-                            Integer.parseInt(jTextFieldPersNr.getText()),
-                            dienstgrad,
-                            jTextFieldNachname.getText(),
-                            jTextFieldVorname.getText(),
-                            rollenComboBox.getSelectedItem().toString()));
-                    aktualliesieren();
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, "Nutzer bereits vorhanden", "Fehler", JOptionPane.WARNING_MESSAGE);
-            }
-
-        }
-
-        private void aktualliesieren() {
-            JOptionPane.showMessageDialog(null, "erfolgreich in Datenbank gespeichert", "Fertig", JOptionPane.INFORMATION_MESSAGE);
-            jTextFieldPersNr.setText(null);
-            jCheckBox.setSelected(false);
-            rollenComboBox.setSelectedIndex(0);
-            jTextFieldNachname.setText("");
-            jTextFieldVorname.setText("");
-            jComboBoxDG.setSelectedIndex(0);
-            jComboBoxDGZusatz.setSelectedIndex(0);
-            jListNutzer.setListData(NutzerDAO.nutzerHolen().toArray(new Nutzer[0]));
-
-        }
-    }
 
 }
