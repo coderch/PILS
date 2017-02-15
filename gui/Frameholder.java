@@ -12,7 +12,8 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by mwaldau on 12.12.2016.
+ * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
+ * @author mwaldau
  */
 public class Frameholder {
     private final JFrame frame;
@@ -24,7 +25,10 @@ public class Frameholder {
     private final JMenu verwaltungReiter;
     private final JMenu uebersichtenReiter;
 
-
+    /**
+     * Konstruktor um den Frame anzuzeigen
+     * @param userlevel Funktion des Nutzers
+     */
     public Frameholder(String userlevel) {
         frame = new JFrame("PILS");
         kalender = new Kalender();
@@ -43,6 +47,10 @@ public class Frameholder {
         frame.setVisible(true);
     }
 
+    /**
+     * Erstellt den Inhalt des Frames
+     * @return Jpanel mit Menubar
+     */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());
 
@@ -94,8 +102,10 @@ public class Frameholder {
                     }
                 });
                 JMenuItem vorhabenUebersicht = new JMenuItem("Vorhabenübersicht");
+                JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
                 uebersichtenReiter.add(personalUebersicht);
                 uebersichtenReiter.add(vorhabenUebersicht);
+                uebersichtenReiter.add(dienstUebersicht);
                 menuBar.add(uebersichtenReiter);
             }
 
