@@ -4,24 +4,49 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * Created by rrose on 21.11.2016.
+ * Ein Vorhaben-Object stellt ein Event dar.
+ * @author rrose
  */
 public class Vorhaben {
 
+    /**
+     * Der Name des jeweiligen Events.
+     */
     private String name;
+    /**
+     * Die Beschreibung des jeweiligen Events.
+     */
     private String beschreibung;
+    /**
+     * Anfangszeitpunkt (Tag) des jeweiligen Events.
+     */
     private LocalDate start;
+    /**
+     * Endzeitszeitpunkt (Tag) des jeweiligen Events.
+     */
     private LocalDate ende;
 
+    /**
+     * Dieser Konstruktor erstellt ein Vorhaben mit allen Parametern. Genutzt um Vorhaben-Objekte anhand der Informationen aus der Datenbank zu erzeugen
+     * und um Vorhaben-Objekte aus diesem Programm in die Datenbank zu schreiben.
+     * @param name
+     * @param beschreibung
+     * @param start
+     * @param ende
+     */
     public Vorhaben(String name, String beschreibung, LocalDate start, LocalDate ende) {
         this.name = name;
         this.beschreibung = beschreibung;
         this.start = start;
         this.ende = ende;
     }
-    public Vorhaben(String name, String beschreibung){
+
+    /**
+     * Dieser Konstruktor wird benötigt um schon vorhandene Vorhaben-Namen aus der Datenbank zu erhalten und um nicht vorhandene Vorhaben-Namen in die Datenbank zu schreiben.
+     * @param name
+     */
+    public Vorhaben(String name){
         this.name = name;
-        this.beschreibung = beschreibung;
     }
 
     public String getName() {
