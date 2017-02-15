@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 
 /**
  * Dient der Erzeugung von Passwort-Hashes
+ * @author rrose
  */
 public class PasswordHash {
     /**
@@ -16,7 +17,7 @@ public class PasswordHash {
      * Erzeugt mit Hilfe des SHA-256 Algorithmuses einen Hashwert des übergebenen Passwortes.
      * @param kennwort
      * @return SHA-256 Hashwert für den übergebenen Passwort-String
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException Wird geworfen wenn der aufgerufene Algorithmus nicht verfügbar ist.
      */
    public static String createHash(String kennwort) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
