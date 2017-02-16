@@ -34,14 +34,18 @@ public class VorhabenAnlegen extends JDialog{
     private Vorhaben vorhaben = null;
 
 
-    // Konstruktor zum Anlegen aus dem Framholder heraus
+    /**
+     * Konstruktor zum Anlegen aus dem Framholder heraus
+     */
     public VorhabenAnlegen(){
         this.setTitle("Vorhaben erstellen");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
         dialogBauen();
     }
-    //Konstruktor zum Editieren
+    /**
+     * Konstruktor zum Editieren
+     * */
     public VorhabenAnlegen(Vorhaben vorhaben){
         this.setTitle("Vorhaben bearbeiten");
         this.soldatenListe = NutzerDAO.nutzerHolen();
