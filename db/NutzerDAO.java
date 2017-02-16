@@ -9,12 +9,22 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.*;
 
-
+/**
+ * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über einen Nutzer.
+ * @author rrose
+ */
 public class NutzerDAO {
 
+    /**
+     * Verhindert die Instanzierung dieser Klasse
+     */
     private NutzerDAO() {
     }
-
+    /**
+     * Diese Methode Speichert die Daten des übergebenen Nutzer-Objektes in die Datenbank. Ist ein Nutzer bereits mit der selben Personalnummer vorhaben,
+     * wird ein Update auf alle anderen Attribute in der Datenbank durchgeführt.
+     * @param nutzer Der übergebene zu speichernde Nutzer
+     */
     public static void nutzerSpeichern(Nutzer nutzer) {
         String sqlStatement = "INSERT INTO t_nutzer(dienstgrad, name, vorname,fk_t_rolle_pk_beschreibung,pk_personalnummer) VALUES (?,?,?,?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (dienstgrad, name, vorname, fk_t_rolle_pk_beschreibung) = (?,?,?,?)";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
@@ -37,6 +47,12 @@ public class NutzerDAO {
         }
     }
 
+    /**
+     * Speichert die Login-Daten in der Tabelle t_login.
+     * Bei bereits vorhandener Personalnummer wird ein Update auf das abgelegte Passwort in der Tabelle durchgeführt.
+     * @param personalnummer
+     * @param passwort
+     */
     public static void loginSpeichern(int personalnummer, String passwort) {
         String sqlStatement = "INSERT INTO t_login (pk_personalnummer, passwort) VALUES (?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (passwort) = (?)";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
@@ -50,6 +66,10 @@ public class NutzerDAO {
         }
     }
 
+    /**
+     * Diese Methode ist lediglich für das Zurücksetzen eines Passwortes genutzt. Hierbei wird das Passwort für die übergebene Personalnummer auf das "Standard-Passwort" in die Datenbank geschrieben.
+     * @param personalnummer
+     */
     public static void passwordZurücksetzen(int personalnummer) {
         try {
             loginSpeichern(personalnummer, PasswordHash.createHash("password"));
@@ -58,7 +78,11 @@ public class NutzerDAO {
         }
     }
 
-
+    /**
+     * Diese Methode liest die Informationen jedes Eintrages in der Tabelle t_nutzer aus und erzeugt aus jeder Tupel ein Nutzer-Objekt,
+     * welches darauffolgende in eine Liste<Nutzer> hinzugefügt wird.
+     * @return Gibt eine Liste mit allen in der Datenbank (t_nutzer) abgelegten Nutzer zurück.
+     */
     public static List<Nutzer> nutzerHolen() {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer";
         List<Nutzer> alleNutzer = new LinkedList<>();
@@ -74,6 +98,10 @@ public class NutzerDAO {
         return alleNutzer;
     }
 
+    /**
+     * Löscht den Eintrag aus Tabelle t_nutzer, welche als Primärschüssel die übergebene Personalnummer inne hat.
+     * @param personalnummer
+     */
     public static void nutzerLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_nutzer WHERE pk_personalnummer = ?";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
@@ -85,6 +113,10 @@ public class NutzerDAO {
 
     }
 
+    /**
+     *
+     * @return Set mit allen in der Datenbank (t_login) abgelegten Logins.
+     */
     public static Set<Integer> holeLogins() {
         String sqlStatement = "SELECT pk_personalnummer FROM t_login";
         Set<Integer> logins = new HashSet<>();
@@ -99,6 +131,10 @@ public class NutzerDAO {
         return logins;
     }
 
+    /**
+     * Löscht den Eintrag aus der Tabelle t_login der als Primärschlüssel die übergebene Personalnummer inne hat.
+     * @param personalnummer
+     */
     public static void loginLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_login WHERE pk_personalnummer = ?";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
@@ -110,6 +146,12 @@ public class NutzerDAO {
 
     }
 
+    /**
+     *
+     * @param nutzer
+     * @param date
+     * @return gibt den Namen des Anwesenheitsstatuses des gewünschten Nutzer(Soldaten) für das angegebene Datum zurück.
+     */
     public static String hatAnwesenheit(Nutzer nutzer, LocalDate date) {
         String anwesenheit = "";
         try {
@@ -128,6 +170,12 @@ public class NutzerDAO {
         return anwesenheit;
     }
 
+    /**
+     * Speichert den Anwesenheitsstaus eines Soldaten für das angegebene Datum in die Tabelle t_hat_status_im_zeitraum
+     * @param nutzer
+     * @param date
+     * @param status
+     */
     public static void anwesenheitEintragen(Nutzer nutzer, LocalDate date, String status) {
         try {
             PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");

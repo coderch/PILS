@@ -53,34 +53,27 @@ public class Vorhaben {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
+//    public void setName(String name) {
+//        this.name = name;
+//    }
     public String getBeschreibung() {
         return beschreibung;
     }
-
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
-    }
-
+//    public void setBeschreibung(String beschreibung) {
+//        this.beschreibung = beschreibung;
+//    }
     public LocalDate getStart() {
         return start;
     }
-
-    public void setStart(LocalDate start) {
-        this.start = start;
-    }
-
+//    public void setStart(LocalDate start) {
+//        this.start = start;
+//    }
     public LocalDate getEnde() {
         return ende;
     }
-
-    public void setEnde(LocalDate ende) {
-        this.ende = ende;
-    }
-
+//    public void setEnde(LocalDate ende) {
+//        this.ende = ende;
+//    }
     @Override
     public String toString() {
         return "Vorhaben{" +

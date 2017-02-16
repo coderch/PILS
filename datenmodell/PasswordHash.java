@@ -4,12 +4,21 @@ import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
 /**
- * Created by rrose on 21.01.2017.
+ * Dient der Erzeugung von Passwort-Hashes
+ * @author rrose
  */
 public class PasswordHash {
-
+    /**
+     * Verhindert die Instanzierung dieser Klasse.
+     */
     private PasswordHash(){}
 
+    /**
+     * Erzeugt mit Hilfe des SHA-256 Algorithmuses einen Hashwert des übergebenen Passwortes.
+     * @param kennwort
+     * @return SHA-256 Hashwert für den übergebenen Passwort-String
+     * @throws NoSuchAlgorithmException Wird geworfen wenn der aufgerufene Algorithmus nicht verfügbar ist.
+     */
    public static String createHash(String kennwort) throws NoSuchAlgorithmException {
         MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
         byte[] result = mDigest.digest(kennwort.getBytes());
