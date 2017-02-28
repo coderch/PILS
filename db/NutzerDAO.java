@@ -183,7 +183,7 @@ public class NutzerDAO {
             pstm.setDate(2, Date.valueOf(date));
             pstm.executeUpdate();
 
-            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_status_im_zeitraum (fk_t_soldat_pk_personalnummer, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, fk_t_anwesenheitstatus_pk_beschreibung) VALUES (?,?,?,?)ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET fk_t_anwesenheitstatus_pk_beschreibung = ?");
+            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_status_im_zeitraum (fk_t_soldat_pk_personalnummer, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, fk_t_anwesenheitstatus_pk_beschreibung) VALUES (?,?,?,?)ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET (fk_t_anwesenheitstatus_pk_beschreibung) = (?)");
             pstm.setInt(1, nutzer.getPersonalnummer());
             pstm.setDate(2, Date.valueOf(date));
             pstm.setDate(3, Date.valueOf(date));

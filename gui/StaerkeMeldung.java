@@ -2,14 +2,15 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import javafx.scene.control.RadioButton;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fenster zum Eintragen der taeglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern
@@ -19,6 +20,7 @@ import java.util.List;
 public class StaerkeMeldung extends JDialog{
 
     private List<Nutzer> soldaten;
+    private Map<Nutzer, String> ausgewSoldat = new HashMap<>();
 
     public StaerkeMeldung() {
 
@@ -83,9 +85,17 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             //TODO @mwaldau Abändern des Models um Button ansprechbar zu machen.
             JRadioButton radioButtonanwesend = new JRadioButton();
+            radioButtonanwesend.setName("Anwesend");
             JRadioButton radioButtonkrank = new JRadioButton();
+            radioButtonkrank.setName("Krank");
             JRadioButton radioButtonurlaub = new JRadioButton();
+            radioButtonurlaub.setName("Urlaub");
             JRadioButton radioButtonvorhaben = new JRadioButton();
+            radioButtonvorhaben.setName("Vorhaben");
+            radioButtonanwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonanwesend.getName()));
+            radioButtonkrank.addActionListener(new SelektierterSoldat(nutzer, radioButtonkrank.getName()));
+            radioButtonurlaub.addActionListener(new SelektierterSoldat(nutzer, radioButtonurlaub.getName()));
+            radioButtonvorhaben.addActionListener(new SelektierterSoldat(nutzer, radioButtonvorhaben.getName()));
             gruppe.add(radioButtonanwesend);
             gruppe.add(radioButtonkrank);
             gruppe.add(radioButtonurlaub);
@@ -105,9 +115,8 @@ public class StaerkeMeldung extends JDialog{
         melden.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                for (Nutzer nutzer : soldaten) {
-//                    NutzerDAO.anwesenheitEintragen(nutzer, LocalDate.now(),);
-                    //TODO @mwaldau in Datenbank schreiben
+                for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
+                    NutzerDAO.anwesenheitEintragen(nutzerStringEntry.getKey(), LocalDate.now(),nutzerStringEntry.getValue());
                 }
                 dispose();
             }
@@ -123,5 +132,20 @@ public class StaerkeMeldung extends JDialog{
         buttonPanel.add(abbrechen);
         contentPanel.add(buttonPanel, buttonPanelConstr);
         return contentPanel;
+    }
+
+    private class SelektierterSoldat implements ActionListener {
+        private Nutzer nutzer;
+        private String status;
+
+        public SelektierterSoldat(Nutzer nutzer, String status) {
+            this.nutzer = nutzer;
+            this.status = status;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            ausgewSoldat.put(nutzer,status);
+        }
     }
 }
