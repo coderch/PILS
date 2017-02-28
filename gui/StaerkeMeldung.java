@@ -117,6 +117,7 @@ public class StaerkeMeldung extends JDialog{
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
                     NutzerDAO.anwesenheitEintragen(nutzerStringEntry.getKey(), LocalDate.now(),nutzerStringEntry.getValue());
+                    System.out.println(nutzerStringEntry.getKey() + " " + LocalDate.now() + " " + nutzerStringEntry.getValue());
                 }
                 dispose();
             }
