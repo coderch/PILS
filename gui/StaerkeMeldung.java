@@ -83,7 +83,6 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbKrankConstr = new GridBagConstraints(2,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            //TODO @mwaldau Abändern des Models um Button ansprechbar zu machen.
             JRadioButton radioButtonanwesend = new JRadioButton();
             radioButtonanwesend.setName("Anwesend");
             JRadioButton radioButtonkrank = new JRadioButton();
@@ -117,7 +116,6 @@ public class StaerkeMeldung extends JDialog{
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
                     NutzerDAO.anwesenheitEintragen(nutzerStringEntry.getKey(), LocalDate.now(),nutzerStringEntry.getValue());
-                    System.out.println(nutzerStringEntry.getKey() + " " + LocalDate.now() + " " + nutzerStringEntry.getValue());
                 }
                 dispose();
             }
