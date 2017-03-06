@@ -38,7 +38,7 @@ public class StaerkeMeldung extends JDialog{
         this.setResizable(false);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(getParent());
         this.setVisible(true);
     }
 

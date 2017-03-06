@@ -43,7 +43,7 @@ public class Frameholder {
         frame.add(createContent(), BorderLayout.CENTER);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(frame.getParent());
         frame.setVisible(true);
     }
 
