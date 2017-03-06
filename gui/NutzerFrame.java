@@ -41,7 +41,7 @@ public class NutzerFrame extends JDialog {
         this.setModal(true);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(getParent());
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }

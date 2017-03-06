@@ -48,7 +48,7 @@ public class PersonalUebersicht extends JDialog {
         this.setResizable(false);
         this.add(createContent(soldaten));
         this.pack();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(getParent());
         this.setVisible(true);
     }
 

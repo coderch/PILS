@@ -1,6 +1,7 @@
 package gui;
 
 import datenmodell.Nutzer;
+import db.DBConnect;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 
@@ -43,7 +45,18 @@ public class Frameholder {
         frame.add(createContent(), BorderLayout.CENTER);
         frame.pack();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        frame.setLocationRelativeTo(frame.getParent());
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent windowEvent) {
+                try {
+                    DBConnect.schliessen();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                super.windowClosing(windowEvent);
+            }
+        });
         frame.setVisible(true);
     }
 
