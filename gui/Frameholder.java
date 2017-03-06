@@ -115,6 +115,12 @@ public class Frameholder {
                     }
                 });
                 JMenuItem vorhabenUebersicht = new JMenuItem("Vorhabenübersicht");
+                vorhabenUebersicht.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new VorhabenUebersicht();
+                    }
+                });
                 JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
                 uebersichtenReiter.add(personalUebersicht);
                 uebersichtenReiter.add(vorhabenUebersicht);
