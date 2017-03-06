@@ -101,7 +101,7 @@ public class NutzerSpeicherListener implements ActionListener {
                 } catch (NoSuchAlgorithmException e) {
                     e.printStackTrace();
                 }
-                aktualliesieren();
+                textFieldReset();
             } else {
                 NutzerDAO.nutzerSpeichern(new Nutzer(
                         Integer.parseInt(jTextFieldPersNr.getText()),
@@ -109,20 +109,15 @@ public class NutzerSpeicherListener implements ActionListener {
                         jTextFieldNachname.getText(),
                         jTextFieldVorname.getText(),
                         rollenComboBox.getSelectedItem().toString()));
-                aktualliesieren();
+                textFieldReset();
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Nutzer bereits vorhanden", "Fehler", JOptionPane.WARNING_MESSAGE);
         }
-
     }
 
     /**
      * Methode zum zurücksetzen aller Felder in Frame auf null soewie die aktualliesierung der JList
      */
-    public void aktualliesieren() {
-        JOptionPane.showMessageDialog(null, "erfolgreich in Datenbank gespeichert", "Fertig", JOptionPane.INFORMATION_MESSAGE);
+    public void textFieldReset() {
         jTextFieldPersNr.setText(null);
         jCheckBox.setSelected(false);
         rollenComboBox.setSelectedIndex(0);

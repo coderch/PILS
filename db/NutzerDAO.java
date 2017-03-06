@@ -5,9 +5,11 @@ import datenmodell.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über einen Nutzer.
@@ -131,6 +133,22 @@ public class NutzerDAO {
         return logins;
     }
 
+    /**
+     *
+     * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
+     */
+    public static Set<String> holeDiestgrade() {
+        String sqlStatement = "SELECT pk_liestenschreibweise FROM t_diensgrade";
+        Set<String> dienstgradeSet = new HashSet<>();
+        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery();) {
+            while (rs.next()) {
+                dienstgradeSet.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return dienstgradeSet;
+    }
     /**
      * Löscht den Eintrag aus der Tabelle t_login der als Primärschlüssel die übergebene Personalnummer inne hat.
      * @param personalnummer
