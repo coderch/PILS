@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="14.02.2017 - Franeholder kommentiert&#10;&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.ids" afterPath="$PROJECT_DIR$/.idea/dataSources.ids" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Frameholder.java" afterPath="$PROJECT_DIR$/gui/Frameholder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/NutzerFrame.java" afterPath="$PROJECT_DIR$/gui/NutzerFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PersonalUebersicht.java" afterPath="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/StaerkeMeldung.java" afterPath="$PROJECT_DIR$/gui/StaerkeMeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" afterPath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -98,12 +91,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Frameholder.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Frameholder.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui/Frameholder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="323">
+              <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="40" />
+              <folding>
+                <element signature="e#1513#1863#0" expanded="true" />
+                <element signature="e#1862#1863#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -128,10 +124,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NutzerFrame.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="NutzerFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="68">
               <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
               <folding />
             </state>
@@ -183,9 +179,9 @@
         <option value="$PROJECT_DIR$/db/NutzerDAO.java" />
         <option value="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
         <option value="$PROJECT_DIR$/gui/StaerkeMeldung.java" />
-        <option value="$PROJECT_DIR$/gui/Frameholder.java" />
         <option value="$PROJECT_DIR$/gui/NutzerFrame.java" />
         <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
+        <option value="$PROJECT_DIR$/gui/Frameholder.java" />
       </list>
     </option>
   </component>
@@ -601,7 +597,7 @@
       <workItem from="1487246699176" duration="10000" />
       <workItem from="1488283727147" duration="4323000" />
       <workItem from="1488456187367" duration="149000" />
-      <workItem from="1488806962016" duration="661000" />
+      <workItem from="1488806962016" duration="786000" />
     </task>
     <task id="LOCAL-00001" summary="26.01.2017">
       <created>1485426966297</created>
@@ -820,11 +816,18 @@
       <option name="project" value="LOCAL" />
       <updated>1488806998237</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="06.03.2017 - getParent in Jdialogues eingearbeitet&#10;&#10;">
+      <created>1488807661256</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1488807661256</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101518000" />
+    <option name="totallyTimeSpent" value="101643000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -837,7 +840,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="848" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867134" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -848,7 +851,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2055944" sideWeight="0.48927614" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32922733" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21581769" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21581769" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1689008" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -939,7 +942,8 @@
     <MESSAGE value="28.02.2017 - Staerkemeldung Actionlistener funktionabel gemacht&#10;&#10;" />
     <MESSAGE value="28.02.2017 - test&#10;" />
     <MESSAGE value="14.02.2017 - Franeholder kommentiert&#10;&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.02.2017 - Franeholder kommentiert&#10;&#10;" />
+    <MESSAGE value="06.03.2017 - getParent in Jdialogues eingearbeitet&#10;&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="06.03.2017 - getParent in Jdialogues eingearbeitet&#10;&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -1932,14 +1936,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/Frameholder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gui/VorhabenAnlegen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1974,9 +1970,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="68">
           <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/Frameholder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="54" column="20" selection-start-line="54" selection-start-column="20" selection-end-line="54" selection-end-column="40" />
+          <folding>
+            <element signature="e#1513#1863#0" expanded="true" />
+            <element signature="e#1862#1863#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
