@@ -6,11 +6,9 @@ import datenmodell.Vorhaben;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.sql.Date;
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über einen Nutzer.

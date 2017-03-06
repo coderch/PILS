@@ -46,7 +46,7 @@ public class LoginFrame {
     }
 
     /**
-     * Methode zur prüfung ob die Eingaben im LoginFrame mit den eintragunfen in der Datenbank übereinstimmen
+     * Methode zur prüfung ob die Eingaben im LoginFrame mit den eintragungen in der Datenbank übereinstimmen
      * @return wahr oder falsch
      */
     private static boolean getLogin() {
