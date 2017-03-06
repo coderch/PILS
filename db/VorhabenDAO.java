@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über ein Vorhaben.
+ *
  * @author rrose
  */
 public class VorhabenDAO {
@@ -17,8 +18,8 @@ public class VorhabenDAO {
      */
     private VorhabenDAO() {
     }
+
     /**
-     *
      * @return Gibt eine Liste mit den bereits in der Datenbank (t_vorhaben) vorhandenen Vorhaben-Namen zurück.
      */
     public static List<String> holeVorhabenNamen() {
@@ -36,7 +37,6 @@ public class VorhabenDAO {
     }
 
     /**
-     *
      * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
@@ -46,7 +46,7 @@ public class VorhabenDAO {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Vorhaben vorhaben = new Vorhaben(rs.getString(1), rs.getString(2), rs.getDate(3).toLocalDate(), rs.getDate(4).toLocalDate());
+                Vorhaben vorhaben = new Vorhaben(rs.getString(1), rs.getString(4), rs.getDate(2).toLocalDate(), rs.getDate(3).toLocalDate());
                 alleVorhaben.add(vorhaben);
             }
         } catch (SQLException e) {
@@ -57,7 +57,8 @@ public class VorhabenDAO {
 
     /**
      * Speichert ein übergebenes Vorhaben inkl. der ihm zugeteilten Soldaten in die Datenbank.
-     * @param vorhaben das übergebene Vorhaben-Objekt
+     *
+     * @param vorhaben            das übergebene Vorhaben-Objekt
      * @param eingeteilteSoldaten Liste mit dem übergebenen Vorhaben zugeilten Nutzern (Soldaten)
      */
     public static void vorhabenSpeichern(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten) {
@@ -109,7 +110,6 @@ public class VorhabenDAO {
     }
 
     /**
-     *
      * @param vorhaben Übergebenes Vorhaben, wessen zugeteilte Nutzer gewünscht werden.
      * @return Gibt die einem Vorhaben zugeteilten Nutzer (Soldaten) aus der Datenbank zurück.
      */
@@ -122,12 +122,12 @@ public class VorhabenDAO {
              * SELECT Statement, welches durch einen INNER JOIN nur die dem Vorhaben zugeteilten Soldaten im passenden Zeitraum zurück gibt.
              */
             PreparedStatement pstm = DBConnect.preparedStatement(" SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer INNER JOIN t_nimmt_teil_am_vorhaben ON fk_t_soldat_pk_personalnummer = t_nutzer.pk_personalnummer WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND t_nimmt_teil_am_vorhaben.fk_t_zeitraum_pk_bis = ?");
-            pstm.setString(1,vorhaben.getName());
+            pstm.setString(1, vorhaben.getName());
             pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(3, Date.valueOf(vorhaben.getStart()));
             ResultSet rs = pstm.executeQuery();
-            while (rs.next()){
-                eingeteilteSoldaten.add(new Nutzer(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)));
+            while (rs.next()) {
+                eingeteilteSoldaten.add(new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
 
         } catch (SQLException e) {

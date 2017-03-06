@@ -23,16 +23,16 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
             switch ((String) value) {
                 default:
                     break;
-                case "krank":
+                case "Krank":
                     zelle.setIcon(IconHandler.KRANK);
                     break;
-                case "anwesend":
+                case "Anwesend":
                     zelle.setIcon(IconHandler.HAKEN2);
                     break;
-                case "urlaub":
+                case "Urlaub":
                     zelle.setIcon(IconHandler.SONNE);
                     break;
-                case "vorhaben":
+                case "Vorhaben":
                     zelle.setIcon(IconHandler.WOLKE);
                     break;
             }

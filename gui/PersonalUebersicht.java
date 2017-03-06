@@ -48,7 +48,7 @@ public class PersonalUebersicht extends JDialog {
         this.setResizable(false);
         this.add(createContent(soldaten));
         this.pack();
-        this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(getParent());
         this.setVisible(true);
     }
 
@@ -103,7 +103,7 @@ public class PersonalUebersicht extends JDialog {
             //treemodel und tree erstellen
         TreeModel treeModel = new DefaultTreeModel(root);
         JTree tree = new JTree(treeModel);
-            //Öffnen der Pfade  TODO überprüfen
+            //Öffnen der Pfade
         tree.expandPath(new TreePath(offzeTreeNode.getPath()));
         tree.expandPath(new TreePath(umpTreeNode.getPath()));
         tree.expandPath(new TreePath(uopTreeNode.getPath()));
@@ -126,7 +126,7 @@ public class PersonalUebersicht extends JDialog {
         GridBagConstraints endeConstriant = new GridBagConstraints();
         endeConstriant.gridx = 0;
         endeConstriant.gridy = 2;
-        endePanel.add(new JLabel("Beginn"));
+        endePanel.add(new JLabel("Ende"));
         ende.setPreferredSize(new Dimension(100, 20));
         endePanel.add(ende);
 
@@ -184,6 +184,7 @@ public class PersonalUebersicht extends JDialog {
                 }
                 //Adden des Übersichtpanels an Stelle 0
                 centerPanel.add(uebersichtPanel(),0);
+                centerPanel.setSelectedIndex(0);
             }
         });
         JButton pdfExport = new JButton(IconHandler.PDF);
