@@ -139,6 +139,22 @@ public class NutzerDAO {
     }
 
     /**
+     *
+     * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
+     */
+    public static Set<String> holeDiestgrade() {
+        String sqlStatement = "SELECT pk_liestenschreibweise FROM t_diensgrade";
+        Set<String> dienstgradeSet = new HashSet<>();
+        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery();) {
+            while (rs.next()) {
+                dienstgradeSet.add(rs.getString(1));
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return dienstgradeSet;
+    }
+    /**
      * Löscht den Eintrag aus der Tabelle t_login der als Primärschlüssel die übergebene Personalnummer inne hat.
      *
      * @param personalnummer

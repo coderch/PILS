@@ -93,7 +93,7 @@ public class VorhabenDAO {
              * Speichert die einzelnen Nutzer aus der übergebenen Liste mit Zeitraum und zugeteiltem Vorhaben in die Tabelle t_nimmt_teil_am_vorhaben.
              * Ist ein Nutzer bereits dem gleichen Vorhaben mit gleichem Zeitraum zugeordnet wird kein weiterer Datenbank-Befehl ausgeführt.
              */
-            pstm = DBConnect.preparedStatement("INSERT INTO t_nimmt_teil_am_vorhaben (fk_t_soldat_pk_personalnummer, fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis) VALUES (?,?,?,?) ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_vorhaben_pk_t_name,fk_t_zeitraum_pk_bis,fk_t_zeitraum_pk_bis) DO NOTHING ");
+            pstm = DBConnect.preparedStatement("INSERT INTO t_nimmt_teil_am_vorhaben (fk_t_soldat_pk_personalnummer, fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis) VALUES (?,?,?,?) ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_vorhaben_pk_t_name,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO NOTHING ");
             for (Nutzer nutzer : eingeteilteSoldaten) {
                 pstm.setInt(1, nutzer.getPersonalnummer());
                 pstm.setString(2, vorhaben.getName());

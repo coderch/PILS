@@ -16,6 +16,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by ajanzen on 09.01.2017.
@@ -307,8 +309,16 @@ public class NutzerFrame extends JDialog {
      */
     private JComboBox<String> getStringJComboBoxDienstgradZusatz() {
         JComboBox<String> jComboBoxDGZusatz = new JComboBox<>();
-        String[] dgzusatz = {" ", "UA", "FA", "MA", "BA", "OA"};
-        for (String s : dgzusatz) {
+        Set<String> dienstgrade = NutzerDAO.holeDiestgrade();
+        Set<String> diensgradZusatz = new HashSet<>();
+        diensgradZusatz.add(" ");
+        for (String s : dienstgrade) {
+            if((s.endsWith("UA")||s.endsWith("MA")||s.endsWith("FA")||s.endsWith("BA")||s.endsWith("OA"))){
+                String splitter [] = s.split(" ");
+                diensgradZusatz.add(splitter[1]);
+            }
+        }
+        for (String s : diensgradZusatz) {
             jComboBoxDGZusatz.addItem(s);
         }
         jComboBoxDGZusatz.setPreferredSize(new Dimension(225, 23));
@@ -322,12 +332,14 @@ public class NutzerFrame extends JDialog {
      */
     private JComboBox<String> getStringJComboBoxDienstgrad() {
         JComboBox<String> jComboBoxDG = new JComboBox<>();
-        String[] diensgrade = {"S", "G", "OG", "HG", "SG", "OSG", "U",
-                "FJ", "SK", "SU", "OMT", "F", "B", "FRZS", "FR",
-                "OF", "OB", "HF", "HB", "OFR", "OFRZS", "SF", "SB",
-                "OSF", "OSB", "L", "LZS", "OL", "OLZS", "H",
-                "KL", "SH", "SKL", "M", "KK", "OTL", "FK"};
-        for (String s : diensgrade) {
+        Set<String> dienstgrade = NutzerDAO.holeDiestgrade();
+        Set<String> diensgradeOhneZusatz = new HashSet<>();
+        for (String s : dienstgrade) {
+            if(!(s.endsWith("UA")||s.endsWith("MA")||s.endsWith("FA")||s.endsWith("BA")||s.endsWith("OA"))){
+                diensgradeOhneZusatz.add(s);
+            }
+        }
+        for (String s : diensgradeOhneZusatz) {
             jComboBoxDG.addItem(s);
         }
         jComboBoxDG.setPreferredSize(new Dimension(225, 23));

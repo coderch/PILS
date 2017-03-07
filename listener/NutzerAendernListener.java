@@ -78,8 +78,6 @@ public class NutzerAendernListener implements ActionListener {
                     jTextFieldVorname.getText(),
                     rollenComboBox.getSelectedItem().toString()));
             jListNutzer.setListData(NutzerDAO.nutzerHolen().toArray(new Nutzer[0]));
-        } else {
-            JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.WARNING_MESSAGE);
         }
     }
 }

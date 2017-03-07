@@ -58,6 +58,7 @@ public class NutzerLoeschenListener implements ActionListener {
 
     /**
      * Methode aus dem Interface ActionListener zum Löschen der Datensätze aus der Datenbank
+     *
      * @param actionEvent
      * @see ActionListener
      */
@@ -75,17 +76,16 @@ public class NutzerLoeschenListener implements ActionListener {
                     NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
                 }
             }
-            aktualliesieren(nutzerList);
-        } else {
-            JOptionPane.showMessageDialog(null, "Kein Nutzer ausgewählt", "Fehler", JOptionPane.WARNING_MESSAGE);
+            textFieldReset(nutzerList);
         }
     }
 
     /**
      * Methode um die JList nach den Löschvorgang zu aktualisieren
+     *
      * @param nutzerList Uebergibt die in der JList ausgewählten Nutzer
      */
-    private void aktualliesieren(List<Nutzer> nutzerList) {
+    private void textFieldReset(List<Nutzer> nutzerList) {
         StringBuilder sb = new StringBuilder();
         for (Nutzer nutzer : nutzerList) {
             sb.append(nutzer + "\n");
