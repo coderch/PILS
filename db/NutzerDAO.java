@@ -214,7 +214,7 @@ public class NutzerDAO {
      */
     public static Map<Nutzer, List<Vorhaben>> nutzerVorhabenUebersicht(List<Nutzer> nutzer, LocalDate start, LocalDate ende) {
         Map<Nutzer, List<Vorhaben>> map = new TreeMap<>();
-        try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT fk_t_vorhaben_pk_name,fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis,beschreibung FROM t_hat_vorhaben_im_zeitraum LEFT JOIN t_nimmt_teil_am_vorhaben ON t_nimmt_teil_am_vorhaben.fk_t_vorhaben_pk_t_name = t_nimmt_teil_am_vorhaben.fk_t_vorhaben_pk_t_name WHERE fk_t_soldat_pk_personalnummer = ? AND (SELECT (fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis) OVERLAPS (?,?))")) {
+        try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT fk_t_vorhaben_pk_name,fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis,beschreibung FROM t_hat_vorhaben_im_zeitraum LEFT JOIN t_nimmt_teil_am_vorhaben ON t_nimmt_teil_am_vorhaben.fk_t_vorhaben_pk_t_name = t_hat_vorhaben_im_zeitraum.fk_t_vorhaben_pk_t_name WHERE fk_t_soldat_pk_personalnummer = ? AND (SELECT (fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis) OVERLAPS (?,?))")) {
             for (Nutzer n : nutzer) {
                 pstm.setInt(1, n.getPersonalnummer());
                 pstm.setDate(2, Date.valueOf(start));
