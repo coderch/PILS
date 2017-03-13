@@ -1,6 +1,7 @@
 package db;
 
 import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -15,6 +16,15 @@ public class DBExport {
         List<String> tableNames = getTableNames();
         for (String s : tableNames) {
             System.out.println(s);
+            try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT * FROM " + s);
+                 ResultSet rs = pstm.executeQuery()) {
+                while (rs.next()){
+                    System.out.println("Hier kommen nun eigentlich Daten");
+
+                }
+            } catch (SQLException e) {
+                System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            }
         }
     }
 
