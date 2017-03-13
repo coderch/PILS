@@ -139,7 +139,6 @@ public class NutzerDAO {
     }
 
     /**
-     *
      * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
      */
     public static Set<String> holeDienstgrade() {
@@ -154,6 +153,7 @@ public class NutzerDAO {
         }
         return dienstgradeSet;
     }
+
     /**
      * Löscht den Eintrag aus der Tabelle t_login der als Primärschlüssel die übergebene Personalnummer inne hat.
      *
@@ -223,6 +223,7 @@ public class NutzerDAO {
 
     /**
      * Holt die Vorhaben welche von den mitgegebenen Soldaten im angegebenene Zeitraum für diese Soldaten geplant/durchgeführt wurden.
+     *
      * @param nutzer
      * @param start
      * @param ende
@@ -243,7 +244,7 @@ public class NutzerDAO {
                 map.put(n, vorhaben);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
 
         return map;
