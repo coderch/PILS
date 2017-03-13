@@ -1,11 +1,10 @@
 import db.DBConnect;
+import db.DBExport;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -48,17 +47,7 @@ public class DAOTests {
 //        for(int i : logins){
 //            System.out.println(i);
 //        }
-
-        DatabaseMetaData dbmd = DBConnect.getMetaData();
-        try {
-            ResultSet rs = dbmd.getColumns(null,null,"t_nimmt_teil_am_vorhaben",null);
-            while ((rs.next())){
-                System.out.println(rs.getString(6));
-            }
-        } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
-
+        new DBExport();
 
     }
 
