@@ -76,7 +76,7 @@ public class NutzerDAO {
      *
      * @param personalnummer
      */
-    public static void passwordZurücksetzen(int personalnummer) {
+    public static void passwordZuruecksetzen(int personalnummer) {
         try {
             loginSpeichern(personalnummer, PasswordHash.createHash("password"));
         } catch (NoSuchAlgorithmException e) {
