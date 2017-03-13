@@ -6,6 +6,7 @@ import java.util.Properties;
 
 /**
  * Klasse zu herstellung der Datenbankverbindung
+ *
  * @author ajanzen
  * @see Connection
  */
@@ -14,7 +15,8 @@ public class DBConnect {
 
     /**
      * Methode für den Verbindungsaufbau
-     * @param url die URL die den Datenbankteiber, den Port und die IP des PostgreSQL - Servers
+     *
+     * @param url  die URL die den Datenbankteiber, den Port und die IP des PostgreSQL - Servers
      * @param info Login und Kennwort für die Anmeldung an PostgreSQL - Servers
      * @throws SQLException Fehler in der Verbindung
      */
@@ -27,6 +29,7 @@ public class DBConnect {
 
     /**
      * Methode um zu prüfen ob ein gültige Verbindung besteht
+     *
      * @return
      */
     public static boolean verbindungSteht() {
@@ -43,6 +46,7 @@ public class DBConnect {
 
     /**
      * Methode zum Schlissen der Datenbankverbindung
+     *
      * @throws SQLException
      */
     public static void schliessen() throws SQLException {
@@ -53,10 +57,11 @@ public class DBConnect {
 
     /**
      * Methode zu Übergabe eines SQl - Statment an die Connection
-     * @see PreparedStatement
+     *
      * @param sql SQL- Statment
      * @return Ausgeführter SQL - Statment
      * @throws SQLException Fehler in der Verbindung
+     * @see PreparedStatement
      */
     public static PreparedStatement preparedStatement(String sql) throws SQLException {
         PreparedStatement pstm = connection.prepareStatement(sql);
@@ -65,13 +70,24 @@ public class DBConnect {
 
     /**
      * Methode zu Übergabe eines SQl - Statment an die Connection
-     * @see CallableStatement
+     *
      * @param sql SQL- Statment
      * @return Ausgeführter SQL - Statment
      * @throws SQLException Fehler in der Verbindung
+     * @see CallableStatement
      */
     public static CallableStatement callableStatement(String sql) throws SQLException {
         CallableStatement cstm = connection.prepareCall(sql);
         return cstm;
+    }
+
+    public static DatabaseMetaData getMetaData() {
+        DatabaseMetaData dbmd = null;
+        try {
+            dbmd = connection.getMetaData();
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return dbmd;
     }
 }
