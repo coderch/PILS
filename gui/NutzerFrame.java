@@ -309,7 +309,7 @@ public class NutzerFrame extends JDialog {
      */
     private JComboBox<String> getStringJComboBoxDienstgradZusatz() {
         JComboBox<String> jComboBoxDGZusatz = new JComboBox<>();
-        Set<String> dienstgrade = NutzerDAO.holeDiestgrade();
+        Set<String> dienstgrade = NutzerDAO.holeDienstgrade();
         Set<String> diensgradZusatz = new HashSet<>();
         diensgradZusatz.add(" ");
         for (String s : dienstgrade) {
@@ -332,7 +332,7 @@ public class NutzerFrame extends JDialog {
      */
     private JComboBox<String> getStringJComboBoxDienstgrad() {
         JComboBox<String> jComboBoxDG = new JComboBox<>();
-        Set<String> dienstgrade = NutzerDAO.holeDiestgrade();
+        Set<String> dienstgrade = NutzerDAO.holeDienstgrade();
         Set<String> diensgradeOhneZusatz = new HashSet<>();
         for (String s : dienstgrade) {
             if(!(s.endsWith("UA")||s.endsWith("MA")||s.endsWith("FA")||s.endsWith("BA")||s.endsWith("OA"))){

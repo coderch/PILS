@@ -142,8 +142,8 @@ public class NutzerDAO {
      *
      * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
      */
-    public static Set<String> holeDiestgrade() {
-        String sqlStatement = "SELECT pk_liestenschreibweise FROM t_diensgrade";
+    public static Set<String> holeDienstgrade() {
+        String sqlStatement = "SELECT pk_listenschreibweise FROM t_dienstgrade";
         Set<String> dienstgradeSet = new HashSet<>();
         try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery();) {
             while (rs.next()) {
