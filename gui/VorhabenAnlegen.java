@@ -141,6 +141,14 @@ public class VorhabenAnlegen extends JDialog{
         beginnconstraint.gridy = 2;
         beginnconstraint.gridx = 0;
         beginnconstraint.anchor = GridBagConstraints.FIRST_LINE_START;
+        JPanel sonderdienstPanel = new JPanel();
+        JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
+        sonderdienstPanel.add(sonderdienst);
+        sonderdienstPanel.setPreferredSize(new Dimension(100,30));
+        GridBagConstraints sonderConstr = new GridBagConstraints();
+        sonderConstr.gridx = 1;
+        sonderConstr.gridy = 2;
+        sonderConstr.anchor = GridBagConstraints.CENTER;
         JPanel endePanel = new JPanel();
         endePanel.setBorder(BorderFactory.createTitledBorder("Ende"));
         ende.setPreferredSize(new Dimension(100, 20));
@@ -266,6 +274,7 @@ public class VorhabenAnlegen extends JDialog{
         centerPanel.add(center1, center1Constraint);
         centerPanel.add(center2, center2Constraint);
         centerPanel.add(beginnPanel, beginnconstraint);
+        centerPanel.add(sonderdienstPanel, sonderConstr);
         centerPanel.add(endePanel, endeconstraint);
         centerPanel.add(soldaten1Panel, soldatenJList1Contraint);
         centerPanel.add(soldatenButtonPanel, buttonPanelContraint);
