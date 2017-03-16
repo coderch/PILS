@@ -34,7 +34,6 @@ public class DBExport {
                     }
                     bwr.write(sj.toString());
                     bwr.newLine();
-
                 }
             } catch (SQLException e) {
                 System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
