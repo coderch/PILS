@@ -241,7 +241,9 @@ public class NutzerDAO {
                 ResultSet rs = pstm.executeQuery();
                 while (rs.next()) {
                     vorhaben.add(new Vorhaben(rs.getString(2), rs.getString(5), rs.getDate(3).toLocalDate(), rs.getDate(4).toLocalDate()));
-                    System.out.println(rs.getInt(1) +" " + rs.getString(2) + " " + rs.getString(5) + " " + rs.getDate(3).toLocalDate() + " " + rs.getDate(4).toLocalDate());
+                }
+                for(Vorhaben v: vorhaben){
+                    System.out.println(v);
                 }
                 map.put(n, vorhaben);
             }
