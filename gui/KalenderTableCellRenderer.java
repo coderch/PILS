@@ -25,18 +25,25 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                     break;
                 case "Krank":
                     zelle.setIcon(IconHandler.KRANK);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case "Anwesend":
                     zelle.setIcon(IconHandler.HAKEN2);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case "Urlaub":
                     zelle.setIcon(IconHandler.SONNE);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case "Vorhaben":
                     zelle.setIcon(IconHandler.WOLKE);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
             }
-
         }
         // Dient zur Darstellung der Wochenenden im Kalender
         if (column >= 2) {

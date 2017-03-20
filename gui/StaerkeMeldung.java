@@ -20,11 +20,16 @@ import java.util.Map;
 public class StaerkeMeldung extends JDialog{
 
     private List<Nutzer> soldaten;
-    private Map<Nutzer, String> ausgewSoldat = new HashMap<>();
+    private final Map<Nutzer, String> ausgewSoldat = new HashMap<>();
+    private final Map<Nutzer, String> status = new HashMap<>();
+
 
     public StaerkeMeldung() {
 
         this.soldaten = NutzerDAO.nutzerHolen();
+        for (Nutzer nutzer : soldaten) {
+            status.put(nutzer, NutzerDAO.hatAnwesenheit(nutzer, LocalDate.now()));
+        }
         dialogBauen();
     }
 
@@ -85,12 +90,24 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             JRadioButton radioButtonanwesend = new JRadioButton();
             radioButtonanwesend.setName("Anwesend");
+            if(status.get(nutzer).equalsIgnoreCase("Anwesend")) {
+                radioButtonanwesend.setSelected(true);
+            }
             JRadioButton radioButtonkrank = new JRadioButton();
             radioButtonkrank.setName("Krank");
+            if(status.get(nutzer).equalsIgnoreCase("Krank")) {
+                radioButtonkrank.setSelected(true);
+            }
             JRadioButton radioButtonurlaub = new JRadioButton();
             radioButtonurlaub.setName("Urlaub");
+            if(status.get(nutzer).equalsIgnoreCase("Urlaub")) {
+                radioButtonurlaub.setSelected(true);
+            }
             JRadioButton radioButtonvorhaben = new JRadioButton();
             radioButtonvorhaben.setName("Vorhaben");
+            if(status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
+                radioButtonvorhaben.setSelected(true);
+            }
             radioButtonanwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonanwesend.getName()));
             radioButtonkrank.addActionListener(new SelektierterSoldat(nutzer, radioButtonkrank.getName()));
             radioButtonurlaub.addActionListener(new SelektierterSoldat(nutzer, radioButtonurlaub.getName()));

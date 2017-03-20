@@ -35,16 +35,10 @@ public class Kalender extends JPanel {
 
     public Kalender() {
         this.setLayout(new BorderLayout());
-//        monatDaten = datenerzeugen();
-
         monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         monatsAnzeigeBauen();
-
-
         monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
         kalenderPane.add("Monat", monat);
-
-
     }
 
     /**
@@ -125,7 +119,7 @@ public class Kalender extends JPanel {
                 datum = datum.minusMonths(1);
                 label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
 
-                monat.remove(1);
+                monat.remove(halter);
                 monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
         });
@@ -149,6 +143,8 @@ public class Kalender extends JPanel {
         refresh.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                datum = LocalDate.now();
+                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
                 monat.remove(halter);
                 monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
             }
