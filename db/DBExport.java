@@ -38,7 +38,7 @@ public class DBExport {
                         if (rs.getObject(i) == null) {
                             sj.add("''");
                         } else if (rsmd.getColumnTypeName(i) == "int2" || rsmd.getColumnTypeName(i) == "int4" || rsmd.getColumnTypeName(i) == "int8" || rsmd.getColumnTypeName(i) == "bool"
-                                || rsmd.getColumnTypeName(i) == "float4" || rsmd.getColumnTypeName(i) == "int8") {
+                                || rsmd.getColumnTypeName(i) == "float4" || rsmd.getColumnTypeName(i) == "float8" || rsmd.getColumnTypeName(i) == "numeric") {
                             sj.add(rs.getObject(i).toString());
                         } else {
                             sj.add("'" + rs.getObject(i).toString() + "'");
