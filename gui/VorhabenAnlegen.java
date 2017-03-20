@@ -31,7 +31,7 @@ public class VorhabenAnlegen extends JDialog{
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> soldatenListe;
     private final List<String> vorhabenListe;
-    private Vorhaben vorhaben = null;
+//    private Vorhaben vorhaben = null;
 
 
     /**
@@ -50,7 +50,13 @@ public class VorhabenAnlegen extends JDialog{
         this.setTitle("Vorhaben bearbeiten");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
-        this.vorhaben = vorhaben;
+//        this.vorhaben = vorhaben;
+        //TODO eingeteilte Soldaten eintragen
+        this.name.setText(vorhaben.getName());
+        this.beschreibung.setText(vorhaben.getBeschreibung());
+        this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        this.ende.setDate(Date.from(vorhaben.getEnde().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+//        VorhabenDAO.
         dialogBauen();
     }
     /**

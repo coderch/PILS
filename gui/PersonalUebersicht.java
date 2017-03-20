@@ -13,8 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 /**
@@ -183,7 +182,7 @@ public class PersonalUebersicht extends JDialog {
 
                 }
                 //Adden des Übersichtpanels an Stelle 0
-                centerPanel.add(uebersichtPanel(),0);
+                centerPanel.add(uebersichtPanel(ausgNutzer),0);
                 centerPanel.setSelectedIndex(0);
             }
         });
@@ -211,10 +210,19 @@ public class PersonalUebersicht extends JDialog {
         centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
         ausgNutzer.add(nutzer);
     }
-    private JPanel uebersichtPanel() {
+    private JPanel uebersichtPanel(List<Nutzer> ausgNutzer) {
         JPanel uebersichtPane = new JPanel();
         uebersichtPane.setName("Übersicht");
         //TODO @mwaldau ÜbersichtPanel erstellen
+        Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(ausgNutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+        for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
+            System.out.println(nutzerListEntry.getKey());
+            if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
+                System.out.println(nutzerListEntry.getValue());
+            }
+        }
+
 
         return uebersichtPane;
     }

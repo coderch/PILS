@@ -6,7 +6,12 @@ import db.NutzerDAO;
 import db.VorhabenDAO;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,12 +19,68 @@ import java.util.Map;
 /**
  * Created by mwaldau on 07.02.2017.
  */
-public class SoldatUebersichtPane extends JPanel{
-    public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende) {
-        //TODO SoldatUbersichtPane erstellen
-        List<Nutzer> nutzerList = new ArrayList<>();
-        nutzerList.add(nutzer);
-        Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(nutzerList, beginn,ende);
+public class SoldatUebersichtPane extends JPanel {
+    private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
+    private final List<Nutzer> nutzerList = new ArrayList<>();
+    private final LocalDate beginn;
+    private final LocalDate ende;
 
+    public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende) {
+        this.beginn = beginn;
+        this.ende = ende;
+        nutzerList.add(nutzer);
+        this.setLayout(new BorderLayout());
+        this.add(createContent(), BorderLayout.CENTER);
+}
+
+    private JScrollPane createContent() {
+        Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(nutzerList, beginn, ende);
+
+        JPanel rahmen = new JPanel();
+        rahmen.setLayout(new BoxLayout(rahmen, BoxLayout.Y_AXIS));
+        JLabel kopfzeile = new JLabel();
+        kopfzeile.setText(String.format("Vorhaben im Zeitraum von %s bis %s", beginn.format(DTF), ende.format(DTF)));
+        JPanel kopfPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        kopfPanel.setMaximumSize(new Dimension(800,50));
+        kopfPanel.add(kopfzeile);
+        rahmen.add(kopfPanel);
+
+
+
+
+        for (List<Vorhaben> vorhabens : vorhabenMap.values()) {
+            for (Vorhaben vorhaben : vorhabens) {
+                JPanel vorhabenRahmen = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                vorhabenRahmen.setMaximumSize(new Dimension(800,35));
+                JTextField vorhabenAnzeige = new JTextField();
+                vorhabenAnzeige.setEditable(false);
+                vorhabenAnzeige.setPreferredSize(new Dimension(200,20));
+                vorhabenAnzeige.setMaximumSize(new Dimension(200,20));
+                JTextField vorhabenBeginn = new JTextField();
+                vorhabenBeginn.setEditable(false);
+                JTextField vorhabenEnde = new JTextField();
+                vorhabenEnde.setEditable(false);
+                vorhabenAnzeige.setText(vorhaben.getName());
+                vorhabenBeginn.setText(vorhaben.getStart().format(DTF));
+                vorhabenEnde.setText(vorhaben.getEnde().format(DTF));
+                JButton editieren = new JButton("Bearbeiten");
+                editieren.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new VorhabenAnlegen(vorhaben);
+                    }
+                });
+                editieren.setFont(new Font("Arial", Font.PLAIN, 10));
+                editieren.setPreferredSize(new Dimension(100,20));
+                vorhabenRahmen.add(vorhabenAnzeige);
+                vorhabenRahmen.add(vorhabenBeginn);
+                vorhabenRahmen.add(vorhabenEnde);
+                vorhabenRahmen.add(editieren);
+                rahmen.add(vorhabenRahmen);
+
+            }
+        }
+        JScrollPane contentPanel = new JScrollPane(rahmen, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        return contentPanel;
     }
 }
