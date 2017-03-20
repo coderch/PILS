@@ -169,6 +169,25 @@ public class NutzerDAO {
         }
 
     }
+    public static boolean getLogin(int userName, String password) {
+        boolean status = false;
+
+        String sqlState = "SELECT * FROM t_login WHERE pk_personalnummer = ? AND passwort = ?;";
+        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlState)) {
+            ptsm.setInt(1, userName);
+            ptsm.setString(2, password);
+
+            ResultSet rs = ptsm.executeQuery();
+            if (rs.next()) {
+                status = true;
+            } else {
+                status = false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
 
     /**
      * @param nutzer

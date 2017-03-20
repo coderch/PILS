@@ -27,7 +27,8 @@ public class Runner {
             e1.printStackTrace();
         }
 
-        new Frameholder("Zugführer");
+        new LoginFrame();
+//        new Frameholder("Zugführer");
 
 
     }
