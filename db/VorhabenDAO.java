@@ -114,7 +114,7 @@ public class VorhabenDAO {
      * @return Gibt die einem Vorhaben zugeteilten Nutzer (Soldaten) aus der Datenbank zurück.
      */
 
-    public List<Nutzer> holeZugeteilteSoldaten(Vorhaben vorhaben) {
+    public static List<Nutzer> holeZugeteilteSoldaten(Vorhaben vorhaben) {
         List<Nutzer> eingeteilteSoldaten = new LinkedList<>();
 
         try {
