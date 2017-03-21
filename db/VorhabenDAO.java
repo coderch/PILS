@@ -18,6 +18,7 @@ public class VorhabenDAO {
      */
     private VorhabenDAO() {
     }
+
     /**
      * @return Gibt eine Liste mit den bereits in der Datenbank (t_vorhaben) vorhandenen Vorhaben-Namen zurück.
      */
@@ -34,6 +35,7 @@ public class VorhabenDAO {
         }
         return vorhabenNamen;
     }
+
     /**
      * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
@@ -53,6 +55,11 @@ public class VorhabenDAO {
         return alleVorhaben;
     }
 
+    /**
+     * Löscht das übergebene Vorhaben aus der Datenbank
+     *
+     * @param vorhaben Das aus der Datenbank zu löschende Vorhaben
+     */
     public static void loescheVorhaben(Vorhaben vorhaben) {
         try {
             PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_vorhaben_im_zeitraum WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
@@ -122,6 +129,7 @@ public class VorhabenDAO {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
     }
+
     /**
      * @param vorhaben Übergebenes Vorhaben, wessen zugeteilte Nutzer gewünscht werden.
      * @return Gibt die einem Vorhaben zugeteilten Nutzer (Soldaten) aus der Datenbank zurück.
