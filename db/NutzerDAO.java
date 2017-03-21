@@ -169,6 +169,13 @@ public class NutzerDAO {
         }
 
     }
+
+    /**
+     * TODO
+     * @param userName
+     * @param password
+     * @return
+     */
     public static boolean getLogin(int userName, String password) {
         boolean status = false;
 
@@ -183,10 +190,31 @@ public class NutzerDAO {
             } else {
                 status = false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
         return status;
+    }
+
+    /**
+     * TODO
+     * @param personalnummer
+     * @return
+     */
+    public static String holeRolle(int personalnummer){
+        String rolle = "";
+        String sqlState = "SELECT fk_t_rolle_pk_beschreibung FROM t_nutzer WHERE pk_personalnummer = ?";
+        try(PreparedStatement ptsm = DBConnect.preparedStatement(sqlState)){
+            ptsm.setInt(1,personalnummer);
+
+            ResultSet rs = ptsm.executeQuery();
+            while (rs.next()){
+                rolle = rs.getString(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+        return rolle;
     }
 
     /**
