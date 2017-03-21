@@ -56,12 +56,18 @@ public class VorhabenDAO {
     }
 
     public static void loescheVorhaben(Vorhaben vorhaben) {
-        String sqlStatement = "DELETE FROM t_hat_vorhaben_im_zeitraum WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ? ";
-        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_vorhaben_im_zeitraum WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
             pstm.setString(1, vorhaben.getName());
             pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));
             pstm.executeUpdate();
+            pstm = DBConnect.preparedStatement("DELETE FROM t_nimmt_teil_am_vorhaben WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+            pstm.setString(1, vorhaben.getName());
+            pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
+            pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));
+            pstm.executeUpdate();
+            pstm.close();
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
