@@ -40,7 +40,7 @@ public class VorhabenDAO {
      * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
-        String sqlStatement = "SELECT fk_t_vorhaben_pk_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung FROM t_hat_vorhaben_im_zeitraum";
+        String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung FROM t_hat_vorhaben_im_zeitraum";
         List<Vorhaben> alleVorhaben = new LinkedList<>();
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
@@ -53,6 +53,18 @@ public class VorhabenDAO {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
         return alleVorhaben;
+    }
+
+    public static void loescheVorhaben(Vorhaben vorhaben) {
+        String sqlStatement = "DELETE FROM t_hat_vorhaben_im_zeitraum WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ? ";
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
+            pstm.setString(1, vorhaben.getName());
+            pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
+            pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
     }
 
     /**
