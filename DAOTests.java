@@ -1,11 +1,16 @@
+import datenmodell.Nutzer;
+import datenmodell.Vorhaben;
 import db.DBConnect;
 import db.DBExport;
+import db.VorhabenDAO;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -48,6 +53,10 @@ public class DAOTests {
 //            System.out.println(i);
 //        }
         new DBExport();
+        List<Nutzer> eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(new Vorhaben("StOSAnl SB D1","4",LocalDate.parse("2017-03-20"),LocalDate.parse("2017-04-18")));
+        for(Nutzer n : eingeteilteSoldaten){
+            System.out.println(n.toString());
+        }
 
     }
 
