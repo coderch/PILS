@@ -1,5 +1,8 @@
 package gui;
 
+import db.NutzerDAO;
+import db.VorhabenDAO;
+
 import javax.swing.*;
 
 /**

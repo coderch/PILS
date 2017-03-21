@@ -34,16 +34,20 @@ import java.util.Set;
 public class NutzerFrame extends JDialog {
 
 
+
+
     /**
      * Konstruktor für die Klasse NutzerFrame
+     *
      */
-    public NutzerFrame() {
+    public NutzerFrame(JFrame frame) {
         super(new JFrame(), "Soldat erstellen / bearbeiten");
+
 
         this.setModal(true);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(getParent());
+        this.setLocationRelativeTo(frame);
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }

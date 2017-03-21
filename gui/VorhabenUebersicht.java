@@ -14,8 +14,10 @@ public class VorhabenUebersicht extends JDialog{
     private JTabbedPane centerPanel;
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
+    private JFrame frame;
 
-    public VorhabenUebersicht() {
+    public VorhabenUebersicht(JFrame frame) {
+        this.frame = frame;
         centerPanel = new JTabbedPane();
         centerPanel.setPreferredSize(new Dimension(700, 500));
         dialogBauen();
@@ -30,7 +32,7 @@ public class VorhabenUebersicht extends JDialog{
         this.setResizable(false);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(getParent());
+        this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
 

@@ -24,10 +24,12 @@ public class SoldatUebersichtPane extends JPanel {
     private final List<Nutzer> nutzerList = new ArrayList<>();
     private final LocalDate beginn;
     private final LocalDate ende;
+    private JFrame frame;
 
-    public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende) {
+    public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende, JFrame frame) {
         this.beginn = beginn;
         this.ende = ende;
+        this.frame = frame;
         nutzerList.add(nutzer);
         this.setLayout(new BorderLayout());
         this.add(createContent(), BorderLayout.CENTER);
@@ -67,7 +69,7 @@ public class SoldatUebersichtPane extends JPanel {
                 editieren.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenAnlegen(vorhaben);
+                        new VorhabenAnlegen(vorhaben, frame);
                     }
                 });
                 editieren.setFont(new Font("Arial", Font.PLAIN, 10));

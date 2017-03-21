@@ -32,8 +32,10 @@ public class PersonalUebersicht extends JDialog {
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;
+    private JFrame frame;
 
-    public PersonalUebersicht() {
+    public PersonalUebersicht(JFrame frame) {
+        this.frame = frame;
         this.soldaten = NutzerDAO.nutzerHolen();
         centerPanel = new JTabbedPane();
         centerPanel.setPreferredSize(new Dimension(700, 500));
@@ -49,7 +51,7 @@ public class PersonalUebersicht extends JDialog {
         this.setResizable(false);
         this.add(createContent(soldaten));
         this.pack();
-        this.setLocationRelativeTo(getParent());
+        this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
 
@@ -209,7 +211,7 @@ public class PersonalUebersicht extends JDialog {
      * @param nutzer Nutzer für den das Panel erstellt werden soll
      */
     private void neuerTab(Nutzer nutzer) {
-        centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+        centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), frame));
         ausgNutzer.add(nutzer);
     }
     private JPanel uebersichtPanel(List<Nutzer> ausgNutzer) {

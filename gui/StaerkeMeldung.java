@@ -22,10 +22,11 @@ public class StaerkeMeldung extends JDialog{
     private List<Nutzer> soldaten;
     private final Map<Nutzer, String> ausgewSoldat = new HashMap<>();
     private final Map<Nutzer, String> status = new HashMap<>();
+    private JFrame frame;
 
 
-    public StaerkeMeldung() {
-
+    public StaerkeMeldung(JFrame frame) {
+        this.frame = frame;
         this.soldaten = NutzerDAO.nutzerHolen();
         for (Nutzer nutzer : soldaten) {
             status.put(nutzer, NutzerDAO.hatAnwesenheit(nutzer, LocalDate.now()));
@@ -43,7 +44,7 @@ public class StaerkeMeldung extends JDialog{
         this.setResizable(false);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(getParent());
+        this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
 

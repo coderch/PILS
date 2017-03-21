@@ -31,13 +31,15 @@ public class VorhabenAnlegen extends JDialog{
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> soldatenListe;
     private final List<String> vorhabenListe;
+    private JFrame frame;
 //    private Vorhaben vorhaben = null;
 
 
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
      */
-    public VorhabenAnlegen(){
+    public VorhabenAnlegen(JFrame frame){
+        this.frame = frame;
         this.setTitle("Vorhaben erstellen");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
@@ -46,7 +48,8 @@ public class VorhabenAnlegen extends JDialog{
     /**
      * Konstruktor zum Editieren
      * */
-    public VorhabenAnlegen(Vorhaben vorhaben){
+    public VorhabenAnlegen(Vorhaben vorhaben, JFrame frame){
+        this.frame = frame;
         this.setTitle("Vorhaben bearbeiten");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
@@ -68,7 +71,7 @@ public class VorhabenAnlegen extends JDialog{
         this.setResizable(false);
         this.add(createContent());
         this.pack();
-        this.setLocationRelativeTo(getParent());
+        this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
 

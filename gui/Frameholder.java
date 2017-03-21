@@ -79,7 +79,7 @@ public class Frameholder {
             staerkeMeldung.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    new StaerkeMeldung();
+                    new StaerkeMeldung(frame);
                 }
             });
 
@@ -92,14 +92,14 @@ public class Frameholder {
                 soldatenVerwalten.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        new NutzerFrame();
+                        new NutzerFrame(frame);
                     }
                 });
                 JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");
                 vorhabenAnlegen.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenAnlegen();
+                        new VorhabenAnlegen(frame);
                     }
                 });
                 verwaltungReiter.add(soldatenVerwalten);
@@ -111,14 +111,14 @@ public class Frameholder {
                 personalUebersicht.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        new PersonalUebersicht();
+                        new PersonalUebersicht(frame);
                     }
                 });
                 JMenuItem vorhabenUebersicht = new JMenuItem("Vorhabenübersicht");
                 vorhabenUebersicht.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenUebersicht();
+                        new VorhabenUebersicht(frame);
                     }
                 });
                 JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
