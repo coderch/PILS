@@ -121,7 +121,7 @@ public class VorhabenDAO {
             /**
              * SELECT Statement, welches durch einen INNER JOIN nur die dem Vorhaben zugeteilten Soldaten im passenden Zeitraum zurück gibt.
              */
-            PreparedStatement pstm = DBConnect.preparedStatement(" SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer INNER JOIN t_nimmt_teil_am_vorhaben ON fk_t_soldat_pk_personalnummer = t_nutzer.pk_personalnummer WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND t_nimmt_teil_am_vorhaben.fk_t_zeitraum_pk_bis = ?");
+            PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer INNER JOIN t_nimmt_teil_am_vorhaben ON fk_t_soldat_pk_personalnummer = t_nutzer.pk_personalnummer WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND t_nimmt_teil_am_vorhaben.fk_t_zeitraum_pk_bis = ?");
             pstm.setString(1, vorhaben.getName());
             pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(3, Date.valueOf(vorhaben.getStart()));
