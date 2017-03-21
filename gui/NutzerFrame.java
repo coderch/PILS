@@ -20,30 +20,19 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by ajanzen on 09.01.2017.
- */
-
-/**
  * Klasse NutzerFrame. Erstellt ein GUI - element zum erstellung neuer Nutzer sowie die änderung der Informationen der Nutzer
  *
  * @author ajanzen
  * @version 1.0
  * @see JDialog
  */
-
 public class NutzerFrame extends JDialog {
-
-
-
-
     /**
      * Konstruktor für die Klasse NutzerFrame
      *
      */
     public NutzerFrame(JFrame frame) {
         super(new JFrame(), "Soldat erstellen / bearbeiten");
-
-
         this.setModal(true);
         this.add(createContent());
         this.pack();
@@ -109,12 +98,8 @@ public class NutzerFrame extends JDialog {
         JCheckBox jCheckBox = new JCheckBox("Login anlegen");
         jPanelBox.add(jCheckBox);
         jPanelPersNr.add(jPanelBox);
-
-        JPanel jPanelresetButton = new JPanel();
         JButton jButtonReset = new JButton("Reset");
-
         jPanelPersNr.add(jButtonReset);
-
 
         JPanel jPanelName = new JPanel();
         JPanel jPanelNachname = new JPanel();
@@ -128,29 +113,22 @@ public class NutzerFrame extends JDialog {
         jPanelName.add(jPanelNachname);
         jPanelName.add(jPanelVorname);
 
-
         JPanel jPanelDienstgradeUebersicht = new JPanel();
         JPanel jPanelDienstgrad = new JPanel();
         JPanel jPanelDGZusatz = new JPanel();
         jPanelDienstgrad.setBorder(BorderFactory.createTitledBorder("Dienstgrad"));
         jPanelDGZusatz.setBorder(BorderFactory.createTitledBorder("Dienstgradzusatz"));
-
         JComboBox<String> jComboBoxDG = getStringJComboBoxDienstgrad();
         JComboBox<String> jComboBoxDGZusatz = getStringJComboBoxDienstgradZusatz();
-
         jPanelDienstgrad.add(jComboBoxDG);
         jPanelDGZusatz.add(jComboBoxDGZusatz);
-
         jPanelDienstgradeUebersicht.add(jPanelDienstgrad);
-
         jPanelEingaben.add(jPanelPersNr);
         jPanelEingaben.add(jPanelName);
         jPanelEingaben.add(jPanelDienstgradeUebersicht);
 
         jPanelTextFelder.add(jPanelEingaben);
         jPanelDienstgradeUebersicht.add(jPanelDGZusatz);
-
-
         // Jlist anzeigen
         jListAnzeiger(
                 jListNutzer,
@@ -160,7 +138,6 @@ public class NutzerFrame extends JDialog {
                 jTextFieldVorname,
                 jComboBoxDG,
                 jComboBoxDGZusatz);
-
         // Buttons anzeigen
         JPanel jPanelButtons = getjPanelButtons(
                 jListNutzer,
@@ -171,13 +148,10 @@ public class NutzerFrame extends JDialog {
                 jTextFieldVorname,
                 jComboBoxDG,
                 jComboBoxDGZusatz);
-
         jPanelRechts.add(jPanelTextFelder, BorderLayout.NORTH);
         jPanelRechts.add(jPanelButtons, BorderLayout.SOUTH);
-
         jPanelMaster.add(jPanelJListNutzer, BorderLayout.WEST);
         jPanelMaster.add(jPanelRechts, BorderLayout.EAST);
-
         jButtonReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -193,7 +167,6 @@ public class NutzerFrame extends JDialog {
         return jPanelMaster;
 
     }
-
     /**
      * Methode zur Darstellung der Nutzerinformationen aus der Datenbank
      *
@@ -232,7 +205,6 @@ public class NutzerFrame extends JDialog {
             }
         });
     }
-
     /**
      * Methode zur Darstellung der Buttons
      *
@@ -257,7 +229,6 @@ public class NutzerFrame extends JDialog {
             JComboBox<String> jComboBoxDGZusatz) {
         JPanel jPanelButtons = new JPanel();
         jPanelButtons.setBorder(BorderFactory.createTitledBorder("Nutzer..."));
-
         JButton jButtonSpeichern = new JButton("Anlegen");
         jButtonSpeichern.addActionListener(new NutzerSpeicherListener(
                 jTextFieldPersNr,
@@ -298,14 +269,12 @@ public class NutzerFrame extends JDialog {
                 dispose();
             }
         });
-
         jPanelButtons.add(jButtonSpeichern);
         jPanelButtons.add(jButtonAendern);
         jPanelButtons.add(jButtonLoeschen);
         jPanelButtons.add(jButtonAbbruch);
         return jPanelButtons;
     }
-
     /**
      * Methode um die JComboBox mit Informationen zu befüllen
      *
@@ -328,7 +297,6 @@ public class NutzerFrame extends JDialog {
         jComboBoxDGZusatz.setPreferredSize(new Dimension(225, 23));
         return jComboBoxDGZusatz;
     }
-
     /**
      * Methode um die JComboBox mit Informationen zu befüllen
      *
@@ -366,8 +334,6 @@ public class NutzerFrame extends JDialog {
                             JTextField jTextFieldNachname,
                             JComboBox<String> jComboBoxDG,
                             JComboBox<String> jComboBoxDGZusatz) {
-
-
         jTextFieldPersNr.setText(Integer.toString(selectedValue.getPersonalnummer()));
         rollenComboBox.setSelectedItem(selectedValue.getRolle());
         jTextFieldNachname.setText(selectedValue.getName());
@@ -380,13 +346,10 @@ public class NutzerFrame extends JDialog {
             for (String s : selectedValue.getDienstgrad().split(" ")) {
                 jComboBoxDG.setSelectedItem(s);
                 jComboBoxDGZusatz.setSelectedItem(s);
-
             }
         } else {
             jComboBoxDGZusatz.setSelectedIndex(0);
             jComboBoxDG.setSelectedItem(selectedValue.getDienstgrad());
         }
     }
-
-
 }
