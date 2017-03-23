@@ -91,23 +91,25 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             JRadioButton radioButtonanwesend = new JRadioButton();
             radioButtonanwesend.setName("Anwesend");
+            JRadioButton radioButtonkrank = new JRadioButton();
+            radioButtonkrank.setName("Krank");
+            JRadioButton radioButtonurlaub = new JRadioButton();
+            radioButtonurlaub.setName("Urlaub");
+            JRadioButton radioButtonvorhaben = new JRadioButton();
+            radioButtonvorhaben.setName("Vorhaben");
             if(status.get(nutzer).equalsIgnoreCase("Anwesend")) {
                 radioButtonanwesend.setSelected(true);
             }
-            JRadioButton radioButtonkrank = new JRadioButton();
-            radioButtonkrank.setName("Krank");
-            if(status.get(nutzer).equalsIgnoreCase("Krank")) {
+            else if(status.get(nutzer).equalsIgnoreCase("Krank")) {
                 radioButtonkrank.setSelected(true);
             }
-            JRadioButton radioButtonurlaub = new JRadioButton();
-            radioButtonurlaub.setName("Urlaub");
-            if(status.get(nutzer).equalsIgnoreCase("Urlaub")) {
+            else if(status.get(nutzer).equalsIgnoreCase("Urlaub")) {
                 radioButtonurlaub.setSelected(true);
             }
-            JRadioButton radioButtonvorhaben = new JRadioButton();
-            radioButtonvorhaben.setName("Vorhaben");
-            if(status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
+            else if(status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
                 radioButtonvorhaben.setSelected(true);
+            } else {
+                radioButtonanwesend.setSelected(true);
             }
             radioButtonanwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonanwesend.getName()));
             radioButtonkrank.addActionListener(new SelektierterSoldat(nutzer, radioButtonkrank.getName()));

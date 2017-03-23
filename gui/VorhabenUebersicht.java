@@ -1,16 +1,22 @@
 package gui;
 
 import com.toedter.calendar.JDateChooser;
+import datenmodell.Vorhaben;
+import db.VorhabenDAO;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Instant;
-import java.util.Date;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by mwaldau on 06.03.2017.
  */
-public class VorhabenUebersicht extends JDialog{
+public class VorhabenUebersicht extends JDialog {
     private JTabbedPane centerPanel;
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
@@ -22,6 +28,7 @@ public class VorhabenUebersicht extends JDialog{
         centerPanel.setPreferredSize(new Dimension(700, 500));
         dialogBauen();
     }
+
     /**
      * Setzt die Umgebungsvariablen für den Dialog
      */
@@ -43,12 +50,28 @@ public class VorhabenUebersicht extends JDialog{
         JLabel von = new JLabel("von: ");
         JLabel bis = new JLabel("bis: ");
         JButton erstellen = new JButton("Übersicht erstellen");
+        erstellen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+//                contentPanel.c
+                List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
+                centerPanel.removeAll();
+                centerPanel.add(uebersichtPanel(vorhabenListe));
+                for (Vorhaben vorhaben : vorhabenListe) {
+                    if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
+                            !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                        centerPanel.add(new VorhabenPanel(vorhaben, frame));
+                    }
+                }
+                System.out.println("-------------------------------------");
+            }
+        });
         JButton pdfExport = new JButton(IconHandler.PDF);
-        JPanel buttonPanel = new JPanel(new GridLayout(2,1));
+        JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(erstellen);
         buttonPanel.add(pdfExport);
         JPanel platzhalter = new JPanel();
-        platzhalter.setPreferredSize(new Dimension(20,300));
+        platzhalter.setPreferredSize(new Dimension(20, 300));
         GridBagConstraints zeitraumConst = new GridBagConstraints();
         zeitraumConst.gridx = 0;
         zeitraumConst.gridy = 0;
@@ -72,8 +95,8 @@ public class VorhabenUebersicht extends JDialog{
         buttonConstr.gridx = 0;
         buttonConstr.gridy = 4;
         buttonConstr.gridwidth = 2;
-        beginn.setPreferredSize(new Dimension(100,20));
-        ende.setPreferredSize(new Dimension(100,20));
+        beginn.setPreferredSize(new Dimension(100, 20));
+        ende.setPreferredSize(new Dimension(100, 20));
 
 
         leftPanel.add(zeitraum, zeitraumConst);
@@ -85,10 +108,15 @@ public class VorhabenUebersicht extends JDialog{
         leftPanel.add(buttonPanel, buttonConstr);
 
 
-
-
         contentPanel.add(leftPanel, BorderLayout.WEST);
         contentPanel.add(centerPanel, BorderLayout.CENTER);
         return contentPanel;
+    }
+
+    private JPanel uebersichtPanel(List<Vorhaben> vorhabenListe) {
+        JPanel uebersichtpane = new JPanel();
+        uebersichtpane.setName("Übersicht");
+        //TODO ÜbersichtPane erstellen
+        return uebersichtpane;
     }
 }

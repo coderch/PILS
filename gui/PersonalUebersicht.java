@@ -141,53 +141,61 @@ public class PersonalUebersicht extends JDialog {
         uebersicht.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //löscht den Inhalt des TabPanes
-                ausgNutzer.clear();
-                centerPanel.removeAll();
-                //Auswahl der Soldaten anhand der Länge des Selectionpath
-                if (tree.getSelectionPath().getPath().length == 1) {
+                try {
+                    //löscht den Inhalt des TabPanes
+                    ausgNutzer.clear();
+                    centerPanel.removeAll();
+                    //Auswahl der Soldaten anhand der Länge des Selectionpath
+                    if (tree.getSelectionPath().getPath().length == 1) {
+                        for (Nutzer nutzer : soldaten) {
+                            neuerTab(nutzer);
+                        }
+                    } else if (tree.getSelectionPath().getPath().length == 2) {
+                        String dienstgradGruppe = "";
+                        for (TreePath treePath : tree.getSelectionPaths()) {
+                            switch (treePath.getPath()[1].toString()) {
+                                case "Offiziere":
+                                    dienstgradGruppe = "Offz";
+                                    break;
+                                case "U.m.P.":
+                                    dienstgradGruppe = "Uffz.m.P";
+                                    break;
+                                case "U.o.P.":
+                                    dienstgradGruppe = "Uffz.o.P";
+                                    break;
+                                case "Mannschaften":
+                                    dienstgradGruppe = "Mnsch";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            for (Nutzer nutzer : soldaten) {
+                                if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
+                                    neuerTab(nutzer);
+                                }
+                            }
+                        }
+                    } else if (tree.getSelectionPath().getPath().length == 3) {
+                        for (TreePath treePath : tree.getSelectionPaths()) {
+                            for (Nutzer nutzer : soldaten) {
+                                if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
+                                    neuerTab(nutzer);
+                                }
+                            }
+                        }
 
+                    }
+                    //Adden des Übersichtpanels an Stelle 0
+                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
+                    centerPanel.setSelectedIndex(0);
+                } catch (NullPointerException e){
                     for (Nutzer nutzer : soldaten) {
                         neuerTab(nutzer);
                     }
-                } else if (tree.getSelectionPath().getPath().length == 2) {
-                    String dienstgradGruppe = "";
-                    for (TreePath treePath : tree.getSelectionPaths()) {
-                        switch (treePath.getPath()[1].toString()) {
-                            case "Offiziere":
-                                dienstgradGruppe = "Offz";
-                                break;
-                            case "U.m.P.":
-                                dienstgradGruppe = "Uffz.m.P";
-                                break;
-                            case "U.o.P.":
-                                dienstgradGruppe = "Uffz.o.P";
-                                break;
-                            case "Mannschaften":
-                                dienstgradGruppe = "Mnsch";
-                                break;
-                            default:
-                                break;
-                        }
-                        for (Nutzer nutzer : soldaten) {
-                            if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
-                                neuerTab(nutzer);
-                            }
-                        }
-                    }
-                } else if (tree.getSelectionPath().getPath().length == 3) {
-                    for (TreePath treePath : tree.getSelectionPaths()) {
-                        for (Nutzer nutzer : soldaten) {
-                            if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
-                                neuerTab(nutzer);
-                            }
-                        }
-                    }
-
+                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
+                    System.out.println(ausgNutzer);
+                    centerPanel.setSelectedIndex(0);
                 }
-                //Adden des Übersichtpanels an Stelle 0
-                centerPanel.add(uebersichtPanel(ausgNutzer),0);
-                centerPanel.setSelectedIndex(0);
             }
         });
         JButton pdfExport = new JButton(IconHandler.PDF);
@@ -220,12 +228,12 @@ public class PersonalUebersicht extends JDialog {
         //TODO @mwaldau ÜbersichtPanel erstellen
         Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(ausgNutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
-        for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
-            System.out.println(nutzerListEntry.getKey());
-            if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
-                System.out.println(nutzerListEntry.getValue());
-            }
-        }
+//        for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
+//            System.out.println(nutzerListEntry.getKey());
+//            if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
+//                System.out.println(nutzerListEntry.getValue());
+//            }
+//        }
 
 
         return uebersichtPane;
