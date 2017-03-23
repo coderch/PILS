@@ -193,7 +193,6 @@ public class PersonalUebersicht extends JDialog {
                         neuerTab(nutzer);
                     }
                     centerPanel.add(uebersichtPanel(ausgNutzer), 0);
-                    System.out.println(ausgNutzer);
                     centerPanel.setSelectedIndex(0);
                 }
             }

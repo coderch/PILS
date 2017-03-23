@@ -33,9 +33,6 @@ public class VorhabenAnlegen extends JDialog{
     private final List<Nutzer> eingeteilteSoldaten;
     private final List<String> vorhabenListe;
     private JFrame frame;
-//    private Vorhaben vorhaben = null;
-
-
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
      */
@@ -66,7 +63,9 @@ public class VorhabenAnlegen extends JDialog{
                 }
             }
         }
-        this.soldatenListe = bufferListe;
+        for (Nutzer nutzer : bufferListe) {
+            soldatenListe.remove(nutzer);
+        }
         this.name.setText(vorhaben.getName());
         this.beschreibung.setText(vorhaben.getBeschreibung());
         this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));

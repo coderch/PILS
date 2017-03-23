@@ -73,7 +73,7 @@ public class Kalender extends JPanel {
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         kalender.setRowHeight(30);
         halter = new JScrollPane(kalender);
-        halter.setPreferredSize(new Dimension(1200, 400));
+        halter.setPreferredSize(new Dimension(1200, 600));
 
         halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         halter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
