@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.List;
 
@@ -20,6 +22,7 @@ public class VorhabenUebersicht extends JDialog {
     private JTabbedPane centerPanel;
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
+    private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     private JFrame frame;
 
     public VorhabenUebersicht(JFrame frame) {
@@ -113,10 +116,35 @@ public class VorhabenUebersicht extends JDialog {
         return contentPanel;
     }
 
-    private JPanel uebersichtPanel(List<Vorhaben> vorhabenListe) {
-        JPanel uebersichtpane = new JPanel();
-        uebersichtpane.setName("Übersicht");
+    private JScrollPane uebersichtPanel(List<Vorhaben> vorhabenListe) {
         //TODO ÜbersichtPane erstellen
+        JPanel uebersicht = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        uebersicht.setLayout(new BoxLayout(uebersicht, BoxLayout.Y_AXIS));
+        for (Vorhaben vorhaben : vorhabenListe) {
+            if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
+                    !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                JPanel vorhabenPanel = new JPanel();
+                vorhabenPanel.setMaximumSize(new Dimension(700,50));
+                JTextField vorhabenName = new JTextField(vorhaben.getName(), 30);
+                JLabel vorhabenBeginn = new JLabel(vorhaben.getStart().format(DTF) + " -");
+                JLabel vorhabenEnde = new JLabel(vorhaben.getEnde().format(DTF));
+                JButton editieren = new JButton("Bearbeiten");
+                editieren.setFont(new Font("Arial", Font.PLAIN, 10));
+                editieren.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new VorhabenAnlegen(vorhaben, frame);
+                    }
+                });
+                vorhabenPanel.add(vorhabenName);
+                vorhabenPanel.add(vorhabenBeginn);
+                vorhabenPanel.add(vorhabenEnde);
+                vorhabenPanel.add(editieren);
+                uebersicht.add(vorhabenPanel);
+            }
+        }
+        JScrollPane uebersichtpane = new JScrollPane(uebersicht, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        uebersichtpane.setName("Übersicht");
         return uebersichtpane;
     }
 }

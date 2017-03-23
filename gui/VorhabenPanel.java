@@ -38,7 +38,6 @@ public class VorhabenPanel extends JPanel {
         zeitraum.setEditable(false);
         zeitraum.setBorder(null);
         zeitraum.setFont(new Font("Arial", Font.BOLD, 12));
-//        JLabel zeitraum = new JLabel(String.format("von %s bis %s",vorhaben.getStart().format(DTF), vorhaben.getEnde().format(DTF)));
         JTextArea beschreibung = new JTextArea(5,35);
         JScrollPane jScrollPane = new JScrollPane(beschreibung);
         beschreibung.setText(vorhaben.getBeschreibung());
