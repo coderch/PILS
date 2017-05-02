@@ -75,6 +75,8 @@ public class Frameholder {
         if (userlevel.equalsIgnoreCase("zugdienst") || userlevel.equalsIgnoreCase("zugführer")) {
             JMenuItem staerkeMeldung = new JMenuItem("Stärkemeldung");
             verwaltungReiter.add(staerkeMeldung);
+            JMenuItem urlaubEintragen = new JMenuItem("Urlaub eintragen");
+            verwaltungReiter.add(urlaubEintragen);
             menuBar.add(verwaltungReiter);
             staerkeMeldung.addActionListener(new ActionListener() {
                 @Override
@@ -82,6 +84,13 @@ public class Frameholder {
                     new StaerkeMeldung(frame);
                 }
             });
+            urlaubEintragen.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    new UrlaubEintragen(frame);
+                }
+            });
+
 
 
             if (userlevel.equalsIgnoreCase("zugführer")) {

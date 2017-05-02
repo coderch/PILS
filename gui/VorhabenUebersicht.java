@@ -66,7 +66,6 @@ public class VorhabenUebersicht extends JDialog {
                         centerPanel.add(new VorhabenPanel(vorhaben, frame));
                     }
                 }
-                System.out.println("-------------------------------------");
             }
         });
         JButton pdfExport = new JButton(IconHandler.PDF);
@@ -117,7 +116,6 @@ public class VorhabenUebersicht extends JDialog {
     }
 
     private JScrollPane uebersichtPanel(List<Vorhaben> vorhabenListe) {
-        //TODO ÜbersichtPane erstellen
         JPanel uebersicht = new JPanel(new FlowLayout(FlowLayout.LEFT));
         uebersicht.setLayout(new BoxLayout(uebersicht, BoxLayout.Y_AXIS));
         for (Vorhaben vorhaben : vorhabenListe) {

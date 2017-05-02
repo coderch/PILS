@@ -64,6 +64,7 @@ public class StaerkeMeldung extends JDialog{
         GridBagConstraints krankConstraint = new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         GridBagConstraints urlaubConstraint = new GridBagConstraints(3,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         GridBagConstraints vorhabenConstraint = new GridBagConstraints(4,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints abwesendConstraint = new GridBagConstraints(5,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
         JLabel anwesendLabel = new JLabel(IconHandler.HAKEN);
         anwesendLabel.setToolTipText("Anwesend");
         JLabel krankLabel = new JLabel(IconHandler.KRANK);
@@ -72,10 +73,13 @@ public class StaerkeMeldung extends JDialog{
         urlaubLabel.setToolTipText("Urlaub");
         JLabel vorhabenLabel = new JLabel(IconHandler.WOLKE);
         vorhabenLabel.setToolTipText("Übung/verplant");
+        JLabel abwesendLabel = new JLabel(IconHandler.SIRENE);
+        abwesendLabel.setToolTipText("Abwesend");
         contentPanel.add(anwesendLabel, anwesendConstraint);
         contentPanel.add(krankLabel, krankConstraint);
         contentPanel.add(urlaubLabel, urlaubConstraint);
         contentPanel.add(vorhabenLabel, vorhabenConstraint);
+        contentPanel.add(abwesendLabel, abwesendConstraint);
         int i = 1;
 
         for (Nutzer nutzer : soldaten) {
@@ -89,6 +93,7 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbKrankConstr = new GridBagConstraints(2,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+            GridBagConstraints rbAbwesendConstr = new GridBagConstraints(5,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             JRadioButton radioButtonanwesend = new JRadioButton();
             radioButtonanwesend.setName("Anwesend");
             JRadioButton radioButtonkrank = new JRadioButton();
@@ -97,6 +102,8 @@ public class StaerkeMeldung extends JDialog{
             radioButtonurlaub.setName("Urlaub");
             JRadioButton radioButtonvorhaben = new JRadioButton();
             radioButtonvorhaben.setName("Vorhaben");
+            JRadioButton radioButtonAbwesend = new JRadioButton();
+            radioButtonvorhaben.setName("Abwesend");
             if(status.get(nutzer).equalsIgnoreCase("Anwesend")) {
                 radioButtonanwesend.setSelected(true);
             }
@@ -108,17 +115,24 @@ public class StaerkeMeldung extends JDialog{
             }
             else if(status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
                 radioButtonvorhaben.setSelected(true);
-            } else {
+            }
+            else if(status.get(nutzer).equalsIgnoreCase("Abwesend")) {
+                radioButtonAbwesend.setSelected(true);
+            }
+            else {
                 radioButtonanwesend.setSelected(true);
+                ausgewSoldat.put(nutzer, "Anwesend");
             }
             radioButtonanwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonanwesend.getName()));
             radioButtonkrank.addActionListener(new SelektierterSoldat(nutzer, radioButtonkrank.getName()));
             radioButtonurlaub.addActionListener(new SelektierterSoldat(nutzer, radioButtonurlaub.getName()));
             radioButtonvorhaben.addActionListener(new SelektierterSoldat(nutzer, radioButtonvorhaben.getName()));
+            radioButtonAbwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonAbwesend.getName()));
             gruppe.add(radioButtonanwesend);
             gruppe.add(radioButtonkrank);
             gruppe.add(radioButtonurlaub);
             gruppe.add(radioButtonvorhaben);
+            gruppe.add(radioButtonAbwesend);
 
 
             contentPanel.add(label, labelConstraint);
@@ -126,6 +140,7 @@ public class StaerkeMeldung extends JDialog{
             contentPanel.add(radioButtonkrank, rbKrankConstr);
             contentPanel.add(radioButtonurlaub, rbUrlaubConstr);
             contentPanel.add(radioButtonvorhaben, rbVorhabenConstr);
+            contentPanel.add(radioButtonAbwesend, rbAbwesendConstr);
             i++;
         }
         JPanel buttonPanel = new JPanel();
@@ -136,6 +151,7 @@ public class StaerkeMeldung extends JDialog{
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
                     NutzerDAO.anwesenheitEintragen(nutzerStringEntry.getKey(), LocalDate.now(),nutzerStringEntry.getValue());
+                    System.out.println(nutzerStringEntry);
                 }
                 dispose();
             }
