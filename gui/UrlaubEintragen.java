@@ -15,7 +15,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.List;
 
@@ -26,14 +30,15 @@ public class UrlaubEintragen extends JDialog{
     private final JFrame frame;
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;
-    private final JPanel centerPanel;
+    private final JScrollPane centerPanel;
+    private final JTextArea anzeige = new JTextArea();
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
 
     public UrlaubEintragen(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
         this.frame = frame;
-        centerPanel = new JPanel();
+        centerPanel = new JScrollPane(anzeige, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         centerPanel.setPreferredSize(new Dimension(700, 500));
         dialogBauen();
     }
@@ -139,13 +144,19 @@ public class UrlaubEintragen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    //löscht den Inhalt des TabPanes
                     ausgNutzer.clear();
-                    centerPanel.removeAll();
+                    LocalDate startDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     //Auswahl der Soldaten anhand der Länge des Selectionpath
                     if (tree.getSelectionPath().getPath().length == 1) {
                         for (Nutzer nutzer : soldaten) {
                             //TODO
+                            anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                    startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                    endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                            for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                            }
                         }
                     } else if (tree.getSelectionPath().getPath().length == 2) {
                         String dienstgradGruppe = "";
@@ -169,6 +180,12 @@ public class UrlaubEintragen extends JDialog{
                             for (Nutzer nutzer : soldaten) {
                                 if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
                                     //TODO
+                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                    }
                                 }
                             }
                         }
@@ -177,6 +194,12 @@ public class UrlaubEintragen extends JDialog{
                             for (Nutzer nutzer : soldaten) {
                                 if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
                                     //TODO
+                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                    }
                                 }
                             }
                         }
@@ -185,14 +208,12 @@ public class UrlaubEintragen extends JDialog{
                     //Adden des Übersichtpanels an Stelle 0
 
                 } catch (NullPointerException e){
-                    JOptionPane.showMessageDialog(null, "Fehler", "Keinen soldaten ausgewählt", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt","Fehler", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        JButton pdfExport = new JButton(IconHandler.PDF);
         buttonPanel.add(new JLabel());
         buttonPanel.add(eintragen);
-        buttonPanel.add(pdfExport);
 
         leftPanel.add(scrollingTree, treeConstraint);
         leftPanel.add(beginnPanel, beginnConstriant);
