@@ -1,6 +1,5 @@
 package gui;
 
-import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
@@ -8,45 +7,48 @@ import db.NutzerDAO;
 import db.VorhabenDAO;
 
 import javax.swing.*;
-import javax.swing.plaf.TabbedPaneUI;
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.List;
 
 /**
- * Liefert ein Fenster das einen Zeitraum auswählen lässt und Soldaten in einem Baum
- * um eine Übersicht des im Zeitraum verfügbaren Personals und eine Übersicht der Vorhaben
- * für jeden einzelnen zu erstellen
- * @see javax.swing.JDialog
- * @author mwaldau
+ * Created by mwaldau on 02.05.2017.
  */
-public class PersonalUebersicht extends JDialog {
-
-    private JTabbedPane centerPanel;
-    private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
-    private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
+public class UrlaubEintragen extends JDialog{
+    private final JFrame frame;
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;
-    private JFrame frame;
+    private final JScrollPane centerPanel;
+    private final JTextArea anzeige = new JTextArea();
+    private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
+    private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
 
-    public PersonalUebersicht(JFrame frame) {
-        this.frame = frame;
+    public UrlaubEintragen(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
-        centerPanel = new JTabbedPane();
+        this.frame = frame;
+        centerPanel = new JScrollPane(anzeige, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         centerPanel.setPreferredSize(new Dimension(700, 500));
         dialogBauen();
     }
+
     /**
      * Setzt die Umgebungsvariablen für den Dialog
      */
     private void dialogBauen() {
         this.setModal(true);
-        this.setTitle("Personalübersicht");
+        this.setTitle("Urlaubsbearbeitung");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.add(createContent(soldaten));
@@ -75,12 +77,12 @@ public class PersonalUebersicht extends JDialog {
         treeConstraint.gridx = 0;
         treeConstraint.gridy = 0;
         treeConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
-            // Treenodes erstellen (Gruppen)
+        // Treenodes erstellen (Gruppen)
         DefaultMutableTreeNode offzeTreeNode = new DefaultMutableTreeNode("Offiziere");
         DefaultMutableTreeNode umpTreeNode = new DefaultMutableTreeNode("U.m.P.");
         DefaultMutableTreeNode uopTreeNode = new DefaultMutableTreeNode("U.o.P.");
         DefaultMutableTreeNode mnschTreeNode = new DefaultMutableTreeNode("Mannschaften");
-            // nutzer Nodes erstellen und den Gruppen zuweisen
+        // nutzer Nodes erstellen und den Gruppen zuweisen
         for (Nutzer nutzer : soldaten) {
             switch (nutzer.getDienstgradgruppe()) {
                 case "Offz":
@@ -97,16 +99,16 @@ public class PersonalUebersicht extends JDialog {
                     break;
             }
         }
-            //tree wurzel erstellen und nodes adden
+        //tree wurzel erstellen und nodes adden
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Teileinheit");
         root.add(offzeTreeNode);
         root.add(umpTreeNode);
         root.add(uopTreeNode);
         root.add(mnschTreeNode);
-            //treemodel und tree erstellen
+        //treemodel und tree erstellen
         TreeModel treeModel = new DefaultTreeModel(root);
         JTree tree = new JTree(treeModel);
-            //Öffnen der Pfade
+        //Öffnen der Pfade
         tree.expandPath(new TreePath(offzeTreeNode.getPath()));
         tree.expandPath(new TreePath(umpTreeNode.getPath()));
         tree.expandPath(new TreePath(uopTreeNode.getPath()));
@@ -137,18 +139,24 @@ public class PersonalUebersicht extends JDialog {
         GridBagConstraints buttonConstriant = new GridBagConstraints();
         buttonConstriant.gridx = 0;
         buttonConstriant.gridy = 3;
-        JButton uebersicht = new JButton("Übersicht erstellen");
-        uebersicht.addActionListener(new ActionListener() {
+        JButton eintragen = new JButton("Eintragen");
+        eintragen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
-                    //löscht den Inhalt des TabPanes
                     ausgNutzer.clear();
-                    centerPanel.removeAll();
+                    LocalDate startDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     //Auswahl der Soldaten anhand der Länge des Selectionpath
                     if (tree.getSelectionPath().getPath().length == 1) {
                         for (Nutzer nutzer : soldaten) {
-                            neuerTab(nutzer);
+                            //TODO
+                            anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                    startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                    endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                            for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                            }
                         }
                     } else if (tree.getSelectionPath().getPath().length == 2) {
                         String dienstgradGruppe = "";
@@ -171,7 +179,13 @@ public class PersonalUebersicht extends JDialog {
                             }
                             for (Nutzer nutzer : soldaten) {
                                 if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
-                                    neuerTab(nutzer);
+                                    //TODO
+                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                    }
                                 }
                             }
                         }
@@ -179,28 +193,27 @@ public class PersonalUebersicht extends JDialog {
                         for (TreePath treePath : tree.getSelectionPaths()) {
                             for (Nutzer nutzer : soldaten) {
                                 if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
-                                    neuerTab(nutzer);
+                                    //TODO
+                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                    }
                                 }
                             }
                         }
 
                     }
                     //Adden des Übersichtpanels an Stelle 0
-                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
-                    centerPanel.setSelectedIndex(0);
+
                 } catch (NullPointerException e){
-                    for (Nutzer nutzer : soldaten) {
-                        neuerTab(nutzer);
-                    }
-                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
-                    centerPanel.setSelectedIndex(0);
+                    JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt","Fehler", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
-        JButton pdfExport = new JButton(IconHandler.PDF);
         buttonPanel.add(new JLabel());
-        buttonPanel.add(uebersicht);
-        buttonPanel.add(pdfExport);
+        buttonPanel.add(eintragen);
 
         leftPanel.add(scrollingTree, treeConstraint);
         leftPanel.add(beginnPanel, beginnConstriant);
@@ -210,31 +223,5 @@ public class PersonalUebersicht extends JDialog {
         contentPanel.add(centerPanel, BorderLayout.CENTER);
         contentPanel.add(leftPanel, BorderLayout.WEST);
         return contentPanel;
-    }
-
-    /**
-     * Erstellt für den übergebenen Nutzer im TabPanel(centerPanel) ein neuen SoldatUebersichtPane
-     * und fügt einen nutzer der ausgNutzerListe hinzu
-     * @param nutzer Nutzer für den das Panel erstellt werden soll
-     */
-    private void neuerTab(Nutzer nutzer) {
-        centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), frame));
-        ausgNutzer.add(nutzer);
-    }
-    private JPanel uebersichtPanel(List<Nutzer> ausgNutzer) {
-        JPanel uebersichtPane = new JPanel();
-        uebersichtPane.setName("Übersicht");
-        //TODO @mwaldau ÜbersichtPanel erstellen
-        Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(ausgNutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-
-//        for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
-//            System.out.println(nutzerListEntry.getKey());
-//            if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
-//                System.out.println(nutzerListEntry.getValue());
-//            }
-//        }
-
-
-        return uebersichtPane;
     }
 }

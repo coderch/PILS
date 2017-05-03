@@ -1,8 +1,11 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 
@@ -12,12 +15,15 @@ import java.time.LocalDate;
  * @author mwaldau
  */
 class KalenderTableCellRenderer extends DefaultTableCellRenderer {
+    public static final Border STANDARD = new JLabel().getBorder();
+    public static final Border MARKIERT = BorderFactory.createLineBorder(Color.GREEN);
 
 
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
 
         JLabel zelle = new JLabel((String) value);
+
 // gibt zu String Values im Object array bei bestimmten Daten ein Icon in der Zelle zurueck
         if (value != null && value instanceof String) {
             switch ((String) value) {
@@ -29,7 +35,7 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case "Anwesend":
-                    zelle.setIcon(IconHandler.HAKEN2);
+                    zelle.setIcon(IconHandler.HAKEN);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
@@ -40,6 +46,11 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                     break;
                 case "Vorhaben":
                     zelle.setIcon(IconHandler.WOLKE);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
+                    break;
+                case "Abwesend":
+                    zelle.setIcon(IconHandler.SIRENE);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
@@ -55,7 +66,6 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
 
             }
         }
-
 
         return zelle;
     }

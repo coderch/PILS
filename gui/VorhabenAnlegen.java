@@ -29,12 +29,11 @@ public class VorhabenAnlegen extends JDialog{
     private final JTextArea beschreibung = new JTextArea(5,35);
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
-    private final List<Nutzer> soldatenListe;
+    private List<Nutzer> soldatenListe;
+    private final List<Nutzer> eingeteilteSoldaten;
     private final List<String> vorhabenListe;
+    private Vorhaben vorhaben;
     private JFrame frame;
-//    private Vorhaben vorhaben = null;
-
-
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
      */
@@ -43,23 +42,35 @@ public class VorhabenAnlegen extends JDialog{
         this.setTitle("Vorhaben erstellen");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
+        eingeteilteSoldaten = new ArrayList<>();
         dialogBauen();
     }
     /**
      * Konstruktor zum Editieren
      * */
     public VorhabenAnlegen(Vorhaben vorhaben, JFrame frame){
+        this.vorhaben = vorhaben;
         this.frame = frame;
         this.setTitle("Vorhaben bearbeiten");
         this.soldatenListe = NutzerDAO.nutzerHolen();
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
-//        this.vorhaben = vorhaben;
-        //TODO eingeteilte Soldaten eintragen
+
+        this.eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
+        List<Nutzer> bufferListe = new ArrayList<>();
+        for (Nutzer nutzer : soldatenListe) {
+            for (Nutzer nutzer1 : eingeteilteSoldaten) {
+                if (nutzer.getPersonalnummer() == nutzer1.getPersonalnummer()) {
+                    bufferListe.add(nutzer);
+                }
+            }
+        }
+        for (Nutzer nutzer : bufferListe) {
+            soldatenListe.remove(nutzer);
+        }
         this.name.setText(vorhaben.getName());
         this.beschreibung.setText(vorhaben.getBeschreibung());
         this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         this.ende.setDate(Date.from(vorhaben.getEnde().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-//        VorhabenDAO.
         dialogBauen();
     }
     /**
@@ -169,7 +180,6 @@ public class VorhabenAnlegen extends JDialog{
 
         //-------------center4 mit 2 Jlists und 2 JButtons um soldaten zuzuweisen-------------------------
 
-        List<Nutzer> eingeteilteSoldaten = new ArrayList<>();
         JList<Nutzer> soldatenJlist1 = new JList(this.soldatenListe.toArray(new Nutzer[0]));
         JPanel soldaten1Panel = new JPanel();
         JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -255,7 +265,9 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                //TODO Vorhaben löschen
+                VorhabenDAO.loescheVorhaben(vorhaben);
+                vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
                 dispose();
 
@@ -265,7 +277,9 @@ public class VorhabenAnlegen extends JDialog{
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Vorhaben vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                //TODO Vorhaben löschen
+                VorhabenDAO.loescheVorhaben(vorhaben);
+                vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
             }
         });

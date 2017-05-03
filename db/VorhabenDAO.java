@@ -40,7 +40,7 @@ public class VorhabenDAO {
      * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
-        String sqlStatement = "SELECT fk_t_vorhaben_pk_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung FROM t_hat_vorhaben_im_zeitraum";
+        String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung FROM t_hat_vorhaben_im_zeitraum";
         List<Vorhaben> alleVorhaben = new LinkedList<>();
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
@@ -56,13 +56,35 @@ public class VorhabenDAO {
     }
 
     /**
+     * Löscht das übergebene Vorhaben aus der Datenbank
+     *
+     * @param vorhaben Das aus der Datenbank zu löschende Vorhaben
+     */
+    public static void loescheVorhaben(Vorhaben vorhaben) {
+        try {
+            PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_vorhaben_im_zeitraum WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+            pstm.setString(1, vorhaben.getName());
+            pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
+            pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));
+            pstm.executeUpdate();
+            pstm = DBConnect.preparedStatement("DELETE FROM t_nimmt_teil_am_vorhaben WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+            pstm.setString(1, vorhaben.getName());
+            pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
+            pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));
+            pstm.executeUpdate();
+            pstm.close();
+        } catch (SQLException e) {
+            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+        }
+    }
+
+    /**
      * Speichert ein übergebenes Vorhaben inkl. der ihm zugeteilten Soldaten in die Datenbank.
      *
      * @param vorhaben            das übergebene Vorhaben-Objekt
      * @param eingeteilteSoldaten Liste mit dem übergebenen Vorhaben zugeilten Nutzern (Soldaten)
      */
     public static void vorhabenSpeichern(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten) {
-
         try {
             /**
              * Speichert einen noch nicht vorhandenen Vorhaben-Namen in der Tabelle t_vorhaben. Überprüfung erfolgt über "ON CONFLICT DO".
@@ -103,7 +125,6 @@ public class VorhabenDAO {
             }
             pstm.executeBatch();
             pstm.close();
-
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
@@ -113,10 +134,8 @@ public class VorhabenDAO {
      * @param vorhaben Übergebenes Vorhaben, wessen zugeteilte Nutzer gewünscht werden.
      * @return Gibt die einem Vorhaben zugeteilten Nutzer (Soldaten) aus der Datenbank zurück.
      */
-
     public static List<Nutzer> holeZugeteilteSoldaten(Vorhaben vorhaben) {
         List<Nutzer> eingeteilteSoldaten = new LinkedList<>();
-
         try {
             /**
              * SELECT Statement, welches durch einen INNER JOIN nur die dem Vorhaben zugeteilten Soldaten im passenden Zeitraum zurück gibt.
@@ -129,11 +148,9 @@ public class VorhabenDAO {
             while (rs.next()) {
                 eingeteilteSoldaten.add(new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
-
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
-
         return eingeteilteSoldaten;
     }
 }
