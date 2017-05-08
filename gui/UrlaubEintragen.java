@@ -26,7 +26,7 @@ import java.util.List;
 /**
  * Created by mwaldau on 02.05.2017.
  */
-public class UrlaubEintragen extends JDialog{
+public class UrlaubEintragen extends JDialog {
     private final JFrame frame;
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;
@@ -60,12 +60,11 @@ public class UrlaubEintragen extends JDialog{
     /**
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
      * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
-     * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum PDFExport
-     *
+     * auszuwählen und einen Button zum Eintragen von Urlaub
+     * <p>
      * Der Übersicht erstellen button erstellt für jeden ausgewählten Soldaten, bzw. für jeden in der
      * ausgewählten Gruppe einen TabPanel mit einem SoldatUebersichtPane sowie eine ÜbersichtPane
      *
-     * @see SoldatUebersichtPane
      * @param soldaten
      * @return Es wird ein JPanel mit diversen Komponenten erstellt
      */
@@ -150,7 +149,6 @@ public class UrlaubEintragen extends JDialog{
                     //Auswahl der Soldaten anhand der Länge des Selectionpath
                     if (tree.getSelectionPath().getPath().length == 1) {
                         for (Nutzer nutzer : soldaten) {
-                            //TODO
                             anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
                                     startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                     endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
@@ -179,7 +177,6 @@ public class UrlaubEintragen extends JDialog{
                             }
                             for (Nutzer nutzer : soldaten) {
                                 if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
-                                    //TODO
                                     anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
                                             startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                             endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
@@ -193,7 +190,6 @@ public class UrlaubEintragen extends JDialog{
                         for (TreePath treePath : tree.getSelectionPaths()) {
                             for (Nutzer nutzer : soldaten) {
                                 if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
-                                    //TODO
                                     anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
                                             startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                             endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
@@ -203,12 +199,9 @@ public class UrlaubEintragen extends JDialog{
                                 }
                             }
                         }
-
                     }
-                    //Adden des Übersichtpanels an Stelle 0
-
-                } catch (NullPointerException e){
-                    JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt","Fehler", JOptionPane.ERROR_MESSAGE);
+                } catch (NullPointerException e) {
+                    JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
