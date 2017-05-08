@@ -143,7 +143,7 @@ public class NutzerDAO {
      */
     public static Set<String> holeDienstgrade() {
         String sqlStatement = "SELECT pk_listenschreibweise FROM t_dienstgrade";
-        Set<String> dienstgradeSet = new HashSet<>();
+        Set<String> dienstgradeSet = new TreeSet<>();
         try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery();) {
             while (rs.next()) {
                 dienstgradeSet.add(rs.getString(1));
@@ -172,6 +172,7 @@ public class NutzerDAO {
 
     /**
      * TODO
+     *
      * @param userName
      * @param password
      * @return
@@ -198,17 +199,18 @@ public class NutzerDAO {
 
     /**
      * TODO
+     *
      * @param personalnummer
      * @return
      */
-    public static String holeRolle(int personalnummer){
+    public static String holeRolle(int personalnummer) {
         String rolle = "";
         String sqlState = "SELECT fk_t_rolle_pk_beschreibung FROM t_nutzer WHERE pk_personalnummer = ?";
-        try(PreparedStatement ptsm = DBConnect.preparedStatement(sqlState)){
-            ptsm.setInt(1,personalnummer);
+        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlState)) {
+            ptsm.setInt(1, personalnummer);
 
             ResultSet rs = ptsm.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 rolle = rs.getString(1);
             }
         } catch (SQLException e) {

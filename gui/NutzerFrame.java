@@ -1,5 +1,8 @@
 package gui;
 
+
+import datenmodell.Dienstgrade.Dienstgrad;
+import datenmodell.Dienstgrade.DienstgradComparator;
 import datenmodell.Nutzer;
 import datenmodell.Rolle;
 import db.NutzerDAO;
@@ -16,8 +19,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.List;
 
 /**
  * Klasse NutzerFrame. Erstellt ein GUI - element zum erstellung neuer Nutzer sowie die änderung der Informationen der Nutzer
@@ -29,7 +32,6 @@ import java.util.Set;
 public class NutzerFrame extends JDialog {
     /**
      * Konstruktor für die Klasse NutzerFrame
-     *
      */
     public NutzerFrame(JFrame frame) {
         super(new JFrame(), "Soldat erstellen / bearbeiten");
@@ -167,6 +169,7 @@ public class NutzerFrame extends JDialog {
         return jPanelMaster;
 
     }
+
     /**
      * Methode zur Darstellung der Nutzerinformationen aus der Datenbank
      *
@@ -205,6 +208,7 @@ public class NutzerFrame extends JDialog {
             }
         });
     }
+
     /**
      * Methode zur Darstellung der Buttons
      *
@@ -275,6 +279,7 @@ public class NutzerFrame extends JDialog {
         jPanelButtons.add(jButtonAbbruch);
         return jPanelButtons;
     }
+
     /**
      * Methode um die JComboBox mit Informationen zu befüllen
      *
@@ -286,8 +291,8 @@ public class NutzerFrame extends JDialog {
         Set<String> diensgradZusatz = new HashSet<>();
         diensgradZusatz.add(" ");
         for (String s : dienstgrade) {
-            if((s.endsWith("UA")||s.endsWith("MA")||s.endsWith("FA")||s.endsWith("BA")||s.endsWith("OA"))){
-                String splitter [] = s.split(" ");
+            if ((s.endsWith("UA") || s.endsWith("MA") || s.endsWith("FA") || s.endsWith("BA") || s.endsWith("OA"))) {
+                String splitter[] = s.split(" ");
                 diensgradZusatz.add(splitter[1]);
             }
         }
@@ -297,23 +302,30 @@ public class NutzerFrame extends JDialog {
         jComboBoxDGZusatz.setPreferredSize(new Dimension(225, 23));
         return jComboBoxDGZusatz;
     }
+
     /**
      * Methode um die JComboBox mit Informationen zu befüllen
      *
      * @return JComboBox mit den Dienstgraden
      */
     private JComboBox<String> getStringJComboBoxDienstgrad() {
-        JComboBox<String> jComboBoxDG = new JComboBox<>();
         Set<String> dienstgrade = NutzerDAO.holeDienstgrade();
         Set<String> diensgradeOhneZusatz = new HashSet<>();
         for (String s : dienstgrade) {
-            if(!(s.endsWith("UA")||s.endsWith("MA")||s.endsWith("FA")||s.endsWith("BA")||s.endsWith("OA"))){
+            if (!(s.endsWith("UA") || s.endsWith("MA") || s.endsWith("FA") || s.endsWith("BA") || s.endsWith("OA"))) {
                 diensgradeOhneZusatz.add(s);
             }
         }
-        for (String s : diensgradeOhneZusatz) {
-            jComboBoxDG.addItem(s);
+
+        List<Dienstgrad> dienstGradList = Dienstgrad.sortier(diensgradeOhneZusatz);
+        Collections.sort(dienstGradList, new DienstgradComparator());
+
+        JComboBox<String> jComboBoxDG = new JComboBox<>();
+
+        for (Dienstgrad dienstgrad : dienstGradList) {
+            jComboBoxDG.addItem(dienstgrad.getBezeicnung());
         }
+
         jComboBoxDG.setPreferredSize(new Dimension(225, 23));
         return jComboBoxDG;
     }
