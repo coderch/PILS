@@ -5,16 +5,11 @@ import db.NutzerDAO;
 import export.PDFExport;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.IsoFields;
 import java.util.*;
 import java.util.List;
 

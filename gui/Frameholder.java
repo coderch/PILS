@@ -1,7 +1,7 @@
 package gui;
 
-import datenmodell.Nutzer;
 import db.DBConnect;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,11 +10,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.*;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
+ *
  * @author mwaldau
  */
 public class Frameholder {
@@ -29,6 +29,7 @@ public class Frameholder {
 
     /**
      * Konstruktor um den Frame anzuzeigen
+     *
      * @param userlevel Funktion des Nutzers
      */
     public Frameholder(String userlevel) {
@@ -62,6 +63,7 @@ public class Frameholder {
 
     /**
      * Erstellt den Inhalt des Frames
+     *
      * @return Jpanel mit Menubar
      */
     private JPanel createContent() {
@@ -92,7 +94,6 @@ public class Frameholder {
             });
 
 
-
             if (userlevel.equalsIgnoreCase("zugführer")) {
 
 
@@ -113,7 +114,6 @@ public class Frameholder {
                 });
                 verwaltungReiter.add(soldatenVerwalten);
                 verwaltungReiter.add(vorhabenAnlegen);
-
 
 
                 JMenuItem personalUebersicht = new JMenuItem("Personalübersicht");
@@ -155,6 +155,18 @@ public class Frameholder {
 
         contentPanel.add(kalender.anzeigen(), BorderLayout.CENTER);
 
+
+        JButton drucken = new JButton("Drucken");
+        drucken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                java.util.List<Component> druckListe = new ArrayList<>();
+                druckListe.add(kalender);
+                PrintUtilities print = new PrintUtilities(druckListe);
+                print.print();
+            }
+        });
+        contentPanel.add(drucken,BorderLayout.SOUTH);
 
         return contentPanel;
     }
