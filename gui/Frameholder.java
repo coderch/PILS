@@ -164,9 +164,21 @@ public class Frameholder {
                 druckListe.add(kalender);
                 PrintUtilities print = new PrintUtilities(druckListe);
                 print.print();
+//                PDDocument doc = new PDDocument();
+//                PDPage page = null;
+//                doc.addPage(new PDPage());
+//                try {
+//                    page = new PDPage();
+//                    PDPageContentStream content = new PDPageContentStream(doc,page);
+//
+//                    doc.save("leerePDF.pdf");
+//                    doc.close();
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
             }
         });
-        contentPanel.add(drucken,BorderLayout.SOUTH);
+        contentPanel.add(drucken, BorderLayout.SOUTH);
 
         return contentPanel;
     }
