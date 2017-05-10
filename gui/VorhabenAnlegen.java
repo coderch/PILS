@@ -265,8 +265,8 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                VorhabenDAO.loescheVorhaben(vorhaben);
                 vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                VorhabenDAO.loescheVorhaben(vorhaben);
                 VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
                 dispose();
 
@@ -276,8 +276,8 @@ public class VorhabenAnlegen extends JDialog{
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                VorhabenDAO.loescheVorhaben(vorhaben);
                 vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                VorhabenDAO.loescheVorhaben(vorhaben);
                 VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
             }
         });
