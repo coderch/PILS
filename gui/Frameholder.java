@@ -1,7 +1,6 @@
 package gui;
 
 import db.DBConnect;
-import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
@@ -154,31 +152,6 @@ public class Frameholder {
 
 
         contentPanel.add(kalender.anzeigen(), BorderLayout.CENTER);
-
-
-        JButton drucken = new JButton("Drucken");
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                java.util.List<Component> druckListe = new ArrayList<>();
-                druckListe.add(kalender);
-                PrintUtilities print = new PrintUtilities(druckListe);
-                print.print();
-//                PDDocument doc = new PDDocument();
-//                PDPage page = null;
-//                doc.addPage(new PDPage());
-//                try {
-//                    page = new PDPage();
-//                    PDPageContentStream content = new PDPageContentStream(doc,page);
-//
-//                    doc.save("leerePDF.pdf");
-//                    doc.close();
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-            }
-        });
-        contentPanel.add(drucken, BorderLayout.SOUTH);
 
         return contentPanel;
     }

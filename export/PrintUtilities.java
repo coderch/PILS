@@ -11,14 +11,14 @@ import java.util.List;
 
 public class PrintUtilities implements Printable {
 
-    private List<Component> componentsToPrint;
+    private List<JComponent> componentsToPrint;
 
 
-    public static void printComponents( List<Component> componentsToPrint ) {
+    public static void printComponents( List<JComponent> componentsToPrint ) {
         new PrintUtilities( componentsToPrint ).print();
     }
 
-    public PrintUtilities( List<Component> componentsToPrint ) {
+    public PrintUtilities( List<JComponent> componentsToPrint ) {
         this.componentsToPrint = componentsToPrint;
     }
 
