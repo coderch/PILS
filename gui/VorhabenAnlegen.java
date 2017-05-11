@@ -276,6 +276,7 @@ public class VorhabenAnlegen extends JDialog{
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+                //TODO Plausibilitätsmeldung
                 VorhabenDAO.loescheVorhaben(vorhaben);
                 vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                 VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);

@@ -7,6 +7,7 @@ import javax.swing.*;
  * @author mwaldau
  */
 public class IconHandler {
+
     public static ImageIcon SONNE = new ImageIcon("gui/img/sonne.jpg", "sonne");
     public static ImageIcon HAKEN = new ImageIcon("gui/img/haken.png", "haken");
     public static ImageIcon WOLKE = new ImageIcon("gui/img/wolke.jpg", "wolke");

@@ -45,6 +45,7 @@ public class Dienstuebersicht extends JDialog {
             JPanel panel = new JPanel();
             int anzDienste = 0;
             //TODO Logik anzahl der Dienste anpassen
+
             if (vorhabenMap.containsKey(nutzer)) {
                 anzDienste = vorhabenMap.get(nutzer).size();
                 JLabel angezNutzer = new JLabel(nutzer.toString());

@@ -56,7 +56,6 @@ public class VorhabenUebersicht extends JDialog {
         erstellen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-//                contentPanel.c
                 List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
                 centerPanel.removeAll();
                 centerPanel.add(uebersichtPanel(vorhabenListe));
@@ -116,6 +115,7 @@ public class VorhabenUebersicht extends JDialog {
     }
 
     private JScrollPane uebersichtPanel(List<Vorhaben> vorhabenListe) {
+        //TODO @mwaldau Vorhaben löschen Funktion hinzufügen
         JPanel uebersicht = new JPanel(new FlowLayout(FlowLayout.LEFT));
         uebersicht.setLayout(new BoxLayout(uebersicht, BoxLayout.Y_AXIS));
         for (Vorhaben vorhaben : vorhabenListe) {
@@ -134,10 +134,29 @@ public class VorhabenUebersicht extends JDialog {
                         new VorhabenAnlegen(vorhaben, frame);
                     }
                 });
+                JButton loeschen = new JButton("Löschen");
+                loeschen.setFont(new Font("Arial", Font.PLAIN, 10));
+                loeschen.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        VorhabenDAO.loescheVorhaben(vorhaben);
+                        List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
+                        centerPanel.removeAll();
+                        centerPanel.add(uebersichtPanel(vorhabenListe));
+                        for (Vorhaben vorhaben : vorhabenListe) {
+                            if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
+                                    !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                                centerPanel.add(new VorhabenPanel(vorhaben, frame));
+                            }
+                        }
+
+                    }
+                });
                 vorhabenPanel.add(vorhabenName);
                 vorhabenPanel.add(vorhabenBeginn);
                 vorhabenPanel.add(vorhabenEnde);
                 vorhabenPanel.add(editieren);
+                vorhabenPanel.add(loeschen);
                 uebersicht.add(vorhabenPanel);
             }
         }

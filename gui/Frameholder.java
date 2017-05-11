@@ -59,7 +59,8 @@ public class Frameholder {
         });
         frame.setVisible(true);
     }
-
+    //TODO @mwaldau asuloggen ermöglichen
+    //TODO @mwaldau Passwort ändern ermöglichen
     /**
      * Erstellt den Inhalt des Frames
      * @return Jpanel mit Menubar
@@ -90,20 +91,22 @@ public class Frameholder {
                     new UrlaubEintragen(frame);
                 }
             });
+            JMenuItem soldatenVerwalten = new JMenuItem("Teileinheit verwalten");
+            verwaltungReiter.add(soldatenVerwalten);
+            soldatenVerwalten.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    new NutzerFrame(frame);
+                }
+            });
+            verwaltungReiter.add(soldatenVerwalten);
 
 
 
             if (userlevel.equalsIgnoreCase("zugführer")) {
 
 
-                JMenuItem soldatenVerwalten = new JMenuItem("Teileinheit verwalten");
-                verwaltungReiter.add(soldatenVerwalten);
-                soldatenVerwalten.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        new NutzerFrame(frame);
-                    }
-                });
+
                 JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");
                 vorhabenAnlegen.addActionListener(new ActionListener() {
                     @Override
@@ -111,7 +114,6 @@ public class Frameholder {
                         new VorhabenAnlegen(frame);
                     }
                 });
-                verwaltungReiter.add(soldatenVerwalten);
                 verwaltungReiter.add(vorhabenAnlegen);
 
 

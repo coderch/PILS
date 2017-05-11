@@ -38,7 +38,7 @@ public class LoginFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
+    //TODO @rrose Standard Password abfrage -> erstmalige Anmeldung PW ändern
     private JPanel createContent() {
 
         JPanel jPanelMaster = new JPanel(new BorderLayout());

@@ -222,10 +222,12 @@ public class PersonalUebersicht extends JDialog {
         ausgNutzer.add(nutzer);
     }
     private JPanel uebersichtPanel(List<Nutzer> ausgNutzer) {
+
         JPanel uebersichtPane = new JPanel();
         uebersichtPane.setName("Übersicht");
         Set<Vorhaben> vorhabenSet = new HashSet<>();
-        //TODO @mwaldau ÜbersichtPanel erstellen
+        //TODO @mwaldau ÜbersichtPanel erstellen - STÄRKEMELDUUNG !!!!!!!!!!!
+        //TODO Grafische Aufarbeitung
         Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(ausgNutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
 
         for (List<Vorhaben> vorhabenList : vorhabenMap.values()) {
