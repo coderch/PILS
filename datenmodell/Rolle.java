@@ -8,10 +8,8 @@ public class Rolle {
     private final String beschreibung;
 
     public Rolle(String beschreibung) {
-
         this.beschreibung = beschreibung;
     }
-
 
     public String getBeschreibung() {
         return beschreibung;
