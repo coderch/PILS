@@ -1,6 +1,5 @@
 package gui;
 
-import datenmodell.Nutzer;
 import db.DBConnect;
 
 import java.io.BufferedInputStream;
@@ -8,8 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 
 /**
@@ -26,7 +23,6 @@ public class Runner {
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-
         new LoginFrame();
 //        new Frameholder("Zugführer");
 
