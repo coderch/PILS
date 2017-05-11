@@ -1,14 +1,11 @@
 package gui;
 
-import com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 import db.NutzerDAO;
-import db.VorhabenDAO;
 
 import javax.swing.*;
-import javax.swing.plaf.TabbedPaneUI;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

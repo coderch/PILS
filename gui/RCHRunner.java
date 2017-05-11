@@ -12,17 +12,18 @@ import java.util.Properties;
 /**
  * Created by mwaldau on 26.01.2017.
  */
-public class Runner {
+public class RCHRunner {
 
     public static Properties config;
 
     public static void main(String[] args) {
         config = readConfigFile();
         try {
-            DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
+            DBConnect.verbindungAufbauen("jdbc:postgresql://localhost/db_pils", config);
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
+
         new LoginFrame();
 //        new Frameholder("Zugführer");
 
