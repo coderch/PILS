@@ -25,6 +25,7 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
 // gibt zu String Values im Object array bei bestimmten Daten ein Icon in der Zelle zurueck
         if (value != null && value instanceof String) {
             switch ((String) value) {
+                //TODO Lehrgang als Status hinzufügen
                 default:
                     break;
                 case "Krank":

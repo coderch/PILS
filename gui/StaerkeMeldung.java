@@ -94,6 +94,7 @@ public class StaerkeMeldung extends JDialog{
             GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
             GridBagConstraints rbAbwesendConstr = new GridBagConstraints(5,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+            //TODO Lehrgang als Status hinzufügen
             JRadioButton radioButtonanwesend = new JRadioButton();
             radioButtonanwesend.setName("Anwesend");
             JRadioButton radioButtonkrank = new JRadioButton();
