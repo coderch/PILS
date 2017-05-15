@@ -307,6 +307,16 @@ public class NutzerDAO {
 
     }
 
+    public static void anwesenheitLoeschen(Nutzer nutzer, LocalDate date) {
+        try (PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND (fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) OVERLAPS (?)")) {
+            pstm.setInt(1, nutzer.getPersonalnummer());
+            pstm.setDate(2, Date.valueOf(date));
+            pstm.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Holt die Vorhaben welche von den mitgegebenen Soldaten im angegebenene Zeitraum für diese Soldaten geplant/durchgeführt wurden.
      *
