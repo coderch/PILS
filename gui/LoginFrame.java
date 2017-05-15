@@ -38,6 +38,7 @@ public class LoginFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
     //TODO @rrose Standard Password abfrage -> erstmalige Anmeldung PW ändern
     private JPanel createContent() {
 
@@ -95,7 +96,7 @@ public class LoginFrame extends JFrame {
         jTextFieldUser.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
 
                 }
@@ -105,7 +106,7 @@ public class LoginFrame extends JFrame {
         jPasswordFieldPassword.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
 
                 }
@@ -137,7 +138,7 @@ public class LoginFrame extends JFrame {
         return new String(jPasswordFieldPassword.getPassword());
     }
 
-    private void getLogin(JLabel jLabelMeldung){
+    private void getLogin(JLabel jLabelMeldung) {
         if (jTextFieldUser.getText().isEmpty() || jTextFieldUser.getText().matches("[a-zöäüßA-ZÖÄÜ]*")) {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");
         } else try {
@@ -145,6 +146,8 @@ public class LoginFrame extends JFrame {
                 dispose();
                 //System.out.println(NutzerDAO.holeRolle(getUser()));
                 new Frameholder(NutzerDAO.holeRolle(getUser()));
+                Frameholder.aktiverNutzer = NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText()));
+                System.out.println(Frameholder.aktiverNutzer);
             } else {
                 jLabelMeldung.setText("Benutzername oder Passwort falsch!");
             }

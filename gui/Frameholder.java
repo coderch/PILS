@@ -1,5 +1,6 @@
 package gui;
 
+import datenmodell.Nutzer;
 import db.DBConnect;
 
 import javax.swing.*;
@@ -24,6 +25,7 @@ public class Frameholder {
     private final JMenu hilfeReiter;
     private final JMenu verwaltungReiter;
     private final JMenu uebersichtenReiter;
+    public static Nutzer aktiverNutzer;
 
     /**
      * Konstruktor um den Frame anzuzeigen

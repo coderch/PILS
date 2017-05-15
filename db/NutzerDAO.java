@@ -105,6 +105,21 @@ public class NutzerDAO {
         return alleNutzer;
     }
 
+    public static Nutzer holeEinzelnenNutzer(int personalnummer) {
+        String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer WHERE pk_personalnummer = ?";
+        Nutzer nutzer = null;
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
+            pstm.setInt(1, personalnummer);
+            ResultSet rs = pstm.executeQuery();
+            if (rs.next()) {
+                nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nutzer;
+    }
+
     /**
      * Löscht den Eintrag aus Tabelle t_nutzer, welche als Primärschüssel die übergebene Personalnummer inne hat.
      *
