@@ -38,6 +38,7 @@ public class LoginFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
     //TODO @rrose Standard Password abfrage -> erstmalige Anmeldung PW ändern
     private JPanel createContent() {
 
@@ -145,6 +146,8 @@ public class LoginFrame extends JFrame {
                 dispose();
                 //System.out.println(NutzerDAO.holeRolle(getUser()));
                 new Frameholder(NutzerDAO.holeRolle(getUser()));
+                Frameholder.aktiverNutzer = NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText()));
+                System.out.println(Frameholder.aktiverNutzer);
             } else {
                 jLabelMeldung.setText("Benutzername oder Passwort falsch!");
             }
