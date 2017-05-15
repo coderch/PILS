@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -265,11 +266,16 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                VorhabenDAO.loescheVorhaben(vorhaben);
-                vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
-                dispose();
-
+                LocalDate start = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate ablauf = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (start.isAfter(ablauf)){
+                    JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                    VorhabenDAO.loescheVorhaben(vorhaben);
+                    VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+                    dispose();
+                }
             }
         });
         JButton uebernehmen = new JButton("Übernehmen");
@@ -277,9 +283,15 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //TODO Plausibilitätsmeldung
-                VorhabenDAO.loescheVorhaben(vorhaben);
-                vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+                LocalDate start = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate ablauf = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (start.isAfter(ablauf)){
+                    JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), start, ablauf);
+                    VorhabenDAO.loescheVorhaben(vorhaben);
+                    VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+                }
             }
         });
         JButton abbrechen = new JButton("Abbrechen");

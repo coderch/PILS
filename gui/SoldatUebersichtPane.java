@@ -42,8 +42,6 @@ public class SoldatUebersichtPane extends JPanel {
         rahmen.setLayout(new BoxLayout(rahmen, BoxLayout.Y_AXIS));
         JLabel kopfzeile = new JLabel();
         kopfzeile.setText(String.format("<html>von %s <br>bis %s</html>", beginn.format(DTF), ende.format(DTF)));
-//        JLabel kopfzeile2 = new JLabel();
-//        kopfzeile2.setText(String.format("Vorhaben endend %s", ende.format(DTF)));
         JPanel kopfPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         kopfPanel.setMaximumSize(new Dimension(800,50));
         kopfPanel.add(kopfzeile);

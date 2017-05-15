@@ -14,10 +14,7 @@ import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.*;
@@ -142,59 +139,66 @@ public class UrlaubEintragen extends JDialog {
         eintragen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+
                 try {
                     ausgNutzer.clear();
-                    LocalDate startDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    //Auswahl der Soldaten anhand der Länge des Selectionpath
-                    if (tree.getSelectionPath().getPath().length == 1) {
-                        for (Nutzer nutzer : soldaten) {
-                            anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
-                                    startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-                                    endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
-                            for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
-                            }
-                        }
-                    } else if (tree.getSelectionPath().getPath().length == 2) {
-                        String dienstgradGruppe = "";
-                        for (TreePath treePath : tree.getSelectionPaths()) {
-                            switch (treePath.getPath()[1].toString()) {
-                                case "Offiziere":
-                                    dienstgradGruppe = "Offz";
-                                    break;
-                                case "U.m.P.":
-                                    dienstgradGruppe = "Uffz.m.P";
-                                    break;
-                                case "U.o.P.":
-                                    dienstgradGruppe = "Uffz.o.P";
-                                    break;
-                                case "Mannschaften":
-                                    dienstgradGruppe = "Mnsch";
-                                    break;
-                                default:
-                                    break;
-                            }
+                    LocalDate startDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    if (startDatum.isAfter(endDatum)) {
+                        JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        //Auswahl der Soldaten anhand der Länge des Selectionpath
+                        if (tree.getSelectionPath().getPath().length == 1) {
                             for (Nutzer nutzer : soldaten) {
-                                if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
-                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
-                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
-                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                        startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                        endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                //Todo update Range Funkltion
+                                for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                    NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                }
+                            }
+                        } else if (tree.getSelectionPath().getPath().length == 2) {
+                            String dienstgradGruppe = "";
+                            for (TreePath treePath : tree.getSelectionPaths()) {
+                                switch (treePath.getPath()[1].toString()) {
+                                    case "Offiziere":
+                                        dienstgradGruppe = "Offz";
+                                        break;
+                                    case "U.m.P.":
+                                        dienstgradGruppe = "Uffz.m.P";
+                                        break;
+                                    case "U.o.P.":
+                                        dienstgradGruppe = "Uffz.o.P";
+                                        break;
+                                    case "Mannschaften":
+                                        dienstgradGruppe = "Mnsch";
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                for (Nutzer nutzer : soldaten) {
+                                    if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
+                                        anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                                startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                                endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                        for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                            NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                        }
                                     }
                                 }
                             }
-                        }
-                    } else if (tree.getSelectionPath().getPath().length == 3) {
-                        for (TreePath treePath : tree.getSelectionPaths()) {
-                            for (Nutzer nutzer : soldaten) {
-                                if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
-                                    anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
-                                            startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-                                            endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
-                                    for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                        } else if (tree.getSelectionPath().getPath().length == 3) {
+                            for (TreePath treePath : tree.getSelectionPaths()) {
+                                for (Nutzer nutzer : soldaten) {
+                                    if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
+                                        anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
+                                                startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                                                endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
+                                        for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                            NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                        }
                                     }
                                 }
                             }
@@ -203,6 +207,7 @@ public class UrlaubEintragen extends JDialog {
                 } catch (NullPointerException e) {
                     JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
                 }
+
             }
         });
         buttonPanel.add(new JLabel());
