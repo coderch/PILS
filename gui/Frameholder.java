@@ -72,7 +72,20 @@ public class Frameholder {
         JPanel contentPanel = new JPanel(new BorderLayout());
 
         JMenuItem ausloggen = new JMenuItem("ausloggen");
+        ausloggen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                frame.dispose();
+                new LoginFrame();
+            }
+        });
         JMenuItem pwaendern = new JMenuItem("Passwort ändern");
+        pwaendern.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                new PwAendern(frame);
+            }
+        });
         nutzerReiter.add(ausloggen);
         nutzerReiter.add(pwaendern);
         menuBar.add(nutzerReiter);
