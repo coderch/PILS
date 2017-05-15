@@ -306,7 +306,7 @@ public class Kalender extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            NutzerDAO.anwesenheitEintragen(nutzer, date, button.getName());
+            NutzerDAO.anwesenheitEintragenTag(nutzer, date, button.getName());
             kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
             ((KalenderModel) kalender.getModel()).fireTableDataChanged();
             spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
