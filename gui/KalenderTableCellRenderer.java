@@ -27,6 +27,9 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
             switch ((String) value) {
                 default:
                     break;
+                case "":
+                    zelle.setIcon(null);
+                    break;
                 case "Krank":
                     zelle.setIcon(IconHandler.KRANK);
                     zelle.setText("");

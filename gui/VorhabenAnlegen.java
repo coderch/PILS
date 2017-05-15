@@ -1,4 +1,5 @@
 package gui;
+
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
@@ -22,12 +23,13 @@ import java.util.List;
  * Erstellt ein Fenster das Vorhaben aus der Datenbank einliest und diese in einer JList darstellt,
  * dem Vorhaben kann ein individuller Name und eine Beschreibung gegeben werden sowie ein Start, Enddatum und
  * Soldaten zugewiesen werden.
- * @see javax.swing.JDialog
+ *
  * @author mwaldau
+ * @see javax.swing.JDialog
  */
-public class VorhabenAnlegen extends JDialog{
+public class VorhabenAnlegen extends JDialog {
     private final JTextField name = new JTextField(35);
-    private final JTextArea beschreibung = new JTextArea(5,35);
+    private final JTextArea beschreibung = new JTextArea(5, 35);
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private List<Nutzer> soldatenListe;
@@ -36,10 +38,11 @@ public class VorhabenAnlegen extends JDialog{
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
     private JFrame frame;
+
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
      */
-    public VorhabenAnlegen(JFrame frame){
+    public VorhabenAnlegen(JFrame frame) {
         this.frame = frame;
         this.setTitle("Vorhaben erstellen");
         this.soldatenListe = NutzerDAO.nutzerHolen();
@@ -47,10 +50,11 @@ public class VorhabenAnlegen extends JDialog{
         eingeteilteSoldaten = new ArrayList<>();
         dialogBauen();
     }
+
     /**
      * Konstruktor zum Editieren
-     * */
-    public VorhabenAnlegen(Vorhaben vorhaben, JFrame frame){
+     */
+    public VorhabenAnlegen(Vorhaben vorhaben, JFrame frame) {
         this.vorhaben = vorhaben;
         this.frame = frame;
         this.setTitle("Vorhaben bearbeiten");
@@ -74,6 +78,7 @@ public class VorhabenAnlegen extends JDialog{
         this.ende.setDate(Date.from(vorhaben.getEnde().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         dialogBauen();
     }
+
     /**
      * Setzt die Umgebungsvariablen für den Dialog
      */
@@ -89,6 +94,7 @@ public class VorhabenAnlegen extends JDialog{
 
     /**
      * Erstellt den ContentPane mit einem GridBagLayout
+     *
      * @return
      */
 
@@ -105,8 +111,8 @@ public class VorhabenAnlegen extends JDialog{
         leftConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         platzhalter.setBorder(BorderFactory.createTitledBorder("Vorhaben"));
         JList<String> vorhabenJList = new JList(this.vorhabenListe.toArray(new String[0]));
-        JScrollPane scP = new JScrollPane(vorhabenJList,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scP.setPreferredSize(new Dimension(150,388));
+        JScrollPane scP = new JScrollPane(vorhabenJList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scP.setPreferredSize(new Dimension(150, 388));
 
         vorhabenJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
         vorhabenJList.addListSelectionListener(new ListSelectionListener() {
@@ -165,7 +171,7 @@ public class VorhabenAnlegen extends JDialog{
         JPanel sonderdienstPanel = new JPanel();
         JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
         sonderdienstPanel.add(sonderdienst);
-        sonderdienstPanel.setPreferredSize(new Dimension(100,30));
+        sonderdienstPanel.setPreferredSize(new Dimension(100, 30));
         GridBagConstraints sonderConstr = new GridBagConstraints();
         sonderConstr.gridx = 1;
         sonderConstr.gridy = 2;
@@ -183,8 +189,8 @@ public class VorhabenAnlegen extends JDialog{
 
         JList<Nutzer> soldatenJlist1 = new JList(this.soldatenListe.toArray(new Nutzer[0]));
         JPanel soldaten1Panel = new JPanel();
-        JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane1.setPreferredSize(new Dimension(150,150));
+        JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane1.setPreferredSize(new Dimension(150, 150));
         soldaten1Panel.setBorder(BorderFactory.createTitledBorder("Soldat zuweisen"));
         soldaten1Panel.add(scrollPane1);
 
@@ -194,7 +200,7 @@ public class VorhabenAnlegen extends JDialog{
         soldatenJList1Contraint.anchor = GridBagConstraints.FIRST_LINE_START;
 
         JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new Nutzer[0]));
-        JScrollPane scrollPane2 = new JScrollPane(soldatenJlist2,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane scrollPane2 = new JScrollPane(soldatenJlist2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane2.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
         soldaten2Panel.setBorder(BorderFactory.createTitledBorder("zugewiesene Soldaten"));
@@ -224,7 +230,7 @@ public class VorhabenAnlegen extends JDialog{
         });
         // sinsgemäß umgekehrt zu >>
         JButton ab = new JButton("<<");
-        ab.setPreferredSize(new Dimension(80,20));
+        ab.setPreferredSize(new Dimension(80, 20));
         ab.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -239,7 +245,7 @@ public class VorhabenAnlegen extends JDialog{
                 }
             }
         });
-        JPanel soldatenButtonPanel = new JPanel(new GridLayout(2,1));
+        JPanel soldatenButtonPanel = new JPanel(new GridLayout(2, 1));
         soldatenButtonPanel.add(zu);
         soldatenButtonPanel.add(ab);
 
@@ -249,7 +255,7 @@ public class VorhabenAnlegen extends JDialog{
 
         //-------------center5  Platzhalter -------------------------
         JPanel center5 = new JPanel();
-        center5.setPreferredSize(new Dimension(0,50));
+        center5.setPreferredSize(new Dimension(0, 50));
         GridBagConstraints center5Constraint = new GridBagConstraints();
         center5Constraint.gridy = 4;
         center5Constraint.gridx = 0;
@@ -266,17 +272,9 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (beginnDatum.isAfter(endDatum)){
-                    JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                    VorhabenDAO.loescheVorhaben(vorhaben);
-                    VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+                eintragen();
+                dispose();
 
-                    dispose();
-                }
             }
         });
         JButton uebernehmen = new JButton("Übernehmen");
@@ -284,23 +282,8 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //TODO Plausibilitätsmeldung
-                LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (beginnDatum.isAfter(endDatum)){
-                    JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum);
-                    VorhabenDAO.loescheVorhaben(vorhaben);
-                    for (Nutzer nutzer : bufferListe) {
-                        //lösche nutzer anwesenheit für zeitraum
-                    }
-                    VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
-                    for (Nutzer nutzer : soldatenListe) {
-                    for (LocalDate i = beginnDatum; i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                            NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Vorhaben");
-                        }
-                    }
-                }
+
+                eintragen();
             }
         });
         JButton abbrechen = new JButton("Abbrechen");
@@ -329,5 +312,29 @@ public class VorhabenAnlegen extends JDialog{
         contentPanel.add(centerPanel, centerConstraint);
 
         return contentPanel;
+    }
+
+    private void eintragen() {
+        LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        if (beginnDatum.isAfter(endDatum)) {
+            JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
+        } else {
+            vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum);
+            VorhabenDAO.loescheVorhaben(vorhaben);
+            for (Nutzer nutzer : soldatenListe) {
+
+                    NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
+
+            }
+            VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+            System.out.println(eingeteilteSoldaten);
+            System.out.println(soldatenListe);
+            for (Nutzer nutzer : eingeteilteSoldaten) {
+                for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                    NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Vorhaben");
+                }
+            }
+        }
     }
 }
