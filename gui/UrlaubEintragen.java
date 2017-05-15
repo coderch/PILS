@@ -2,9 +2,7 @@ package gui;
 
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
-import datenmodell.Vorhaben;
 import db.NutzerDAO;
-import db.VorhabenDAO;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -16,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -153,7 +150,7 @@ public class UrlaubEintragen extends JDialog {
                                     startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                     endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
                             for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Urlaub");
                             }
                         }
                     } else if (tree.getSelectionPath().getPath().length == 2) {
@@ -181,7 +178,7 @@ public class UrlaubEintragen extends JDialog {
                                             startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                             endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
                                     for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                        NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Urlaub");
                                     }
                                 }
                             }
@@ -194,7 +191,7 @@ public class UrlaubEintragen extends JDialog {
                                             startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                             endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
                                     for (LocalDate i = startDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                                        NutzerDAO.anwesenheitEintragen(nutzer, i, "Urlaub");
+                                        NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Urlaub");
                                     }
                                 }
                             }

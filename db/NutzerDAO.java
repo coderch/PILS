@@ -264,7 +264,7 @@ public class NutzerDAO {
      * @param date
      * @param status
      */
-    public static void anwesenheitEintragen(Nutzer nutzer, LocalDate date, String status) {
+    public static void anwesenheitEintragenTag(Nutzer nutzer, LocalDate date, String status) {
         try {
             PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");
             pstm.setDate(1, Date.valueOf(date));
@@ -283,6 +283,10 @@ public class NutzerDAO {
         } catch (SQLException e) {
             System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
         }
+    }
+
+    public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
+
     }
 
     /**
