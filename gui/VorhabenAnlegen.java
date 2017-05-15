@@ -266,14 +266,15 @@ public class VorhabenAnlegen extends JDialog{
         ok.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                LocalDate start = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate ablauf = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (start.isAfter(ablauf)){
+                LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (beginnDatum.isAfter(endDatum)){
                     JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
                 } else {
                     vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
                     VorhabenDAO.loescheVorhaben(vorhaben);
                     VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+
                     dispose();
                 }
             }
@@ -283,14 +284,15 @@ public class VorhabenAnlegen extends JDialog{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 //TODO Plausibilitätsmeldung
-                LocalDate start = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate ablauf = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (start.isAfter(ablauf)){
+                LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (beginnDatum.isAfter(endDatum)){
                     JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), start, ablauf);
+                    vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum);
                     VorhabenDAO.loescheVorhaben(vorhaben);
                     VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
+
                 }
             }
         });
