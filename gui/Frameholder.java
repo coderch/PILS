@@ -61,8 +61,6 @@ public class Frameholder {
         });
         frame.setVisible(true);
     }
-    //TODO @mwaldau asuloggen ermöglichen
-    //TODO @mwaldau Passwort ändern ermöglichen
     /**
      * Erstellt den Inhalt des Frames
      *
