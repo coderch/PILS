@@ -307,6 +307,11 @@ public class NutzerDAO {
 
     }
 
+    /**
+     * Löscht einen Anwesenheitsstatus für einen bestimmten Nutzer und einem dazugehörigen Datum.
+     * @param nutzer Nutzer für den ein Anwesenheitsstatus gelöscht werden soll.
+     * @param date Datum für welches der Anwesenheitsstatus gelöscht werden soll.
+     */
     public static void anwesenheitLoeschen(Nutzer nutzer, LocalDate date) {
         try (PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND (fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) OVERLAPS (?)")) {
             pstm.setInt(1, nutzer.getPersonalnummer());
