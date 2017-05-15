@@ -144,10 +144,7 @@ public class LoginFrame extends JFrame {
         } else try {
             if (NutzerDAO.getLogin(getUser(), PasswordHash.createHash(getPassword()))) {
                 dispose();
-                //System.out.println(NutzerDAO.holeRolle(getUser()));
-                new Frameholder(NutzerDAO.holeRolle(getUser()));
-                Frameholder.aktiverNutzer = NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText()));
-                System.out.println(Frameholder.aktiverNutzer);
+                new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
             } else {
                 jLabelMeldung.setText("Benutzername oder Passwort falsch!");
             }

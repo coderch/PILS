@@ -30,12 +30,13 @@ public class Frameholder {
     /**
      * Konstruktor um den Frame anzuzeigen
      *
-     * @param userlevel Funktion des Nutzers
+     * @param aktiverNutzer aktiver Nutzer des Systems
      */
-    public Frameholder(String userlevel) {
+    public Frameholder(Nutzer aktiverNutzer) {
+        this.aktiverNutzer = aktiverNutzer;
+        this.userlevel = aktiverNutzer.getRolle();
         frame = new JFrame("PILS");
         kalender = new Kalender();
-        this.userlevel = userlevel;
         menuBar = new JMenuBar();
         nutzerReiter = new JMenu("Nutzer");
         hilfeReiter = new JMenu("Hilfe");

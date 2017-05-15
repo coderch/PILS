@@ -239,6 +239,16 @@ public class Kalender extends JPanel {
      */
     private Object[][] datenerzeugen() {
         soldatenListe = NutzerDAO.nutzerHolen();
+        if (Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("Soldat")) {
+            List<Nutzer> bufferListe = new ArrayList<>();
+            for (Nutzer nutzer : soldatenListe) {
+                if (nutzer.getPersonalnummer() == Frameholder.aktiverNutzer.getPersonalnummer())
+                {
+                    bufferListe.add(Frameholder.aktiverNutzer);
+                }
+            }
+            soldatenListe = bufferListe;
+        }
         List<Object[]> objectList = new ArrayList<>();
         for (Nutzer nutzer : soldatenListe) {
             List<Object> soldatAnwesenheit = new ArrayList<>();

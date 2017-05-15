@@ -24,7 +24,6 @@ public class Runner {
             e1.printStackTrace();
         }
         new LoginFrame();
-//        new Frameholder("Zugführer");
 
 
     }
