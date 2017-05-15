@@ -25,7 +25,6 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
 // gibt zu String Values im Object array bei bestimmten Daten ein Icon in der Zelle zurueck
         if (value != null && value instanceof String) {
             switch ((String) value) {
-                //TODO Lehrgang als Status hinzufügen
                 default:
                     break;
                 case "Krank":
@@ -50,6 +49,11 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                     break;
                 case "Abwesend":
                     zelle.setIcon(IconHandler.SIRENE);
+                    zelle.setText("");
+                    zelle.setHorizontalAlignment(JLabel.CENTER);
+                    break;
+                case "Lehrgang":
+                    zelle.setIcon(IconHandler.LEHRGANG);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;

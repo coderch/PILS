@@ -30,6 +30,7 @@ public class Kalender extends JPanel {
     private final JButton urlaub = new JButton();
     private final JButton vorhaben = new JButton();
     private final JButton abwesend = new JButton();
+    private final JButton lehrgang = new JButton();
     private List<Nutzer> soldatenListe;
     private JTable kalender;
     private JScrollPane halter;
@@ -62,11 +63,15 @@ public class Kalender extends JPanel {
         abwesend.setIcon(IconHandler.SIRENE);
         abwesend.setName("Abwesend");
         abwesend.setPreferredSize(PUBUTTONSIZE);
+        lehrgang.setIcon(IconHandler.LEHRGANG);
+        lehrgang.setName("Lehrgang");
+        lehrgang.setPreferredSize(PUBUTTONSIZE);
         popupMenu.add(anwesend);
         popupMenu.add(krank);
         popupMenu.add(urlaub);
         popupMenu.add(vorhaben);
         popupMenu.add(abwesend);
+        popupMenu.add(lehrgang);
     }
 
     private void popUpFunktionen(int x, int y) {
@@ -92,11 +97,15 @@ public class Kalender extends JPanel {
         if (abwesend.getActionListeners().length > 0) {
             abwesend.removeActionListener(abwesend.getActionListeners()[0]);
         }
+        if (lehrgang.getActionListeners().length > 0) {
+            lehrgang.removeActionListener(lehrgang.getActionListeners()[0]);
+        }
         anwesend.addActionListener(new StatusEintragen(anwesend, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         krank.addActionListener(new StatusEintragen(krank, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         urlaub.addActionListener(new StatusEintragen(urlaub, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         vorhaben.addActionListener(new StatusEintragen(vorhaben, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         abwesend.addActionListener(new StatusEintragen(abwesend, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
+        lehrgang.addActionListener(new StatusEintragen(lehrgang, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
 
     }
 

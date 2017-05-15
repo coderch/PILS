@@ -15,4 +15,5 @@ public class IconHandler {
     public static ImageIcon REFRESH = new ImageIcon("gui/img/refresh.png", "refresh");
     public static ImageIcon PDF = new ImageIcon("gui/img/pdf.png", "pdf");
     public static ImageIcon SIRENE = new ImageIcon("gui/img/sirene.png", "sirene");
+    public static ImageIcon LEHRGANG = new ImageIcon("gui/img/lehrgang.jpg", "lehrgang");
 }
