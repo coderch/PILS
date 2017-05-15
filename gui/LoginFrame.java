@@ -95,7 +95,7 @@ public class LoginFrame extends JFrame {
         jTextFieldUser.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
 
                 }
@@ -105,7 +105,7 @@ public class LoginFrame extends JFrame {
         jPasswordFieldPassword.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent keyEvent) {
-                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER){
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
 
                 }
@@ -137,7 +137,7 @@ public class LoginFrame extends JFrame {
         return new String(jPasswordFieldPassword.getPassword());
     }
 
-    private void getLogin(JLabel jLabelMeldung){
+    private void getLogin(JLabel jLabelMeldung) {
         if (jTextFieldUser.getText().isEmpty() || jTextFieldUser.getText().matches("[a-zöäüßA-ZÖÄÜ]*")) {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");
         } else try {
