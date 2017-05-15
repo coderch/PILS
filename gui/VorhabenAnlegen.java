@@ -32,6 +32,7 @@ public class VorhabenAnlegen extends JDialog{
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private List<Nutzer> soldatenListe;
     private final List<Nutzer> eingeteilteSoldaten;
+    private List<Nutzer> bufferListe = new ArrayList<>();
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
     private JFrame frame;
@@ -57,7 +58,6 @@ public class VorhabenAnlegen extends JDialog{
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
 
         this.eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
-        List<Nutzer> bufferListe = new ArrayList<>();
         for (Nutzer nutzer : soldatenListe) {
             for (Nutzer nutzer1 : eingeteilteSoldaten) {
                 if (nutzer.getPersonalnummer() == nutzer1.getPersonalnummer()) {
@@ -291,8 +291,15 @@ public class VorhabenAnlegen extends JDialog{
                 } else {
                     vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum);
                     VorhabenDAO.loescheVorhaben(vorhaben);
+                    for (Nutzer nutzer : bufferListe) {
+                        //lösche nutzer anwesenheit für zeitraum
+                    }
                     VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
-
+                    for (Nutzer nutzer : soldatenListe) {
+                    for (LocalDate i = beginnDatum; i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                            NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Vorhaben");
+                        }
+                    }
                 }
             }
         });
