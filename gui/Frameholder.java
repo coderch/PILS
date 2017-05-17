@@ -33,6 +33,7 @@ public class Frameholder {
      * @param aktiverNutzer aktiver Nutzer des Systems
      */
     public Frameholder(Nutzer aktiverNutzer) {
+
         this.aktiverNutzer = aktiverNutzer;
         this.userlevel = aktiverNutzer.getRolle();
         frame = new JFrame("PILS");
@@ -61,6 +62,7 @@ public class Frameholder {
         });
         frame.setVisible(true);
     }
+
     /**
      * Erstellt den Inhalt des Frames
      *
@@ -117,7 +119,6 @@ public class Frameholder {
 
 
             if (userlevel.equalsIgnoreCase("zugführer")) {
-
 
 
                 JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");

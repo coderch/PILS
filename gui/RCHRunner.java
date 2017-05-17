@@ -1,5 +1,6 @@
 package gui;
 
+import datenmodell.PasswordHash;
 import db.DBConnect;
 
 import java.io.BufferedInputStream;
@@ -26,6 +27,7 @@ public class RCHRunner {
 
         new LoginFrame();
 //        new Frameholder("Zugführer");
+        System.out.println(PasswordHash.createHash("password"));
 
 
     }
