@@ -40,13 +40,13 @@ public class VorhabenDAO {
      * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
-        String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung FROM t_hat_vorhaben_im_zeitraum";
+        String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung,sonderdienst FROM t_hat_vorhaben_im_zeitraum";
         List<Vorhaben> alleVorhaben = new LinkedList<>();
         try {
             PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
-                Vorhaben vorhaben = new Vorhaben(rs.getString(1), rs.getString(4), rs.getDate(2).toLocalDate(), rs.getDate(3).toLocalDate());
+                Vorhaben vorhaben = new Vorhaben(rs.getString(1), rs.getString(4), rs.getDate(2).toLocalDate(), rs.getDate(3).toLocalDate(), rs.getBoolean(5));
                 alleVorhaben.add(vorhaben);
             }
         } catch (SQLException e) {
@@ -104,12 +104,13 @@ public class VorhabenDAO {
             /**
              * Speichert das übergebene Vorhaben-Objekt in die Tabelle t_hat_vorhaben_im_zeitraum. Ist dieses Vorhaben bereits in dieser Tabelle vorhanden wird ein Update für die Vorhaben-Beschreibung durchgeführt.
              */
-            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_vorhaben_im_zeitraum (fk_t_vorhaben_pk_t_name,beschreibung,fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis ) VALUES (?,?,?,?) ON CONFLICT (fk_t_vorhaben_pk_t_name,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET beschreibung = ?");
+            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_vorhaben_im_zeitraum (fk_t_vorhaben_pk_t_name,beschreibung,fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, sonderdienst ) VALUES (?,?,?,?,?) ON CONFLICT (fk_t_vorhaben_pk_t_name,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET beschreibung = ?");
             pstm.setString(1, vorhaben.getName());
             pstm.setString(2, vorhaben.getBeschreibung());
             pstm.setDate(3, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(4, Date.valueOf(vorhaben.getEnde()));
-            pstm.setString(5, vorhaben.getBeschreibung());
+            pstm.setBoolean(5,vorhaben.getSonderdienst());
+            pstm.setString(6, vorhaben.getBeschreibung());
             pstm.executeUpdate();
             /**
              * Speichert die einzelnen Nutzer aus der übergebenen Liste mit Zeitraum und zugeteiltem Vorhaben in die Tabelle t_nimmt_teil_am_vorhaben.

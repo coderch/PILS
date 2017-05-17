@@ -25,6 +25,10 @@ public class Vorhaben {
      * Endzeitszeitpunkt (Tag) des jeweiligen Events.
      */
     private LocalDate ende;
+    /**
+     * Sonderdienst wie z.B. Wache - Ja / Nein ?
+     */
+    private boolean sonderdienst;
 
     /**
      * Dieser Konstruktor erstellt ein Vorhaben mit allen Parametern. Genutzt um Vorhaben-Objekte anhand der Informationen aus der Datenbank zu erzeugen
@@ -34,12 +38,14 @@ public class Vorhaben {
      * @param beschreibung Die Beschreibung und weitere Informationen über das Event.
      * @param start        Anfangszeitpunkt (Tag) des jeweiligen Events / Vorhabens.
      * @param ende         Endzeitpunkt (Tag) des jeweiligen Events / Vorhabens.
+     * @param sonderdienst Sonderdienst wie z.B. Wache - Ja / Nein?
      */
-    public Vorhaben(String name, String beschreibung, LocalDate start, LocalDate ende) {
+    public Vorhaben(String name, String beschreibung, LocalDate start, LocalDate ende, boolean sonderdienst) {
         this.name = name;
         this.beschreibung = beschreibung;
         this.start = start;
         this.ende = ende;
+        this.sonderdienst = sonderdienst;
     }
 
     /**
@@ -55,32 +61,20 @@ public class Vorhaben {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getBeschreibung() {
         return beschreibung;
-    }
-
-    public void setBeschreibung(String beschreibung) {
-        this.beschreibung = beschreibung;
     }
 
     public LocalDate getStart() {
         return start;
     }
 
-    public void setStart(LocalDate start) {
-        this.start = start;
-    }
-
     public LocalDate getEnde() {
         return ende;
     }
 
-    public void setEnde(LocalDate ende) {
-        this.ende = ende;
+    public boolean getSonderdienst() {
+        return sonderdienst;
     }
 
     @Override
