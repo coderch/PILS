@@ -1,7 +1,9 @@
 package gui;
 
 import com.toedter.calendar.JDateChooser;
+import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
+import db.NutzerDAO;
 import db.VorhabenDAO;
 
 import javax.swing.*;
@@ -115,7 +117,6 @@ public class VorhabenUebersicht extends JDialog {
     }
 
     private JScrollPane uebersichtPanel(List<Vorhaben> vorhabenListe) {
-        //TODO @mwaldau Vorhaben löschen Funktion hinzufügen
         JPanel uebersicht = new JPanel(new FlowLayout(FlowLayout.LEFT));
         uebersicht.setLayout(new BoxLayout(uebersicht, BoxLayout.Y_AXIS));
         for (Vorhaben vorhaben : vorhabenListe) {
@@ -140,6 +141,7 @@ public class VorhabenUebersicht extends JDialog {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         VorhabenDAO.loescheVorhaben(vorhaben);
+
                         List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
                         centerPanel.removeAll();
                         centerPanel.add(uebersichtPanel(vorhabenListe));
