@@ -27,6 +27,7 @@ public class RCHRunner {
 
         new LoginFrame();
 //        new Frameholder("Zugführer");
+
         System.out.println(PasswordHash.createHash("password"));
 
 

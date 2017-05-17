@@ -142,6 +142,7 @@ public class LoginFrame extends JFrame {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");
         } else if (NutzerDAO.getLogin(getUser(), PasswordHash.createHash(getPassword()))) {
             dispose();
+            Frameholder.aktiverNutzer = NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText()));
             new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
         } else {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");

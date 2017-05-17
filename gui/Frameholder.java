@@ -1,7 +1,9 @@
 package gui;
 
 import datenmodell.Nutzer;
+import datenmodell.PasswordHash;
 import db.DBConnect;
+import db.NutzerDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,7 +61,17 @@ public class Frameholder {
                 }
                 super.windowClosing(windowEvent);
             }
+
+            @Override
+            public void windowActivated(WindowEvent windowEvent) {
+                super.windowActivated(windowEvent);
+                if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash("password"))) {
+                    new PwAendern(frame);
+                    System.out.println(NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash("password")));
+                }
+            }
         });
+
         frame.setVisible(true);
     }
 
