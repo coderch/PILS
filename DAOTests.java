@@ -58,7 +58,7 @@ public class DAOTests {
             System.out.println(PasswordHash.createHash("Masterr0se!1"));
 
 //        }
-        Vorhaben vorhaben = new Vorhaben("HiBa","Alle werden ge...", LocalDate.parse("2017-03-14"),LocalDate.parse("2017-03-14"));
+        Vorhaben vorhaben = new Vorhaben("HiBa","Alle werden ge...", LocalDate.parse("2017-03-14"),LocalDate.parse("2017-03-14"),false);
         VorhabenDAO.loescheVorhaben(vorhaben);
 
     }

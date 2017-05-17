@@ -22,10 +22,17 @@ public class PwAendern extends JDialog {
     private JPasswordField neuesPasswortWiederholen;
     private JButton uebernehmen;
     private JButton abbrechen;
+    private boolean ersteAnmeldung;
 
     public PwAendern(JFrame frame) {
         this.frame = frame;
+        this.ersteAnmeldung = false;
         dialogBauen();
+    }
+
+    public PwAendern(JFrame frame, boolean ersteAnmeldung) {
+        this.frame = frame;
+        this.ersteAnmeldung = ersteAnmeldung;
     }
 
     private void dialogBauen() {
@@ -42,21 +49,11 @@ public class PwAendern extends JDialog {
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());
         JPanel jPanel = new JPanel(new GridBagLayout());
+        JPanel buttonPanel = new JPanel();
 
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
 
-        altesPasswortLabel = new JLabel("altes Passwort");
-        cs.gridx = 0;
-        cs.gridy = 0;
-        jPanel.add(altesPasswortLabel, cs);
-
-        altesPasswort = new JPasswordField(20);
-        altesPasswort.requestFocusInWindow();
-        cs.gridx = 1;
-        cs.gridy = 0;
-        cs.gridwidth = 3;
-        jPanel.add(altesPasswort, cs);
 
         neuesPasswortLabel = new JLabel("neues Passwort");
         cs.gridx = 0;
@@ -86,16 +83,9 @@ public class PwAendern extends JDialog {
 
         contentPanel.add(jPanel, BorderLayout.NORTH);
 
-        JPanel meldungsPanel = new JPanel();
-        JLabel meldungslabel = new JLabel();
-        meldungslabel.setForeground(Color.RED);
-        meldungsPanel.add(meldungslabel);
 
-        contentPanel.add(meldungsPanel, BorderLayout.CENTER);
-
-        JPanel buttonPanel = new JPanel();
         uebernehmen = new JButton("Übernehmen");
-        abbrechen = new JButton("Abbrechen");
+
 
         uebernehmen.addActionListener(new ActionListener() {
             @Override
@@ -118,15 +108,32 @@ public class PwAendern extends JDialog {
             }
         });
 
-        abbrechen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                dispose();
-            }
-        });
-
         buttonPanel.add(uebernehmen);
-        buttonPanel.add(abbrechen);
+
+        if (!ersteAnmeldung) {
+            altesPasswortLabel = new JLabel("altes Passwort");
+            cs.gridx = 0;
+            cs.gridy = 0;
+            jPanel.add(altesPasswortLabel, cs);
+
+            altesPasswort = new JPasswordField(20);
+            altesPasswort.requestFocusInWindow();
+            cs.gridx = 1;
+            cs.gridy = 0;
+            cs.gridwidth = 3;
+            jPanel.add(altesPasswort, cs);
+
+            abbrechen = new JButton("Abbrechen");
+
+            abbrechen.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    dispose();
+                }
+            });
+
+            buttonPanel.add(abbrechen);
+        }
 
         contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 

@@ -38,6 +38,7 @@ public class VorhabenAnlegen extends JDialog {
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
     private JFrame frame;
+    private JCheckBox sonderdienst;
 
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
@@ -169,7 +170,7 @@ public class VorhabenAnlegen extends JDialog {
         beginnconstraint.gridx = 0;
         beginnconstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         JPanel sonderdienstPanel = new JPanel();
-        JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
+        sonderdienst = new JCheckBox("Sonderdienst");
         sonderdienstPanel.add(sonderdienst);
         sonderdienstPanel.setPreferredSize(new Dimension(100, 30));
         GridBagConstraints sonderConstr = new GridBagConstraints();
@@ -317,14 +318,18 @@ public class VorhabenAnlegen extends JDialog {
     private void eintragen() {
         LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        boolean sDienst = false;
+        if (sonderdienst.isSelected()) {
+            sDienst = true;
+        }
         if (beginnDatum.isAfter(endDatum)) {
             JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
         } else {
-            vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum);
+            vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum, sDienst);
             VorhabenDAO.loescheVorhaben(vorhaben);
             for (Nutzer nutzer : soldatenListe) {
 
-                    NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
+                NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
 
             }
             VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
