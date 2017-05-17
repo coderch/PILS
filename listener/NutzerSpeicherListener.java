@@ -7,7 +7,6 @@ import db.NutzerDAO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -95,12 +94,10 @@ public class NutzerSpeicherListener implements ActionListener {
                         jTextFieldNachname.getText(),
                         jTextFieldVorname.getText(),
                         rollenComboBox.getSelectedItem().toString()));
-                try {
-                    NutzerDAO.loginSpeichern(
-                            Integer.parseInt(jTextFieldPersNr.getText()), PasswordHash.createHash("password"));
-                } catch (NoSuchAlgorithmException e) {
-                    e.printStackTrace();
-                }
+
+                NutzerDAO.loginSpeichern(
+                        Integer.parseInt(jTextFieldPersNr.getText()), PasswordHash.createHash("password"));
+
                 textFieldReset();
             } else {
                 NutzerDAO.nutzerSpeichern(new Nutzer(

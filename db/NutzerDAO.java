@@ -4,7 +4,6 @@ import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 import datenmodell.Vorhaben;
 
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -77,11 +76,7 @@ public class NutzerDAO {
      * @param personalnummer
      */
     public static void passwordZuruecksetzen(int personalnummer) {
-        try {
-            loginSpeichern(personalnummer, PasswordHash.createHash("password"));
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        loginSpeichern(personalnummer, PasswordHash.createHash("password"));
     }
 
     /**
@@ -309,8 +304,9 @@ public class NutzerDAO {
 
     /**
      * Löscht einen Anwesenheitsstatus für einen bestimmten Nutzer und einem dazugehörigen Datum.
+     *
      * @param nutzer Nutzer für den ein Anwesenheitsstatus gelöscht werden soll.
-     * @param start Startzeitraum für welches der Anwesenheitsstatus gelöscht werden soll.
+     * @param start  Startzeitraum für welches der Anwesenheitsstatus gelöscht werden soll.
      */
     public static void anwesenheitLoeschen(Nutzer nutzer, LocalDate start, LocalDate ende) {
         try (PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND (fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) OVERLAPS (?,?)")) {

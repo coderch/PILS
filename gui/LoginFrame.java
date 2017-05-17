@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by ajanzen on 09.01.2017.
@@ -141,15 +140,11 @@ public class LoginFrame extends JFrame {
     private void getLogin(JLabel jLabelMeldung) {
         if (jTextFieldUser.getText().isEmpty() || jTextFieldUser.getText().matches("[a-zöäüßA-ZÖÄÜ]*")) {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");
-        } else try {
-            if (NutzerDAO.getLogin(getUser(), PasswordHash.createHash(getPassword()))) {
-                dispose();
-                new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
-            } else {
-                jLabelMeldung.setText("Benutzername oder Passwort falsch!");
-            }
-        } catch (NoSuchAlgorithmException e1) {
-            e1.printStackTrace();
+        } else if (NutzerDAO.getLogin(getUser(), PasswordHash.createHash(getPassword()))) {
+            dispose();
+            new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
+        } else {
+            jLabelMeldung.setText("Benutzername oder Passwort falsch!");
         }
     }
 }

@@ -7,7 +7,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by mwaldau on 15.05.2017.
@@ -105,12 +104,8 @@ public class PwAendern extends JDialog {
                 System.out.println(altesPasswort.getText());
                 System.out.println(neuesPasswort.getText());
                 if (altesPasswort.getPassword().length >= 6 && neuesPasswort.getPassword().length >= 6 && neuesPasswort.getPassword().toString().equals(neuesPasswortWiederholen.getPassword().toString())) {
-                    try {
-                        alterHash = PasswordHash.createHash(altesPasswort.getPassword().toString());
-                        neuerHash = PasswordHash.createHash(neuesPasswort.getPassword().toString());
-                    } catch (NoSuchAlgorithmException e) {
-                        e.printStackTrace();
-                    }
+                    alterHash = PasswordHash.createHash(altesPasswort.getPassword().toString());
+                    neuerHash = PasswordHash.createHash(neuesPasswort.getPassword().toString());
                 } else {
                     System.out.println("Eingaben stimmen nicht");
                 }
