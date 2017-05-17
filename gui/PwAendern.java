@@ -100,16 +100,20 @@ public class PwAendern extends JDialog {
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (!altesPasswort.getText().equals(neuesPasswort.getText()) && neuesPasswort.getText().length() >= 8 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
-                    if (neuesPasswort.getText().equalsIgnoreCase("password"))
-                        JOptionPane.showMessageDialog(null, "PASSWORD ist nicht gestattet", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
-                    else {
-                        NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
-                        dispose();
-                        JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
+                if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(altesPasswort.getText()))) {
+                    if (!altesPasswort.getText().equals(neuesPasswort.getText()) && neuesPasswort.getText().length() >= 8 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
+                        if (neuesPasswort.getText().equalsIgnoreCase("password"))
+                            JOptionPane.showMessageDialog(null, "PASSWORD ist nicht gestattet", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
+                        else {
+                            NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
+                            dispose();
+                            JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Eingabe stimmen nicht überein\nmin. 8 Zeichen\nnicht das alte Passwort", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Eingabe stimmen nicht überein\nmin. 8 Zeichen\nnicht das alte Passwort", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Das alte Passwort stimmt nicht", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
