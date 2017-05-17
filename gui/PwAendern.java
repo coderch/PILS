@@ -1,6 +1,7 @@
 package gui;
 
 import datenmodell.PasswordHash;
+import db.NutzerDAO;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -99,15 +100,16 @@ public class PwAendern extends JDialog {
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                String neuerHash;
-                String alterHash;
-                System.out.println(altesPasswort.getText());
-                System.out.println(neuesPasswort.getText());
-                if (altesPasswort.getPassword().length >= 6 && neuesPasswort.getPassword().length >= 6 && neuesPasswort.getPassword().toString().equals(neuesPasswortWiederholen.getPassword().toString())) {
-                    alterHash = PasswordHash.createHash(altesPasswort.getPassword().toString());
-                    neuerHash = PasswordHash.createHash(neuesPasswort.getPassword().toString());
+                if (altesPasswort.getText().length() >= 6 && neuesPasswort.getText().length() >= 6 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
+                    if (neuesPasswort.getText().equalsIgnoreCase("password"))
+                        System.out.println("PASSWORD ist nicht gestattet");
+                    else {
+                        NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
+                        dispose();
+                        JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
+                    }
                 } else {
-                    System.out.println("Eingaben stimmen nicht");
+                    JOptionPane.showMessageDialog(null, "Eingabe stimmen nicht überein", "Passwort ändern", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -123,7 +125,6 @@ public class PwAendern extends JDialog {
         buttonPanel.add(abbrechen);
 
         contentPanel.add(buttonPanel, BorderLayout.SOUTH);
-
 
         return contentPanel;
     }
