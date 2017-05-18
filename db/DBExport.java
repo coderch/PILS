@@ -51,7 +51,7 @@ public class DBExport {
                     bwr.newLine();
                 }
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
+                DBConnect.SQLFehlermeldung(e);
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             }
@@ -74,7 +74,7 @@ public class DBExport {
                 tableNames.add(rs.getString(3));
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
+            DBConnect.SQLFehlermeldung(e);
         }
         return tableNames;
     }
