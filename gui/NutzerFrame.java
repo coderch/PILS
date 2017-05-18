@@ -10,6 +10,7 @@ import db.RolleDAO;
 import listener.NutzerAendernListener;
 import listener.NutzerLoeschenListener;
 import listener.NutzerSpeicherListener;
+import listener.PasswordResetListener;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -44,6 +45,7 @@ public class NutzerFrame extends JDialog {
     }
     //TODO @ajanzen Nutzerlevel abfangen und Zugdienst das Erstellen von Soldaten erlauben
     //TODO @ajanzen Passwort Reset hinzufügen
+
     /**
      * Methode zur Dartsellung des Inhalts
      *
@@ -254,6 +256,8 @@ public class NutzerFrame extends JDialog {
                 jComboBoxDG,
                 jComboBoxDGZusatz,
                 jListNutzer));
+        JButton jButtonPWReset = new JButton("Passwort Reset");
+        jButtonPWReset.addActionListener(new PasswordResetListener(jTextFieldPersNr));
         JButton jButtonLoeschen = new JButton("Löschen");
         jButtonLoeschen.addActionListener(new NutzerLoeschenListener(
                 jTextFieldPersNr,
