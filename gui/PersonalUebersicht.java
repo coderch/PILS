@@ -232,9 +232,7 @@ public class PersonalUebersicht extends JDialog {
                 vorhabenSet.add(vorhaben);
             }
         }
-        for (Vorhaben vorhaben : vorhabenSet) {
-            System.out.println(vorhaben);
-        }
+
 
 
 

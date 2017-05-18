@@ -7,6 +7,8 @@ import db.NutzerDAO;
 import db.VorhabenDAO;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -37,8 +39,10 @@ public class VorhabenAnlegen extends JDialog {
     private List<Nutzer> bufferListe = new ArrayList<>();
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
+    private final JList<Nutzer> soldatenJlist1 = new JList();
+    private final JList<Nutzer> soldatenJlist2 = new JList();
+    private final JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
     private JFrame frame;
-    private JCheckBox sonderdienst;
 
     /**
      * Konstruktor zum Anlegen aus dem Framholder heraus
@@ -141,6 +145,22 @@ public class VorhabenAnlegen extends JDialog {
         center1Constraint.gridwidth = 3;
         center1Constraint.anchor = GridBagConstraints.FIRST_LINE_START;
         JPanel namePanel = new JPanel();
+        name.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                if (name.getText().equalsIgnoreCase("Lehrgang")) name.setEditable(false);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                insertUpdate(documentEvent);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {
+                insertUpdate(documentEvent);
+            }
+        });
         namePanel.setBorder(BorderFactory.createTitledBorder("Name"));
         namePanel.add(name);
         center1.add(namePanel);
@@ -170,9 +190,8 @@ public class VorhabenAnlegen extends JDialog {
         beginnconstraint.gridx = 0;
         beginnconstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         JPanel sonderdienstPanel = new JPanel();
-        sonderdienst = new JCheckBox("Sonderdienst");
+
         sonderdienstPanel.add(sonderdienst);
-        if(vorhaben != null && vorhaben.getSonderdienst()) sonderdienst.setSelected(true);
         sonderdienstPanel.setPreferredSize(new Dimension(100, 30));
         GridBagConstraints sonderConstr = new GridBagConstraints();
         sonderConstr.gridx = 1;
@@ -189,7 +208,8 @@ public class VorhabenAnlegen extends JDialog {
 
         //-------------center4 mit 2 Jlists und 2 JButtons um soldaten zuzuweisen-------------------------
 
-        JList<Nutzer> soldatenJlist1 = new JList(this.soldatenListe.toArray(new Nutzer[0]));
+        soldatenJlist1.setListData(this.soldatenListe.toArray(new Nutzer[0]));
+
         JPanel soldaten1Panel = new JPanel();
         JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane1.setPreferredSize(new Dimension(150, 150));
@@ -201,7 +221,7 @@ public class VorhabenAnlegen extends JDialog {
         soldatenJList1Contraint.gridx = 0;
         soldatenJList1Contraint.anchor = GridBagConstraints.FIRST_LINE_START;
 
-        JList<Nutzer> soldatenJlist2 = new JList(eingeteilteSoldaten.toArray(new Nutzer[0]));
+        soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
         JScrollPane scrollPane2 = new JScrollPane(soldatenJlist2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane2.setPreferredSize(new Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
@@ -230,7 +250,7 @@ public class VorhabenAnlegen extends JDialog {
                 }
             }
         });
-        // sinsgemäß umgekehrt zu >>
+        // sinngemäß umgekehrt zu >>
         JButton ab = new JButton("<<");
         ab.setPreferredSize(new Dimension(80, 20));
         ab.addActionListener(new ActionListener() {
@@ -247,9 +267,39 @@ public class VorhabenAnlegen extends JDialog {
                 }
             }
         });
-        JPanel soldatenButtonPanel = new JPanel(new GridLayout(2, 1));
+        JButton prüfen = new JButton("Prüfen");
+        prüfen.setPreferredSize(new Dimension(80,20));
+        prüfen.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                soldatenJlist1.setCellRenderer(new DefaultListCellRenderer() {
+                    @Override
+                    public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+                        Component rendererComponent =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                        if (value instanceof Nutzer) {
+                        for (LocalDate i = beginnDatum; i.isBefore(endDatum.plusDays(1)) ; i = i.plusDays(1)) {
+                            if (!NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("") || NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("Anwesend")) {
+                                rendererComponent.setBackground(Color.red);
+                            } else {
+                                rendererComponent.setBackground(Color.green);
+                            }
+                            if (isSelected) {
+                                rendererComponent.setBackground(getBackground().darker());
+                            }
+                        }
+
+                        }
+                        return rendererComponent;
+                    }
+                });
+            }
+        });
+        JPanel soldatenButtonPanel = new JPanel(new GridLayout(3, 1));
         soldatenButtonPanel.add(zu);
         soldatenButtonPanel.add(ab);
+        soldatenButtonPanel.add(prüfen);
 
         GridBagConstraints buttonPanelContraint = new GridBagConstraints();
         buttonPanelContraint.gridy = 3;
@@ -283,8 +333,6 @@ public class VorhabenAnlegen extends JDialog {
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                //TODO Plausibilitätsmeldung
-
                 eintragen();
             }
         });
@@ -319,26 +367,26 @@ public class VorhabenAnlegen extends JDialog {
     private void eintragen() {
         LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        boolean sDienst = false;
-        if (sonderdienst.isSelected()) {
-            sDienst = true;
-        }
         if (beginnDatum.isAfter(endDatum)) {
             JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
         } else {
-            vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum, sDienst);
+            vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum, sonderdienst.isSelected());
             VorhabenDAO.loescheVorhaben(vorhaben);
             for (Nutzer nutzer : soldatenListe) {
-
-                NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
-
+                for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                    if (NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.VORHABEN)) {
+                        NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
+                    }
+                }
             }
             VorhabenDAO.vorhabenSpeichern(vorhaben, eingeteilteSoldaten);
-            System.out.println(eingeteilteSoldaten);
-            System.out.println(soldatenListe);
             for (Nutzer nutzer : eingeteilteSoldaten) {
                 for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                    NutzerDAO.anwesenheitEintragenTag(nutzer, i, "Vorhaben");
+                    if (name.getText().equalsIgnoreCase("Lehrgang")) {
+                        NutzerDAO.anwesenheitEintragenTag(nutzer, i, Anwesenheit.LEHRGANG);
+                    } else {
+                        NutzerDAO.anwesenheitEintragenTag(nutzer, i, Anwesenheit.VORHABEN);
+                    }
                 }
             }
         }

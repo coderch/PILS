@@ -30,32 +30,32 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                 case "":
                     zelle.setIcon(null);
                     break;
-                case "Krank":
+                case Anwesenheit.KRANK:
                     zelle.setIcon(IconHandler.KRANK);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
-                case "Anwesend":
+                case Anwesenheit.ANWESEND:
                     zelle.setIcon(IconHandler.HAKEN);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
-                case "Urlaub":
+                case Anwesenheit.URLAUB:
                     zelle.setIcon(IconHandler.SONNE);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
-                case "Vorhaben":
+                case Anwesenheit.VORHABEN:
                     zelle.setIcon(IconHandler.WOLKE);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
-                case "Abwesend":
+                case Anwesenheit.ABWESEND:
                     zelle.setIcon(IconHandler.SIRENE);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
-                case "Lehrgang":
+                case Anwesenheit.LEHRGANG:
                     zelle.setIcon(IconHandler.LEHRGANG);
                     zelle.setText("");
                     zelle.setHorizontalAlignment(JLabel.CENTER);

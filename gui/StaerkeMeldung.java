@@ -75,17 +75,17 @@ public class StaerkeMeldung extends JDialog {
         GridBagConstraints abwesendConstraint = new GridBagConstraints(5, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         GridBagConstraints lehrgangConstraint = new GridBagConstraints(6, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JLabel anwesendLabel = new JLabel(IconHandler.HAKEN);
-        anwesendLabel.setToolTipText("Anwesend");
+        anwesendLabel.setToolTipText(Anwesenheit.ANWESEND);
         JLabel krankLabel = new JLabel(IconHandler.KRANK);
-        krankLabel.setToolTipText("KzH");
+        krankLabel.setToolTipText(Anwesenheit.KRANK);
         JLabel urlaubLabel = new JLabel(IconHandler.SONNE);
-        urlaubLabel.setToolTipText("Urlaub");
+        urlaubLabel.setToolTipText(Anwesenheit.URLAUB);
         JLabel vorhabenLabel = new JLabel(IconHandler.WOLKE);
-        vorhabenLabel.setToolTipText("Übung/verplant");
+        vorhabenLabel.setToolTipText(Anwesenheit.VORHABEN);
         JLabel abwesendLabel = new JLabel(IconHandler.SIRENE);
-        abwesendLabel.setToolTipText("Abwesend");
+        abwesendLabel.setToolTipText(Anwesenheit.ABWESEND);
         JLabel lehrgangLabel = new JLabel(IconHandler.LEHRGANG);
-        lehrgangLabel.setToolTipText("Lehrgang");
+        lehrgangLabel.setToolTipText(Anwesenheit.LEHRGANG);
         contentPanel.add(anwesendLabel, anwesendConstraint);
         contentPanel.add(krankLabel, krankConstraint);
         contentPanel.add(urlaubLabel, urlaubConstraint);
@@ -107,35 +107,33 @@ public class StaerkeMeldung extends JDialog {
             GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
             GridBagConstraints rbAbwesendConstr = new GridBagConstraints(5, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
             GridBagConstraints rbLehrgangConstr = new GridBagConstraints(6, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
-
-            //TODO Lehrgang als Status hinzufügen
             JRadioButton radioButtonanwesend = new JRadioButton();
-            radioButtonanwesend.setName("Anwesend");
+            radioButtonanwesend.setName(Anwesenheit.ANWESEND);
             JRadioButton radioButtonkrank = new JRadioButton();
-            radioButtonkrank.setName("Krank");
+            radioButtonkrank.setName(Anwesenheit.KRANK);
             JRadioButton radioButtonurlaub = new JRadioButton();
-            radioButtonurlaub.setName("Urlaub");
+            radioButtonurlaub.setName(Anwesenheit.URLAUB);
             JRadioButton radioButtonvorhaben = new JRadioButton();
-            radioButtonvorhaben.setName("Vorhaben");
+            radioButtonvorhaben.setName(Anwesenheit.VORHABEN);
             JRadioButton radioButtonAbwesend = new JRadioButton();
-            radioButtonvorhaben.setName("Abwesend");
+            radioButtonvorhaben.setName(Anwesenheit.ABWESEND);
             JRadioButton radioButtonLehrgang = new JRadioButton();
-            radioButtonvorhaben.setName("Lehrgang");
-            if (status.get(nutzer).equalsIgnoreCase("Anwesend")) {
+            radioButtonvorhaben.setName(Anwesenheit.LEHRGANG);
+            if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.ANWESEND)) {
                 radioButtonanwesend.setSelected(true);
-            } else if (status.get(nutzer).equalsIgnoreCase("Krank")) {
+            } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.KRANK)) {
                 radioButtonkrank.setSelected(true);
-            } else if (status.get(nutzer).equalsIgnoreCase("Urlaub")) {
+            } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.URLAUB)) {
                 radioButtonurlaub.setSelected(true);
-            } else if (status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
+            } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.VORHABEN)) {
                 radioButtonvorhaben.setSelected(true);
-            } else if (status.get(nutzer).equalsIgnoreCase("Abwesend")) {
+            } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.ABWESEND)) {
                 radioButtonAbwesend.setSelected(true);
-            } else if (status.get(nutzer).equalsIgnoreCase("Lehrgang")) {
+            } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.LEHRGANG)) {
                 radioButtonLehrgang.setSelected(true);
             } else {
                 radioButtonanwesend.setSelected(true);
-                ausgewSoldat.put(nutzer, "Anwesend");
+                ausgewSoldat.put(nutzer, Anwesenheit.ANWESEND);
             }
             radioButtonanwesend.addActionListener(new SelektierterSoldat(nutzer, radioButtonanwesend.getName()));
             radioButtonkrank.addActionListener(new SelektierterSoldat(nutzer, radioButtonkrank.getName()));
