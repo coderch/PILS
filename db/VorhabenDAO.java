@@ -31,7 +31,7 @@ public class VorhabenDAO {
                 vorhabenNamen.add(rs.getString(1));
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return vorhabenNamen;
     }
@@ -50,7 +50,7 @@ public class VorhabenDAO {
                 alleVorhaben.add(vorhaben);
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return alleVorhaben;
     }
@@ -74,7 +74,7 @@ public class VorhabenDAO {
             pstm.executeUpdate();
             pstm.close();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
     }
 
@@ -109,7 +109,7 @@ public class VorhabenDAO {
             pstm.setString(2, vorhaben.getBeschreibung());
             pstm.setDate(3, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(4, Date.valueOf(vorhaben.getEnde()));
-            pstm.setBoolean(5,vorhaben.getSonderdienst());
+            pstm.setBoolean(5, vorhaben.getSonderdienst());
             pstm.setString(6, vorhaben.getBeschreibung());
             pstm.executeUpdate();
             /**
@@ -127,7 +127,7 @@ public class VorhabenDAO {
             pstm.executeBatch();
             pstm.close();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
     }
 
@@ -150,7 +150,7 @@ public class VorhabenDAO {
                 eingeteilteSoldaten.add(new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return eingeteilteSoldaten;
     }
