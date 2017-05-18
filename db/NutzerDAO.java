@@ -4,6 +4,7 @@ import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 import datenmodell.Vorhaben;
 
+import javax.swing.*;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -46,7 +47,7 @@ public class NutzerDAO {
             pstm.executeUpdate();
             cstm.execute();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
     }
 
@@ -66,7 +67,7 @@ public class NutzerDAO {
             pstm.executeUpdate();
             pstm.close();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
     }
 
@@ -95,7 +96,7 @@ public class NutzerDAO {
                 alleNutzer.add(nutzer);
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return alleNutzer;
     }
@@ -110,7 +111,7 @@ public class NutzerDAO {
                 nutzer = new Nutzer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            DBConnect.SQLFehlermeldung(e);
         }
         return nutzer;
     }
@@ -126,9 +127,8 @@ public class NutzerDAO {
             pstm.setInt(1, personalnummer);
             pstm.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
-
     }
 
     /**
@@ -143,7 +143,7 @@ public class NutzerDAO {
                 logins.add(rs.getInt(1));
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return logins;
     }
@@ -159,7 +159,7 @@ public class NutzerDAO {
                 dienstgradeSet.add(rs.getString(1));
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
         return dienstgradeSet;
     }
@@ -175,9 +175,8 @@ public class NutzerDAO {
             pstm.setInt(1, personalnummer);
             pstm.executeUpdate();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            DBConnect.SQLFehlermeldung(e);
         }
-
     }
 
     /**
@@ -202,8 +201,7 @@ public class NutzerDAO {
                 status = false;
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
         return status;
     }
 
@@ -224,8 +222,7 @@ public class NutzerDAO {
                 rolle = rs.getString(1);
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
         return rolle;
     }
 
@@ -246,8 +243,7 @@ public class NutzerDAO {
                 anwesenheit = rs.getString(1);
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
 
         return anwesenheit;
     }
@@ -276,8 +272,7 @@ public class NutzerDAO {
             pstm.close();
 
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
     }
 
     public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
@@ -297,8 +292,7 @@ public class NutzerDAO {
             pstm.close();
 
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
 
     }
 
@@ -315,8 +309,7 @@ public class NutzerDAO {
             pstm.setDate(3, Date.valueOf(ende));
             pstm.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            DBConnect.SQLFehlermeldung(e);        }
     }
 
     /**
@@ -343,8 +336,7 @@ public class NutzerDAO {
                 map.put(n, vorhaben);
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
-        }
+            DBConnect.SQLFehlermeldung(e);        }
         return map;
     }
 

@@ -1,5 +1,6 @@
 package datenmodell;
 
+import javax.swing.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
@@ -31,7 +32,7 @@ public class PasswordHash {
                sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
            }
        } catch (NoSuchAlgorithmException e) {
-           e.printStackTrace();
+           JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);;
        }
         return sb.toString();
     }

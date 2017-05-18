@@ -1,5 +1,6 @@
 package db;
 
+import javax.swing.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -50,9 +51,9 @@ public class DBExport {
                     bwr.newLine();
                 }
             } catch (SQLException e) {
-                System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+                JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
             } catch (IOException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -73,7 +74,7 @@ public class DBExport {
                 tableNames.add(rs.getString(3));
             }
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
         }
         return tableNames;
     }

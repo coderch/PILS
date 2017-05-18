@@ -50,7 +50,6 @@ public class Nutzer implements Comparable<Nutzer>{
         this.dienstgradgruppe = dienstgradgruppe;
         this.rolle = rolle;
     }
-
     /**
      * Dieser Konstruktor wird benötigt um aus dem Program einen neuen Nutzer (Soldaten) anzulegen und in der Datenbank zu speichern.
      * @param personalnummer
@@ -66,7 +65,6 @@ public class Nutzer implements Comparable<Nutzer>{
         this.dienstgrad = dienstgrad;
         this.rolle = rolle;
     }
-
 
     public int getPersonalnummer() {
         return personalnummer;

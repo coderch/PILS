@@ -1,5 +1,6 @@
 package db;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.Properties;
 
@@ -38,7 +39,7 @@ public class DBConnect {
             try {
                 if (connection.isValid(0)) steht = true;
             } catch (SQLException e) {
-                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
             }
         }
         return steht;
@@ -86,8 +87,11 @@ public class DBConnect {
         try {
             dbmd = connection.getMetaData();
         } catch (SQLException e) {
-            System.err.println("Fehler: " + e.getLocalizedMessage() + " (" + e.getSQLState() + ")");
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
         }
         return dbmd;
+    }
+    public static void SQLFehlermeldung(SQLException e){
+        JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
     }
 }
