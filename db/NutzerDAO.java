@@ -4,7 +4,6 @@ import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 import datenmodell.Vorhaben;
 
-import javax.swing.*;
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -201,7 +200,8 @@ public class NutzerDAO {
                 status = false;
             }
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
         return status;
     }
 
@@ -222,7 +222,8 @@ public class NutzerDAO {
                 rolle = rs.getString(1);
             }
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
         return rolle;
     }
 
@@ -243,7 +244,8 @@ public class NutzerDAO {
                 anwesenheit = rs.getString(1);
             }
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
 
         return anwesenheit;
     }
@@ -272,7 +274,8 @@ public class NutzerDAO {
             pstm.close();
 
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
     }
 
     public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
@@ -292,7 +295,8 @@ public class NutzerDAO {
             pstm.close();
 
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
 
     }
 
@@ -309,7 +313,8 @@ public class NutzerDAO {
             pstm.setDate(3, Date.valueOf(ende));
             pstm.executeUpdate();
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
     }
 
     /**
@@ -336,7 +341,8 @@ public class NutzerDAO {
                 map.put(n, vorhaben);
             }
         } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);        }
+            DBConnect.SQLFehlermeldung(e);
+        }
         return map;
     }
 
