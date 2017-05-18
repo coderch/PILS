@@ -77,7 +77,6 @@ public class VorhabenAnlegen extends JDialog {
         this.beschreibung.setText(vorhaben.getBeschreibung());
         this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         this.ende.setDate(Date.from(vorhaben.getEnde().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-        if (vorhaben.getSonderdienst()) sonderdienst.setSelected(true);
         dialogBauen();
     }
 
@@ -173,6 +172,7 @@ public class VorhabenAnlegen extends JDialog {
         JPanel sonderdienstPanel = new JPanel();
         sonderdienst = new JCheckBox("Sonderdienst");
         sonderdienstPanel.add(sonderdienst);
+        if(vorhaben != null && vorhaben.getSonderdienst()) sonderdienst.setSelected(true);
         sonderdienstPanel.setPreferredSize(new Dimension(100, 30));
         GridBagConstraints sonderConstr = new GridBagConstraints();
         sonderConstr.gridx = 1;
