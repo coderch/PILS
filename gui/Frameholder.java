@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
@@ -67,13 +68,15 @@ public class Frameholder {
                 super.windowActivated(windowEvent);
                 if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash("password"))) {
                     new PwAendern(frame);
-                    System.out.println(NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash("password")));
                 }
             }
 
             @Override
             public void windowOpened(WindowEvent windowEvent) {
                 super.windowOpened(windowEvent);
+                if (NutzerDAO.hatAnwesenheit(Frameholder.aktiverNutzer, LocalDate.now()).equals("")) {
+                    new StaerkeMeldung(frame);
+                }
             }
         });
 
