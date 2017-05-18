@@ -8,16 +8,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Fenster zum Eintragen der taeglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern
- * @see javax.swing.JDialog
+ *
  * @author mwaldau
+ * @see javax.swing.JDialog
  */
-public class StaerkeMeldung extends JDialog{
+public class StaerkeMeldung extends JDialog {
 
     private List<Nutzer> soldaten;
     private final Map<Nutzer, String> ausgewSoldat = new HashMap<>();
@@ -27,7 +29,12 @@ public class StaerkeMeldung extends JDialog{
 
     public StaerkeMeldung(JFrame frame) {
         this.frame = frame;
-        this.soldaten = NutzerDAO.nutzerHolen();
+        if (Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("soldat")) {
+            this.soldaten = new ArrayList<>();
+            this.soldaten.add(Frameholder.aktiverNutzer);
+        } else {
+            this.soldaten = NutzerDAO.nutzerHolen();
+        }
         for (Nutzer nutzer : soldaten) {
             status.put(nutzer, NutzerDAO.hatAnwesenheit(nutzer, LocalDate.now()));
         }
@@ -50,22 +57,23 @@ public class StaerkeMeldung extends JDialog{
 
     /**
      * Erstellt ein JPanel das variabel aufgrund der Anzahl an Nutzern in der Datenbank Zeilen mit Name, dienstgrad und 4 auswählbaren Statuus
+     *
      * @return JPanel mit dem Inhalt des Fensters
      */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridBagLayout());
         JPanel leeresPanel = new JPanel();
-        leeresPanel.setPreferredSize(new Dimension(200,5));
+        leeresPanel.setPreferredSize(new Dimension(200, 5));
         GridBagConstraints leer = new GridBagConstraints();
         leer.gridx = 0;
         leer.gridy = 0;
-        contentPanel.add(leeresPanel,leer);
-        GridBagConstraints anwesendConstraint = new GridBagConstraints(1,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints krankConstraint = new GridBagConstraints(2,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints urlaubConstraint = new GridBagConstraints(3,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints vorhabenConstraint = new GridBagConstraints(4,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints abwesendConstraint = new GridBagConstraints(5,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-        GridBagConstraints lehrgangConstraint = new GridBagConstraints(6,0,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        contentPanel.add(leeresPanel, leer);
+        GridBagConstraints anwesendConstraint = new GridBagConstraints(1, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        GridBagConstraints krankConstraint = new GridBagConstraints(2, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        GridBagConstraints urlaubConstraint = new GridBagConstraints(3, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        GridBagConstraints vorhabenConstraint = new GridBagConstraints(4, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        GridBagConstraints abwesendConstraint = new GridBagConstraints(5, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+        GridBagConstraints lehrgangConstraint = new GridBagConstraints(6, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JLabel anwesendLabel = new JLabel(IconHandler.HAKEN);
         anwesendLabel.setToolTipText("Anwesend");
         JLabel krankLabel = new JLabel(IconHandler.KRANK);
@@ -90,15 +98,15 @@ public class StaerkeMeldung extends JDialog{
 
             GridBagConstraints labelConstraint = new GridBagConstraints();
             labelConstraint.gridx = 0;
-            labelConstraint.gridy = i+1;
+            labelConstraint.gridy = i + 1;
             JLabel label = new JLabel(nutzer.toString());
             ButtonGroup gruppe = new ButtonGroup();
-            GridBagConstraints rbAnwesendConstr = new GridBagConstraints(1,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            GridBagConstraints rbKrankConstr = new GridBagConstraints(2,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            GridBagConstraints rbAbwesendConstr = new GridBagConstraints(5,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
-            GridBagConstraints rbLehrgangConstr = new GridBagConstraints(6,i+1,1,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+            GridBagConstraints rbAnwesendConstr = new GridBagConstraints(1, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+            GridBagConstraints rbKrankConstr = new GridBagConstraints(2, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+            GridBagConstraints rbUrlaubConstr = new GridBagConstraints(3, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+            GridBagConstraints rbVorhabenConstr = new GridBagConstraints(4, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+            GridBagConstraints rbAbwesendConstr = new GridBagConstraints(5, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
+            GridBagConstraints rbLehrgangConstr = new GridBagConstraints(6, i + 1, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
 
             //TODO Lehrgang als Status hinzufügen
             JRadioButton radioButtonanwesend = new JRadioButton();
@@ -113,25 +121,19 @@ public class StaerkeMeldung extends JDialog{
             radioButtonvorhaben.setName("Abwesend");
             JRadioButton radioButtonLehrgang = new JRadioButton();
             radioButtonvorhaben.setName("Lehrgang");
-            if(status.get(nutzer).equalsIgnoreCase("Anwesend")) {
+            if (status.get(nutzer).equalsIgnoreCase("Anwesend")) {
                 radioButtonanwesend.setSelected(true);
-            }
-            else if(status.get(nutzer).equalsIgnoreCase("Krank")) {
+            } else if (status.get(nutzer).equalsIgnoreCase("Krank")) {
                 radioButtonkrank.setSelected(true);
-            }
-            else if(status.get(nutzer).equalsIgnoreCase("Urlaub")) {
+            } else if (status.get(nutzer).equalsIgnoreCase("Urlaub")) {
                 radioButtonurlaub.setSelected(true);
-            }
-            else if(status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
+            } else if (status.get(nutzer).equalsIgnoreCase("Vorhaben")) {
                 radioButtonvorhaben.setSelected(true);
-            }
-            else if(status.get(nutzer).equalsIgnoreCase("Abwesend")) {
+            } else if (status.get(nutzer).equalsIgnoreCase("Abwesend")) {
                 radioButtonAbwesend.setSelected(true);
-            }
-            else if(status.get(nutzer).equalsIgnoreCase("Lehrgang")) {
+            } else if (status.get(nutzer).equalsIgnoreCase("Lehrgang")) {
                 radioButtonLehrgang.setSelected(true);
-            }
-            else {
+            } else {
                 radioButtonanwesend.setSelected(true);
                 ausgewSoldat.put(nutzer, "Anwesend");
             }
@@ -159,13 +161,13 @@ public class StaerkeMeldung extends JDialog{
             i++;
         }
         JPanel buttonPanel = new JPanel();
-        GridBagConstraints buttonPanelConstr = new GridBagConstraints(0,i+1,5,1,0,0,GridBagConstraints.CENTER,GridBagConstraints.NONE,new Insets(0,0,0,0),0,0);
+        GridBagConstraints buttonPanelConstr = new GridBagConstraints(0, i + 1, 5, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JButton melden = new JButton("Melden");
         melden.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
-                    NutzerDAO.anwesenheitEintragenTag(nutzerStringEntry.getKey(), LocalDate.now(),nutzerStringEntry.getValue());
+                    NutzerDAO.anwesenheitEintragenTag(nutzerStringEntry.getKey(), LocalDate.now(), nutzerStringEntry.getValue());
                 }
                 dispose();
             }
@@ -194,7 +196,7 @@ public class StaerkeMeldung extends JDialog{
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            ausgewSoldat.put(nutzer,status);
+            ausgewSoldat.put(nutzer, status);
         }
     }
 }
