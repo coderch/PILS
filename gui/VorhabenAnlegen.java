@@ -77,6 +77,7 @@ public class VorhabenAnlegen extends JDialog {
         this.beschreibung.setText(vorhaben.getBeschreibung());
         this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));
         this.ende.setDate(Date.from(vorhaben.getEnde().atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        if (vorhaben.getSonderdienst()) sonderdienst.setSelected(true);
         dialogBauen();
     }
 
