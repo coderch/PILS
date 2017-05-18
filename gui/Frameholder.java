@@ -70,6 +70,11 @@ public class Frameholder {
                     System.out.println(NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash("password")));
                 }
             }
+
+            @Override
+            public void windowOpened(WindowEvent windowEvent) {
+                super.windowOpened(windowEvent);
+            }
         });
 
         frame.setVisible(true);
