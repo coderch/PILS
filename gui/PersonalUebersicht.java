@@ -11,7 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.*;
 import java.util.List;
 
@@ -19,8 +22,9 @@ import java.util.List;
  * Liefert ein Fenster das einen Zeitraum auswählen lässt und Soldaten in einem Baum
  * um eine Übersicht des im Zeitraum verfügbaren Personals und eine Übersicht der Vorhaben
  * für jeden einzelnen zu erstellen
- * @see javax.swing.JDialog
+ *
  * @author mwaldau
+ * @see javax.swing.JDialog
  */
 public class PersonalUebersicht extends JDialog {
 
@@ -38,6 +42,7 @@ public class PersonalUebersicht extends JDialog {
         centerPanel.setPreferredSize(new Dimension(700, 500));
         dialogBauen();
     }
+
     /**
      * Setzt die Umgebungsvariablen für den Dialog
      */
@@ -56,13 +61,13 @@ public class PersonalUebersicht extends JDialog {
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
      * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
      * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum PDFExport
-     *
+     * <p>
      * Der Übersicht erstellen button erstellt für jeden ausgewählten Soldaten, bzw. für jeden in der
      * ausgewählten Gruppe einen TabPanel mit einem SoldatUebersichtPane sowie eine ÜbersichtPane
      *
-     * @see SoldatUebersichtPane
      * @param soldaten
      * @return Es wird ein JPanel mit diversen Komponenten erstellt
+     * @see SoldatUebersichtPane
      */
     private JPanel createContent(List<Nutzer> soldaten) {
         JPanel contentPanel = new JPanel(new BorderLayout());
@@ -72,12 +77,12 @@ public class PersonalUebersicht extends JDialog {
         treeConstraint.gridx = 0;
         treeConstraint.gridy = 0;
         treeConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
-            // Treenodes erstellen (Gruppen)
+        // Treenodes erstellen (Gruppen)
         DefaultMutableTreeNode offzeTreeNode = new DefaultMutableTreeNode("Offiziere");
         DefaultMutableTreeNode umpTreeNode = new DefaultMutableTreeNode("U.m.P.");
         DefaultMutableTreeNode uopTreeNode = new DefaultMutableTreeNode("U.o.P.");
         DefaultMutableTreeNode mnschTreeNode = new DefaultMutableTreeNode("Mannschaften");
-            // nutzer Nodes erstellen und den Gruppen zuweisen
+        // nutzer Nodes erstellen und den Gruppen zuweisen
         for (Nutzer nutzer : soldaten) {
             switch (nutzer.getDienstgradgruppe()) {
                 case "Offz":
@@ -94,16 +99,16 @@ public class PersonalUebersicht extends JDialog {
                     break;
             }
         }
-            //tree wurzel erstellen und nodes adden
+        //tree wurzel erstellen und nodes adden
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Teileinheit");
         root.add(offzeTreeNode);
         root.add(umpTreeNode);
         root.add(uopTreeNode);
         root.add(mnschTreeNode);
-            //treemodel und tree erstellen
+        //treemodel und tree erstellen
         TreeModel treeModel = new DefaultTreeModel(root);
         JTree tree = new JTree(treeModel);
-            //Öffnen der Pfade
+        //Öffnen der Pfade
         tree.expandPath(new TreePath(offzeTreeNode.getPath()));
         tree.expandPath(new TreePath(umpTreeNode.getPath()));
         tree.expandPath(new TreePath(uopTreeNode.getPath()));
@@ -185,7 +190,7 @@ public class PersonalUebersicht extends JDialog {
                     //Adden des Übersichtpanels an Stelle 0
                     centerPanel.add(uebersichtPanel(ausgNutzer), 0);
                     centerPanel.setSelectedIndex(0);
-                } catch (NullPointerException e){
+                } catch (NullPointerException e) {
                     for (Nutzer nutzer : soldaten) {
                         neuerTab(nutzer);
                     }
@@ -212,30 +217,97 @@ public class PersonalUebersicht extends JDialog {
     /**
      * Erstellt für den übergebenen Nutzer im TabPanel(centerPanel) ein neuen SoldatUebersichtPane
      * und fügt einen nutzer der ausgNutzerListe hinzu
+     *
      * @param nutzer Nutzer für den das Panel erstellt werden soll
      */
     private void neuerTab(Nutzer nutzer) {
         centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), frame));
         ausgNutzer.add(nutzer);
     }
-    private JPanel uebersichtPanel(List<Nutzer> ausgNutzer) {
+
+    private JScrollPane uebersichtPanel(List<Nutzer> ausgNutzer) {
+        LocalDate startdatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate enddatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int offzeIst = 0;
+        int umpIst = 0;
+        int uopIst = 0;
+        int mnschIst = 0;
+        int offzeSoll = 0;
+        int umpSoll = 0;
+        int uopSoll = 0;
+        int mnschSoll = 0;
 
         JPanel uebersichtPane = new JPanel();
-        uebersichtPane.setName("Übersicht");
-        Set<Vorhaben> vorhabenSet = new HashSet<>();
-        //TODO @mwaldau ÜbersichtPanel erstellen - STÄRKEMELDUUNG !!!!!!!!!!!
-        //TODO Grafische Aufarbeitung
-        Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(ausgNutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        uebersichtPane.setLayout(new BoxLayout(uebersichtPane, BoxLayout.Y_AXIS));
 
-        for (List<Vorhaben> vorhabenList : vorhabenMap.values()) {
-            for (Vorhaben vorhaben : vorhabenList) {
-                vorhabenSet.add(vorhaben);
+        for (LocalDate i = startdatum; i.isBefore(enddatum.plusDays(1)); i = i.plusDays(1)) {
+            offzeIst = 0;
+            umpIst = 0;
+            uopIst = 0;
+            mnschIst = 0;
+            offzeSoll = 0;
+            umpSoll = 0;
+            uopSoll = 0;
+            mnschSoll = 0;
+            for (Nutzer nutzer : ausgNutzer) {
+                switch (nutzer.getDienstgradgruppe()) {
+                    case "Offz":
+                        offzeSoll++;
+                        break;
+                    case "Uffz.m.P":
+                        umpSoll++;
+                        break;
+                    case "Uffz.o.P":
+                        uopSoll++;
+                        break;
+                    case "Mnsch":
+                        mnschSoll++;
+                        break;
+                }
+                if (NutzerDAO.hatAnwesenheit(nutzer, i).equalsIgnoreCase(Anwesenheit.ANWESEND) ||
+                        NutzerDAO.hatAnwesenheit(nutzer, i).equalsIgnoreCase("")) {
+
+                    switch (nutzer.getDienstgradgruppe()) {
+                        case "Offz":
+                            offzeIst++;
+                            break;
+                        case "Uffz.m.P":
+                            umpIst++;
+                            break;
+                        case "Uffz.o.P":
+                            uopIst++;
+                            break;
+                        case "Mnsch":
+                            mnschIst++;
+                            break;
+                    }
+                }
             }
+            JPanel staerkePanel = new JPanel(new GridLayout(6, 2));
+            JLabel datum = new JLabel(i.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
+            JLabel offzLabel = new JLabel("Offiziere");
+            JLabel offzStaerke = new JLabel(String.format("%s / %s",String.valueOf(offzeIst), String.valueOf(offzeSoll)));
+            JLabel umpLabel = new JLabel("Unteroffiziere o.P.");
+            JLabel umpStaerke = new JLabel(String.format("%s / %s",String.valueOf(umpIst), String.valueOf(umpSoll)));
+            JLabel uopLabel = new JLabel("Unteroffiziere m.P.");
+            JLabel uopStaerke = new JLabel(String.format("%s / %s",String.valueOf(uopIst), String.valueOf(uopSoll)));
+            JLabel mnschLabel = new JLabel("Mannschaften");
+            JLabel mnschStaerke = new JLabel(String.format("%s / %s",String.valueOf(mnschIst), String.valueOf(mnschSoll)));
+            staerkePanel.add(datum);
+            staerkePanel.add(new JLabel());
+            staerkePanel.add(offzLabel);
+            staerkePanel.add(offzStaerke);
+            staerkePanel.add(umpLabel);
+            staerkePanel.add(umpStaerke);
+            staerkePanel.add(uopLabel);
+            staerkePanel.add(uopStaerke);
+            staerkePanel.add(mnschLabel);
+            staerkePanel.add(mnschStaerke);
+            staerkePanel.add(new JLabel("-------------------------------------------------"));
+            uebersichtPane.add(staerkePanel);
         }
-
-
-
-
-        return uebersichtPane;
+        JScrollPane scp = new JScrollPane(uebersichtPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scp.setName("Übersicht");
+        return scp;
     }
 }

@@ -38,7 +38,6 @@ public class LoginFrame extends JFrame {
         this.setVisible(true);
     }
 
-    //TODO @rrose Standard Password abfrage -> erstmalige Anmeldung PW ändern
     private JPanel createContent() {
 
         JPanel jPanelMaster = new JPanel(new BorderLayout());
@@ -82,7 +81,7 @@ public class LoginFrame extends JFrame {
 
         //TODO @ajanzen: in der Endfassung entfernen:
         jTextFieldUser.setText("11116255");
-        jPasswordFieldPassword.setText("password");
+        jPasswordFieldPassword.setText("P@ssw0rd");
 
         jButtonLogin = new JButton("Login");
 

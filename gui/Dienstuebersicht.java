@@ -44,20 +44,17 @@ public class Dienstuebersicht extends JDialog {
         for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
             JPanel panel = new JPanel();
             int anzDienste = 0;
-            //TODO Logik anzahl der Dienste anpassen
-
             if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
                 for (Vorhaben vorhaben : nutzerListEntry.getValue()) {
                     if (vorhaben.getSonderdienst()) {
                         anzDienste++;
-                        JLabel angezNutzer = new JLabel(nutzerListEntry.getKey().toString());
-                        JLabel angezDienste = new JLabel(String.valueOf(anzDienste));
-                        panel.add(angezNutzer);
-                        panel.add(angezDienste);
-                        contentPanel.add(panel);
                     }
                 }
-
+                JLabel angezNutzer = new JLabel(nutzerListEntry.getKey().toString());
+                JLabel angezDienste = new JLabel(String.valueOf(anzDienste));
+                panel.add(angezNutzer);
+                panel.add(angezDienste);
+                contentPanel.add(panel);
             }
         }
         return contentPanel;
