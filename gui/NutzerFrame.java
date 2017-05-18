@@ -280,6 +280,7 @@ public class NutzerFrame extends JDialog {
         });
         jPanelButtons.add(jButtonSpeichern);
         jPanelButtons.add(jButtonAendern);
+        jPanelButtons.add(jButtonPWReset);
         jPanelButtons.add(jButtonLoeschen);
         jPanelButtons.add(jButtonAbbruch);
         return jPanelButtons;
