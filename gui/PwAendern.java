@@ -8,6 +8,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  * Created by mwaldau on 15.05.2017.
@@ -57,7 +59,18 @@ public class PwAendern extends JDialog {
         cs.gridx = 1;
         cs.gridy = 0;
         cs.gridwidth = 3;
+
+        altesPasswort.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    pruefeEingabe();
+                }
+            }
+        });
+
         jPanel.add(altesPasswort, cs);
+
 
         neuesPasswortLabel = new JLabel("neues Passwort");
         cs.gridx = 0;
@@ -69,6 +82,16 @@ public class PwAendern extends JDialog {
         cs.gridx = 1;
         cs.gridy = 1;
         cs.gridwidth = 3;
+
+        neuesPasswort.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    pruefeEingabe();
+                }
+            }
+        });
+
         jPanel.add(neuesPasswort, cs);
 
         neuesPasswortWiederholenLabel = new JLabel("Passwort wiederholen");
@@ -81,35 +104,29 @@ public class PwAendern extends JDialog {
         cs.gridx = 1;
         cs.gridy = 2;
         cs.gridwidth = 3;
+
+        neuesPasswortWiederholen.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent keyEvent) {
+                if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
+                    pruefeEingabe();
+                }
+            }
+        });
+
         jPanel.add(neuesPasswortWiederholen, cs);
 
         jPanel.setBorder(new LineBorder(Color.GRAY));
 
         contentPanel.add(jPanel, BorderLayout.NORTH);
 
-
         uebernehmen = new JButton("Übernehmen");
         abbrechen = new JButton("Abbrechen");
-
 
         uebernehmen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(altesPasswort.getText()))) {
-                    if (!altesPasswort.getText().equals(neuesPasswort.getText()) && neuesPasswort.getText().length() >= 8 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
-                        if (neuesPasswort.getText().equalsIgnoreCase("password"))
-                            JOptionPane.showMessageDialog(null, "PASSWORD ist nicht gestattet", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
-                        else {
-                            NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
-                            dispose();
-                            JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
-                        }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Eingabe stimmen nicht überein\nmin. 8 Zeichen\nnicht das alte Passwort", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Das alte Passwort stimmt nicht", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
-                }
+                pruefeEingabe();
             }
         });
 
@@ -126,5 +143,23 @@ public class PwAendern extends JDialog {
         contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         return contentPanel;
+    }
+
+    private void pruefeEingabe() {
+        if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(altesPasswort.getText()))) {
+            if (!altesPasswort.getText().equals(neuesPasswort.getText()) && neuesPasswort.getText().length() >= 8 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
+                if (neuesPasswort.getText().equalsIgnoreCase("password"))
+                    JOptionPane.showMessageDialog(null, "PASSWORD ist nicht gestattet", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
+                else {
+                    NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
+                    dispose();
+                    JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Eingabe stimmen nicht überein\nmin. 8 Zeichen\nnicht das alte Passwort", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Das alte Passwort stimmt nicht", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
+        }
     }
 }
