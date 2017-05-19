@@ -19,7 +19,7 @@ public class RolleDAO {
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlState)) {
             pstm.setString(1, beschreibung);
             pstm.executeUpdate();
-            JOptionPane.showMessageDialog(null, "erfolgreich ein Rolle erstellt", "Fertig", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "erfolgreich eine Rolle erstellt", "Fertig", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -36,15 +36,9 @@ public class RolleDAO {
                         rs.getString(1)
                 ));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return rolleList;
     }
-
-    public static void aendern(Rolle rolle) {
-
-    }
-
 }
