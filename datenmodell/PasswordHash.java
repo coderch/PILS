@@ -25,15 +25,16 @@ public class PasswordHash {
      */
     public static String createHash(String kennwort) {
         StringBuffer sb = new StringBuffer();
-       try {
-           MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
-           byte[] result = mDigest.digest(kennwort.getBytes());
-           for (int i = 0; i < result.length; i++) {
-               sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
-           }
-       } catch (NoSuchAlgorithmException e) {
-           JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);;
-       }
+        try {
+            MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
+            byte[] result = mDigest.digest(kennwort.getBytes());
+            for (int i = 0; i < result.length; i++) {
+                sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+            }
+        } catch (NoSuchAlgorithmException e) {
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);
+            ;
+        }
         return sb.toString();
     }
 }
