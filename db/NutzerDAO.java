@@ -15,7 +15,6 @@ import java.util.*;
  * @author rrose
  */
 public class NutzerDAO {
-
     /**
      * Verhindert die Instanzierung dieser Klasse
      */
@@ -100,6 +99,10 @@ public class NutzerDAO {
         return alleNutzer;
     }
 
+    /**
+     * @param personalnummer
+     * @return
+     */
     public static Nutzer holeEinzelnenNutzer(int personalnummer) {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer WHERE pk_personalnummer = ?";
         Nutzer nutzer = null;
@@ -278,6 +281,12 @@ public class NutzerDAO {
         }
     }
 
+    /**
+     * @param nutzer
+     * @param start
+     * @param ende
+     * @param status
+     */
     public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
         try {
             PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");
@@ -297,7 +306,6 @@ public class NutzerDAO {
         } catch (SQLException e) {
             DBConnect.SQLFehlermeldung(e);
         }
-
     }
 
     /**
@@ -345,5 +353,4 @@ public class NutzerDAO {
         }
         return map;
     }
-
 }
