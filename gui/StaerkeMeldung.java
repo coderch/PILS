@@ -2,12 +2,15 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +28,7 @@ public class StaerkeMeldung extends JDialog {
     private List<Nutzer> soldaten;
     private final Map<Nutzer, String> ausgewSoldat = new HashMap<>();
     private final Map<Nutzer, String> status = new HashMap<>();
+    private final JPanel contentPanel = new JPanel(new GridBagLayout());
     private JFrame frame;
 
 
@@ -47,7 +51,7 @@ public class StaerkeMeldung extends JDialog {
      */
     private void dialogBauen() {
         this.setModal(true);
-        this.setTitle("Stärkemeldung");
+        this.setTitle("Stärkemeldung  " + LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         this.add(createContent());
@@ -62,7 +66,6 @@ public class StaerkeMeldung extends JDialog {
      * @return JPanel mit dem Inhalt des Fensters
      */
     private JPanel createContent() {
-        JPanel contentPanel = new JPanel(new GridBagLayout());
         JPanel leeresPanel = new JPanel();
         leeresPanel.setPreferredSize(new Dimension(200, 5));
         GridBagConstraints leer = new GridBagConstraints();
@@ -116,10 +119,12 @@ public class StaerkeMeldung extends JDialog {
             radioButtonurlaub.setName(Anwesenheit.URLAUB);
             JRadioButton radioButtonvorhaben = new JRadioButton();
             radioButtonvorhaben.setName(Anwesenheit.VORHABEN);
+            radioButtonvorhaben.setEnabled(false);
             JRadioButton radioButtonAbwesend = new JRadioButton();
-            radioButtonvorhaben.setName(Anwesenheit.ABWESEND);
+            radioButtonAbwesend.setName(Anwesenheit.ABWESEND);
             JRadioButton radioButtonLehrgang = new JRadioButton();
-            radioButtonvorhaben.setName(Anwesenheit.LEHRGANG);
+            radioButtonLehrgang.setName(Anwesenheit.LEHRGANG);
+            radioButtonLehrgang.setEnabled(false);
             if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.ANWESEND)) {
                 radioButtonanwesend.setSelected(true);
             } else if (status.get(nutzer).equalsIgnoreCase(Anwesenheit.KRANK)) {
@@ -159,7 +164,7 @@ public class StaerkeMeldung extends JDialog {
             contentPanel.add(radioButtonLehrgang, rbLehrgangConstr);
             i++;
         }
-        JPanel buttonPanel = new JPanel();
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         GridBagConstraints buttonPanelConstr = new GridBagConstraints(0, i + 1, 5, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JButton melden = new JButton("Melden");
         melden.addActionListener(new ActionListener() {
@@ -178,8 +183,18 @@ public class StaerkeMeldung extends JDialog {
                 dispose();
             }
         });
+        JButton drucken = new JButton();
+        drucken.setPreferredSize(melden.getPreferredSize());
+        drucken.setIcon(IconHandler.PDF);
+        drucken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PrintUtilities.printComponent(contentPanel);
+            }
+        });
         buttonPanel.add(melden);
         buttonPanel.add(abbrechen);
+        buttonPanel.add(drucken);
         contentPanel.add(buttonPanel, buttonPanelConstr);
         return contentPanel;
     }
