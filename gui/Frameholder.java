@@ -70,14 +70,6 @@ public class Frameholder {
                     new PwAendern(frame);
                 }
             }
-
-            @Override
-            public void windowOpened(WindowEvent windowEvent) {
-                super.windowOpened(windowEvent);
-                if (NutzerDAO.hatAnwesenheit(Frameholder.aktiverNutzer, LocalDate.now()).equals("")) {
-                    new StaerkeMeldung(frame);
-                }
-            }
         });
 
         frame.setVisible(true);

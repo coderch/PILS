@@ -2,7 +2,7 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import export.PDFExport;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -49,22 +49,22 @@ public class Kalender extends JPanel {
 
     private void popupMenubauen() {
         anwesend.setIcon(IconHandler.HAKEN);
-        anwesend.setName("Anwesend");
+        anwesend.setName(Anwesenheit.ANWESEND);
         anwesend.setPreferredSize(PUBUTTONSIZE);
         krank.setIcon(IconHandler.KRANK);
-        krank.setName("Krank");
+        krank.setName(Anwesenheit.KRANK);
         krank.setPreferredSize(PUBUTTONSIZE);
         urlaub.setIcon(IconHandler.SONNE);
-        urlaub.setName("Urlaub");
+        urlaub.setName(Anwesenheit.URLAUB);
         urlaub.setPreferredSize(PUBUTTONSIZE);
         vorhaben.setIcon(IconHandler.WOLKE);
-        vorhaben.setName("Vorhaben");
+        vorhaben.setName(Anwesenheit.VORHABEN);
         vorhaben.setPreferredSize(PUBUTTONSIZE);
         abwesend.setIcon(IconHandler.SIRENE);
-        abwesend.setName("Abwesend");
+        abwesend.setName(Anwesenheit.ABWESEND);
         abwesend.setPreferredSize(PUBUTTONSIZE);
         lehrgang.setIcon(IconHandler.LEHRGANG);
-        lehrgang.setName("Lehrgang");
+        lehrgang.setName(Anwesenheit.LEHRGANG);
         lehrgang.setPreferredSize(PUBUTTONSIZE);
         popupMenu.add(anwesend);
         popupMenu.add(krank);
@@ -226,7 +226,7 @@ public class Kalender extends JPanel {
         pdf.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                new PDFExport(monat);
+                PrintUtilities.printComponent(kalenderPane);
             }
         });
         pdf.setToolTipText("PDF Export");

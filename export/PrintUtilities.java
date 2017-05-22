@@ -3,6 +3,7 @@ package export;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.print.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,11 +12,16 @@ import java.util.List;
 
 public class PrintUtilities implements Printable {
 
-    private List<JComponent> componentsToPrint;
+    private static List<JComponent> componentsToPrint;
 
 
     public static void printComponents( List<JComponent> componentsToPrint ) {
         new PrintUtilities( componentsToPrint ).print();
+    }
+    public static void printComponent( JComponent componentToPrint ) {
+        componentsToPrint = new ArrayList();
+        componentsToPrint.add(componentToPrint);
+        new PrintUtilities(componentsToPrint ).print();
     }
 
     public PrintUtilities( List<JComponent> componentsToPrint ) {

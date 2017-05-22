@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
 
 /**
  * Created by ajanzen on 09.01.2017.
@@ -142,7 +143,11 @@ public class LoginFrame extends JFrame {
         } else if (NutzerDAO.getLogin(getUser(), PasswordHash.createHash(getPassword()))) {
             dispose();
             Frameholder.aktiverNutzer = NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText()));
-            new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
+            if (NutzerDAO.hatAnwesenheit(Frameholder.aktiverNutzer, LocalDate.now()).equals("")) {
+                new Anwesenheit();
+            } else {
+                new Frameholder(NutzerDAO.holeEinzelnenNutzer(Integer.parseInt(jTextFieldUser.getText())));
+            }
         } else {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");
         }
