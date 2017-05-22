@@ -2,8 +2,8 @@ package gui;
 
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
-import datenmodell.Vorhaben;
 import db.NutzerDAO;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -199,10 +199,17 @@ public class PersonalUebersicht extends JDialog {
                 }
             }
         });
-        JButton pdfExport = new JButton(IconHandler.PDF);
+        JButton drucken = new JButton(IconHandler.DRUCKEN);
+        drucken.setToolTipText("Aktuelle Ansicht drucken");
+        drucken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent());
+            }
+        });
         buttonPanel.add(new JLabel());
         buttonPanel.add(uebersicht);
-        buttonPanel.add(pdfExport);
+        buttonPanel.add(drucken);
 
         leftPanel.add(scrollingTree, treeConstraint);
         leftPanel.add(beginnPanel, beginnConstriant);

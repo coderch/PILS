@@ -3,6 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 import db.DBConnect;
+import db.DBExport;
 import db.NutzerDAO;
 
 import javax.swing.*;
@@ -12,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 /**
  * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
@@ -25,7 +25,7 @@ public class Frameholder {
     private String userlevel;
     private final JMenuBar menuBar;
     private final JMenu nutzerReiter;
-    private final JMenu hilfeReiter;
+    private final JMenu export;
     private final JMenu verwaltungReiter;
     private final JMenu uebersichtenReiter;
     public static Nutzer aktiverNutzer;
@@ -43,7 +43,7 @@ public class Frameholder {
         kalender = new Kalender();
         menuBar = new JMenuBar();
         nutzerReiter = new JMenu("Nutzer");
-        hilfeReiter = new JMenu("Hilfe");
+        export = new JMenu("Export");
         verwaltungReiter = new JMenu("Verwaltung");
         uebersichtenReiter = new JMenu("Übersichten");
 
@@ -128,8 +128,14 @@ public class Frameholder {
                 }
             });
             verwaltungReiter.add(soldatenVerwalten);
-
-
+            JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
+            dienstUebersicht.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    new Dienstuebersicht(frame);
+                }
+            });
+            menuBar.add(uebersichtenReiter);
             if (userlevel.equalsIgnoreCase("zugführer")) {
 
 
@@ -157,27 +163,28 @@ public class Frameholder {
                         new VorhabenUebersicht(frame);
                     }
                 });
-                JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
-                dienstUebersicht.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new Dienstuebersicht(frame);
-                    }
-                });
                 uebersichtenReiter.add(personalUebersicht);
                 uebersichtenReiter.add(vorhabenUebersicht);
-                uebersichtenReiter.add(dienstUebersicht);
-                menuBar.add(uebersichtenReiter);
+                menuBar.add(export);
+                JMenuItem dbSicherung = new JMenuItem("Datenbanksicherung");
+                dbSicherung.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                new DBExport();
+                            }
+                        }).start();
+                    }
+                });
+                export.add(dbSicherung);
             }
+            uebersichtenReiter.add(dienstUebersicht);
 
         }
 
 
-        JMenuItem faq = new JMenuItem("F.A.Q.");
-        JMenuItem ueber = new JMenuItem("über");
-        hilfeReiter.add(faq);
-        hilfeReiter.add(ueber);
-        menuBar.add(hilfeReiter);
 
 
         contentPanel.add(kalender.anzeigen(), BorderLayout.CENTER);

@@ -13,7 +13,7 @@ public class IconHandler {
     public static ImageIcon WOLKE = new ImageIcon("gui/img/wolke.jpg", "wolke");
     public static ImageIcon KRANK = new ImageIcon("gui/img/krank.jpg", "krank");
     public static ImageIcon REFRESH = new ImageIcon("gui/img/refresh.png", "refresh");
-    public static ImageIcon PDF = new ImageIcon("gui/img/pdf.png", "pdf");
+    public static ImageIcon DRUCKEN = new ImageIcon("gui/img/drucken.png", "drucken");
     public static ImageIcon SIRENE = new ImageIcon("gui/img/sirene.png", "sirene");
     public static ImageIcon LEHRGANG = new ImageIcon("gui/img/lehrgang.jpg", "lehrgang");
 }

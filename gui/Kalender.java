@@ -205,20 +205,20 @@ public class Kalender extends JPanel {
                 spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
             }
         });
-        JButton pdf = new JButton(IconHandler.PDF);
-        pdf.addActionListener(new ActionListener() {
+        JButton drucken = new JButton(IconHandler.DRUCKEN);
+        drucken.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 PrintUtilities.printComponent(kalenderPane);
             }
         });
-        pdf.setToolTipText("PDF Export");
-        pdf.setPreferredSize(zurueck.getPreferredSize());
+        drucken.setToolTipText("Drucken");
+        drucken.setPreferredSize(zurueck.getPreferredSize());
         anzeigePanel.add(refresh);
         anzeigePanel.add(zurueck);
         anzeigePanel.add(label);
         anzeigePanel.add(weiter);
-        anzeigePanel.add(pdf);
+        anzeigePanel.add(drucken);
 
         return anzeigePanel;
     }

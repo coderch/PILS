@@ -22,7 +22,6 @@ import java.util.Map;
  * @author mwaldau
  * @see javax.swing.JDialog
  */
-//TODO drucken einarbeiten
 public class StaerkeMeldung extends JDialog {
 
     private List<Nutzer> soldaten;
@@ -185,7 +184,7 @@ public class StaerkeMeldung extends JDialog {
         });
         JButton drucken = new JButton();
         drucken.setPreferredSize(melden.getPreferredSize());
-        drucken.setIcon(IconHandler.PDF);
+        drucken.setIcon(IconHandler.DRUCKEN);
         drucken.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

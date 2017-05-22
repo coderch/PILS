@@ -33,8 +33,9 @@ public class VorhabenPanel extends JPanel {
     private JPanel createContent() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-        JTextField zeitraum = new JTextField();
-        zeitraum.setText(String.format("von %s bis %s",vorhaben.getStart().format(DTF), vorhaben.getEnde().format(DTF)));
+        JTextArea zeitraum = new JTextArea();
+        zeitraum.setBackground(this.getBackground());
+        zeitraum.setText(String.format("%s \nvon %s bis %s",vorhaben.getName(),vorhaben.getStart().format(DTF), vorhaben.getEnde().format(DTF)));
         zeitraum.setEditable(false);
         zeitraum.setBorder(null);
         zeitraum.setFont(new Font("Arial", Font.BOLD, 12));
@@ -43,6 +44,7 @@ public class VorhabenPanel extends JPanel {
         beschreibung.setText(vorhaben.getBeschreibung());
         beschreibung.setPreferredSize(beschreibung.getSize());
         beschreibung.setEditable(false);
+        beschreibung.setBackground(this.getBackground());
         contentPane.add(zeitraum);
         contentPane.add(jScrollPane);
         JTextField eingSold = new JTextField();

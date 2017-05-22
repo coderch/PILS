@@ -1,10 +1,9 @@
 package gui;
 
 import com.toedter.calendar.JDateChooser;
-import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
-import db.NutzerDAO;
 import db.VorhabenDAO;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,10 +68,17 @@ public class VorhabenUebersicht extends JDialog {
                 }
             }
         });
-        JButton pdfExport = new JButton(IconHandler.PDF);
+        JButton drucken = new JButton(IconHandler.DRUCKEN);
+        drucken.setToolTipText("Aktuelle Ansicht drucken");
+        drucken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent());
+            }
+        });
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(erstellen);
-        buttonPanel.add(pdfExport);
+        buttonPanel.add(drucken);
         JPanel platzhalter = new JPanel();
         platzhalter.setPreferredSize(new Dimension(20, 300));
         GridBagConstraints zeitraumConst = new GridBagConstraints();
@@ -125,6 +131,7 @@ public class VorhabenUebersicht extends JDialog {
                 JPanel vorhabenPanel = new JPanel();
                 vorhabenPanel.setMaximumSize(new Dimension(700,50));
                 JTextField vorhabenName = new JTextField(vorhaben.getName(), 30);
+                vorhabenName.setEditable(false);
                 JLabel vorhabenBeginn = new JLabel(vorhaben.getStart().format(DTF) + " -");
                 JLabel vorhabenEnde = new JLabel(vorhaben.getEnde().format(DTF));
                 JButton editieren = new JButton("Bearbeiten");

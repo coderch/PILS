@@ -3,6 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 import db.NutzerDAO;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,27 +21,38 @@ public class Dienstuebersicht extends JDialog {
     private JFrame frame;
     private List<Nutzer> soldaten;
     private Map<Nutzer, List<Vorhaben>> vorhabenMap;
+    JPanel contentPanel;
 
     public Dienstuebersicht(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
         this.vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(this.soldaten, LocalDate.of(LocalDate.now().getYear(), 01, 01), LocalDate.of(LocalDate.now().getYear(), 12, 31));
         this.frame = frame;
+        this.contentPanel = new JPanel(new GridLayout(vorhabenMap.size()+1, 1));
         this.dialogBauen();
     }
 
     private void dialogBauen() {
         this.setModal(true);
+        System.out.println(this.getLayout());
         this.setTitle("Dienstübersicht");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
-        this.add(createContent());
+        this.setPreferredSize(new Dimension(100,500));
+        JScrollPane scrollPane = new JScrollPane(createContent(), ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        this.add(scrollPane, BorderLayout.CENTER);
+        JButton drucken = new JButton(IconHandler.DRUCKEN);
+        drucken.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                PrintUtilities.printComponent(contentPanel);
+            }
+        });
+        this.add(drucken, BorderLayout.SOUTH);
         this.pack();
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
-// TODO drucken
     private JPanel createContent() {
-        JPanel contentPanel = new JPanel(new GridLayout(vorhabenMap.size()+1, 1));
         for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
             JPanel panel = new JPanel();
             int anzDienste = 0;
