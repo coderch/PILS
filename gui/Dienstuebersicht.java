@@ -38,7 +38,7 @@ public class Dienstuebersicht extends JDialog {
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
-
+// TODO drucken
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new GridLayout(vorhabenMap.size()+1, 1));
         for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
@@ -46,7 +46,7 @@ public class Dienstuebersicht extends JDialog {
             int anzDienste = 0;
             if (vorhabenMap.containsKey(nutzerListEntry.getKey())) {
                 for (Vorhaben vorhaben : nutzerListEntry.getValue()) {
-                    if (vorhaben.getSonderdienst()) {
+                    if (vorhaben.getSonderdienst() && vorhaben.getStart().getYear() == LocalDate.now().getYear()) {
                         anzDienste++;
                     }
                 }

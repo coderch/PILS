@@ -44,7 +44,7 @@ public class NutzerFrame extends JDialog {
         this.setVisible(true);
     }
     //TODO @ajanzen Nutzerlevel abfangen und Zugdienst das Erstellen von Soldaten erlauben
-    //TODO @ajanzen Passwort Reset hinzufügen
+
 
     /**
      * Methode zur Dartsellung des Inhalts

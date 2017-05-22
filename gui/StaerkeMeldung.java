@@ -19,6 +19,7 @@ import java.util.Map;
  * @author mwaldau
  * @see javax.swing.JDialog
  */
+//TODO drucken einarbeiten
 public class StaerkeMeldung extends JDialog {
 
     private List<Nutzer> soldaten;

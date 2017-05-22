@@ -57,21 +57,13 @@ public class Kalender extends JPanel {
         urlaub.setIcon(IconHandler.SONNE);
         urlaub.setName(Anwesenheit.URLAUB);
         urlaub.setPreferredSize(PUBUTTONSIZE);
-        vorhaben.setIcon(IconHandler.WOLKE);
-        vorhaben.setName(Anwesenheit.VORHABEN);
-        vorhaben.setPreferredSize(PUBUTTONSIZE);
         abwesend.setIcon(IconHandler.SIRENE);
         abwesend.setName(Anwesenheit.ABWESEND);
         abwesend.setPreferredSize(PUBUTTONSIZE);
-        lehrgang.setIcon(IconHandler.LEHRGANG);
-        lehrgang.setName(Anwesenheit.LEHRGANG);
-        lehrgang.setPreferredSize(PUBUTTONSIZE);
         popupMenu.add(anwesend);
         popupMenu.add(krank);
         popupMenu.add(urlaub);
-        popupMenu.add(vorhaben);
         popupMenu.add(abwesend);
-        popupMenu.add(lehrgang);
     }
 
     private void popUpFunktionen(int x, int y) {
@@ -91,22 +83,13 @@ public class Kalender extends JPanel {
         if (urlaub.getActionListeners().length > 0) {
             urlaub.removeActionListener(urlaub.getActionListeners()[0]);
         }
-        if (vorhaben.getActionListeners().length > 0) {
-            vorhaben.removeActionListener(vorhaben.getActionListeners()[0]);
-        }
         if (abwesend.getActionListeners().length > 0) {
             abwesend.removeActionListener(abwesend.getActionListeners()[0]);
-        }
-        if (lehrgang.getActionListeners().length > 0) {
-            lehrgang.removeActionListener(lehrgang.getActionListeners()[0]);
         }
         anwesend.addActionListener(new StatusEintragen(anwesend, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         krank.addActionListener(new StatusEintragen(krank, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         urlaub.addActionListener(new StatusEintragen(urlaub, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
-        vorhaben.addActionListener(new StatusEintragen(vorhaben, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
         abwesend.addActionListener(new StatusEintragen(abwesend, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
-        lehrgang.addActionListener(new StatusEintragen(lehrgang, nutzer, LocalDate.of(datum.getYear(), datum.getMonth(), x - 1)));
-
     }
 
     /**
@@ -150,7 +133,7 @@ public class Kalender extends JPanel {
         kalender.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                if (mouseEvent.getButton() == 3) {
+                if (mouseEvent.getButton() == MouseEvent.BUTTON3) {
                     popupMenu.show(mouseEvent.getComponent(), mouseEvent.getX(), mouseEvent.getY());
                     popUpFunktionen(kalender.columnAtPoint(mouseEvent.getPoint()), kalender.rowAtPoint(mouseEvent.getPoint()));
                 }
