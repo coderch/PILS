@@ -89,10 +89,14 @@ public class NutzerFrame extends JDialog {
         jPanelNummer.add(jTextFieldPersNr);
         jPanelRolle.setBorder(BorderFactory.createTitledBorder("Rolle"));
         JComboBox<String> rollenComboBox = new JComboBox<>();
-        java.util.List<Rolle> rolleList;
-        rolleList = RolleDAO.alleLaden();
-        for (Rolle rolle : rolleList) {
-            rollenComboBox.addItem(rolle.getBeschreibung());
+        if (Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("zugführer")) {
+            java.util.List<Rolle> rolleList;
+            rolleList = RolleDAO.alleLaden();
+            for (Rolle rolle : rolleList) {
+                rollenComboBox.addItem(rolle.getBeschreibung());
+            }
+        }else{
+            rollenComboBox.addItem("Soldat");
         }
         rollenComboBox.setPreferredSize(new Dimension(150, 23));
         jPanelRolle.add(rollenComboBox);
