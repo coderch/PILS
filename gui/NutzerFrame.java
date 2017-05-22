@@ -354,6 +354,9 @@ public class NutzerFrame extends JDialog {
                             JComboBox<String> jComboBoxDGZusatz) {
         jTextFieldPersNr.setText(Integer.toString(selectedValue.getPersonalnummer()));
         rollenComboBox.setSelectedItem(selectedValue.getRolle());
+        if (selectedValue.getPersonalnummer() == Frameholder.aktiverNutzer.getPersonalnummer())
+            rollenComboBox.setEnabled(false);
+        else rollenComboBox.setEnabled(true);
         jTextFieldNachname.setText(selectedValue.getName());
         jTextFieldVorname.setText(selectedValue.getVorname());
         if (selectedValue.getDienstgrad().endsWith("UA") ||
