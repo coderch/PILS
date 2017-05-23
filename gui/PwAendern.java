@@ -12,7 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
- * Created by mwaldau on 15.05.2017.
+ * @author rrose
  */
 public class PwAendern extends JDialog {
     private final JFrame frame;
