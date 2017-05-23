@@ -28,8 +28,8 @@ public class PasswordHash {
         try {
             MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
             byte[] result = mDigest.digest(kennwort.getBytes());
-            for (int i = 0; i < result.length; i++) {
-                sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16).substring(1));
+            for (byte aResult : result) {
+                sb.append(Integer.toString((aResult & 0xff) + 0x100, 16).substring(1));
             }
         } catch (NoSuchAlgorithmException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);
