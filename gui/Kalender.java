@@ -158,7 +158,7 @@ public class Kalender extends JPanel {
     /**
      * Monatsanzeigepanel stellt das Menü des Kalenders zur Verfügung
      *
-     * @return Panel mit weiter, zurück, refresh und PDFExport Button
+     * @return Panel mit weiter, zurück, refresh und PDF-Export Button
      */
     private JPanel monatsAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();

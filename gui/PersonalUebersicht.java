@@ -60,7 +60,7 @@ public class PersonalUebersicht extends JDialog {
     /**
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
      * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
-     * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum PDFExport
+     * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum PDF-Export
      * <p>
      * Der Übersicht erstellen button erstellt für jeden ausgewählten Soldaten, bzw. für jeden in der
      * ausgewählten Gruppe einen TabPanel mit einem SoldatUebersichtPane sowie eine ÜbersichtPane
