@@ -1,6 +1,7 @@
 package gui;
 
 import db.DBConnect;
+import db.DBPrueferTask;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Timer;
 
 /**
  * @author mwaldau
@@ -24,6 +26,10 @@ public class Runner {
             e1.printStackTrace();
         }
         new LoginFrame();
+        if (DBConnect.verbindungSteht()) {
+            Timer timer = new Timer(true);
+            timer.schedule(new DBPrueferTask(), 5000, 5000);
+        }
 
 
     }
