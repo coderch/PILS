@@ -32,7 +32,6 @@ public class DBExport {
                 }
                 command += sjo.toString() + " VALUES ";
 
-
                 while (rs.next()) {
                     StringJoiner sj = new StringJoiner(",", "(", ")");
                     for (int i = 1; i <= columncount; i++) {
@@ -43,7 +42,6 @@ public class DBExport {
                             sj.add(rs.getObject(i).toString());
                         } else {
                             sj.add("'" + rs.getObject(i).toString() + "'");
-
                         }
                     }
                     String zeile = command + sj.toString() + ";";
