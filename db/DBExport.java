@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 /**
- * Die Klasse DBExport dient dazu, für jegliche Tabellen in der vorliegenden Datenbank einen dump zu erzeugen, welche als zusätzliches Back Up dienen.
+ * Die Klasse DBExport dient dazu, für jegliche Tabellen in der vorliegenden Datenbank einen dump bzw. ein INSERT INTO Skript zu erzeugen, welches als zusätzliches Back Up dienen soll.
  *
  * @author rrose
  */
@@ -37,8 +37,8 @@ public class DBExport {
                     for (int i = 1; i <= columncount; i++) {
                         if (rs.getObject(i) == null) {
                             sj.add("''");
-                        } else if (rsmd.getColumnTypeName(i) == "int2" || rsmd.getColumnTypeName(i) == "int4" || rsmd.getColumnTypeName(i) == "int8" || rsmd.getColumnTypeName(i) == "bool"
-                                || rsmd.getColumnTypeName(i) == "float4" || rsmd.getColumnTypeName(i) == "float8" || rsmd.getColumnTypeName(i) == "numeric") {
+                        } else if (rsmd.getColumnTypeName(i).equals("int2") || rsmd.getColumnTypeName(i).equals("int4") || rsmd.getColumnTypeName(i).equals("int8") || rsmd.getColumnTypeName(i).equals("bool")
+                                || rsmd.getColumnTypeName(i).equals("float4") || rsmd.getColumnTypeName(i).equals("float8") || rsmd.getColumnTypeName(i).equals("numeric")) {
                             sj.add(rs.getObject(i).toString());
                         } else {
                             sj.add("'" + rs.getObject(i).toString() + "'");
