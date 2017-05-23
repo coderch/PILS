@@ -16,7 +16,6 @@ import java.awt.event.ActionListener;
 public class NutzerAendernListener implements ActionListener {
     private final JFormattedTextField jTextFieldPersNr;
     private final JComboBox<String> rollenComboBox;
-    private final JCheckBox jCheckBox;
     private final JTextField jTextFieldVorname;
     private final JTextField jTextFieldNachname;
     private final JComboBox<String> jComboBoxDG;
@@ -45,7 +44,7 @@ public class NutzerAendernListener implements ActionListener {
                                  JList jListNutzer) {
         this.jTextFieldPersNr = jTextFieldPersNr;
         this.rollenComboBox = rollenComboBox;
-        this.jCheckBox = jCheckBox;
+        JCheckBox jCheckBox1 = jCheckBox;
         this.jTextFieldVorname = jTextFieldVorname;
         this.jTextFieldNachname = jTextFieldNachname;
         this.jComboBoxDG = jComboBoxDG;

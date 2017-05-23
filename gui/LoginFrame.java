@@ -19,10 +19,6 @@ public class LoginFrame extends JFrame {
 
     private JTextField jTextFieldUser;
     private JPasswordField jPasswordFieldPassword;
-    private JLabel jLabelUser;
-    private JLabel jLabelPassword;
-    private JButton jButtonLogin;
-    private JButton jButtonAbbrechen;
 
 
     public LoginFrame() {
@@ -49,7 +45,7 @@ public class LoginFrame extends JFrame {
 
         cs.fill = GridBagConstraints.HORIZONTAL;
 
-        jLabelUser = new JLabel("Benutzername: ");
+        JLabel jLabelUser = new JLabel("Benutzername: ");
         cs.gridx = 0;
         cs.gridy = 0;
         cs.gridwidth = 1;
@@ -62,7 +58,7 @@ public class LoginFrame extends JFrame {
         cs.gridwidth = 2;
         jPanel.add(jTextFieldUser, cs);
 
-        jLabelPassword = new JLabel("Password: ");
+        JLabel jLabelPassword = new JLabel("Password: ");
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
@@ -84,7 +80,7 @@ public class LoginFrame extends JFrame {
         jTextFieldUser.setText("11116255");
         jPasswordFieldPassword.setText("P@ssw0rd");
 
-        jButtonLogin = new JButton("Login");
+        JButton jButtonLogin = new JButton("Login");
 
         jButtonLogin.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -111,7 +107,7 @@ public class LoginFrame extends JFrame {
                 }
             }
         });
-        jButtonAbbrechen = new JButton("Cancel");
+        JButton jButtonAbbrechen = new JButton("Cancel");
         jButtonAbbrechen.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);

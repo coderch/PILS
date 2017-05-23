@@ -16,14 +16,9 @@ import java.awt.event.KeyEvent;
  */
 public class PwAendern extends JDialog {
     private final JFrame frame;
-    private JLabel altesPasswortLabel;
-    private JLabel neuesPasswortLabel;
-    private JLabel neuesPasswortWiederholenLabel;
     private JPasswordField altesPasswort;
     private JPasswordField neuesPasswort;
     private JPasswordField neuesPasswortWiederholen;
-    private JButton uebernehmen;
-    private JButton abbrechen;
 
     public PwAendern(JFrame frame) {
         this.frame = frame;
@@ -49,7 +44,7 @@ public class PwAendern extends JDialog {
         GridBagConstraints cs = new GridBagConstraints();
         cs.fill = GridBagConstraints.HORIZONTAL;
 
-        altesPasswortLabel = new JLabel("altes Passwort");
+        JLabel altesPasswortLabel = new JLabel("altes Passwort");
         cs.gridx = 0;
         cs.gridy = 0;
         jPanel.add(altesPasswortLabel, cs);
@@ -72,7 +67,7 @@ public class PwAendern extends JDialog {
         jPanel.add(altesPasswort, cs);
 
 
-        neuesPasswortLabel = new JLabel("neues Passwort");
+        JLabel neuesPasswortLabel = new JLabel("neues Passwort");
         cs.gridx = 0;
         cs.gridy = 1;
         cs.gridwidth = 1;
@@ -94,7 +89,7 @@ public class PwAendern extends JDialog {
 
         jPanel.add(neuesPasswort, cs);
 
-        neuesPasswortWiederholenLabel = new JLabel("Passwort wiederholen");
+        JLabel neuesPasswortWiederholenLabel = new JLabel("Passwort wiederholen");
         cs.gridx = 0;
         cs.gridy = 2;
         cs.gridwidth = 1;
@@ -120,8 +115,8 @@ public class PwAendern extends JDialog {
 
         contentPanel.add(jPanel, BorderLayout.NORTH);
 
-        uebernehmen = new JButton("Übernehmen");
-        abbrechen = new JButton("Abbrechen");
+        JButton uebernehmen = new JButton("Übernehmen");
+        JButton abbrechen = new JButton("Abbrechen");
 
         uebernehmen.addActionListener(new ActionListener() {
             @Override
