@@ -30,8 +30,6 @@ public class Runner {
             Timer timer = new Timer(true);
             timer.schedule(new DBPrueferTask(), 5000, 5000);
         }
-
-
     }
 
     private static Properties readConfigFile() {
