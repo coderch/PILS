@@ -2,11 +2,12 @@ package datenmodell;
 
 /**
  * Erstellt ein Nutzer-Objekt anhand der übergebenen Daten.
+ *
+ * @author rrose
  * @see #Nutzer(int, String, String, String, String, String)
  * @see #Nutzer(int, String, String, String, String)
- * @author rrose
  */
-public class Nutzer implements Comparable<Nutzer>{
+public class Nutzer implements Comparable<Nutzer> {
     /**
      * Einmalige Nummer, welche den Nutzer (Soldaten) identifiziert
      */
@@ -35,6 +36,7 @@ public class Nutzer implements Comparable<Nutzer>{
 
     /**
      * Dieser Konstruktor wird benötigt um eine Instanz eines Nutzers anhand der in der Datenbank vorhanden Informationen zu erzeugen.
+     *
      * @param personalnummer
      * @param dienstgrad
      * @param dienstgradgruppe
@@ -50,8 +52,10 @@ public class Nutzer implements Comparable<Nutzer>{
         this.dienstgradgruppe = dienstgradgruppe;
         this.rolle = rolle;
     }
+
     /**
      * Dieser Konstruktor wird benötigt um aus dem Program einen neuen Nutzer (Soldaten) anzulegen und in der Datenbank zu speichern.
+     *
      * @param personalnummer
      * @param dienstgrad
      * @param name
@@ -90,12 +94,13 @@ public class Nutzer implements Comparable<Nutzer>{
         return rolle;
     }
 
-    public String toString(){
+    public String toString() {
         return dienstgrad + " " + name;
     }
 
     /**
      * Vergleicht den übergebenen Nutzer mit diesem Nutzer anhand des Nachnamens
+     *
      * @param nutzer Übergebener Nutzer
      * @return Integerwert -1 für "kleiner", 0 für "gleich", 1 für "größer"
      */
