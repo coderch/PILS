@@ -23,7 +23,7 @@ public class NutzerLoeschenListener implements ActionListener {
     private final JTextField jTextFieldNachname;
     private final JComboBox<String> jComboBoxDG;
     private final JComboBox<String> jComboBoxDGZusatz;
-    private final JList jListNutzer;
+    private final JList<Nutzer> jListNutzer;
 
     /**
      * Konstruktor für die Klasse NutzerLoeschenListener
@@ -44,7 +44,7 @@ public class NutzerLoeschenListener implements ActionListener {
                                   JTextField jTextFieldNachname,
                                   JComboBox<String> jComboBoxDG,
                                   JComboBox<String> jComboBoxDGZusatz,
-                                  JList jListNutzer) {
+                                  JList<Nutzer> jListNutzer) {
 
         this.jTextFieldPersNr = jTextFieldPersNr;
         this.rollenComboBox = rollenComboBox;

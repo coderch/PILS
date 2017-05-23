@@ -22,7 +22,7 @@ public class NutzerAendernListener implements ActionListener {
     private final JTextField jTextFieldNachname;
     private final JComboBox<String> jComboBoxDG;
     private final JComboBox<String> jComboBoxDGZusatz;
-    private final JList jListNutzer;
+    private final JList<Nutzer> jListNutzer;
     private final JCheckBox login;
 
     /**
@@ -44,7 +44,7 @@ public class NutzerAendernListener implements ActionListener {
                                  JTextField jTextFieldNachname,
                                  JComboBox<String> jComboBoxDG,
                                  JComboBox<String> jComboBoxDGZusatz,
-                                 JList jListNutzer) {
+                                 JList<Nutzer> jListNutzer) {
         this.jTextFieldPersNr = jTextFieldPersNr;
         this.rollenComboBox = rollenComboBox;
         this.login = jCheckBox;

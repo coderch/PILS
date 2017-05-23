@@ -26,7 +26,7 @@ public class NutzerSpeicherListener implements ActionListener {
     private final JTextField jTextFieldNachname;
     private final JComboBox<String> jComboBoxDG;
     private final JComboBox<String> jComboBoxDGZusatz;
-    private JList jListNutzer;
+    private JList<Nutzer> jListNutzer;
 
     /**
      * Konstruktor für die Klasse NutzerSpeicherListener
@@ -47,7 +47,7 @@ public class NutzerSpeicherListener implements ActionListener {
                                   JTextField jTextFieldNachname,
                                   JComboBox<String> jComboBoxDG,
                                   JComboBox<String> jComboBoxDGZusatz,
-                                  JList jListNutzer) {
+                                  JList<Nutzer> jListNutzer) {
 
         this.jTextFieldPersNr = jTextFieldPersNr;
         this.rollenComboBox = rollenComboBox;

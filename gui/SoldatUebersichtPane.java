@@ -3,7 +3,6 @@ package gui;
 import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 import db.NutzerDAO;
-import db.VorhabenDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,7 +81,6 @@ public class SoldatUebersichtPane extends JPanel {
 
             }
         }
-        JScrollPane contentPanel = new JScrollPane(rahmen, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        return contentPanel;
+        return new JScrollPane(rahmen, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     }
 }

@@ -182,7 +182,7 @@ public class NutzerFrame extends JDialog {
      * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze
      */
     private void jListAnzeiger(
-            final JList jListNutzer,
+            final JList<Nutzer> jListNutzer,
             final JFormattedTextField jTextFieldPersNr,
             final JComboBox<String> rollenComboBox,
             final JTextField jTextFieldNachname,
@@ -220,7 +220,7 @@ public class NutzerFrame extends JDialog {
      * @return JPanel mit Buttons
      */
     private JPanel getjPanelButtons(
-            JList jListNutzer,
+            JList<Nutzer> jListNutzer,
             JFormattedTextField jTextFieldPersNr,
             JComboBox<String> rollenComboBox,
             JCheckBox jCheckBox,
