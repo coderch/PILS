@@ -5,7 +5,6 @@ import db.DBPrueferTask;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -39,8 +38,6 @@ public class Runner {
             config.load(bis);
             bis.close();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
