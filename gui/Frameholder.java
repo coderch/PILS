@@ -3,7 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import datenmodell.PasswordHash;
 import db.DBConnect;
-import db.DBExport;
+import export.DBExport;
 import db.NutzerDAO;
 
 import javax.swing.*;

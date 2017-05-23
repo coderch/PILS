@@ -1,4 +1,6 @@
-package db;
+package export;
+
+import db.DBConnect;
 
 import javax.swing.*;
 import java.io.BufferedWriter;
