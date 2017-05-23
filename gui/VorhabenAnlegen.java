@@ -36,7 +36,6 @@ public class VorhabenAnlegen extends JDialog {
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private List<Nutzer> soldatenListe;
     private final List<Nutzer> eingeteilteSoldaten;
-    private List<Nutzer> bufferListe = new ArrayList<>();
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
     private final JList<Nutzer> soldatenJlist1 = new JList();
@@ -67,6 +66,7 @@ public class VorhabenAnlegen extends JDialog {
         this.vorhabenListe = VorhabenDAO.holeVorhabenNamen();
 
         this.eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
+        List<Nutzer> bufferListe = new ArrayList<>();
         for (Nutzer nutzer : soldatenListe) {
             for (Nutzer nutzer1 : eingeteilteSoldaten) {
                 if (nutzer.getPersonalnummer() == nutzer1.getPersonalnummer()) {
