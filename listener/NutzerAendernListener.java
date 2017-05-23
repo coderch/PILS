@@ -1,6 +1,7 @@
 package listener;
 
 import datenmodell.Nutzer;
+import datenmodell.PasswordHash;
 import db.NutzerDAO;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionListener;
 
 /**
  * AktionListener Klasse zum Ändern der Daten aus dem GUI - Element NutzerFrame in die Datenbank
+ *
  * @author ajanzen
  * @see gui.NutzerFrame
  * @see java.awt.event.ActionListener
@@ -21,6 +23,7 @@ public class NutzerAendernListener implements ActionListener {
     private final JComboBox<String> jComboBoxDG;
     private final JComboBox<String> jComboBoxDGZusatz;
     private final JList jListNutzer;
+    private final JCheckBox login;
 
     /**
      * Konstruktor für die Klasse NutzerAendernListener
@@ -44,7 +47,7 @@ public class NutzerAendernListener implements ActionListener {
                                  JList jListNutzer) {
         this.jTextFieldPersNr = jTextFieldPersNr;
         this.rollenComboBox = rollenComboBox;
-        JCheckBox jCheckBox1 = jCheckBox;
+        this.login = jCheckBox;
         this.jTextFieldVorname = jTextFieldVorname;
         this.jTextFieldNachname = jTextFieldNachname;
         this.jComboBoxDG = jComboBoxDG;
@@ -54,18 +57,15 @@ public class NutzerAendernListener implements ActionListener {
 
     /**
      * Methode aus dem Interface ActionListener zum Ändern der Datensätze aus der Datenbank
+     *
      * @param actionEvent
      * @see ActionListener
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (!jListNutzer.isSelectionEmpty()){
+        if (!jListNutzer.isSelectionEmpty()) {
             String dienstgrad;
-            if (jComboBoxDGZusatz.getSelectedItem().toString().endsWith("UA") ||
-                    jComboBoxDGZusatz.getSelectedItem().toString().endsWith("MA") ||
-                    jComboBoxDGZusatz.getSelectedItem().toString().endsWith("FA") ||
-                    jComboBoxDGZusatz.getSelectedItem().toString().endsWith("BA") ||
-                    jComboBoxDGZusatz.getSelectedItem().toString().endsWith("OA")) {
+            if (!jComboBoxDGZusatz.getSelectedItem().equals(" ")) {
                 dienstgrad = jComboBoxDG.getSelectedItem().toString() + " " + jComboBoxDGZusatz.getSelectedItem().toString();
             } else {
                 dienstgrad = jComboBoxDG.getSelectedItem().toString();
@@ -76,6 +76,8 @@ public class NutzerAendernListener implements ActionListener {
                     jTextFieldNachname.getText(),
                     jTextFieldVorname.getText(),
                     rollenComboBox.getSelectedItem().toString()));
+            if (login.isSelected()) NutzerDAO.loginSpeichern(
+                    Integer.parseInt(jTextFieldPersNr.getText()), PasswordHash.createHash("password"));
             jListNutzer.setListData(NutzerDAO.nutzerHolen().toArray(new Nutzer[0]));
         }
     }

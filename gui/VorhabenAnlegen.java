@@ -38,8 +38,8 @@ public class VorhabenAnlegen extends JDialog {
     private final List<Nutzer> eingeteilteSoldaten;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
-    private final JList<Nutzer> soldatenJlist1 = new JList();
-    private final JList<Nutzer> soldatenJlist2 = new JList();
+    private final JList<Nutzer> soldatenJlist1 = new JList<>();
+    private final JList<Nutzer> soldatenJlist2 = new JList<>();
     private final JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
     private JFrame frame;
 
@@ -115,7 +115,7 @@ public class VorhabenAnlegen extends JDialog {
         leftConstraint.gridx = 0;
         leftConstraint.anchor = GridBagConstraints.FIRST_LINE_START;
         platzhalter.setBorder(BorderFactory.createTitledBorder("Vorhaben"));
-        JList<String> vorhabenJList = new JList(this.vorhabenListe.toArray(new String[0]));
+        JList<String> vorhabenJList = new JList<>(this.vorhabenListe.toArray(new String[0]));
         JScrollPane scP = new JScrollPane(vorhabenJList, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scP.setPreferredSize(new Dimension(150, 388));
 

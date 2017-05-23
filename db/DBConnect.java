@@ -65,8 +65,7 @@ public class DBConnect {
      * @see PreparedStatement
      */
     public static PreparedStatement preparedStatement(String sql) throws SQLException {
-        PreparedStatement pstm = connection.prepareStatement(sql);
-        return pstm;
+        return connection.prepareStatement(sql);
     }
 
     /**
@@ -78,8 +77,7 @@ public class DBConnect {
      * @see CallableStatement
      */
     public static CallableStatement callableStatement(String sql) throws SQLException {
-        CallableStatement cstm = connection.prepareCall(sql);
-        return cstm;
+        return connection.prepareCall(sql);
     }
 
     public static DatabaseMetaData getMetaData() {

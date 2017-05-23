@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 /**
  * @author rrose
  */
+@SuppressWarnings("deprecation")
 public class PwAendern extends JDialog {
     private final JFrame frame;
     private JPasswordField altesPasswort;

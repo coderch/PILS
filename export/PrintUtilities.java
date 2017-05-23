@@ -19,7 +19,7 @@ public class PrintUtilities implements Printable {
         new PrintUtilities( componentsToPrint ).print();
     }
     public static void printComponent( JComponent componentToPrint ) {
-        componentsToPrint = new ArrayList();
+        componentsToPrint = new ArrayList<>();
         componentsToPrint.add(componentToPrint);
         new PrintUtilities(componentsToPrint ).print();
     }

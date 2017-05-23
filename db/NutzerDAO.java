@@ -156,7 +156,7 @@ public class NutzerDAO {
     public static Set<String> holeDienstgrade() {
         String sqlStatement = "SELECT pk_listenschreibweise FROM t_dienstgrade";
         Set<String> dienstgradeSet = new TreeSet<>();
-        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery();) {
+        try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlStatement); ResultSet rs = ptsm.executeQuery()) {
             while (rs.next()) {
                 dienstgradeSet.add(rs.getString(1));
             }
@@ -197,11 +197,7 @@ public class NutzerDAO {
             ptsm.setString(2, password);
 
             ResultSet rs = ptsm.executeQuery();
-            if (rs.next()) {
-                status = true;
-            } else {
-                status = false;
-            }
+            status = rs.next();
         } catch (SQLException e) {
             DBConnect.SQLFehlermeldung(e);
         }

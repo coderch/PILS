@@ -33,7 +33,6 @@ public class PasswordHash {
             }
         } catch (NoSuchAlgorithmException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);
-            ;
         }
         return sb.toString();
     }

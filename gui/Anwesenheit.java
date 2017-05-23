@@ -1,8 +1,6 @@
 package gui;
 
-import datenmodell.Nutzer;
 import db.NutzerDAO;
-import db.VorhabenDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +18,7 @@ public class Anwesenheit extends JDialog {
     public static final String VORHABEN = "Vorhaben";
     public static final String ABWESEND = "Abwesend";
     public static final String LEHRGANG = "Lehrgang";
-    private final JComboBox<String> anwesenheitsStatus = new JComboBox();
+    private final JComboBox<String> anwesenheitsStatus = new JComboBox<>();
 
     public Anwesenheit() {
         this.dialogbauen();

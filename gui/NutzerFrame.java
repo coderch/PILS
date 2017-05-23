@@ -41,8 +41,6 @@ public class NutzerFrame extends JDialog {
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
-    //TODO @ajanzen Nutzerlevel abfangen und Zugdienst das Erstellen von Soldaten erlauben
-
 
     /**
      * Methode zur Dartsellung des Inhalts
@@ -93,7 +91,7 @@ public class NutzerFrame extends JDialog {
             for (Rolle rolle : rolleList) {
                 rollenComboBox.addItem(rolle.getBeschreibung());
             }
-        }else{
+        } else {
             rollenComboBox.addItem("Soldat");
         }
         rollenComboBox.setPreferredSize(new Dimension(150, 23));
