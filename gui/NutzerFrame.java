@@ -13,18 +13,16 @@ import listener.NutzerSpeicherListener;
 import listener.PasswordResetListener;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
- * Klasse NutzerFrame. Erstellt ein GUI - element zum erstellung neuer Nutzer sowie die änderung der Informationen der Nutzer
+ * Klasse NutzerFrame. Erstellt ein GUI-Element zur Erstellung neuer Nutzer sowie die Änderung der Informationen der Nutzer
  *
  * @author ajanzen
  * @version 1.0
@@ -161,17 +159,14 @@ public class NutzerFrame extends JDialog {
         jPanelRechts.add(jPanelButtons, BorderLayout.SOUTH);
         jPanelMaster.add(jPanelJListNutzer, BorderLayout.WEST);
         jPanelMaster.add(jPanelRechts, BorderLayout.EAST);
-        jButtonReset.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                jTextFieldPersNr.setText(null);
-                jCheckBox.setSelected(false);
-                rollenComboBox.setSelectedIndex(0);
-                jTextFieldNachname.setText("");
-                jTextFieldVorname.setText("");
-                jComboBoxDG.setSelectedIndex(0);
-                jComboBoxDGZusatz.setSelectedIndex(0);
-            }
+        jButtonReset.addActionListener(actionEvent -> {
+            jTextFieldPersNr.setText(null);
+            jCheckBox.setSelected(false);
+            rollenComboBox.setSelectedIndex(0);
+            jTextFieldNachname.setText("");
+            jTextFieldVorname.setText("");
+            jComboBoxDG.setSelectedIndex(0);
+            jComboBoxDGZusatz.setSelectedIndex(0);
         });
         return jPanelMaster;
 
@@ -199,19 +194,16 @@ public class NutzerFrame extends JDialog {
 
         java.util.List<Nutzer> nutzers = NutzerDAO.nutzerHolen();
         jListNutzer.setListData(nutzers.toArray(new Nutzer[0]));
-        jListNutzer.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
+        jListNutzer.addListSelectionListener(listSelectionEvent -> {
 
-                if (jListNutzer.getSelectedValue() != null) {
-                    zeigeDaten((Nutzer) jListNutzer.getSelectedValue(),
-                            jTextFieldPersNr,
-                            rollenComboBox,
-                            jTextFieldVorname,
-                            jTextFieldNachname,
-                            jComboBoxDG,
-                            jComboBoxDGZusatz);
-                }
+            if (jListNutzer.getSelectedValue() != null) {
+                zeigeDaten((Nutzer) jListNutzer.getSelectedValue(),
+                        jTextFieldPersNr,
+                        rollenComboBox,
+                        jTextFieldVorname,
+                        jTextFieldNachname,
+                        jComboBoxDG,
+                        jComboBoxDGZusatz);
             }
         });
     }
@@ -274,13 +266,10 @@ public class NutzerFrame extends JDialog {
                 jListNutzer
         ));
         JButton jButtonAbbruch = new JButton("Abbrechen");
-        jButtonAbbruch.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
+        jButtonAbbruch.addActionListener(actionEvent -> {
 
-                setVisible(false);
-                dispose();
-            }
+            setVisible(false);
+            dispose();
         });
         jPanelButtons.add(jButtonSpeichern);
         jPanelButtons.add(jButtonAendern);
