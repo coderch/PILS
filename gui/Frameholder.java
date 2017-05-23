@@ -91,7 +91,7 @@ public class Frameholder {
         nutzerReiter.add(ausloggen);
         nutzerReiter.add(pwaendern);
         menuBar.add(nutzerReiter);
-        if (userlevel.equalsIgnoreCase("zugdienst") || userlevel.equalsIgnoreCase("zugführer")) {
+        if (!userlevel.equals("Soldat")) {
             JMenuItem staerkeMeldung = new JMenuItem("Stärkemeldung");
             verwaltungReiter.add(staerkeMeldung);
             JMenuItem urlaubEintragen = new JMenuItem("Urlaub eintragen");

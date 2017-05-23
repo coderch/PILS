@@ -3,6 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
 import export.PrintUtilities;
+import listener.DruckenListener;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -44,7 +45,9 @@ public class Kalender extends JPanel {
         monatsAnzeigeBauen();
         monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
         kalenderPane.add("Monat", monat);
-        popupMenubauen();
+        if (!Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("Soldat")) {
+            popupMenubauen();
+        }
     }
 
     private void popupMenubauen() {
@@ -197,7 +200,7 @@ public class Kalender extends JPanel {
             spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
-        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(kalenderPane));
+        drucken.addActionListener(new DruckenListener(kalenderPane));
         drucken.setToolTipText("Drucken");
         drucken.setPreferredSize(zurueck.getPreferredSize());
         anzeigePanel.add(refresh);

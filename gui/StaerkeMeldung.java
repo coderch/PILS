@@ -3,6 +3,7 @@ package gui;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
 import export.PrintUtilities;
+import listener.DruckenListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -177,7 +178,7 @@ public class StaerkeMeldung extends JDialog {
         JButton drucken = new JButton();
         drucken.setPreferredSize(melden.getPreferredSize());
         drucken.setIcon(IconHandler.DRUCKEN);
-        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(contentPanel));
+        drucken.addActionListener(new DruckenListener(contentPanel));
         buttonPanel.add(melden);
         buttonPanel.add(abbrechen);
         buttonPanel.add(drucken);

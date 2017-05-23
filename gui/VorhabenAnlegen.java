@@ -27,6 +27,7 @@ import java.util.List;
  * @author mwaldau
  * @see javax.swing.JDialog
  */
+
 public class VorhabenAnlegen extends JDialog {
     private final JTextField name = new JTextField(35);
     private final JTextArea beschreibung = new JTextArea(5, 35);
@@ -42,7 +43,7 @@ public class VorhabenAnlegen extends JDialog {
     private JFrame frame;
 
     /**
-     * Konstruktor zum Anlegen aus dem Framholder heraus
+     * Konstruktor zum Anlegen eines Vorhabens aus dem Framholder heraus
      */
     public VorhabenAnlegen(JFrame frame) {
         this.frame = frame;
@@ -141,7 +142,11 @@ public class VorhabenAnlegen extends JDialog {
         name.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent documentEvent) {
-                if (name.getText().equalsIgnoreCase("Lehrgang")) name.setEditable(false);
+                if (name.getText().equalsIgnoreCase("Lehrgang")) {
+                    name.setEditable(false);
+                } else {
+                    name.setEditable(true);
+                }
             }
 
             @Override
@@ -176,7 +181,9 @@ public class VorhabenAnlegen extends JDialog {
 
         JPanel beginnPanel = new JPanel();
         beginnPanel.setBorder(BorderFactory.createTitledBorder("Beginn"));
-        beginn.setPreferredSize(new Dimension(100, 20));
+        beginn.setPreferredSize(new
+
+                Dimension(100, 20));
         beginnPanel.add(beginn);
         GridBagConstraints beginnconstraint = new GridBagConstraints();
         beginnconstraint.gridy = 2;
@@ -205,7 +212,9 @@ public class VorhabenAnlegen extends JDialog {
 
         JPanel soldaten1Panel = new JPanel();
         JScrollPane scrollPane1 = new JScrollPane(soldatenJlist1, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane1.setPreferredSize(new Dimension(150, 150));
+        scrollPane1.setPreferredSize(new
+
+                Dimension(150, 150));
         soldaten1Panel.setBorder(BorderFactory.createTitledBorder("Soldat zuweisen"));
         soldaten1Panel.add(scrollPane1);
 
@@ -216,7 +225,9 @@ public class VorhabenAnlegen extends JDialog {
 
         soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
         JScrollPane scrollPane2 = new JScrollPane(soldatenJlist2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane2.setPreferredSize(new Dimension(150, 150));
+        scrollPane2.setPreferredSize(new
+
+                Dimension(150, 150));
         JPanel soldaten2Panel = new JPanel();
         soldaten2Panel.setBorder(BorderFactory.createTitledBorder("zugewiesene Soldaten"));
         soldaten2Panel.add(scrollPane2);
@@ -229,7 +240,9 @@ public class VorhabenAnlegen extends JDialog {
         JButton zu = new JButton(">>");
         // wenn Selection nicht leer, Selektierte durchgehen, aus SoldatenListe entfernen und den eingeteilten zuweisen
         //danach die JLists mit den Lists<Nutzer> abgleichen
-        zu.addActionListener(actionEvent -> {
+        zu.addActionListener(actionEvent ->
+
+        {
             if (!soldatenJlist1.isSelectionEmpty()) {
                 for (Nutzer nutzer : soldatenJlist1.getSelectedValuesList()) {
                     soldatenListe.remove(nutzer);
@@ -242,8 +255,12 @@ public class VorhabenAnlegen extends JDialog {
         });
         // sinngemäß umgekehrt zu >>
         JButton ab = new JButton("<<");
-        ab.setPreferredSize(new Dimension(80, 20));
-        ab.addActionListener(actionEvent -> {
+        ab.setPreferredSize(new
+
+                Dimension(80, 20));
+        ab.addActionListener(actionEvent ->
+
+        {
             if (!soldatenJlist2.isSelectionEmpty()) {
                 for (Nutzer nutzer : soldatenJlist2.getSelectedValuesList()) {
                     eingeteilteSoldaten.remove(nutzer);
@@ -255,7 +272,7 @@ public class VorhabenAnlegen extends JDialog {
             }
         });
         JButton prüfen = new JButton("Prüfen");
-        prüfen.setPreferredSize(new Dimension(80,20));
+        prüfen.setPreferredSize(new Dimension(80, 20));
         prüfen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -264,18 +281,18 @@ public class VorhabenAnlegen extends JDialog {
                 soldatenJlist1.setCellRenderer(new DefaultListCellRenderer() {
                     @Override
                     public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-                        Component rendererComponent =  super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+                        Component rendererComponent = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
                         if (value instanceof Nutzer) {
-                        for (LocalDate i = beginnDatum; i.isBefore(endDatum.plusDays(1)) ; i = i.plusDays(1)) {
-                            if (!NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("") || NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("Anwesend")) {
-                                rendererComponent.setBackground(Color.red);
-                            } else {
-                                rendererComponent.setBackground(Color.green);
+                            for (LocalDate i = beginnDatum; i.isBefore(endDatum.plusDays(1)); i = i.plusDays(1)) {
+                                if (!NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("") || NutzerDAO.hatAnwesenheit((Nutzer) value, i).equals("Anwesend")) {
+                                    rendererComponent.setBackground(Color.red);
+                                } else {
+                                    rendererComponent.setBackground(Color.green);
+                                }
+                                if (isSelected) {
+                                    rendererComponent.setBackground(getBackground().darker());
+                                }
                             }
-                            if (isSelected) {
-                                rendererComponent.setBackground(getBackground().darker());
-                            }
-                        }
 
                         }
                         return rendererComponent;
@@ -294,7 +311,9 @@ public class VorhabenAnlegen extends JDialog {
 
         //-------------center5  Platzhalter -------------------------
         JPanel center5 = new JPanel();
-        center5.setPreferredSize(new Dimension(0, 50));
+        center5.setPreferredSize(new
+
+                Dimension(0, 50));
         GridBagConstraints center5Constraint = new GridBagConstraints();
         center5Constraint.gridy = 4;
         center5Constraint.gridx = 0;
@@ -308,15 +327,21 @@ public class VorhabenAnlegen extends JDialog {
         center6Constraint.gridwidth = 3;
         center6Constraint.anchor = GridBagConstraints.CENTER;
         JButton ok = new JButton("OK");
-        ok.addActionListener(actionEvent -> {
+        ok.addActionListener(actionEvent ->
+
+        {
             eintragen();
             dispose();
 
         });
         JButton uebernehmen = new JButton("Übernehmen");
-        uebernehmen.addActionListener(actionEvent -> eintragen());
+        uebernehmen.addActionListener(actionEvent ->
+
+                eintragen());
         JButton abbrechen = new JButton("Abbrechen");
-        abbrechen.addActionListener(actionEvent -> dispose());
+        abbrechen.addActionListener(actionEvent ->
+
+                dispose());
         center6.add(ok);
         center6.add(uebernehmen);
         center6.add(abbrechen);

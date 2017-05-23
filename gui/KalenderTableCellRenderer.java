@@ -1,11 +1,20 @@
 package gui;
 
+import datenmodell.Nutzer;
+import datenmodell.Vorhaben;
+import db.NutzerDAO;
+import db.VorhabenDAO;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.*;
+import java.util.List;
 
 /**
  * Gibt das Aussehen der einzelnen Table Zellen vor
@@ -13,10 +22,6 @@ import java.time.LocalDate;
  * @author mwaldau
  */
 class KalenderTableCellRenderer extends DefaultTableCellRenderer {
-    public static final Border STANDARD = new JLabel().getBorder();
-    public static final Border MARKIERT = BorderFactory.createLineBorder(Color.GREEN);
-
-
     public Component getTableCellRendererComponent(JTable table, Object value,
                                                    boolean isSelected, boolean hasFocus, int row, int column) {
 
@@ -48,6 +53,7 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                 case Anwesenheit.VORHABEN:
                     zelle.setIcon(IconHandler.WOLKE);
                     zelle.setText("");
+//                    zelle.setToolTipText(String.valueOf(table.getValueAt(row, 1)));
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case Anwesenheit.ABWESEND:

@@ -4,6 +4,7 @@ import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
 import db.NutzerDAO;
 import export.PrintUtilities;
+import listener.DruckenListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +40,7 @@ public class Dienstuebersicht extends JDialog {
         JScrollPane scrollPane = new JScrollPane(createContent(), ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.CENTER);
         JButton drucken = new JButton(IconHandler.DRUCKEN);
-        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(contentPanel));
+        drucken.addActionListener(new DruckenListener(contentPanel));
         this.add(drucken, BorderLayout.SOUTH);
         this.pack();
         this.setLocationRelativeTo(frame);

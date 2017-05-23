@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
 import export.PrintUtilities;
+import listener.DruckenListener;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -200,7 +201,7 @@ public class PersonalUebersicht extends JDialog {
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
+        drucken.addActionListener(new DruckenListener((JComponent) centerPanel.getSelectedComponent()));
         buttonPanel.add(new JLabel());
         buttonPanel.add(uebersicht);
         buttonPanel.add(drucken);

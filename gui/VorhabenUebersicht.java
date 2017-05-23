@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import datenmodell.Vorhaben;
 import db.VorhabenDAO;
 import export.PrintUtilities;
+import listener.DruckenListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -65,7 +66,7 @@ public class VorhabenUebersicht extends JDialog {
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
+        drucken.addActionListener(new DruckenListener((JComponent) centerPanel.getSelectedComponent()));
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(erstellen);
         buttonPanel.add(drucken);
