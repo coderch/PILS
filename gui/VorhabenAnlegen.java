@@ -120,12 +120,7 @@ public class VorhabenAnlegen extends JDialog {
         scP.setPreferredSize(new Dimension(150, 388));
 
         vorhabenJList.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
-        vorhabenJList.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent listSelectionEvent) {
-                name.setText(vorhabenJList.getSelectedValue());
-            }
-        });
+        vorhabenJList.addListSelectionListener(listSelectionEvent -> name.setText(vorhabenJList.getSelectedValue()));
         platzhalter.add(scP);
         leftPanel.add(platzhalter);
 
@@ -236,35 +231,29 @@ public class VorhabenAnlegen extends JDialog {
         JButton zu = new JButton(">>");
         // wenn Selection nicht leer, Selektierte durchgehen, aus SoldatenListe entfernen und den eingeteilten zuweisen
         //danach die JLists mit den Lists<Nutzer> abgleichen
-        zu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (!soldatenJlist1.isSelectionEmpty()) {
-                    for (Nutzer nutzer : soldatenJlist1.getSelectedValuesList()) {
-                        soldatenListe.remove(nutzer);
-                        eingeteilteSoldaten.add(nutzer);
-                    }
-                    soldatenJlist1.removeAll();
-                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
-                    soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
+        zu.addActionListener(actionEvent -> {
+            if (!soldatenJlist1.isSelectionEmpty()) {
+                for (Nutzer nutzer : soldatenJlist1.getSelectedValuesList()) {
+                    soldatenListe.remove(nutzer);
+                    eingeteilteSoldaten.add(nutzer);
                 }
+                soldatenJlist1.removeAll();
+                soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
+                soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
             }
         });
         // sinngemäß umgekehrt zu >>
         JButton ab = new JButton("<<");
         ab.setPreferredSize(new Dimension(80, 20));
-        ab.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                if (!soldatenJlist2.isSelectionEmpty()) {
-                    for (Nutzer nutzer : soldatenJlist2.getSelectedValuesList()) {
-                        eingeteilteSoldaten.remove(nutzer);
-                        soldatenListe.add(nutzer);
-                    }
-                    soldatenJlist2.removeAll();
-                    soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
-                    soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
+        ab.addActionListener(actionEvent -> {
+            if (!soldatenJlist2.isSelectionEmpty()) {
+                for (Nutzer nutzer : soldatenJlist2.getSelectedValuesList()) {
+                    eingeteilteSoldaten.remove(nutzer);
+                    soldatenListe.add(nutzer);
                 }
+                soldatenJlist2.removeAll();
+                soldatenJlist1.setListData(soldatenListe.toArray(new Nutzer[0]));
+                soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
             }
         });
         JButton prüfen = new JButton("Prüfen");
@@ -321,28 +310,15 @@ public class VorhabenAnlegen extends JDialog {
         center6Constraint.gridwidth = 3;
         center6Constraint.anchor = GridBagConstraints.CENTER;
         JButton ok = new JButton("OK");
-        ok.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                eintragen();
-                dispose();
+        ok.addActionListener(actionEvent -> {
+            eintragen();
+            dispose();
 
-            }
         });
         JButton uebernehmen = new JButton("Übernehmen");
-        uebernehmen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                eintragen();
-            }
-        });
+        uebernehmen.addActionListener(actionEvent -> eintragen());
         JButton abbrechen = new JButton("Abbrechen");
-        abbrechen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                dispose();
-            }
-        });
+        abbrechen.addActionListener(actionEvent -> dispose());
         center6.add(ok);
         center6.add(uebernehmen);
         center6.add(abbrechen);

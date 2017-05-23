@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 
 /**
- * Created by ajanzen on 09.01.2017.
+ * @author ajanzen
  */
 public class LoginFrame extends JFrame {
 
@@ -82,11 +82,7 @@ public class LoginFrame extends JFrame {
 
         JButton jButtonLogin = new JButton("Login");
 
-        jButtonLogin.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                getLogin(jLabelMeldung);
-            }
-        });
+        jButtonLogin.addActionListener(e -> getLogin(jLabelMeldung));
 
         jTextFieldUser.addKeyListener(new KeyAdapter() {
             @Override
@@ -108,11 +104,7 @@ public class LoginFrame extends JFrame {
             }
         });
         JButton jButtonAbbrechen = new JButton("Cancel");
-        jButtonAbbrechen.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        jButtonAbbrechen.addActionListener(e -> System.exit(0));
         JPanel jPanelButton = new JPanel();
         jPanelButton.add(jButtonLogin);
         jPanelButton.add(jButtonAbbrechen);

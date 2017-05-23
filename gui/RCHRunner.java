@@ -12,7 +12,7 @@ import java.util.Properties;
 import java.util.Timer;
 
 /**
- * Created by mwaldau on 26.01.2017.
+ * @author rrose
  */
 public class RCHRunner {
 

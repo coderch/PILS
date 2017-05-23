@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by mwaldau on 03.05.2017.
+ * @author mwaldau
  */
 public class Dienstuebersicht extends JDialog {
 
@@ -25,7 +25,7 @@ public class Dienstuebersicht extends JDialog {
 
     public Dienstuebersicht(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
-        this.vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(this.soldaten, LocalDate.of(LocalDate.now().getYear(), 01, 01), LocalDate.of(LocalDate.now().getYear(), 12, 31));
+        this.vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(this.soldaten, LocalDate.of(LocalDate.now().getYear(), 1, 1), LocalDate.of(LocalDate.now().getYear(), 12, 31));
         this.frame = frame;
         this.contentPanel = new JPanel(new GridLayout(vorhabenMap.size()+1, 1));
         this.dialogBauen();
@@ -41,12 +41,7 @@ public class Dienstuebersicht extends JDialog {
         JScrollPane scrollPane = new JScrollPane(createContent(), ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         this.add(scrollPane, BorderLayout.CENTER);
         JButton drucken = new JButton(IconHandler.DRUCKEN);
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PrintUtilities.printComponent(contentPanel);
-            }
-        });
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(contentPanel));
         this.add(drucken, BorderLayout.SOUTH);
         this.pack();
         this.setLocationRelativeTo(frame);

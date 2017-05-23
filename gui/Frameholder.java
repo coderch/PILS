@@ -37,7 +37,7 @@ public class Frameholder {
      */
     public Frameholder(Nutzer aktiverNutzer) {
 
-        this.aktiverNutzer = aktiverNutzer;
+        Frameholder.aktiverNutzer = aktiverNutzer;
         this.userlevel = aktiverNutzer.getRolle();
         frame = new JFrame("PILS");
         kalender = new Kalender();
@@ -84,20 +84,12 @@ public class Frameholder {
         JPanel contentPanel = new JPanel(new BorderLayout());
 
         JMenuItem ausloggen = new JMenuItem("ausloggen");
-        ausloggen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                frame.dispose();
-                new LoginFrame();
-            }
+        ausloggen.addActionListener(actionEvent -> {
+            frame.dispose();
+            new LoginFrame();
         });
         JMenuItem pwaendern = new JMenuItem("Passwort ändern");
-        pwaendern.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new PwAendern(frame);
-            }
-        });
+        pwaendern.addActionListener(actionEvent -> new PwAendern(frame));
         nutzerReiter.add(ausloggen);
         nutzerReiter.add(pwaendern);
         menuBar.add(nutzerReiter);
@@ -107,77 +99,32 @@ public class Frameholder {
             JMenuItem urlaubEintragen = new JMenuItem("Urlaub eintragen");
             verwaltungReiter.add(urlaubEintragen);
             menuBar.add(verwaltungReiter);
-            staerkeMeldung.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    new StaerkeMeldung(frame);
-                }
-            });
-            urlaubEintragen.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    new UrlaubEintragen(frame);
-                }
-            });
+            staerkeMeldung.addActionListener(actionEvent -> new StaerkeMeldung(frame));
+            urlaubEintragen.addActionListener(actionEvent -> new UrlaubEintragen(frame));
             JMenuItem soldatenVerwalten = new JMenuItem("Teileinheit verwalten");
             verwaltungReiter.add(soldatenVerwalten);
-            soldatenVerwalten.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    new NutzerFrame(frame);
-                }
-            });
+            soldatenVerwalten.addActionListener(e -> new NutzerFrame(frame));
             verwaltungReiter.add(soldatenVerwalten);
             JMenuItem dienstUebersicht = new JMenuItem("Dienstübersicht");
-            dienstUebersicht.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent actionEvent) {
-                    new Dienstuebersicht(frame);
-                }
-            });
+            dienstUebersicht.addActionListener(actionEvent -> new Dienstuebersicht(frame));
             menuBar.add(uebersichtenReiter);
             if (userlevel.equalsIgnoreCase("zugführer")) {
 
 
                 JMenuItem vorhabenAnlegen = new JMenuItem("Vorhaben anlegen");
-                vorhabenAnlegen.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenAnlegen(frame);
-                    }
-                });
+                vorhabenAnlegen.addActionListener(actionEvent -> new VorhabenAnlegen(frame));
                 verwaltungReiter.add(vorhabenAnlegen);
 
 
                 JMenuItem personalUebersicht = new JMenuItem("Personalübersicht");
-                personalUebersicht.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new PersonalUebersicht(frame);
-                    }
-                });
+                personalUebersicht.addActionListener(actionEvent -> new PersonalUebersicht(frame));
                 JMenuItem vorhabenUebersicht = new JMenuItem("Vorhabenübersicht");
-                vorhabenUebersicht.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenUebersicht(frame);
-                    }
-                });
+                vorhabenUebersicht.addActionListener(actionEvent -> new VorhabenUebersicht(frame));
                 uebersichtenReiter.add(personalUebersicht);
                 uebersichtenReiter.add(vorhabenUebersicht);
                 menuBar.add(export);
                 JMenuItem dbSicherung = new JMenuItem("Datenbanksicherung");
-                dbSicherung.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                new DBExport();
-                            }
-                        }).start();
-                    }
-                });
+                dbSicherung.addActionListener(actionEvent -> new Thread(() -> new DBExport()).start());
                 export.add(dbSicherung);
             }
             uebersichtenReiter.add(dienstUebersicht);

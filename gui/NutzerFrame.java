@@ -195,7 +195,7 @@ public class NutzerFrame extends JDialog {
         jListNutzer.addListSelectionListener(listSelectionEvent -> {
 
             if (jListNutzer.getSelectedValue() != null) {
-                zeigeDaten((Nutzer) jListNutzer.getSelectedValue(),
+                zeigeDaten(jListNutzer.getSelectedValue(),
                         jTextFieldPersNr,
                         rollenComboBox,
                         jTextFieldVorname,

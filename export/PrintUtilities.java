@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by rrose on 09.05.2017.
+ * @author rrose
  */
-
 public class PrintUtilities implements Printable {
 
     private static List<JComponent> componentsToPrint;
@@ -25,7 +24,7 @@ public class PrintUtilities implements Printable {
     }
 
     public PrintUtilities( List<JComponent> componentsToPrint ) {
-        this.componentsToPrint = componentsToPrint;
+        PrintUtilities.componentsToPrint = componentsToPrint;
     }
 
     public void print() {

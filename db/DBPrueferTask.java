@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.TimerTask;
 
 /**
- * Created by rrose on 22.05.2017.
+ * @author rrose
  */
 public class DBPrueferTask extends TimerTask {
     @Override

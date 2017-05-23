@@ -166,31 +166,18 @@ public class StaerkeMeldung extends JDialog {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         GridBagConstraints buttonPanelConstr = new GridBagConstraints(0, i + 1, 5, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JButton melden = new JButton("Melden");
-        melden.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
-                    NutzerDAO.anwesenheitEintragenTag(nutzerStringEntry.getKey(), LocalDate.now(), nutzerStringEntry.getValue());
-                }
-                dispose();
+        melden.addActionListener(actionEvent -> {
+            for (Map.Entry<Nutzer, String> nutzerStringEntry : ausgewSoldat.entrySet()) {
+                NutzerDAO.anwesenheitEintragenTag(nutzerStringEntry.getKey(), LocalDate.now(), nutzerStringEntry.getValue());
             }
+            dispose();
         });
         JButton abbrechen = new JButton("Abbrechen");
-        abbrechen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                dispose();
-            }
-        });
+        abbrechen.addActionListener(actionEvent -> dispose());
         JButton drucken = new JButton();
         drucken.setPreferredSize(melden.getPreferredSize());
         drucken.setIcon(IconHandler.DRUCKEN);
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PrintUtilities.printComponent(contentPanel);
-            }
-        });
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(contentPanel));
         buttonPanel.add(melden);
         buttonPanel.add(abbrechen);
         buttonPanel.add(drucken);

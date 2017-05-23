@@ -1,7 +1,7 @@
 package datenmodell;
 
 /**
- * Created by ajanzen on 16.12.2016.
+ * @author ajanzen
  */
 public class Rolle {
 

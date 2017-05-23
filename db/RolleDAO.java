@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ajanzen on 16.12.2016.
+ * @author ajazen
  */
 public class RolleDAO {
 

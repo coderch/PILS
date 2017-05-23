@@ -166,28 +166,22 @@ public class Kalender extends JPanel {
         label.setPreferredSize(new Dimension(400, 60));
         JButton zurueck = new JButton("<");
         zurueck.setToolTipText("zurück");
-        zurueck.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                datum = datum.minusMonths(1);
-                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
+        zurueck.addActionListener(e -> {
+            datum = datum.minusMonths(1);
+            label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
 
-                kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-                ((KalenderModel) kalender.getModel()).fireTableDataChanged();
-                spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-            }
+            kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
+            ((KalenderModel) kalender.getModel()).fireTableDataChanged();
+            spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
         });
         JButton weiter = new JButton(">");
         weiter.setToolTipText("weiter");
-        weiter.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                datum = datum.plusMonths(1);
-                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-                ((KalenderModel) kalender.getModel()).fireTableDataChanged();
-                spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-            }
+        weiter.addActionListener(e -> {
+            datum = datum.plusMonths(1);
+            label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
+            kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
+            ((KalenderModel) kalender.getModel()).fireTableDataChanged();
+            spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
         });
 
         label.setFont(new Font(label.getFont().getName(), Font.CENTER_BASELINE, 35));
@@ -195,23 +189,15 @@ public class Kalender extends JPanel {
         JButton refresh = new JButton(IconHandler.REFRESH);
         refresh.setToolTipText("Aktualisieren");
         refresh.setPreferredSize(zurueck.getPreferredSize());
-        refresh.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                datum = LocalDate.now();
-                label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
-                kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-                ((KalenderModel) kalender.getModel()).fireTableDataChanged();
-                spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
-            }
+        refresh.addActionListener(actionEvent -> {
+            datum = LocalDate.now();
+            label.setText(String.format("%s", MONATJAHRFORMATTER.format(datum)));
+            kalenderModel.setDataVector(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
+            ((KalenderModel) kalender.getModel()).fireTableDataChanged();
+            spaltenBreite(monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()]));
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PrintUtilities.printComponent(kalenderPane);
-            }
-        });
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent(kalenderPane));
         drucken.setToolTipText("Drucken");
         drucken.setPreferredSize(zurueck.getPreferredSize());
         anzeigePanel.add(refresh);

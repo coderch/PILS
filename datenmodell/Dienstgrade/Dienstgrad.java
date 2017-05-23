@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Created by ajanzen on 03.05.2017.
+ * @author ajanzen
  */
 public class Dienstgrad implements Comparator<Dienstgrad> {
     private String bezeicnung;

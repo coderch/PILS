@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 /**
- * Created by rrose on 29.11.2016.
+ * @author rrose
  */
 public class Anwesenheit extends JDialog {
     public static final String ANWESEND = "Anwesend";
@@ -55,13 +55,10 @@ public class Anwesenheit extends JDialog {
         JPanel buttonPanel = new JPanel();
         JButton eintragen = new JButton("Senden");
         eintragen.setPreferredSize(new Dimension(100,26));
-        eintragen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                NutzerDAO.anwesenheitEintragenTag(Frameholder.aktiverNutzer, LocalDate.now(), (String) anwesenheitsStatus.getSelectedItem());
-                new Frameholder(Frameholder.aktiverNutzer);
-                dispose();
-            }
+        eintragen.addActionListener(actionEvent -> {
+            NutzerDAO.anwesenheitEintragenTag(Frameholder.aktiverNutzer, LocalDate.now(), (String) anwesenheitsStatus.getSelectedItem());
+            new Frameholder(Frameholder.aktiverNutzer);
+            dispose();
         });
         buttonPanel.add(eintragen);
         contentPanel.add(begrPanel);

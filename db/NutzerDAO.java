@@ -277,32 +277,32 @@ public class NutzerDAO {
         }
     }
 
-    /**
-     * @param nutzer
-     * @param start
-     * @param ende
-     * @param status
-     */
-    public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");
-            pstm.setDate(1, Date.valueOf(start));
-            pstm.setDate(2, Date.valueOf(ende));
-            pstm.executeUpdate();
-
-            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_status_im_zeitraum (fk_t_soldat_pk_personalnummer, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, fk_t_anwesenheitstatus_pk_beschreibung) VALUES (?,?,?,?)ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET (fk_t_anwesenheitstatus_pk_beschreibung) = (?)");
-            pstm.setInt(1, nutzer.getPersonalnummer());
-            pstm.setDate(2, Date.valueOf(start));
-            pstm.setDate(3, Date.valueOf(ende));
-            pstm.setString(4, status);
-            pstm.setString(5, status);
-            pstm.executeUpdate();
-            pstm.close();
-
-        } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);
-        }
-    }
+//    /**
+//     * @param nutzer
+//     * @param start
+//     * @param ende
+//     * @param status
+//     */
+//    public static void anwesenheitEintragenZeitraum(Nutzer nutzer, LocalDate start, LocalDate ende, String status) {
+//        try {
+//            PreparedStatement pstm = DBConnect.preparedStatement("INSERT INTO t_zeitraum (pk_von, pk_bis) VALUES (?,?) ON CONFLICT DO NOTHING ");
+//            pstm.setDate(1, Date.valueOf(start));
+//            pstm.setDate(2, Date.valueOf(ende));
+//            pstm.executeUpdate();
+//
+//            pstm = DBConnect.preparedStatement("INSERT INTO t_hat_status_im_zeitraum (fk_t_soldat_pk_personalnummer, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, fk_t_anwesenheitstatus_pk_beschreibung) VALUES (?,?,?,?)ON CONFLICT (fk_t_soldat_pk_personalnummer,fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) DO UPDATE SET (fk_t_anwesenheitstatus_pk_beschreibung) = (?)");
+//            pstm.setInt(1, nutzer.getPersonalnummer());
+//            pstm.setDate(2, Date.valueOf(start));
+//            pstm.setDate(3, Date.valueOf(ende));
+//            pstm.setString(4, status);
+//            pstm.setString(5, status);
+//            pstm.executeUpdate();
+//            pstm.close();
+//
+//        } catch (SQLException e) {
+//            DBConnect.SQLFehlermeldung(e);
+//        }
+//    }
 
     /**
      * Löscht einen Anwesenheitsstatus für einen bestimmten Nutzer und einem dazugehörigen Datum.

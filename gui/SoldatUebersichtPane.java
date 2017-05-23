@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by mwaldau on 07.02.2017.
+ * @author mwaldau
  */
 public class SoldatUebersichtPane extends JPanel {
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
@@ -65,12 +65,7 @@ public class SoldatUebersichtPane extends JPanel {
                 vorhabenBeginn.setText(vorhaben.getStart().format(DTF));
                 vorhabenEnde.setText(vorhaben.getEnde().format(DTF));
                 JButton editieren = new JButton("Bearbeiten");
-                editieren.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenAnlegen(vorhaben, frame);
-                    }
-                });
+                editieren.addActionListener(actionEvent -> new VorhabenAnlegen(vorhaben, frame));
                 editieren.setFont(new Font("Arial", Font.PLAIN, 10));
                 editieren.setPreferredSize(new Dimension(100,20));
                 vorhabenRahmen.add(vorhabenAnzeige);

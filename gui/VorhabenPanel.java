@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
- * Created by mwaldau on 23.03.2017.
+ * @author mwaldau
  */
 public class VorhabenPanel extends JPanel {
     private Vorhaben vorhaben;
@@ -67,12 +67,7 @@ public class VorhabenPanel extends JPanel {
         JPanel buttonPanel = new JPanel();
         JButton editieren = new JButton("Bearbeiten");
         editieren.setFont(new Font("Arial", Font.PLAIN, 10));
-        editieren.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                new VorhabenAnlegen(vorhaben, frame);
-            }
-        });
+        editieren.addActionListener(actionEvent -> new VorhabenAnlegen(vorhaben, frame));
         buttonPanel.add(editieren);
         contentPane.add(buttonPanel);
         return contentPane;

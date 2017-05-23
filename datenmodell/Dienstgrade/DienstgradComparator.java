@@ -3,7 +3,7 @@ package datenmodell.Dienstgrade;
 import java.util.Comparator;
 
 /**
- * Created by ajanzen on 21.03.2017.
+ * @author ajanzen
  */
 public class DienstgradComparator implements Comparator <Dienstgrad>{
     @Override

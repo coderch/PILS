@@ -119,19 +119,9 @@ public class PwAendern extends JDialog {
         JButton uebernehmen = new JButton("Übernehmen");
         JButton abbrechen = new JButton("Abbrechen");
 
-        uebernehmen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                pruefeEingabe();
-            }
-        });
+        uebernehmen.addActionListener(actionEvent -> pruefeEingabe());
 
-        abbrechen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                dispose();
-            }
-        });
+        abbrechen.addActionListener(actionEvent -> dispose());
 
         buttonPanel.add(uebernehmen);
         buttonPanel.add(abbrechen);

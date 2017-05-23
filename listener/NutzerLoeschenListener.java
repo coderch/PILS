@@ -88,7 +88,7 @@ public class NutzerLoeschenListener implements ActionListener {
     private void textFieldReset(List<Nutzer> nutzerList) {
         StringBuilder sb = new StringBuilder();
         for (Nutzer nutzer : nutzerList) {
-            sb.append(nutzer + "\n");
+            sb.append(nutzer).append("\n");
         }
         JOptionPane.showMessageDialog(null, sb.toString() + "\ngelöscht", "Fertig", JOptionPane.INFORMATION_MESSAGE);
         this.jTextFieldPersNr.setText(null);

@@ -6,16 +6,18 @@ import db.NutzerDAO;
 import export.PrintUtilities;
 
 import javax.swing.*;
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -140,73 +142,65 @@ public class PersonalUebersicht extends JDialog {
         buttonConstriant.gridx = 0;
         buttonConstriant.gridy = 3;
         JButton uebersicht = new JButton("Übersicht erstellen");
-        uebersicht.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    //löscht den Inhalt des TabPanes
-                    ausgNutzer.clear();
-                    centerPanel.removeAll();
-                    //Auswahl der Soldaten anhand der Länge des Selectionpath
-                    if (tree.getSelectionPath().getPath().length == 1) {
-                        for (Nutzer nutzer : soldaten) {
-                            neuerTab(nutzer);
-                        }
-                    } else if (tree.getSelectionPath().getPath().length == 2) {
-                        String dienstgradGruppe = "";
-                        for (TreePath treePath : tree.getSelectionPaths()) {
-                            switch (treePath.getPath()[1].toString()) {
-                                case "Offiziere":
-                                    dienstgradGruppe = "Offz";
-                                    break;
-                                case "U.m.P.":
-                                    dienstgradGruppe = "Uffz.m.P";
-                                    break;
-                                case "U.o.P.":
-                                    dienstgradGruppe = "Uffz.o.P";
-                                    break;
-                                case "Mannschaften":
-                                    dienstgradGruppe = "Mnsch";
-                                    break;
-                                default:
-                                    break;
-                            }
-                            for (Nutzer nutzer : soldaten) {
-                                if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
-                                    neuerTab(nutzer);
-                                }
-                            }
-                        }
-                    } else if (tree.getSelectionPath().getPath().length == 3) {
-                        for (TreePath treePath : tree.getSelectionPaths()) {
-                            for (Nutzer nutzer : soldaten) {
-                                if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
-                                    neuerTab(nutzer);
-                                }
-                            }
-                        }
-
-                    }
-                    //Adden des Übersichtpanels an Stelle 0
-                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
-                    centerPanel.setSelectedIndex(0);
-                } catch (NullPointerException e) {
+        uebersicht.addActionListener(actionEvent -> {
+            try {
+                //löscht den Inhalt des TabPanes
+                ausgNutzer.clear();
+                centerPanel.removeAll();
+                //Auswahl der Soldaten anhand der Länge des Selectionpath
+                if (tree.getSelectionPath().getPath().length == 1) {
                     for (Nutzer nutzer : soldaten) {
                         neuerTab(nutzer);
                     }
-                    centerPanel.add(uebersichtPanel(ausgNutzer), 0);
-                    centerPanel.setSelectedIndex(0);
+                } else if (tree.getSelectionPath().getPath().length == 2) {
+                    String dienstgradGruppe = "";
+                    for (TreePath treePath : tree.getSelectionPaths()) {
+                        switch (treePath.getPath()[1].toString()) {
+                            case "Offiziere":
+                                dienstgradGruppe = "Offz";
+                                break;
+                            case "U.m.P.":
+                                dienstgradGruppe = "Uffz.m.P";
+                                break;
+                            case "U.o.P.":
+                                dienstgradGruppe = "Uffz.o.P";
+                                break;
+                            case "Mannschaften":
+                                dienstgradGruppe = "Mnsch";
+                                break;
+                            default:
+                                break;
+                        }
+                        for (Nutzer nutzer : soldaten) {
+                            if (dienstgradGruppe.equalsIgnoreCase(nutzer.getDienstgradgruppe()) && !ausgNutzer.contains(nutzer)) {
+                                neuerTab(nutzer);
+                            }
+                        }
+                    }
+                } else if (tree.getSelectionPath().getPath().length == 3) {
+                    for (TreePath treePath : tree.getSelectionPaths()) {
+                        for (Nutzer nutzer : soldaten) {
+                            if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
+                                neuerTab(nutzer);
+                            }
+                        }
+                    }
+
                 }
+                //Adden des Übersichtpanels an Stelle 0
+                centerPanel.add(uebersichtPanel(ausgNutzer), 0);
+                centerPanel.setSelectedIndex(0);
+            } catch (NullPointerException e) {
+                for (Nutzer nutzer : soldaten) {
+                    neuerTab(nutzer);
+                }
+                centerPanel.add(uebersichtPanel(ausgNutzer), 0);
+                centerPanel.setSelectedIndex(0);
             }
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent());
-            }
-        });
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
         buttonPanel.add(new JLabel());
         buttonPanel.add(uebersicht);
         buttonPanel.add(drucken);

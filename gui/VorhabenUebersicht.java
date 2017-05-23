@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Created by mwaldau on 06.03.2017.
+ * @author rrose mwaldau
  */
 public class VorhabenUebersicht extends JDialog {
     private JTabbedPane centerPanel;
@@ -54,28 +54,20 @@ public class VorhabenUebersicht extends JDialog {
         JLabel von = new JLabel("von: ");
         JLabel bis = new JLabel("bis: ");
         JButton erstellen = new JButton("Übersicht erstellen");
-        erstellen.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
-                centerPanel.removeAll();
-                centerPanel.add(uebersichtPanel(vorhabenListe));
-                for (Vorhaben vorhaben : vorhabenListe) {
-                    if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
-                            !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
-                        centerPanel.add(new VorhabenPanel(vorhaben, frame));
-                    }
+        erstellen.addActionListener(actionEvent -> {
+            List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
+            centerPanel.removeAll();
+            centerPanel.add(uebersichtPanel(vorhabenListe));
+            for (Vorhaben vorhaben : vorhabenListe) {
+                if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
+                        !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                    centerPanel.add(new VorhabenPanel(vorhaben, frame));
                 }
             }
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent());
-            }
-        });
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(erstellen);
         buttonPanel.add(drucken);
@@ -136,30 +128,22 @@ public class VorhabenUebersicht extends JDialog {
                 JLabel vorhabenEnde = new JLabel(vorhaben.getEnde().format(DTF));
                 JButton editieren = new JButton("Bearbeiten");
                 editieren.setFont(new Font("Arial", Font.PLAIN, 10));
-                editieren.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        new VorhabenAnlegen(vorhaben, frame);
-                    }
-                });
+                editieren.addActionListener(actionEvent -> new VorhabenAnlegen(vorhaben, frame));
                 JButton loeschen = new JButton("Löschen");
                 loeschen.setFont(new Font("Arial", Font.PLAIN, 10));
-                loeschen.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        VorhabenDAO.loescheVorhaben(vorhaben);
+                loeschen.addActionListener(actionEvent -> {
+                    VorhabenDAO.loescheVorhaben(vorhaben);
 
-                        List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
-                        centerPanel.removeAll();
-                        centerPanel.add(uebersichtPanel(vorhabenListe));
-                        for (Vorhaben vorhaben : vorhabenListe) {
-                            if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
-                                    !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
-                                centerPanel.add(new VorhabenPanel(vorhaben, frame));
-                            }
+                    List<Vorhaben> vorhabenListe1 = VorhabenDAO.holeVorhaben();
+                    centerPanel.removeAll();
+                    centerPanel.add(uebersichtPanel(vorhabenListe1));
+                    for (Vorhaben vorhaben1 : vorhabenListe1) {
+                        if (!vorhaben1.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
+                                !vorhaben1.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
+                            centerPanel.add(new VorhabenPanel(vorhaben1, frame));
                         }
-
                     }
+
                 });
                 vorhabenPanel.add(vorhabenName);
                 vorhabenPanel.add(vorhabenBeginn);
