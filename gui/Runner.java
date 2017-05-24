@@ -3,6 +3,7 @@ package gui;
 import db.DBConnect;
 import db.DBPrueferTask;
 
+import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class Runner {
             bis.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);;
         }
         return config;
 

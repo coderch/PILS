@@ -3,6 +3,7 @@ package gui;
 import db.DBConnect;
 import db.DBPrueferTask;
 
+import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -27,9 +28,9 @@ public class RCHRunner {
 
         new LoginFrame();
 //        new Frameholder("Zugführer");
-        if(DBConnect.verbindungSteht()){
+        if (DBConnect.verbindungSteht()) {
             Timer timer = new Timer(true);
-            timer.schedule(new DBPrueferTask(),5000,5000);
+            timer.schedule(new DBPrueferTask(), 5000, 5000);
         }
 
 
@@ -43,7 +44,8 @@ public class RCHRunner {
             bis.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
+            ;
         }
         return config;
 
