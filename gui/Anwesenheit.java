@@ -7,7 +7,8 @@ import java.awt.*;
 import java.time.LocalDate;
 
 /**
- * @author rrose
+ * Diese Klasse stellt einen Dialog zur Verfügung der den Anwesenheitsstatus des angemeldeten Benutzers in die Datenbank einträgt
+ * @author mwaldau
  */
 public class Anwesenheit extends JDialog {
     public static final String ANWESEND = "Anwesend";
@@ -18,10 +19,21 @@ public class Anwesenheit extends JDialog {
     public static final String LEHRGANG = "Lehrgang";
     private final JComboBox<String> anwesenheitsStatus = new JComboBox<>();
 
+    /**
+     * Der Konstruktor ruft die Methode dialogbauen() auf.
+     */
     public Anwesenheit() {
         this.dialogbauen();
     }
 
+    /**
+     * Diese Methode setzt die Umgebungsvariablen des JDialog's und ruft die Methode createContent() auf
+     * Parameter des Dialogs:
+     * Modal
+     * Titel
+     * Dispose on Close
+     * resizable -> false
+     */
     private void dialogbauen() {
         this.setModal(true);
         this.setTitle("Anwesenheit");
@@ -33,6 +45,10 @@ public class Anwesenheit extends JDialog {
         this.setVisible(true);
     }
 
+    /**
+     * Erstellt den Inhalt des Dialogs.
+     * @return  contentPanel    Das JPanel das dem Dialog hinzugefügt wird
+     */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel();
         contentPanel.setPreferredSize(new Dimension(300,120));

@@ -18,20 +18,17 @@ import java.util.List;
  * Kalender ist ein JPanel das den Kalender in einer JTable zur Verfügung stellt
  *
  * @author mwaldau
- * @see javax.swing.JPanel
  */
 public class Kalender extends JPanel {
     public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
-    private static final Dimension PUBUTTONSIZE = new Dimension(25,25);
     public static LocalDate datum = LocalDate.now();
+    private static final Dimension PUBUTTONSIZE = new Dimension(25,25);
     private final JTabbedPane kalenderPane = new JTabbedPane();
     private final JPanel monat = new JPanel(new BorderLayout());
     private final JButton anwesend = new JButton();
     private final JButton krank = new JButton();
     private final JButton urlaub = new JButton();
-    private final JButton vorhaben = new JButton();
     private final JButton abwesend = new JButton();
-    private final JButton lehrgang = new JButton();
     private List<Nutzer> soldatenListe;
     private JTable kalender;
     private JScrollPane halter;
@@ -41,32 +38,32 @@ public class Kalender extends JPanel {
 
     public Kalender() {
         this.setLayout(new BorderLayout());
-        monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
-        monatsAnzeigeBauen();
-        monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
-        kalenderPane.add("Monat", monat);
+        this.monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
+        this.monatsAnzeigeBauen();
+        this.monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+        this.kalenderPane.add("Monat", monat);
         if (!Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("Soldat")) {
             popupMenubauen();
         }
     }
 
     private void popupMenubauen() {
-        anwesend.setIcon(IconHandler.HAKEN);
-        anwesend.setName(Anwesenheit.ANWESEND);
-        anwesend.setPreferredSize(PUBUTTONSIZE);
-        krank.setIcon(IconHandler.KRANK);
-        krank.setName(Anwesenheit.KRANK);
-        krank.setPreferredSize(PUBUTTONSIZE);
-        urlaub.setIcon(IconHandler.SONNE);
-        urlaub.setName(Anwesenheit.URLAUB);
-        urlaub.setPreferredSize(PUBUTTONSIZE);
-        abwesend.setIcon(IconHandler.SIRENE);
-        abwesend.setName(Anwesenheit.ABWESEND);
-        abwesend.setPreferredSize(PUBUTTONSIZE);
-        popupMenu.add(anwesend);
-        popupMenu.add(krank);
-        popupMenu.add(urlaub);
-        popupMenu.add(abwesend);
+        this.anwesend.setIcon(IconHandler.HAKEN);
+        this.anwesend.setName(Anwesenheit.ANWESEND);
+        this.anwesend.setPreferredSize(PUBUTTONSIZE);
+        this.krank.setIcon(IconHandler.KRANK);
+        this.krank.setName(Anwesenheit.KRANK);
+        this.krank.setPreferredSize(PUBUTTONSIZE);
+        this.urlaub.setIcon(IconHandler.SONNE);
+        this.urlaub.setName(Anwesenheit.URLAUB);
+        this.urlaub.setPreferredSize(PUBUTTONSIZE);
+        this.abwesend.setIcon(IconHandler.SIRENE);
+        this.abwesend.setName(Anwesenheit.ABWESEND);
+        this.abwesend.setPreferredSize(PUBUTTONSIZE);
+        this.popupMenu.add(anwesend);
+        this.popupMenu.add(krank);
+        this.popupMenu.add(urlaub);
+        this.popupMenu.add(abwesend);
     }
 
     private void popUpFunktionen(int x, int y) {
@@ -98,7 +95,7 @@ public class Kalender extends JPanel {
     /**
      * Erstellt eine String Liste die von der JTable als Headerzeile verwendet wird
      *
-     * @return Liste mit Name, Dienstgrad und Tagen im Monat
+     * @return monatsAnzeige Liste mit Name, Dienstgrad und Tagen im Monat
      */
     private List<String> monatsAnzeigeBauen() {
         List<String> monatsAnzeige = new ArrayList<>();
@@ -161,7 +158,7 @@ public class Kalender extends JPanel {
     /**
      * Monatsanzeigepanel stellt das Menü des Kalenders zur Verfügung
      *
-     * @return Panel mit weiter, zurück, refresh und PDF-Export Button
+     * @return anzeigePanel Panel mit weiter, zurück, refresh und Drucken Button
      */
     private JPanel monatsAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();
@@ -247,7 +244,7 @@ public class Kalender extends JPanel {
     /**
      * Setzt die Breite der zellen
      *
-     * @param anzeige
+     * @param anzeige Kopfzeile der JTable
      */
     private void spaltenBreite(String[] anzeige) {
         TableColumn spalte = null;
@@ -264,6 +261,9 @@ public class Kalender extends JPanel {
         }
     }
 
+    /**
+     * Diese Klasse gibt den Buttons des PopupMenüs die Funktion Status in die Datenbank einutragen.
+     */
     private class StatusEintragen implements ActionListener {
         private final Nutzer nutzer;
         private final LocalDate date;

@@ -75,8 +75,14 @@ public class Frameholder {
 
     /**
      * Erstellt den Inhalt des Frames
+     * Soldaten bekommen nur den Kalender und den Menüreiter Nutzer, mit ausloggen und Passwort ändern.<br>
      *
-     * @return Jpanel mit Menubar
+     * Zugschreiber/Zugdienst bekommt zusätzlich den Reiter Verwaltung mit Stärkemeldung, Urlaub eintragen und Teileinheit verwalten sowie den Reiter Übersichten mit der Sonderdienstübersicht/Jahr<br>
+     *
+     * Zugführer bekommen im Reiter Verwaltung den zusätzlichen Menüeintrag Vorhaben anlegen sowie im Reiter Übersichten die Personalübersicht und die Vorhabenübersicht<br>
+     *
+     * @return  contentPanel    Jpanel mit Menubar
+     * @see VorhabenAnlegen
      */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());

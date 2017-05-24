@@ -30,9 +30,17 @@ public class Dienstuebersicht extends JDialog {
         this.dialogBauen();
     }
 
+    /**
+     * Diese Methode setzt die Umgebungsvariablen des JDialog's und ruft die Methode createContent() auf, die in ein ScrollPane integriert wird.
+     * Parameter des Dialogs:
+     * Modal
+     * Titel
+     * Dispose on Close
+     * resizable -> false
+     * Preferred Size x = 100, y = 500
+     */
     private void dialogBauen() {
         this.setModal(true);
-        System.out.println(this.getLayout());
         this.setTitle("Dienstübersicht");
         this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         this.setResizable(false);
@@ -46,6 +54,14 @@ public class Dienstuebersicht extends JDialog {
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
+
+    /**
+     * Erstellt ein JPanel das für jeden einzelnen, in der Datenbank gespeicherten, Soldaten die Anzahl der im
+     * Kalenderjahr geleisteten Sonderdienste
+     * @return  contentPanel    JPanel mit der Anzahl an Sonderdiensten pro Soldat
+     * @see Vorhaben
+     * @see Nutzer
+     */
     private JPanel createContent() {
         for (Map.Entry<Nutzer, List<Vorhaben>> nutzerListEntry : vorhabenMap.entrySet()) {
             JPanel panel = new JPanel();
