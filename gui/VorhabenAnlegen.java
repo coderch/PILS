@@ -172,9 +172,9 @@ public class VorhabenAnlegen extends JDialog {
         center2Constraint.gridwidth = 3;
         center2Constraint.anchor = GridBagConstraints.FIRST_LINE_START;
         beschreibung.setBorder(name.getBorder());
-        JPanel beschreibungPanel = new JPanel();
+        JScrollPane beschreibungPanel = new JScrollPane(beschreibung, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         beschreibungPanel.setBorder(BorderFactory.createTitledBorder("Beschreibung"));
-        beschreibungPanel.add(beschreibung);
+//        beschreibungPanel.add(beschreibung);
         center2.add(beschreibungPanel);
 
         //-------------center3 mit DateChooser beginn und ende-------------------------

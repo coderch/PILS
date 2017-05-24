@@ -262,7 +262,7 @@ public class Kalender extends JPanel {
     }
 
     /**
-     * Diese Klasse gibt den Buttons des PopupMenüs die Funktion Status in die Datenbank einutragen.
+     * Diese Klasse gibt den Buttons des PopupMenüs die Funktion Status in die Datenbank einzutragen.
      */
     private class StatusEintragen implements ActionListener {
         private final Nutzer nutzer;
