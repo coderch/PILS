@@ -2,7 +2,6 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import export.PrintUtilities;
 import listener.DruckenListener;
 
 import javax.swing.*;

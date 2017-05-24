@@ -3,6 +3,7 @@ package gui;
 import db.DBConnect;
 import db.DBPrueferTask;
 
+import javax.swing.*;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,8 +22,9 @@ public class Runner {
         config = readConfigFile();
         try {
             DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException e) {
+            DBConnect.SQLFehlermeldung(e);
+            System.exit(0);
         }
         new LoginFrame();
         if (DBConnect.verbindungSteht()) {
@@ -39,7 +41,7 @@ public class Runner {
             bis.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }
         return config;
 

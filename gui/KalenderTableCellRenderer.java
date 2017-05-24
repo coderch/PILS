@@ -1,20 +1,10 @@
 package gui;
 
-import datenmodell.Nutzer;
-import datenmodell.Vorhaben;
-import db.NutzerDAO;
-import db.VorhabenDAO;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.List;
 
 /**
  * Gibt das Aussehen der einzelnen Table Zellen vor
