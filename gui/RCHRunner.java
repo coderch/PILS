@@ -45,7 +45,6 @@ public class RCHRunner {
 
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
-            ;
         }
         return config;
 

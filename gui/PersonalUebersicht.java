@@ -3,7 +3,6 @@ package gui;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import export.PrintUtilities;
 import listener.DruckenListener;
 
 import javax.swing.*;
