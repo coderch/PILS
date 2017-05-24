@@ -24,6 +24,7 @@ public class Runner {
             DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
         } catch (SQLException e) {
             DBConnect.SQLFehlermeldung(e);
+            System.exit(0);
         }
         new LoginFrame();
         if (DBConnect.verbindungSteht()) {
