@@ -21,8 +21,8 @@ public class Runner {
         config = readConfigFile();
         try {
             DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
-        } catch (SQLException e1) {
-            e1.printStackTrace();
+        } catch (SQLException e) {
+            DBConnect.SQLFehlermeldung(e);
         }
         new LoginFrame();
         if (DBConnect.verbindungSteht()) {
