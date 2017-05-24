@@ -25,7 +25,7 @@ public class Nutzer implements Comparable<Nutzer> {
      */
     private String dienstgrad;
     /**
-     * Dienstgradgrupper des jeweiligen Nutzers
+     * Dienstgradgruppe des jeweiligen Nutzers
      */
     private String dienstgradgruppe;
     /**
@@ -33,11 +33,11 @@ public class Nutzer implements Comparable<Nutzer> {
      */
     private String rolle;
 
-
     /**
      * Dieser Konstruktor wird benötigt um eine Instanz eines Nutzers anhand der in der Datenbank vorhanden Informationen zu erzeugen.
      *
      * @param personalnummer
+     *
      * @param dienstgrad
      * @param dienstgradgruppe
      * @param name
