@@ -3,7 +3,7 @@ package gui;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
-import listener.DruckenListener;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -200,7 +200,7 @@ public class PersonalUebersicht extends JDialog {
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(new DruckenListener((JComponent) centerPanel.getSelectedComponent()));
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
         buttonPanel.add(new JLabel());
         buttonPanel.add(uebersicht);
         buttonPanel.add(drucken);
@@ -287,13 +287,13 @@ public class PersonalUebersicht extends JDialog {
             JPanel staerkePanel = new JPanel(new GridLayout(6, 2));
             JLabel datum = new JLabel(i.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
             JLabel offzLabel = new JLabel("Offiziere");
-            JLabel offzStaerke = new JLabel(String.format("%s / %s",String.valueOf(offzeIst), String.valueOf(offzeSoll)));
+            JLabel offzStaerke = new JLabel(String.format("%s / %s", String.valueOf(offzeIst), String.valueOf(offzeSoll)));
             JLabel umpLabel = new JLabel("Unteroffiziere o.P.");
-            JLabel umpStaerke = new JLabel(String.format("%s / %s",String.valueOf(umpIst), String.valueOf(umpSoll)));
+            JLabel umpStaerke = new JLabel(String.format("%s / %s", String.valueOf(umpIst), String.valueOf(umpSoll)));
             JLabel uopLabel = new JLabel("Unteroffiziere m.P.");
-            JLabel uopStaerke = new JLabel(String.format("%s / %s",String.valueOf(uopIst), String.valueOf(uopSoll)));
+            JLabel uopStaerke = new JLabel(String.format("%s / %s", String.valueOf(uopIst), String.valueOf(uopSoll)));
             JLabel mnschLabel = new JLabel("Mannschaften");
-            JLabel mnschStaerke = new JLabel(String.format("%s / %s",String.valueOf(mnschIst), String.valueOf(mnschSoll)));
+            JLabel mnschStaerke = new JLabel(String.format("%s / %s", String.valueOf(mnschIst), String.valueOf(mnschSoll)));
             staerkePanel.add(datum);
             staerkePanel.add(new JLabel());
             staerkePanel.add(offzLabel);
@@ -307,7 +307,7 @@ public class PersonalUebersicht extends JDialog {
             staerkePanel.add(new JLabel("-------------------------------------------------"));
             uebersichtPane.add(staerkePanel);
         }
-        JScrollPane scp = new JScrollPane(uebersichtPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scp = new JScrollPane(uebersichtPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scp.setName("Übersicht");
         return scp;
     }

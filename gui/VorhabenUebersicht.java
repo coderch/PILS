@@ -3,7 +3,7 @@ package gui;
 import com.toedter.calendar.JDateChooser;
 import datenmodell.Vorhaben;
 import db.VorhabenDAO;
-import listener.DruckenListener;
+import export.PrintUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,7 +65,7 @@ public class VorhabenUebersicht extends JDialog {
         });
         JButton drucken = new JButton(IconHandler.DRUCKEN);
         drucken.setToolTipText("Aktuelle Ansicht drucken");
-        drucken.addActionListener(new DruckenListener((JComponent) centerPanel.getSelectedComponent()));
+        drucken.addActionListener(actionEvent -> PrintUtilities.printComponent((JComponent) centerPanel.getSelectedComponent()));
         JPanel buttonPanel = new JPanel(new GridLayout(2, 1));
         buttonPanel.add(erstellen);
         buttonPanel.add(drucken);
@@ -119,7 +119,7 @@ public class VorhabenUebersicht extends JDialog {
             if (!vorhaben.getEnde().isBefore(beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate()) &&
                     !vorhaben.getStart().isAfter(ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
                 JPanel vorhabenPanel = new JPanel();
-                vorhabenPanel.setMaximumSize(new Dimension(700,50));
+                vorhabenPanel.setMaximumSize(new Dimension(700, 50));
                 JTextField vorhabenName = new JTextField(vorhaben.getName(), 30);
                 vorhabenName.setEditable(false);
                 JLabel vorhabenBeginn = new JLabel(vorhaben.getStart().format(DTF) + " -");
