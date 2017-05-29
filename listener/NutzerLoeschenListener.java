@@ -65,16 +65,10 @@ public class NutzerLoeschenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (!jListNutzer.isSelectionEmpty()) {
-            java.util.Set<Integer> integerList = NutzerDAO.holeLogins();
             List<Nutzer> nutzerList = jListNutzer.getSelectedValuesList();
             for (Nutzer nutzer : nutzerList) {
-                if (integerList.contains(nutzer.getPersonalnummer())) {
-                    NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
-                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
-
-                } else {
-                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
-                }
+                NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
+                NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
             }
             textFieldReset(nutzerList);
         }

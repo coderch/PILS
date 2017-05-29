@@ -16,16 +16,16 @@ import java.util.*;
  */
 public class NutzerDAO {
     /**
-     * Verhindert die Instanzierung dieser Klasse
+     * Verhindert die Instanzierung dieser Klasse.
      */
     private NutzerDAO() {
     }
 
     /**
-     * Diese Methode Speichert die Daten des übergebenen Nutzer-Objektes in die Datenbank. Ist ein Nutzer bereits mit der selben Personalnummer vorhaben,
+     * Diese Methode Speichert die Daten des übergebenen Nutzer-Objektes in die Datenbank. Ist ein Nutzer bereits mit der selben Personalnummer vorhanden,
      * wird ein Update auf alle anderen Attribute in der Datenbank durchgeführt.
      *
-     * @param nutzer Der übergebene zu speichernde Nutzer
+     * @param nutzer Der übergebene zu speichernde Nutzer.
      */
     public static void nutzerSpeichern(Nutzer nutzer) {
         String sqlStatement = "INSERT INTO t_nutzer(dienstgrad, name, vorname,fk_t_rolle_pk_beschreibung,pk_personalnummer) VALUES (?,?,?,?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (dienstgrad, name, vorname, fk_t_rolle_pk_beschreibung) = (?,?,?,?)";
@@ -53,8 +53,8 @@ public class NutzerDAO {
      * Speichert die Login-Daten in der Tabelle t_login.
      * Bei bereits vorhandener Personalnummer wird ein Update auf das abgelegte Passwort in der Tabelle durchgeführt.
      *
-     * @param personalnummer
-     * @param passwort
+     * @param personalnummer Personalnummer / Login eines Soldaten.
+     * @param passwort 256-Bit langer Passworthash im String-Format.
      */
     public static void loginSpeichern(int personalnummer, String passwort) {
         String sqlStatement = "INSERT INTO t_login (pk_personalnummer, passwort) VALUES (?,?) ON CONFLICT (pk_personalnummer) DO UPDATE SET (passwort) = (?)";
@@ -70,9 +70,9 @@ public class NutzerDAO {
     }
 
     /**
-     * Diese Methode ist lediglich für das Zurücksetzen eines Passwortes genutzt. Hierbei wird das Passwort für die übergebene Personalnummer auf das "Standard-Passwort" in die Datenbank geschrieben.
+     * Diese Methode wird lediglich für das Zurücksetzen eines Passwortes genutzt. Hierbei wird das Passwort für die übergebene Personalnummer auf das "Standard-Passwort" in die Datenbank geschrieben.
      *
-     * @param personalnummer
+     * @param personalnummer Personalnummer / Login für welches das Passwort zurückgesetzt werden soll.
      */
     public static void passwordZuruecksetzen(int personalnummer) {
         loginSpeichern(personalnummer, PasswordHash.createHash("password"));
@@ -80,9 +80,9 @@ public class NutzerDAO {
 
     /**
      * Diese Methode liest die Informationen jedes Eintrages in der Tabelle t_nutzer aus und erzeugt aus jeder Tupel ein Nutzer-Objekt,
-     * welches darauffolgende in eine Liste<Nutzer> hinzugefügt wird.
+     * welches darauffolgend in eine Liste<Nutzer> hinzugefügt wird.
      *
-     * @return Gibt eine Liste mit allen in der Datenbank (t_nutzer) abgelegten Nutzer zurück.
+     * @return Gibt eine Liste mit allen in der Datenbank (t_nutzer) abgelegten Nutzern zurück.
      */
     public static List<Nutzer> nutzerHolen() {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer";
@@ -100,8 +100,10 @@ public class NutzerDAO {
     }
 
     /**
-     * @param personalnummer
-     * @return
+     * Diese Methode wird genutzt um einen Nutzer anhand seiner Personalnummer in der Datenank zu suchen und daraus ein neues Nutzer-Objekt zu erstelen.
+     *
+     * @param personalnummer Personalnummer des in der Datenbank gesuchten Nutzers.
+     * @return Erstellt ein neues Nutzer-Objekt und gibt diesen gesuchten Nutzer zurück.
      */
     public static Nutzer holeEinzelnenNutzer(int personalnummer) {
         String sqlStatement = "SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung FROM t_nutzer WHERE pk_personalnummer = ?";
@@ -119,9 +121,9 @@ public class NutzerDAO {
     }
 
     /**
-     * Löscht den Eintrag aus Tabelle t_nutzer, welche als Primärschüssel die übergebene Personalnummer inne hat.
+     * Löscht den Eintrag aus Tabelle t_nutzer, welcher als Primärschüssel die übergebene Personalnummer inne hat.
      *
-     * @param personalnummer
+     * @param personalnummer Personalnummer des zu löschenden Nutzers.
      */
     public static void nutzerLöschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_nutzer WHERE pk_personalnummer = ?";
@@ -133,22 +135,24 @@ public class NutzerDAO {
         }
     }
 
-    /**
-     * @return Set mit allen in der Datenbank (t_login) abgelegten Logins.
-     */
-    public static Set<Integer> holeLogins() {
-        String sqlStatement = "SELECT pk_personalnummer FROM t_login";
-        Set<Integer> logins = new HashSet<>();
-        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
-             ResultSet rs = pstm.executeQuery()) {
-            while (rs.next()) {
-                logins.add(rs.getInt(1));
-            }
-        } catch (SQLException e) {
-            DBConnect.SQLFehlermeldung(e);
-        }
-        return logins;
-    }
+//    /**
+//     * Diese Methode erstellt ein Hashset mit allen in der Datenbank (t_login) vorhandenen Personalnummers / Logins.
+//     *
+//     * @return Set mit allen in der Datenbank (t_login) abgelegten Logins.
+//     */
+//    public static Set<Integer> holeLogins() {
+//        String sqlStatement = "SELECT pk_personalnummer FROM t_login";
+//        Set<Integer> logins = new HashSet<>();
+//        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+//             ResultSet rs = pstm.executeQuery()) {
+//            while (rs.next()) {
+//                logins.add(rs.getInt(1));
+//            }
+//        } catch (SQLException e) {
+//            DBConnect.SQLFehlermeldung(e);
+//        }
+//        return logins;
+//    }
 
     /**
      * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
