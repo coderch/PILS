@@ -18,7 +18,7 @@ public class RolleDAO {
     /**
      * Diese Methode erstellt eine Liste<Rolle> in die alle in der Datenbank gesicherten Rollen (Userlevel) hinzugefügt werden.
      *
-     * @return Gibt eine Liste mit allen in der Datenbank vorhandenen Rollen (Userlevel) zurück.
+     * @return Gibt eine Liste<Rolle> mit allen in der Datenbank vorhandenen Rollen (Userlevel) zurück.
      */
     public static List<Rolle> alleLaden() {
         List<Rolle> rollenListe = new ArrayList<>();
