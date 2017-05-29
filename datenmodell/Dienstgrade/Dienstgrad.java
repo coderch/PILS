@@ -9,16 +9,16 @@ import java.util.Set;
  * @author ajanzen
  */
 public class Dienstgrad implements Comparator<Dienstgrad> {
-    private String bezeicnung;
+    private String bezeichnung;
     private int wertigkeit;
 
-    public Dienstgrad(String bezeicnung, int wertigkeit) {
-        this.bezeicnung = bezeicnung;
+    public Dienstgrad(String bezeichnung, int wertigkeit) {
+        this.bezeichnung = bezeichnung;
         this.wertigkeit = wertigkeit;
     }
 
-    public String getBezeicnung() {
-        return bezeicnung;
+    public String getBezeichnung() {
+        return bezeichnung;
     }
 
     public int getWertigkeit() {
@@ -29,14 +29,6 @@ public class Dienstgrad implements Comparator<Dienstgrad> {
     @Override
     public int compare(Dienstgrad d1, Dienstgrad d2) {
         return d1.getWertigkeit() - d2.getWertigkeit();
-    }
-
-    public void setBezeicnung(String bezeicnung) {
-        this.bezeicnung = bezeicnung;
-    }
-
-    public void setWertigkeit(int wertigkeit) {
-        this.wertigkeit = wertigkeit;
     }
 
     public static List<Dienstgrad> sortier(Set<String> set) {

@@ -320,7 +320,7 @@ public class NutzerFrame extends JDialog {
         JComboBox<String> jComboBoxDG = new JComboBox<>();
 
         for (Dienstgrad dienstgrad : dienstGradList) {
-            jComboBoxDG.addItem(dienstgrad.getBezeicnung());
+            jComboBoxDG.addItem(dienstgrad.getBezeichnung());
         }
 
         jComboBoxDG.setPreferredSize(new Dimension(225, 23));
