@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.MessageDigest;
 
 /**
- * Dient der Erzeugung von Passwort-Hashes
+ * Dient der Erzeugung von Passwort-Hashes mit Hilfe des in Java implementierten SHA-256 Algorithmuses.
  *
  * @author rrose
  */
@@ -19,20 +19,20 @@ public class PasswordHash {
     /**
      * Erzeugt mit Hilfe des SHA-256 Algorithmuses einen Hashwert des übergebenen Passwortes.
      *
-     * @param kennwort
-     * @return SHA-256 Hashwert für den übergebenen Passwort-String
+     * @param kennwort Das Kennwort für welches der SHA-Hash erzeugt werden soll.
+     * @return Gibt einen String zurück mit dem SHA-256 Hashwert für das übergebene Passwort (64 Symbole von 0-f).
      * @throws NoSuchAlgorithmException Wird geworfen wenn der aufgerufene Algorithmus nicht verfügbar ist.
      */
     public static String createHash(String kennwort) {
         StringBuffer sb = new StringBuffer();
         try {
-            MessageDigest mDigest = MessageDigest.getInstance("SHA-256");
-            byte[] result = mDigest.digest(kennwort.getBytes());
-            for (byte aResult : result) {
-                sb.append(Integer.toString((aResult & 0xff) + 0x100, 16).substring(1));
+            MessageDigest mDigest = MessageDigest.getInstance("SHA-256"); // Festlegen des Hash-Algorithmuses.
+            byte[] hashes = mDigest.digest(kennwort.getBytes()); // Zerlegen des Strings in ein Byte-Array und Berechnung der Hashes der einzelnen Bytes.
+            for (byte hash : hashes) {
+                sb.append(String.format("%02x",hash)); //Zusammenführung der errechneten Hashwerte zu einem zusammenhängenden String. Alternative Möglichkeit (Integer.toString((hash & 0xff) + 0x100, 16).substring(1)).
             }
         } catch (NoSuchAlgorithmException e) {
-            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: Algorithmus nicht vorhanden", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getCause(), JOptionPane.ERROR_MESSAGE);
         }
         return sb.toString();
     }

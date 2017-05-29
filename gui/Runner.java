@@ -1,5 +1,6 @@
 package gui;
 
+import datenmodell.PasswordHash;
 import db.DBConnect;
 import db.DBPrueferTask;
 
@@ -26,6 +27,7 @@ public class Runner {
             DBConnect.SQLFehlermeldung(e);
             System.exit(0);
         }
+        System.out.println(PasswordHash.createHash("P@ssw0rd"));
         new LoginFrame();
         if (DBConnect.verbindungSteht()) {
             Timer timer = new Timer(true);
