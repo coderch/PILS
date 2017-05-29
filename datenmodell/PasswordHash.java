@@ -21,10 +21,9 @@ public class PasswordHash {
      *
      * @param kennwort Das Kennwort für welches der SHA-Hash erzeugt werden soll.
      * @return Gibt einen String zurück mit dem SHA-256 Hashwert für das übergebene Passwort (64 Symbole von 0-f).
-     * @throws NoSuchAlgorithmException Wird geworfen wenn der aufgerufene Algorithmus nicht verfügbar ist.
      */
     public static String createHash(String kennwort) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         try {
             MessageDigest mDigest = MessageDigest.getInstance("SHA-256"); // Festlegen des Hash-Algorithmuses.
             byte[] hashes = mDigest.digest(kennwort.getBytes()); // Zerlegen des Strings in ein Byte-Array und Berechnung der Hashes der einzelnen Bytes.
