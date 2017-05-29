@@ -3,7 +3,6 @@ package export;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.print.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +16,6 @@ public class PrintUtilities implements Printable {
     public static void printComponents( List<JComponent> componentsToPrint ) {
         new PrintUtilities( componentsToPrint ).print();
     }
-    public static void printComponent( JComponent componentToPrint ) {
-        componentsToPrint = new ArrayList<>();
-        componentsToPrint.add(componentToPrint);
-        new PrintUtilities(componentsToPrint ).print();
-    }
 
     public PrintUtilities( List<JComponent> componentsToPrint ) {
         PrintUtilities.componentsToPrint = componentsToPrint;
@@ -31,8 +25,7 @@ public class PrintUtilities implements Printable {
 
         PrinterJob printJob = PrinterJob.getPrinterJob();
 
-        PageFormat pageFormat = printJob.defaultPage();  //new PageFormat();
-        //pageFormat.setOrientation( PageFormat.LANDSCAPE );   //Längs- oder Querformat (Standard: längs)
+        PageFormat pageFormat = printJob.defaultPage();
 
         Paper a4PortraitPaper = new Paper();
         final double cm2inch = 0.3937;  // 1in = 2.54cm
@@ -62,7 +55,7 @@ public class PrintUtilities implements Printable {
 
         double gBreite;
         int b;
-        double skalierung = 0.0;
+        double skalierung;
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate( pageFormat.getImageableX(), pageFormat.getImageableY() );
@@ -73,15 +66,11 @@ public class PrintUtilities implements Printable {
 
             Component c = componentsToPrint.get( pageIndex );
 
-            // ***** Skalierung *****
-
             b = c.getWidth();
 
             skalierung = gBreite / b;
 
             g2d.scale( skalierung, skalierung );
-
-            // ***** Ende Skalierung *****
 
             disableDoubleBuffering( componentsToPrint.get( pageIndex ) );
             componentsToPrint.get( pageIndex ).paint( g2d );

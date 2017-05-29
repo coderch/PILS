@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Dieser ActionListener dient dazu um den Druck von übergebenen JComponents zu starten.
@@ -23,7 +24,7 @@ public class DruckenListener implements ActionListener {
      * Diesem Konstruktor wird eine Liste mit den zu druckenden JComponents übergeben, welche dann als privates Attribut gespeichert wird.
      * @param componentList Die Liste der zu druckenden JComponents
      */
-    public DruckenListener(java.util.List<JComponent> componentList) {
+    public DruckenListener(List<JComponent> componentList) {
         this.componentList = componentList;
     }
 
