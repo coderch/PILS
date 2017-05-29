@@ -93,7 +93,7 @@ public class DBConnect {
         try {
             dbmd = connection.getMetaData();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getSQLState(), JOptionPane.ERROR_MESSAGE);
+            SQLFehlermeldung(e);
         }
         return dbmd;
     }
