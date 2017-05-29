@@ -75,7 +75,7 @@ public class PrintUtilities implements Printable {
 
         if ( pageIndex < componentsToPrint.size() ) {
 
-            Component c = componentsToPrint.get( pageIndex );
+            JComponent c = componentsToPrint.get( pageIndex );
 
             // ***** Skalierung *****
 
