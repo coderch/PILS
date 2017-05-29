@@ -21,18 +21,18 @@ public class RolleDAO {
      * @return Gibt eine Liste mit allen in der Datenbank vorhandenen Rollen (Userlevel) zurück.
      */
     public static List<Rolle> alleLaden() {
-        List<Rolle> rolleList = new ArrayList<>();
+        List<Rolle> rollenListe = new ArrayList<>();
         String sqlState = "SELECT pk_beschreibung FROM t_rolle;";
         try (PreparedStatement ptsm = DBConnect.preparedStatement(sqlState)) {
             ResultSet rs = ptsm.executeQuery();
             while (rs.next()) {
-                rolleList.add(new Rolle(
+                rollenListe.add(new Rolle(
                         rs.getString(1)
                 ));
             }
         } catch (SQLException e) {
             DBConnect.SQLFehlermeldung(e);
         }
-        return rolleList;
+        return rollenListe;
     }
 }
