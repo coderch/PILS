@@ -52,26 +52,22 @@ public class PrintUtilities implements Printable {
         if ( printJob.printDialog() )
             try {
                 printJob.print();
-            } catch( PrinterException pe ) {
-                System.out.println( "Error printing: " + pe );
-                System.out.println( "Error printing (Message): " + pe.getMessage() );
-                System.out.println( "Error printing (Localized Message): " + pe.getLocalizedMessage() );
-                System.out.println( "Error printing (Cause): " + pe.getCause() );
+            } catch( PrinterException e ) {
+                JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getCause(), JOptionPane.ERROR_MESSAGE);
             }
 
     }
 
     public int print( Graphics g, PageFormat pageFormat, int pageIndex ) {
 
-        double gBreite, gHoehe;
-        int b, h;
+        double gBreite;
+        int b;
         double skalierung = 0.0;
 
         Graphics2D g2d = (Graphics2D)g;
         g2d.translate( pageFormat.getImageableX(), pageFormat.getImageableY() );
 
         gBreite = pageFormat.getImageableWidth();
-        gHoehe = pageFormat.getImageableHeight();
 
         if ( pageIndex < componentsToPrint.size() ) {
 
@@ -80,7 +76,6 @@ public class PrintUtilities implements Printable {
             // ***** Skalierung *****
 
             b = c.getWidth();
-            h = c.getHeight();
 
             skalierung = gBreite / b;
 
