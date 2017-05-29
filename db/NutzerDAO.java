@@ -155,7 +155,7 @@ public class NutzerDAO {
 //    }
 
     /**
-     * @return Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade.
+     * @return Gibt ein Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade zurück.
      */
     public static Set<String> holeDienstgrade() {
         String sqlStatement = "SELECT pk_listenschreibweise FROM t_dienstgrade";
