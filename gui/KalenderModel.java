@@ -4,8 +4,8 @@ import java.util.Vector;
 
 /**
  * kalenderModel nicht editierbar
- * @see javax.swing.table.DefaultTableModel
  * @author mwaldau copyright Major Müller
+ * @see javax.swing.table.DefaultTableModel
  */
 public class KalenderModel extends DefaultTableModel {
 

@@ -314,7 +314,7 @@ public class NutzerDAO {
         try (PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND (fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) OVERLAPS (?,?)")) {
             pstm.setInt(1, nutzer.getPersonalnummer());
             pstm.setDate(2, Date.valueOf(start));
-            pstm.setDate(3, Date.valueOf(ende));
+            pstm.setDate(3, Date.valueOf(ende.plusDays(1)));
             pstm.executeUpdate();
         } catch (SQLException e) {
             DBConnect.SQLFehlermeldung(e);
@@ -336,7 +336,7 @@ public class NutzerDAO {
             for (Nutzer n : nutzer) {
                 pstm.setInt(1, n.getPersonalnummer());
                 pstm.setDate(2, Date.valueOf(start));
-                pstm.setDate(3, Date.valueOf(ende));
+                pstm.setDate(3, Date.valueOf(ende.plusDays(1)));
                 List<Vorhaben> vorhaben = new ArrayList<>();
                 ResultSet rs = pstm.executeQuery();
                 while (rs.next()) {

@@ -61,13 +61,13 @@ public class PersonalUebersicht extends JDialog {
 
     /**
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
-     * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
-     * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum PDF-Export
+     * getrennt nach Dienstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
+     * auszuwählen und Zwei Buttons, einen zum Erstellen der Übersicht, einen weiteren zum Drucken
      * <p>
      * Der Übersicht erstellen button erstellt für jeden ausgewählten Soldaten, bzw. für jeden in der
      * ausgewählten Gruppe einen TabPanel mit einem SoldatUebersichtPane sowie eine ÜbersichtPane
      *
-     * @param soldaten
+     * @param soldaten Liste der Soldaten
      * @return Es wird ein JPanel mit diversen Komponenten erstellt
      * @see SoldatUebersichtPane
      */
@@ -226,6 +226,12 @@ public class PersonalUebersicht extends JDialog {
         ausgNutzer.add(nutzer);
     }
 
+    /**
+     * Erstellt eine Übersicht die für jeden Tag im ausgewählten Zeitraum nach Dienstgradgruppen getrennt die
+     * geplante Tagesstärke im Ist/Soll Vergleich wiedergibt
+     * @param ausgNutzer Liste der Nutzer für die die Übersicht erstellt werden soll.
+     * @return scp ScrollPanel mit geplanter Tagesdienststärke
+     */
     private JScrollPane uebersichtPanel(List<Nutzer> ausgNutzer) {
         LocalDate startdatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate enddatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

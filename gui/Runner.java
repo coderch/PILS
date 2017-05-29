@@ -12,11 +12,14 @@ import java.util.Properties;
 import java.util.Timer;
 
 /**
- * @author mwaldau
+ * Startklasse des Programms. Beinhaltet die main Methode in der zunächst die configfile eingelesen wird
+ * um danach die Verbindung zur Datenbank aufzubauen. Mittels eines Timers wird im laufenden Betrieb ständig die Verbindung zur Datenbank
+ * geprüft.
+ * @author ajanzen, rrose, mwaldau
  */
 public class Runner {
 
-    public static Properties config;
+    private static Properties config;
 
     public static void main(String[] args) {
         config = readConfigFile();
@@ -33,6 +36,10 @@ public class Runner {
         }
     }
 
+    /**
+     * List die Konfigdatei ein
+     * @return config Properties Objekt
+     */
     private static Properties readConfigFile() {
         Properties config = new Properties();
 

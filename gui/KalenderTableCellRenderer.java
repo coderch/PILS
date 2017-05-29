@@ -8,8 +8,8 @@ import java.time.LocalDate;
 
 /**
  * Gibt das Aussehen der einzelnen Table Zellen vor
- * @see javax.swing.table.DefaultTableCellRenderer
  * @author mwaldau
+ * @see javax.swing.table.DefaultTableCellRenderer
  */
 class KalenderTableCellRenderer extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value,
@@ -43,7 +43,6 @@ class KalenderTableCellRenderer extends DefaultTableCellRenderer {
                 case Anwesenheit.VORHABEN:
                     zelle.setIcon(IconHandler.WOLKE);
                     zelle.setText("");
-//                    zelle.setToolTipText(String.valueOf(table.getValueAt(row, 1)));
                     zelle.setHorizontalAlignment(JLabel.CENTER);
                     break;
                 case Anwesenheit.ABWESEND:

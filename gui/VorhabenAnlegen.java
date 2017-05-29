@@ -373,8 +373,9 @@ public class VorhabenAnlegen extends JDialog {
             VorhabenDAO.loescheVorhaben(vorhaben);
             for (Nutzer nutzer : soldatenListe) {
                 for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
-                    if (NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.VORHABEN)) {
+                    if (NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.VORHABEN) || NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.LEHRGANG)) {
                         NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
+                        System.out.println(endDatum);
                     }
                 }
             }

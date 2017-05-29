@@ -13,6 +13,7 @@ import java.time.LocalDate;
 /**
  * @author ajanzen
  */
+//TODO Javadoc
 public class LoginFrame extends JFrame {
 
     private JTextField jTextFieldUser;

@@ -34,7 +34,10 @@ public class Kalender extends JPanel {
     private KalenderModel kalenderModel;
     private JPopupMenu popupMenu = new JPopupMenu();
 
-
+    /**
+     * Konstruktor des Kalenders <br>
+     * Erzeugt ein JPanel dem eine Kopfzeile ein 2dimensionales Object-Array in einer JTable übergeben werden sowie ein PopupMenu wenn die Rolle nicht Soldat ist.
+     */
     public Kalender() {
         this.setLayout(new BorderLayout());
         this.monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
@@ -46,6 +49,10 @@ public class Kalender extends JPanel {
         }
     }
 
+    /**
+     * Methode um ein PopupMenu zu erstellen mit 4 Buttons(Anwesend, krank, urlaub abwesend) <br>
+     *     dient dazu nachträglich Status in die Übersicht einzuarbeiten
+     */
     private void popupMenubauen() {
         this.anwesend.setIcon(IconHandler.HAKEN);
         this.anwesend.setName(Anwesenheit.ANWESEND);
@@ -65,6 +72,11 @@ public class Kalender extends JPanel {
         this.popupMenu.add(abwesend);
     }
 
+    /**
+     * Belegt die Buttons des PopupMenus mit Actionlistener und entfernt den ersten falls einer vorhanden ist
+     * @param x X Koordinate im Kalender
+     * @param y Y Koordinate im Kalender
+     */
     private void popUpFunktionen(int x, int y) {
         Nutzer nutzer = null;
         for (Nutzer nutzer1 : soldatenListe) {
@@ -139,8 +151,6 @@ public class Kalender extends JPanel {
             }
 
         });
-
-
         return halter;
     }
 
@@ -155,7 +165,7 @@ public class Kalender extends JPanel {
     }
 
     /**
-     * Monatsanzeigepanel stellt das Menü des Kalenders zur Verfügung
+     * Monatsanzeigepanel stellt das Kopfmenü des Kalenders zur Verfügung
      *
      * @return anzeigePanel Panel mit weiter, zurück, refresh und Drucken Button
      */

@@ -148,7 +148,7 @@ public class UrlaubEintragen extends JDialog {
                             anzeige.append(String.format("%s Urlaub von %s bis %s eingetragen \n", nutzer.toString(),
                                     startDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                                     endDatum.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM))));
-                            for (LocalDate i = startDatum; !i.equals(endDatum); i = i.plusDays(1)) {
+                            for (LocalDate i = startDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
                                 NutzerDAO.anwesenheitEintragenTag(nutzer, i, Anwesenheit.URLAUB);
                             }
 
