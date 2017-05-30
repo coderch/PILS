@@ -18,23 +18,25 @@ import java.util.StringJoiner;
  * @author rrose
  */
 public class DBExport {
-
+    /**
+     * Dieser Konstruktor erstellt ein neues DBExport-Objekt und erstellt gleichzeitig die dump-Dateien mit Hilfe der Metadaten der Datenbank.
+     */
     public DBExport() {
-        List<String> tableNames = getTableNames();
+        List<String> tableNames = getTableNames(); // Alle Tabellen aus der Datenbank holen. Siehe getTableNames().
         for (String s : tableNames) {
             try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT * FROM " + s);
-                 ResultSet rs = pstm.executeQuery();
-                 BufferedWriter bwr = new BufferedWriter(new FileWriter(new File(s) + ".sql"))) {
-                ResultSetMetaData rsmd = rs.getMetaData();
+                 ResultSet rs = pstm.executeQuery(); // ResultSet für jede Tabelle mit allen Inhalten.
+                 BufferedWriter bwr = new BufferedWriter(new FileWriter(new File(s) + ".sql"))) { // Erstellen der Datei für diese Tabelle.
+                ResultSetMetaData rsmd = rs.getMetaData();  // Metadadaten des ResultSets holen, um später die Anzahl und die Datentypen der Spalten zu erkennen.
                 String command = "INSERT INTO " + s + " ";
                 StringJoiner sjo = new StringJoiner(",", "(", ")");
                 int columncount = rsmd.getColumnCount();
                 for (int i = 1; i <= columncount; i++) {
-                    sjo.add(rsmd.getColumnName(i));
+                    sjo.add(rsmd.getColumnName(i)); // Für jede Spalte den Namen in das SQL-Statement einfügen.
                 }
                 command += sjo.toString() + " VALUES ";
 
-                while (rs.next()) {
+                while (rs.next()) { // Für jeden Eintrag im ResultSet werden nun die Values dem SQL-Statement hinzugefügt.
                     StringJoiner sj = new StringJoiner(",", "(", ")");
                     for (int i = 1; i <= columncount; i++) {
                         if (rs.getObject(i) == null) {
@@ -46,8 +48,8 @@ public class DBExport {
                             sj.add("'" + rs.getObject(i).toString() + "'");
                         }
                     }
-                    String zeile = command + sj.toString() + ";";
-                    bwr.write(zeile);
+                    String zeile = command + sj.toString() + ";"; // Zusammenführung der einzelnen Teilbefehle.
+                    bwr.write(zeile); // Schreiben eines Befehls.
                     bwr.newLine();
                 }
             } catch (SQLException e) {
@@ -69,7 +71,7 @@ public class DBExport {
         DatabaseMetaData dbmd = DBConnect.getMetaData();
         String[] types = {"TABLE"};
         try {
-            ResultSet rs = dbmd.getTables(null, null, "%", types);
+            ResultSet rs = dbmd.getTables(null, null, "%", types);  // Filtern, dass nur die Name der Datentabellen dieser Datenbank hinzugefügt werden.
             while ((rs.next())) {
                 tableNames.add(rs.getString(3));
             }
