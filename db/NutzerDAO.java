@@ -153,6 +153,8 @@ public class NutzerDAO {
 //        }
 //        return logins;
 //    }
+// Diese Methode wurde ursprünglich dafür genutzt zu prüfen ob ein Login bereits in der Datenbank vorhanden ist. Dies wurde jedoch mit einer direkt Datenbankabfrage gelöst.
+
 
     /**
      * @return Gibt ein Set mit allen in der Datenbank (t_dienstgrade) abgelegten Dienstgrade zurück.
@@ -286,6 +288,7 @@ public class NutzerDAO {
 //            DBConnect.SQLFehlermeldung(e);
 //        }
 //    }
+// Diese auskommentierte Methode ist eigentlich dafür gedacht, einen Anwesenheitsstatus eines Soldaten über einen bestimmten Zeitraum und nicht lediglich für einen Tag einzutragen.
 
     /**
      * Löscht einen Anwesenheitsstatus für einen bestimmten Nutzer und einem dazugehörigen Datum.

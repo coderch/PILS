@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Diese klasse dient zum Drucken von JComponents.
+ * Diese Klasse dient zum Drucken von JComponents.
  *
  * @author rrose
  */
