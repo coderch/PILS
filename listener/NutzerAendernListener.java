@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * AktionListener Klasse zum Ändern der Daten aus dem GUI - Element NutzerFrame in die Datenbank
+ * AktionListener zum Ändern der Daten aus dem GUI-Element NutzerFrame in der Datenbank.
  *
  * @author ajanzen
  * @see gui.NutzerFrame
@@ -26,7 +26,7 @@ public class NutzerAendernListener implements ActionListener {
     private final JCheckBox login;
 
     /**
-     * Konstruktor für die Klasse NutzerAendernListener
+     * Konstruktor für die Klasse NutzerAendernListener.
      *
      * @param jTextFieldPersNr   JTextField für die Personalnummer
      * @param rollenComboBox     Drop-Down Menü für die Rollen
@@ -56,7 +56,7 @@ public class NutzerAendernListener implements ActionListener {
     }
 
     /**
-     * Methode aus dem Interface ActionListener zum Ändern der Datensätze aus der Datenbank
+     * Methode aus dem Interface ActionListener zum Ändern der Datensätze aus der Datenbank.
      *
      * @param actionEvent
      * @see ActionListener

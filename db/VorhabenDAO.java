@@ -8,7 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über ein Vorhaben.
+ * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über Vorhaben.
  *
  * @author rrose
  */
@@ -20,6 +20,8 @@ public class VorhabenDAO {
     }
 
     /**
+     * Diese Methode erstellt eine Liste<String> mit allen in der Datenbank (t_vorhaben) vorhandenen Vorhabennamen.
+     *
      * @return Gibt eine Liste mit den bereits in der Datenbank (t_vorhaben) vorhandenen Vorhaben-Namen zurück.
      */
     public static List<String> holeVorhabenNamen() {
@@ -37,7 +39,9 @@ public class VorhabenDAO {
     }
 
     /**
-     * @return Gibt eine Liste der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
+     * Erstellt eine List<Vorhaben> mit allen in der Datenbank angelegten und terminierten Vorhaben.
+     *
+     * @return Gibt eine List<Vorhaben> der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
         String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung,sonderdienst FROM t_hat_vorhaben_im_zeitraum";
@@ -56,9 +60,9 @@ public class VorhabenDAO {
     }
 
     /**
-     * Löscht das übergebene Vorhaben aus der Datenbank
+     * Löscht das übergebene Vorhaben aus der Datenbank.
      *
-     * @param vorhaben Das aus der Datenbank zu löschende Vorhaben
+     * @param vorhaben Das aus der Datenbank zu löschende Vorhaben.
      */
     public static void loescheVorhaben(Vorhaben vorhaben) {
         try {
@@ -81,8 +85,8 @@ public class VorhabenDAO {
     /**
      * Speichert ein übergebenes Vorhaben inkl. der ihm zugeteilten Soldaten in die Datenbank.
      *
-     * @param vorhaben            das übergebene Vorhaben-Objekt
-     * @param eingeteilteSoldaten Liste mit dem übergebenen Vorhaben zugeilten Nutzern (Soldaten)
+     * @param vorhaben            Das übergebene Vorhaben-Objekt
+     * @param eingeteilteSoldaten List<Nutzer> mit den dem übergebenen Vorhaben zugeteilten Nutzern (Soldaten).
      */
     public static void vorhabenSpeichern(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten) {
         try {
@@ -132,16 +136,17 @@ public class VorhabenDAO {
     }
 
     /**
+     * Diese Methode liefert eine List<Nutzer> mit den einem Vorhaben zugeteilten Soldaten.
+     *
      * @param vorhaben Übergebenes Vorhaben, wessen zugeteilte Nutzer gewünscht werden.
-     * @return Gibt die einem Vorhaben zugeteilten Nutzer (Soldaten) aus der Datenbank zurück.
+     * @return Gibt eine List<Nutzer> mit den einem Vorhaben zugeteilten Nutzern (Soldaten) aus der Datenbank zurück.
      */
     public static List<Nutzer> holeZugeteilteSoldaten(Vorhaben vorhaben) {
         List<Nutzer> eingeteilteSoldaten = new LinkedList<>();
-        try {
-            /*
-              SELECT Statement, welches durch einen INNER JOIN nur die dem Vorhaben zugeteilten Soldaten im passenden Zeitraum zurück gibt.
-             */
-            PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung  FROM t_nutzer INNER JOIN t_nimmt_teil_am_vorhaben ON pk_personalnummer = fk_t_soldat_pk_personalnummer WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?");
+        /*
+        SELECT Statement, welches durch einen INNER JOIN nur die dem Vorhaben zugeteilten Soldaten im passenden Zeitraum zurück gibt.
+         */
+        try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_personalnummer, dienstgrad, dienstgradgruppe,name, vorname, fk_t_rolle_pk_beschreibung  FROM t_nutzer INNER JOIN t_nimmt_teil_am_vorhaben ON pk_personalnummer = fk_t_soldat_pk_personalnummer WHERE fk_t_vorhaben_pk_t_name = ? AND fk_t_zeitraum_pk_von = ? AND fk_t_zeitraum_pk_bis = ?")) {
             pstm.setString(1, vorhaben.getName());
             pstm.setDate(2, Date.valueOf(vorhaben.getStart()));
             pstm.setDate(3, Date.valueOf(vorhaben.getEnde()));

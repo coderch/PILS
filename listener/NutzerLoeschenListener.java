@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * AktionListener Klasse zum Löschen der Daten aus dem GUI - Element NutzerFrame in die Datenbank
+ * AktionListener zum Löschen der Daten aus dem GUI-Element NutzerFrame in der Datenbank.
  *
  * @author ajanzen
  * @see java.awt.event.ActionListener
@@ -26,16 +26,16 @@ public class NutzerLoeschenListener implements ActionListener {
     private final JList<Nutzer> jListNutzer;
 
     /**
-     * Konstruktor für die Klasse NutzerLoeschenListener
+     * Konstruktor für die Klasse NutzerLoeschenListener.
      *
-     * @param jTextFieldPersNr   JTextField für die Personalnummer
-     * @param rollenComboBox     Drop-Down Menü für die Rollen
-     * @param jCheckBox          Auswahl Box on ein Login erstellt werden soll
-     * @param jTextFieldNachname JTextField für die Nachrname
-     * @param jTextFieldVorname  JTextField für die Vornamen
-     * @param jComboBoxDG        Drop-Down Menü für die Dienstgrade
-     * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze
-     * @param jListNutzer        JListe mit Nutzer
+     * @param jTextFieldPersNr   JTextField für die Personalnummer.
+     * @param rollenComboBox     Drop-Down Menü für die Rollen.
+     * @param jCheckBox          Auswahl Box ob ein Login erstellt werden soll.
+     * @param jTextFieldNachname JTextField für den Nachnamen.
+     * @param jTextFieldVorname  JTextField für den Vornamen.
+     * @param jComboBoxDG        Drop-Down Menü für die Dienstgrade.
+     * @param jComboBoxDGZusatz  Drop-Down Menü für die Dienstgradzusätze.
+     * @param jListNutzer        JListe mit Nutzer.
      */
     public NutzerLoeschenListener(JFormattedTextField jTextFieldPersNr,
                                   JComboBox<String> rollenComboBox,
@@ -57,7 +57,7 @@ public class NutzerLoeschenListener implements ActionListener {
     }
 
     /**
-     * Methode aus dem Interface ActionListener zum Löschen der Datensätze aus der Datenbank
+     * Methode aus dem Interface ActionListener zum Löschen der Datensätze aus der Datenbank.
      *
      * @param actionEvent
      * @see ActionListener
@@ -65,25 +65,19 @@ public class NutzerLoeschenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (!jListNutzer.isSelectionEmpty()) {
-            java.util.Set<Integer> integerList = NutzerDAO.holeLogins();
             List<Nutzer> nutzerList = jListNutzer.getSelectedValuesList();
             for (Nutzer nutzer : nutzerList) {
-                if (integerList.contains(nutzer.getPersonalnummer())) {
-                    NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
-                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
-
-                } else {
-                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
-                }
+                NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
+                NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
             }
             textFieldReset(nutzerList);
         }
     }
 
     /**
-     * Methode um die JList nach den Löschvorgang zu aktualisieren
+     * Methode um die JList nach dem Löschvorgang zu aktualisieren.
      *
-     * @param nutzerList Uebergibt die in der JList ausgewählten Nutzer
+     * @param nutzerList Uebergibt die in der JList ausgewählten Nutzer.
      */
     private void textFieldReset(List<Nutzer> nutzerList) {
         StringBuilder sb = new StringBuilder();

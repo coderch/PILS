@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Dieser Listener ist für das Zurücksetzen der Passwörter zuständing. Ihm wird lediglich das JFormattedTextField übergeben, in welchem die
+ * Dieser Listener ist für das Zurücksetzen der Passwörter zuständig. Ihm wird lediglich das JFormattedTextField übergeben, in welchem die
  * Personalnummer des Nutzers wessen Passwort zurückgesetzt werden soll vorhanden ist.
  * @see java.awt.event.ActionListener
  * @author rrose

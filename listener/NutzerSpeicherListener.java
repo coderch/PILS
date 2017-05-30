@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * AktionListener Klasse zum einfügen der Daten aus dem GUI - Element NutzerFrame in die Datenbank
+ * AktionListener Klasse zum Einfügen der Daten aus dem GUI-Element NutzerFrame in die Datenbank.
  *
  * @author ajanzen
  * @version 1.0
@@ -29,7 +29,7 @@ public class NutzerSpeicherListener implements ActionListener {
     private JList<Nutzer> jListNutzer;
 
     /**
-     * Konstruktor für die Klasse NutzerSpeicherListener
+     * Konstruktor für die Klasse NutzerSpeicherListener.
      *
      * @param jTextFieldPersNr   JTextField für die Personalnummer
      * @param rollenComboBox     Drop-Down Menü für die Rollen
@@ -60,7 +60,7 @@ public class NutzerSpeicherListener implements ActionListener {
     }
 
     /**
-     * Methode aus dem Interface ActionListener
+     * Methode aus dem Interface ActionListener.
      *
      * @param actionEvent
      * @see ActionListener
@@ -112,7 +112,7 @@ public class NutzerSpeicherListener implements ActionListener {
     }
 
     /**
-     * Methode zum zurücksetzen aller Felder in Frame auf null soewie die aktualliesierung der JList
+     * Methode zum Zurücksetzen aller Felder in Frame auf null sowie die Aktualisierung der JList.
      */
     public void textFieldReset() {
         jTextFieldPersNr.setText(null);

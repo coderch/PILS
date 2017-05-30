@@ -7,27 +7,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Diese Klasse dient zum Drucken von JComponents.
+ *
  * @author rrose
  */
 public class PrintUtilities implements Printable {
-
+    /**
+     * Liste mit den zu druckenen JComponents.
+     */
     private static List<JComponent> componentsToPrint;
 
-
+    /**
+     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für die zu druckenden Jcomponents.
+     *
+     * @param componentsToPrint Liste mit den zu druckenden JComponents.
+     */
     public static void printComponents(List<JComponent> componentsToPrint) {
         new PrintUtilities(componentsToPrint).print();
     }
-
+    /**
+     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für eine einzelne zu druckende Jcomponent.
+     *
+     * @param componentToPrint Die zu druckende JComponent.
+     */
     public static void printComponent(JComponent componentToPrint) {
         componentsToPrint = new ArrayList<>();
         componentsToPrint.add(componentToPrint);
         new PrintUtilities(componentsToPrint).print();
     }
 
+    /**
+     * Der Konstruktor weist der statischen Liste die übergebene Liste zu.
+     *
+     * @param componentsToPrint Liste der zu druckenden JComponents.
+     */
     public PrintUtilities(List<JComponent> componentsToPrint) {
         PrintUtilities.componentsToPrint = componentsToPrint;
     }
 
+    /**
+     *
+     */
     public void print() {
 
         PrinterJob printJob = PrinterJob.getPrinterJob();
@@ -35,7 +55,7 @@ public class PrintUtilities implements Printable {
         PageFormat pageFormat = printJob.defaultPage();
 
         Paper a4PortraitPaper = new Paper();
-        final double cm2inch = 0.3937;  // 1in = 2.54cm
+        final double cm2inch = 0.3937;
         double paperHeight = 29.7 * cm2inch;
         double paperWidth = 21.0 * cm2inch;
         double margin = 1.5 * cm2inch;
@@ -60,48 +80,33 @@ public class PrintUtilities implements Printable {
 
     public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
 
-        double gBreite, gHoehe;
-        int b, h;
-        double skalierung = 0.0;
+        double width, height;
+        int x, y;
+        double scale = 0.0;
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
 
-        gBreite = pageFormat.getImageableWidth();
-        gHoehe = pageFormat.getImageableHeight();
+        width = pageFormat.getImageableWidth();
+        height = pageFormat.getImageableHeight();
 
         if (pageIndex < componentsToPrint.size()) {
 
             JComponent c = componentsToPrint.get(pageIndex);
 
-            // ***** Skalierung *****
+            x = c.getWidth();
+            y = c.getHeight();
 
-            b = c.getWidth();
-            h = c.getHeight();
+            scale = width / x;
 
-            skalierung = gBreite / b;
+            g2d.scale(scale, scale);
 
-            g2d.scale(skalierung, skalierung);
-
-            // ***** Ende Skalierung *****
-
-            disableDoubleBuffering(componentsToPrint.get(pageIndex));
             componentsToPrint.get(pageIndex).paint(g2d);
-            enableDoubleBuffering(componentsToPrint.get(pageIndex));
+
             return PAGE_EXISTS;
         } else
             return NO_SUCH_PAGE;
     }
 
-
-    public static void disableDoubleBuffering(Component c) {
-        RepaintManager currentManager = RepaintManager.currentManager(c);
-        currentManager.setDoubleBufferingEnabled(false);
-    }
-
-    public static void enableDoubleBuffering(Component c) {
-        RepaintManager currentManager = RepaintManager.currentManager(c);
-        currentManager.setDoubleBufferingEnabled(true);
-    }
 }
 

@@ -51,33 +51,50 @@ public class Vorhaben {
     /**
      * Dieser Konstruktor wird benötigt um schon vorhandene Vorhaben-Namen aus der Datenbank zu erhalten und um nicht vorhandene Vorhaben-Namen in die Datenbank zu schreiben.
      *
-     * @param name
+     * @param name String mit einem schon in der Datenbank vorhandenen Vorhaben.
      */
     public Vorhaben(String name) {
         this.name = name;
     }
 
+    /**
+     * @return Gibt einen String mit dem Namen des jeweiligen Events zurück.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @return Gibt einen String mit der Beschreibung zu einem Vorhaben zurück.
+     */
     public String getBeschreibung() {
         return beschreibung;
     }
 
+    /**
+     * @return Gibt ein LocalDate mit dem Anfangszeitpunkt des Vorhabens zurück.
+     */
     public LocalDate getStart() {
         return start;
     }
 
+    /**
+     * @return Gibt ein LocalDate mit dem Endzeitpunkt des Vorhabens zurück.
+     */
     public LocalDate getEnde() {
         return ende;
     }
 
+    /**
+     * @return Gib einen Boolean zurück. Wenn das Vorhaben ein Sonderdienst ist - true, andernfalls false.
+     */
     public boolean getSonderdienst() {
         return sonderdienst;
     }
 
-    @Override
+    /**
+     * @return Gibt einen String mit allen Attributen eines Vorhabens zurück. Wurde nur für Testzwecke genutzt.
+     */
     public String toString() {
         return "Vorhaben{" +
                 "name='" + name + '\'' +
