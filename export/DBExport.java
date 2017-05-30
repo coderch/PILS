@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 /**
- * Die Klasse DBExport dient dazu, für jegliche Tabellen in der vorliegenden Datenbank einen dump bzw. ein INSERT INTO Skript zu erzeugen, welches als zusätzliches Back Up dienen soll.
+ * Die Klasse DBExport dient dazu, für jegliche Tabellen in der vorliegenden Datenbank einen Dump bzw. ein INSERT INTO-Skript zu erzeugen, welches als zusätzliches Backup dienen soll.
  *
  * @author rrose
  */
@@ -81,3 +81,8 @@ public class DBExport {
         return tableNames;
     }
 }
+
+/*
+Diese Klasse wurde geschrieben bevor das Thema Threads im Unterricht behandelt wurde. Man kann diesen Vorgang recht simpel in ein Runnable verwandeln.
+Wir haben uns dennoch dafür entschieden, diese Lösung so zu belassen.
+ */
