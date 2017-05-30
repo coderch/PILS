@@ -20,7 +20,7 @@ import java.util.Map;
  * Fenster zum Eintragen der taeglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern
  *
  * @author mwaldau
- * @see javax.swing.JDialog
+ * @see Anwesenheit
  */
 public class StaerkeMeldung extends JDialog {
 
@@ -30,15 +30,13 @@ public class StaerkeMeldung extends JDialog {
     private final JPanel contentPanel = new JPanel(new GridBagLayout());
     private JFrame frame;
 
-
+    /**
+     *
+     * @param frame
+     */
     public StaerkeMeldung(JFrame frame) {
         this.frame = frame;
-        if (Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("soldat")) {
-            this.soldaten = new ArrayList<>();
-            this.soldaten.add(Frameholder.aktiverNutzer);
-        } else {
-            this.soldaten = NutzerDAO.nutzerHolen();
-        }
+        this.soldaten = NutzerDAO.nutzerHolen();
         for (Nutzer nutzer : soldaten) {
             status.put(nutzer, NutzerDAO.hatAnwesenheit(nutzer, LocalDate.now()));
         }

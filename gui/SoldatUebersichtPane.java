@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Stellt eine JPanel zur Verfügung das für den übergebenen Nutzer im Übergebenen Zeitraum ein Übersicht der Vorhaben erstellt
  * @author mwaldau
  */
 public class SoldatUebersichtPane extends JPanel {
@@ -23,6 +24,14 @@ public class SoldatUebersichtPane extends JPanel {
     private final LocalDate ende;
     private JFrame frame;
 
+    /**
+     * Der Konstruktor befüllt die Nutzerliste, setzt das Layout und ruft die createContent() Methode auf.
+     *
+     * @param nutzer Nutzer für den die Übersicht erstellt werden soll
+     * @param beginn beginndatum des Zeitraums
+     * @param ende enddatum des Zeitraums
+     * @param frame JFrame der als Ankerpunkt dient
+     */
     public SoldatUebersichtPane(Nutzer nutzer, LocalDate beginn, LocalDate ende, JFrame frame) {
         this.beginn = beginn;
         this.ende = ende;
@@ -32,6 +41,10 @@ public class SoldatUebersichtPane extends JPanel {
         this.add(createContent(), BorderLayout.CENTER);
 }
 
+    /**
+     * Erstellt ein JPanel dass für den angegebenen Zeitraum und den Nutzer die Vorhaben anzeigt
+     * @return JScrollpane mit Informationen zu Vorhaben für übergebene Nutzer
+     */
     private JScrollPane createContent() {
         Map<Nutzer, List<Vorhaben>> vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(nutzerList, beginn, ende);
 
