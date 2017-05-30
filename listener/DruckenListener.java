@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Dieser ActionListener dient dazu um den Druck von übergebenen JComponents zu starten.
- * @param
+ * Dieser ActionListener dient dazu um den Druck von übergebenen JComponents zu starten. Dieser Listener funktioniert nur
+ * mit statischen vor dem Hinzufügen des ActionListeners fertiggestellten und mit Inhalt gefüllten JComponents.
+ *
  * @author rrose
  */
 public class DruckenListener implements ActionListener {
@@ -37,7 +38,10 @@ public class DruckenListener implements ActionListener {
         this.componentList.add(component);
     }
 
-    @Override
+    /**
+     *
+     * @param actionEvent actionEvent, welches das Drucken bei Aktivierung startet.
+     */
     public void actionPerformed(ActionEvent actionEvent) {
         PrintUtilities.printComponents(this.componentList);
     }
