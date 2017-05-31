@@ -6,6 +6,8 @@ import db.NutzerDAO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.time.LocalDate;
@@ -82,6 +84,19 @@ public class LoginFrame extends JFrame {
         JButton jButtonLogin = new JButton("Login");
 
         jButtonLogin.addActionListener(e -> getLogin(jLabelMeldung));
+        jTextFieldUser.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                jTextFieldUser.selectAll();
+            }
+        });
+
+        jPasswordFieldPassword.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent focusEvent) {
+                jPasswordFieldPassword.selectAll();
+            }
+        });
 
         jTextFieldUser.addKeyListener(new KeyAdapter() {
             @Override
