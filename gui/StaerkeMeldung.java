@@ -2,6 +2,7 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
+import gui.img.IconHandler;
 import listener.DruckenListener;
 
 import javax.swing.*;
@@ -11,7 +12,6 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

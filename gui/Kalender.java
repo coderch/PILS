@@ -2,6 +2,7 @@ package gui;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
+import gui.img.IconHandler;
 import listener.DruckenListener;
 
 import javax.swing.*;

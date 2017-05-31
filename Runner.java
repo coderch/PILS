@@ -1,7 +1,6 @@
-package gui;
-
 import db.DBConnect;
 import db.DBPrueferTask;
+import gui.LoginFrame;
 
 import javax.swing.*;
 import java.io.BufferedInputStream;
@@ -44,7 +43,7 @@ public class Runner {
     private static Properties readConfigFile() {
         Properties config = new Properties();
 
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("info.config"))) {
+        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("./info.config"))) {
             config.load(bis);
             bis.close();
 

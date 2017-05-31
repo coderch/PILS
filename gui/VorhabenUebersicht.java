@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import datenmodell.Vorhaben;
 import db.VorhabenDAO;
 import export.PrintUtilities;
+import gui.img.IconHandler;
 
 import javax.swing.*;
 import java.awt.*;

@@ -4,6 +4,7 @@ import com.toedter.calendar.JDateChooser;
 import datenmodell.Nutzer;
 import db.NutzerDAO;
 import export.PrintUtilities;
+import gui.img.IconHandler;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
