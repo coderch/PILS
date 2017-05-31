@@ -66,32 +66,30 @@ public class NutzerLoeschenListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (!jListNutzer.isSelectionEmpty()) {
+            StringBuilder sb = new StringBuilder();
             List<Nutzer> nutzerList = jListNutzer.getSelectedValuesList();
             for (Nutzer nutzer : nutzerList) {
                 if (Frameholder.aktiverNutzer.getPersonalnummer() != nutzer.getPersonalnummer()) {
+                    sb.append(nutzer).append("\n");
                     NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
                     NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"Sie können Ihren eigenen Account nicht löschen", "Zugriff verweigert", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Sie können Ihren eigenen Account nicht löschen", "Zugriff verweigert", JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
-            textFieldReset(nutzerList);
+            textFieldReset();
+            if (!sb.toString().equals("")) {
+                JOptionPane.showMessageDialog(null, sb.toString() + "\ngelöscht", "Fertig", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 
     /**
      * Methode um die JList nach dem Löschvorgang zu aktualisieren.
      *
-     * @param nutzerList Uebergibt die in der JList ausgewählten Nutzer.
      */
-    private void textFieldReset(List<Nutzer> nutzerList) {
-        StringBuilder sb = new StringBuilder();
-        for (Nutzer nutzer : nutzerList) {
-            sb.append(nutzer).append("\n");
-        }
-        JOptionPane.showMessageDialog(null, sb.toString() + "\ngelöscht", "Fertig", JOptionPane.INFORMATION_MESSAGE);
+    private void textFieldReset() {
         this.jTextFieldPersNr.setText(null);
         this.jCheckBox.setSelected(false);
         this.rollenComboBox.setSelectedIndex(0);
