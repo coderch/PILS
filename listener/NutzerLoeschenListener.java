@@ -2,6 +2,7 @@ package listener;
 
 import datenmodell.Nutzer;
 import db.NutzerDAO;
+import gui.Frameholder;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -67,8 +68,14 @@ public class NutzerLoeschenListener implements ActionListener {
         if (!jListNutzer.isSelectionEmpty()) {
             List<Nutzer> nutzerList = jListNutzer.getSelectedValuesList();
             for (Nutzer nutzer : nutzerList) {
-                NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
-                NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
+                if (Frameholder.aktiverNutzer.getPersonalnummer() != nutzer.getPersonalnummer()) {
+                    NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
+                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"Sie können Ihren eigenen Account nicht löschen", "Zugriff verweigert", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             }
             textFieldReset(nutzerList);
         }
@@ -88,6 +95,7 @@ public class NutzerLoeschenListener implements ActionListener {
         this.jTextFieldPersNr.setText(null);
         this.jCheckBox.setSelected(false);
         this.rollenComboBox.setSelectedIndex(0);
+        this.rollenComboBox.setEnabled(true);
         this.jTextFieldNachname.setText("");
         this.jTextFieldVorname.setText("");
         this.jComboBoxDG.setSelectedIndex(0);
