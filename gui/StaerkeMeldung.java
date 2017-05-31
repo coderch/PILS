@@ -31,8 +31,8 @@ public class StaerkeMeldung extends JDialog {
     private JFrame frame;
 
     /**
-     *
-     * @param frame
+     * Der Konstruktor befüllt die Liste soldaten mit Nutzern und schreibt in die Map status zu jedem Nutzer die Anwesenheit des Soldat zum Zeitpunkt des Aufrufs des Dialog
+     * @param frame Jframe dient zur Bindung des Dialogs an die Position
      */
     public StaerkeMeldung(JFrame frame) {
         this.frame = frame;
@@ -69,6 +69,7 @@ public class StaerkeMeldung extends JDialog {
         leer.gridx = 0;
         leer.gridy = 0;
         contentPanel.add(leeresPanel, leer);
+        // Kopfzeile
         GridBagConstraints anwesendConstraint = new GridBagConstraints(1, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         GridBagConstraints krankConstraint = new GridBagConstraints(2, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         GridBagConstraints urlaubConstraint = new GridBagConstraints(3, 0, 1, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
@@ -94,7 +95,7 @@ public class StaerkeMeldung extends JDialog {
         contentPanel.add(abwesendLabel, abwesendConstraint);
         contentPanel.add(lehrgangLabel, lehrgangConstraint);
         int i = 1;
-
+        // Zeile pro Nutzer erstellen
         for (Nutzer nutzer : soldaten) {
 
             GridBagConstraints labelConstraint = new GridBagConstraints();
@@ -161,6 +162,7 @@ public class StaerkeMeldung extends JDialog {
             contentPanel.add(radioButtonLehrgang, rbLehrgangConstr);
             i++;
         }
+        // Fußzeile
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         GridBagConstraints buttonPanelConstr = new GridBagConstraints(0, i + 1, 5, 1, 0, 0, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0);
         JButton melden = new JButton("Melden");
@@ -183,6 +185,10 @@ public class StaerkeMeldung extends JDialog {
         return contentPanel;
     }
 
+    /**
+     *  ActionListener für die RadioButtons
+     *  ordnet den ausgewählten Status dem Nutzer in einer Map zu
+     */
     private class SelektierterSoldat implements ActionListener {
         private Nutzer nutzer;
         private String status;

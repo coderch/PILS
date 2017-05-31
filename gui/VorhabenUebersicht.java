@@ -16,7 +16,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author rrose mwaldau
+ * Liefert einen Dialog, der dem es ermöglicht Informationen zu Vorhaben in einem Zeitraum zu bekommen und zu drucken
+ * @author mwaldau
+ * @see JDateChooser
  */
 public class VorhabenUebersicht extends JDialog {
     private JTabbedPane centerPanel;
@@ -25,6 +27,10 @@ public class VorhabenUebersicht extends JDialog {
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     private JFrame frame;
 
+    /**
+     * Ruft die Methode dialogbauen() auf
+     * @param frame
+     */
     public VorhabenUebersicht(JFrame frame) {
         this.frame = frame;
         centerPanel = new JTabbedPane();
@@ -45,7 +51,11 @@ public class VorhabenUebersicht extends JDialog {
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
-
+    /**
+     * Erstellt den Inhalt des Dialogs <br>
+     * Übersicht erstellen Button fügt ein ÜbersichtPanel hinzu, sowie ein Übersicht erstellen Button und ein Drucken Button
+     * @return contentPanel JPanel mit Zeitruamauswahl, Übersicht erstellen Button und einem Drucken Button
+     */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());
         JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -53,6 +63,7 @@ public class VorhabenUebersicht extends JDialog {
         JLabel von = new JLabel("von: ");
         JLabel bis = new JLabel("bis: ");
         JButton erstellen = new JButton("Übersicht erstellen");
+        //leert das centerPanel und fügt dann ein ZussamnfassungsPanel hinzu sowie für jedes Vorhaben im Zeitraum ein neues VorhabenPanel(vorhaben, frame)
         erstellen.addActionListener(actionEvent -> {
             List<Vorhaben> vorhabenListe = VorhabenDAO.holeVorhaben();
             centerPanel.removeAll();
@@ -97,8 +108,6 @@ public class VorhabenUebersicht extends JDialog {
         buttonConstr.gridwidth = 2;
         beginn.setPreferredSize(new Dimension(100, 20));
         ende.setPreferredSize(new Dimension(100, 20));
-
-
         leftPanel.add(zeitraum, zeitraumConst);
         leftPanel.add(von, vonConstr);
         leftPanel.add(beginn, beginnConstr);
@@ -106,8 +115,6 @@ public class VorhabenUebersicht extends JDialog {
         leftPanel.add(ende, endeConstr);
         leftPanel.add(platzhalter, platzhalterContstr);
         leftPanel.add(buttonPanel, buttonConstr);
-
-
         contentPanel.add(leftPanel, BorderLayout.WEST);
         contentPanel.add(centerPanel, BorderLayout.CENTER);
         return contentPanel;

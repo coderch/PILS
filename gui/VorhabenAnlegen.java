@@ -99,7 +99,7 @@ public class VorhabenAnlegen extends JDialog {
     /**
      * Erstellt den ContentPane mit einem GridBagLayout
      *
-     * @return
+     * @return contentPanel JPanel mit diversen Komponenten
      */
 
     private JPanel createContent() {
@@ -174,7 +174,6 @@ public class VorhabenAnlegen extends JDialog {
         beschreibung.setBorder(name.getBorder());
         JScrollPane beschreibungPanel = new JScrollPane(beschreibung, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         beschreibungPanel.setBorder(BorderFactory.createTitledBorder("Beschreibung"));
-//        beschreibungPanel.add(beschreibung);
         center2.add(beschreibungPanel);
 
         //-------------center3 mit DateChooser beginn und ende-------------------------
@@ -274,6 +273,8 @@ public class VorhabenAnlegen extends JDialog {
         JButton prüfen = new JButton("Prüfen");
         prüfen.setPreferredSize(new Dimension(80, 20));
         prüfen.addActionListener(new ActionListener() {
+            //Prüft aufgrund der in der Datenbank hinterlegten Anwesenheitsstatus die Verfügbarkeit für ein Vorhaben innerhalb des Zeitraums
+            //und setzt einen neuen ListCellRenderer
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -304,21 +305,16 @@ public class VorhabenAnlegen extends JDialog {
         soldatenButtonPanel.add(zu);
         soldatenButtonPanel.add(ab);
         soldatenButtonPanel.add(prüfen);
-
         GridBagConstraints buttonPanelContraint = new GridBagConstraints();
         buttonPanelContraint.gridy = 3;
         buttonPanelContraint.gridx = 1;
-
         //-------------center5  Platzhalter -------------------------
         JPanel center5 = new JPanel();
-        center5.setPreferredSize(new
-
-                Dimension(0, 50));
+        center5.setPreferredSize(new Dimension(0, 50));
         GridBagConstraints center5Constraint = new GridBagConstraints();
         center5Constraint.gridy = 4;
         center5Constraint.gridx = 0;
         center5Constraint.gridwidth = 3;
-
         //-------------center6 mit Buttons-------------------------
         JPanel center6 = new JPanel();
         GridBagConstraints center6Constraint = new GridBagConstraints();
@@ -363,6 +359,11 @@ public class VorhabenAnlegen extends JDialog {
         return contentPanel;
     }
 
+    /**
+     * Methode zum Eintragen des Vorhabens
+     * prüft auf Konflikte zwischen Start und Enddatum und löscht das gleichnamige Vorhaben aus der DB(um Änderungen an einem Vorhaben zu realisieren) <br>
+     * danach wird das Vorhaben sowie die Anwesenheit in die Datenbank eingetragen
+     */
     private void eintragen() {
         LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate endDatum = ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -375,7 +376,6 @@ public class VorhabenAnlegen extends JDialog {
                 for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
                     if (NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.VORHABEN) || NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.LEHRGANG)) {
                         NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
-                        System.out.println(endDatum);
                     }
                 }
             }

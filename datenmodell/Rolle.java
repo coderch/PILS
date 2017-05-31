@@ -22,7 +22,7 @@ public class Rolle {
 
     /**
      *
-     * @return Gibt die Beschrieibung der jeweiligen Rolle zurück.
+     * @return Gibt die Beschreibung der jeweiligen Rolle zurück.
      */
     public String getBeschreibung() {
         return beschreibung;
