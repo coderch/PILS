@@ -1,7 +1,9 @@
 package gui;
 
 import com.toedter.calendar.JDateChooser;
+import datenmodell.Nutzer;
 import datenmodell.Vorhaben;
+import db.NutzerDAO;
 import db.VorhabenDAO;
 import export.PrintUtilities;
 import gui.img.IconHandler;
@@ -131,7 +133,11 @@ public class VorhabenUebersicht extends JDialog {
                 JButton loeschen = new JButton("Löschen");
                 loeschen.setFont(new Font("Arial", Font.PLAIN, 10));
                 loeschen.addActionListener(actionEvent -> {
+                    List<Nutzer> eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
                     VorhabenDAO.loescheVorhaben(vorhaben);
+                    for(Nutzer nutzer : eingeteilteSoldaten){
+                        NutzerDAO.anwesenheitLoeschen(nutzer,vorhaben.getStart(),vorhaben.getEnde());
+                    }
 
                     List<Vorhaben> vorhabenListe1 = VorhabenDAO.holeVorhaben();
                     centerPanel.removeAll();
