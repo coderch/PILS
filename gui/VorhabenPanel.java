@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
 /**
+ * Stellt für ein Vorhaben eine Übersicht der dazugehörigen Informationen dar
  * @author mwaldau
  */
 public class VorhabenPanel extends JPanel {
@@ -17,8 +18,7 @@ public class VorhabenPanel extends JPanel {
     private java.util.List<Nutzer> eingeteilteSoldaten;
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     private JFrame frame;
-
-
+    // Setzt die Umgebungsvariablen und ruft die createContent() Methode auf
     public VorhabenPanel(Vorhaben vorhaben, JFrame frame) {
         this.frame = frame;
         this.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -27,10 +27,11 @@ public class VorhabenPanel extends JPanel {
         this.setName(vorhaben.getName());
         this.add(createContent());
     }
-
+    // Erstellt ein JPanel mit je einer Textarea für zeitraum und Beschreibung sowie einer Übersicht der eingeteilten Soldaten
     private JPanel createContent() {
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+        //JTextArea Stil eines JLabels angepasst
         JTextArea zeitraum = new JTextArea();
         zeitraum.setBackground(this.getBackground());
         zeitraum.setText(String.format("%s \nvon %s bis %s",vorhaben.getName(),vorhaben.getStart().format(DTF), vorhaben.getEnde().format(DTF)));

@@ -17,6 +17,7 @@ import java.util.*;
 import java.util.List;
 
 /**
+ * Dient zum Eintragen von Urlauben für mehrer Nutzer/Soldaten. Eine Bestätigung
  * @author mwaldau
  */
 public class UrlaubEintragen extends JDialog {
@@ -28,6 +29,11 @@ public class UrlaubEintragen extends JDialog {
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
 
+    /**
+     * Der Konstruktor befüllt die Liste soldaten übernimmt den übergebenen JFrame und fügt ein Scrollpane mit einer Textare hinzu. <br>
+     * Im Anschluss wird die dialogbauen() Methode aufgerufen
+     * @param frame
+     */
     public UrlaubEintragen(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
         this.frame = frame;
@@ -54,11 +60,9 @@ public class UrlaubEintragen extends JDialog {
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
      * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
      * auszuwählen und einen Button zum Eintragen von Urlaub
-     * <p>
-     * Der Übersicht erstellen button erstellt für jeden ausgewählten Soldaten, bzw. für jeden in der
-     * ausgewählten Gruppe einen TabPanel mit einem SoldatUebersichtPane sowie eine ÜbersichtPane
      *
-     * @param soldaten
+     *
+     * @param soldaten Liste der in der Datenbank befindlichen Soldaten
      * @return Es wird ein JPanel mit diversen Komponenten erstellt
      */
     private JPanel createContent(List<Nutzer> soldaten) {
@@ -199,7 +203,7 @@ public class UrlaubEintragen extends JDialog {
                     }
                 }
             } catch (NullPointerException e) {
-                JOptionPane.showMessageDialog(null, "Keinen soldaten ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Keinen Soldaten ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
             }
 
         });
