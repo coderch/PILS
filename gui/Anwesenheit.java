@@ -71,8 +71,8 @@ public class Anwesenheit extends JDialog {
         eintragen.setPreferredSize(new Dimension(100,26));
         eintragen.addActionListener(actionEvent -> {
             NutzerDAO.anwesenheitEintragenTag(Frameholder.aktiverNutzer, LocalDate.now(), (String) anwesenheitsStatus.getSelectedItem());
+            this.dispose();
             new Frameholder(Frameholder.aktiverNutzer);
-            dispose();
         });
         buttonPanel.add(eintragen);
         contentPanel.add(begrPanel);
