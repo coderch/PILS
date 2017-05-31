@@ -118,6 +118,7 @@ public class NutzerSpeicherListener implements ActionListener {
         jTextFieldPersNr.setText(null);
         jCheckBox.setSelected(false);
         rollenComboBox.setSelectedIndex(0);
+        this.rollenComboBox.setEnabled(true);
         jTextFieldNachname.setText("");
         jTextFieldVorname.setText("");
         jComboBoxDG.setSelectedIndex(0);

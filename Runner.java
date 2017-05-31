@@ -3,9 +3,7 @@ import db.DBPrueferTask;
 import gui.LoginFrame;
 
 import javax.swing.*;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Timer;
@@ -14,6 +12,7 @@ import java.util.Timer;
  * Startklasse des Programms. Beinhaltet die main Methode in der zunächst die configfile eingelesen wird
  * um danach die Verbindung zur Datenbank aufzubauen. Mittels eines Timers wird im laufenden Betrieb ständig die Verbindung zur Datenbank
  * geprüft.
+ *
  * @author ajanzen, rrose, mwaldau
  */
 public class Runner {
@@ -38,15 +37,14 @@ public class Runner {
 
     /**
      * List die Konfigdatei ein
+     *
      * @return config Properties Objekt
      */
     private static Properties readConfigFile() {
         Properties config = new Properties();
 
-        try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream("./info.config"))) {
-            config.load(bis);
-            bis.close();
-
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("./info.config")))) {
+            config.load(br);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getMessage(), JOptionPane.ERROR_MESSAGE);
         }

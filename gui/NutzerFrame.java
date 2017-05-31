@@ -161,10 +161,12 @@ public class NutzerFrame extends JDialog {
             jTextFieldPersNr.setText(null);
             jCheckBox.setSelected(false);
             rollenComboBox.setSelectedIndex(0);
+            rollenComboBox.setEnabled(true);
             jTextFieldNachname.setText("");
             jTextFieldVorname.setText("");
             jComboBoxDG.setSelectedIndex(0);
             jComboBoxDGZusatz.setSelectedIndex(0);
+            jListNutzer.clearSelection();
         });
         return jPanelMaster;
 
