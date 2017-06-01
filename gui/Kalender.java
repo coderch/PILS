@@ -24,7 +24,7 @@ public class Kalender extends JPanel {
     public static LocalDate datum = LocalDate.now();
     private static final Dimension PUBUTTONSIZE = new Dimension(25,25);
     private final JTabbedPane kalenderPane = new JTabbedPane();
-    private final JPanel monat = new JPanel(new BorderLayout());
+    private final JPanel teileinheit = new JPanel(new BorderLayout());
     private final JButton anwesend = new JButton();
     private final JButton krank = new JButton();
     private final JButton urlaub = new JButton();
@@ -41,10 +41,10 @@ public class Kalender extends JPanel {
      */
     public Kalender() {
         this.setLayout(new BorderLayout());
-        this.monat.add(monatsAnzeigePanel(), BorderLayout.NORTH);
+        this.teileinheit.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         this.monatsAnzeigeBauen();
-        this.monat.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
-        this.kalenderPane.add("Monat", monat);
+        this.teileinheit.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+        this.kalenderPane.add("Teileinheit", teileinheit);
         if (!Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("Soldat")) {
             popupMenubauen();
         }
