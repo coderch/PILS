@@ -51,7 +51,7 @@ public class Kalender extends JPanel {
     }
 
     /**
-     * Methode um ein PopupMenu zu erstellen mit 4 Buttons(Anwesend, krank, urlaub abwesend) <br>
+     * Methode um ein PopupMenu zu erstellen mit 4 Buttons(Anwesend, Krank, Urlaub, Abwesend) <br>
      *     dient dazu nachträglich Status in die Übersicht einzuarbeiten
      */
     private void popupMenubauen() {
