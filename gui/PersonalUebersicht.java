@@ -181,7 +181,7 @@ public class PersonalUebersicht extends JDialog {
                 } else if (tree.getSelectionPath().getPath().length == 3) {
                     for (TreePath treePath : tree.getSelectionPaths()) {
                         for (Nutzer nutzer : soldaten) {
-                            if (treePath.getPath()[2].toString().contains(nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
+                            if (treePath.getPath()[2].toString().contains(nutzer.getDienstgrad() + " " + nutzer.getName()) && !ausgNutzer.contains(nutzer)) {
                                 neuerTab(nutzer);
                             }
                         }
@@ -218,9 +218,9 @@ public class PersonalUebersicht extends JDialog {
 
     /**
      * Erstellt für den übergebenen Nutzer im TabPanel(centerPanel) ein neuen SoldatUebersichtPane
-     * und fügt einen nutzer der ausgNutzerListe hinzu
+     * und fügt einen nutzer der ausgNutzerListe hinzu.
      *
-     * @param nutzer Nutzer für den das Panel erstellt werden soll
+     * @param nutzer Nutzer für den das Panel erstellt werden soll.
      */
     private void neuerTab(Nutzer nutzer) {
         centerPanel.add(nutzer.toString(), new SoldatUebersichtPane(nutzer, beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), ende.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), frame));
@@ -229,9 +229,10 @@ public class PersonalUebersicht extends JDialog {
 
     /**
      * Erstellt eine Übersicht die für jeden Tag im ausgewählten Zeitraum nach Dienstgradgruppen getrennt die
-     * geplante Tagesstärke im Ist/Soll Vergleich wiedergibt
+     * geplante Tagesstärke im Ist/Soll Vergleich wiedergibt.
+     *
      * @param ausgNutzer Liste der Nutzer für die die Übersicht erstellt werden soll.
-     * @return scp ScrollPanel mit geplanter Tagesdienststärke
+     * @return scp ScrollPanel mit geplanter Tagesdienststärke.
      */
     private JScrollPane uebersichtPanel(List<Nutzer> ausgNutzer) {
         LocalDate startdatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();

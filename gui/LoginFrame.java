@@ -13,15 +13,19 @@ import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 
 /**
+ * Diese Klasse erzeugt ein Loginfenster. Nach erfolgreicher Anmeldung erzeugt dieses Frame einen Frameholder.
+ * {@inheritDoc}
+ *
  * @author ajanzen
  */
-//TODO Javadoc
 public class LoginFrame extends JFrame {
 
     private JTextField jTextFieldUser;
     private JPasswordField jPasswordFieldPassword;
 
-
+    /**
+     * Dieser Konstruktor erzeugt das Frame, weist ihm einen Titel zu und erstellt die Swing-Kompononenten mit Hilfe von createContent().
+     */
     public LoginFrame() {
         super("Login");
 
@@ -36,6 +40,10 @@ public class LoginFrame extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Mit dieser Methode werden alle benötigten Swing-Compononents erzeugt und angeordnet. Des Weiteren werden sämtliche ActionListener bei den jeweiligen Komponenten angemeldet.
+     * @return JPanel mit dem gesamten grafischen Inhalt.
+     */
     private JPanel createContent() {
 
         JPanel jPanelMaster = new JPanel(new BorderLayout());
@@ -77,10 +85,6 @@ public class LoginFrame extends JFrame {
         JPanel jPanelMeldung = new JPanel();
         jPanelMeldung.add(jLabelMeldung);
 
-        //TODO @ajanzen: in der Endfassung entfernen:
-        jTextFieldUser.setText("11116255");
-        jPasswordFieldPassword.setText("P@ssw0rd");
-
         JButton jButtonLogin = new JButton("Login");
 
         jButtonLogin.addActionListener(e -> getLogin(jLabelMeldung));
@@ -103,7 +107,6 @@ public class LoginFrame extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
-
                 }
             }
         });
@@ -113,7 +116,6 @@ public class LoginFrame extends JFrame {
             public void keyPressed(KeyEvent keyEvent) {
                 if (keyEvent.getKeyCode() == KeyEvent.VK_ENTER) {
                     getLogin(jLabelMeldung);
-
                 }
             }
         });
@@ -127,18 +129,30 @@ public class LoginFrame extends JFrame {
         jPanelMaster.add(jPanelMeldung, BorderLayout.CENTER);
         jPanelMaster.add(jPanelButton, BorderLayout.SOUTH);
 
-
         return jPanelMaster;
     }
 
+    /**
+     * Zugriff auf das JTextField jTextFieldUser.
+     * @return Gibt die Eingabe aus jTextFieldUser zurück.
+     */
     public int getUser() {
         return Integer.parseInt(jTextFieldUser.getText().trim());
     }
-
+    /**
+     * Zugriff auf das JTextField jTextFieldPassword.
+     * @return Gibt die Eingabe aus jTextFieldPassword zurück.
+     */
     public String getPassword() {
         return new String(jPasswordFieldPassword.getPassword());
     }
 
+    /**
+     * Diese Methode prüft die Eingaben des Nutzers und testet, ob diese Daten in der Datenbank vorhanden sind. Bei positiver Rückmeldung der Methode NutzerDAO.getLogin() wird das Hauptfenster bzw. bei bisher nicht
+     * eingetragener Anwesenheit die Stärkemeldung geöffnet.
+     * Bei negativer Rückmeldung wird eine Fehlermeldung im Fenster angezeigt.
+     * @param jLabelMeldung JLabel, welches zur Anzeige von Fehlermeldungen dient.
+     */
     private void getLogin(JLabel jLabelMeldung) {
         if (jTextFieldUser.getText().isEmpty() || jTextFieldUser.getText().matches("[a-zöäüßA-ZÖÄÜ]*")) {
             jLabelMeldung.setText("Benutzername oder Passwort falsch!");

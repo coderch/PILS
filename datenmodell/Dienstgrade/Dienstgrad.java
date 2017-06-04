@@ -31,7 +31,7 @@ public class Dienstgrad implements Comparator<Dienstgrad> {
         return d1.getWertigkeit() - d2.getWertigkeit();
     }
 
-    public static List<Dienstgrad> sortier(Set<String> set) {
+    public static List<Dienstgrad> sortieren(Set<String> set) {
         List<Dienstgrad> dienstGradList = new ArrayList<>();
 
         for (String s : set) {

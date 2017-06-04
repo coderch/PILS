@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 /**
- * JFrame mit Jmenubar und entsprechenden Items. Menubar abhängig vom Userlevel
+ * JFrame mit JMenubar und entsprechenden Items. Menubar abhängig vom Userlevel
  *
  * @author mwaldau
  */

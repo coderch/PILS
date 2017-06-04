@@ -60,7 +60,7 @@ public class DBConnect {
     }
 
     /**
-     * Methode zu Übergabe eines SQL-Statements an die Connection.
+     * Methode zur Erstellung eines PreparedStatements.
      *
      * @param sql SQL- Statment
      * @return Gibt ein PreparedStatement zurück.
@@ -72,7 +72,7 @@ public class DBConnect {
     }
 
     /**
-     * Methode zu Übergabe eines SQL-Statements an die Connection.
+     *  Methode zur Erstellung eines CallableStatements.
      *
      * @param sql SQL- Statment
      * @return Gibt ein CallableStatement zurück.

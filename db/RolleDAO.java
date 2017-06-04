@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Data-Access-Object für das Laden und Speichern relevanter Informationen für / über Rollen (Userlevel).
  *
- * @author ajazen
+ * @author ajanzen
  */
 public class RolleDAO {
 

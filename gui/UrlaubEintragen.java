@@ -17,7 +17,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Dient zum Eintragen von Urlauben für mehrer Nutzer/Soldaten. Eine Bestätigung
+ * Dient zum Eintragen von Urlaub für mehrer Nutzer/Soldaten.
  * @author mwaldau
  */
 public class UrlaubEintragen extends JDialog {
@@ -30,9 +30,8 @@ public class UrlaubEintragen extends JDialog {
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
 
     /**
-     * Der Konstruktor befüllt die Liste soldaten übernimmt den übergebenen JFrame und fügt ein Scrollpane mit einer Textare hinzu. <br>
+     * Der Konstruktor befüllt die Liste soldaten, übernimmt den übergebenen JFrame und fügt ein Scrollpane mit einer Textarea hinzu.
      * Im Anschluss wird die dialogbauen() Methode aufgerufen
-     * @param frame
      */
     public UrlaubEintragen(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();
@@ -43,7 +42,7 @@ public class UrlaubEintragen extends JDialog {
     }
 
     /**
-     * Setzt die Umgebungsvariablen für den Dialog
+     * Setzt die Umgebungsvariablen für den Dialog.
      */
     private void dialogBauen() {
         this.setModal(true);
@@ -59,11 +58,11 @@ public class UrlaubEintragen extends JDialog {
     /**
      * Erstellt ein JPanel mit einem Baum der sich in der Datenbank befindlichen Soldaten
      * getrennt nach Diewnstgradgruppen, zwei DateChoosern um Beginn und Ende des Zeitraums
-     * auszuwählen und einen Button zum Eintragen von Urlaub
+     * auszuwählen und einen Button zum Eintragen von Urlaub.
      *
      *
-     * @param soldaten Liste der in der Datenbank befindlichen Soldaten
-     * @return Es wird ein JPanel mit diversen Komponenten erstellt
+     * @param soldaten Liste der in der Datenbank befindlichen Soldaten.
+     * @return Es wird ein JPanel mit diversen Komponenten erstellt.
      */
     private JPanel createContent(List<Nutzer> soldaten) {
         JPanel contentPanel = new JPanel(new BorderLayout());

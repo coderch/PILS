@@ -20,14 +20,13 @@ public class VorhabenDAO {
     }
 
     /**
-     * Diese Methode erstellt eine Liste<String> mit allen in der Datenbank (t_vorhaben) vorhandenen Vorhabennamen.
+     * Diese Methode erstellt eine List<String> mit allen in der Datenbank (t_vorhaben) vorhandenen Vorhabennamen.
      *
      * @return Gibt eine Liste mit den bereits in der Datenbank (t_vorhaben) vorhandenen Vorhaben-Namen zurück.
      */
     public static List<String> holeVorhabenNamen() {
         List<String> vorhabenNamen = new LinkedList<>();
-        try (
-                PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_name FROM t_vorhaben")) {
+        try (PreparedStatement pstm = DBConnect.preparedStatement("SELECT pk_name FROM t_vorhaben")) {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 vorhabenNamen.add(rs.getString(1));
@@ -46,8 +45,7 @@ public class VorhabenDAO {
     public static List<Vorhaben> holeVorhaben() {
         String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung,sonderdienst FROM t_hat_vorhaben_im_zeitraum";
         List<Vorhaben> alleVorhaben = new LinkedList<>();
-        try {
-            PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement);
+        try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             ResultSet rs = pstm.executeQuery();
             while (rs.next()) {
                 Vorhaben vorhaben = new Vorhaben(rs.getString(1), rs.getString(4), rs.getDate(2).toLocalDate(), rs.getDate(3).toLocalDate(), rs.getBoolean(5));

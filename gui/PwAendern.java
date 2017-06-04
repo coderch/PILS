@@ -10,10 +10,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 /**
+ * Diese Klasse erstellt einen JDialog mit dessen Hilfe es möglich ist, dass ein Nutzer sein Passwort ändern kann.
  * @author rrose
  */
-@SuppressWarnings("deprecation")
-//TODO javadoc
 public class PwAendern extends JDialog {
     private final JFrame frame;
     private JPasswordField altesPasswort;
@@ -25,6 +24,9 @@ public class PwAendern extends JDialog {
         dialogBauen();
     }
 
+    /**
+     * Setzt die Umgebungsvariablen für den Dialog.
+     */
     private void dialogBauen() {
         this.setModal(true);
         this.setTitle("Passwort ändern");
@@ -36,6 +38,10 @@ public class PwAendern extends JDialog {
         this.setVisible(true);
     }
 
+    /**
+     * Diese Methode erstellt alle benötigten Swing-Komponenten und fügt diese dem zurückgegebenen JPanel hinzu.
+     * @return JPanel mit allen Swing-Elementen
+     */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());
         JPanel jPanel = new JPanel(new GridBagLayout());
@@ -130,13 +136,17 @@ public class PwAendern extends JDialog {
         return contentPanel;
     }
 
+    /**
+     * Diese Methode prüft die Eingaben des Nutzers und führt eine Komplexitätsprüfung durch.
+     * Das neue Passwort darf nicht gleich dem alten Passwort sein, muss mindesten 8 Zeichen lang sein und darf nicht gleich dem Standard-Passwort "password" sein.
+     */
     private void pruefeEingabe() {
-        if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(altesPasswort.getText()))) {
-            if (!altesPasswort.getText().equals(neuesPasswort.getText()) && neuesPasswort.getText().length() >= 8 && neuesPasswort.getText().equals(neuesPasswortWiederholen.getText())) {
-                if (neuesPasswort.getText().equalsIgnoreCase("password"))
+        if (NutzerDAO.getLogin(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(String.valueOf(altesPasswort.getPassword())))) {
+            if (!String.valueOf(altesPasswort.getPassword()).equals(String.valueOf(neuesPasswort.getPassword())) && String.valueOf(neuesPasswort.getPassword()).length() >= 8 && String.valueOf(neuesPasswort.getPassword()).equals(String.valueOf(neuesPasswortWiederholen.getPassword()))) {
+                if (String.valueOf(neuesPasswort.getPassword()).equalsIgnoreCase("password"))
                     JOptionPane.showMessageDialog(null, "PASSWORD ist nicht gestattet", "FEHLER: Passwort ändern", JOptionPane.ERROR_MESSAGE);
                 else {
-                    NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(neuesPasswort.getText()));
+                    NutzerDAO.loginSpeichern(Frameholder.aktiverNutzer.getPersonalnummer(), PasswordHash.createHash(String.valueOf(neuesPasswort.getPassword())));
                     dispose();
                     JOptionPane.showMessageDialog(null, "Passwort wurde erfolgreich geändert!", "Passwort ändern", JOptionPane.INFORMATION_MESSAGE);
                 }

@@ -25,7 +25,7 @@ public class PasswordHash {
     public static String createHash(String passwort) {
         StringBuilder sb = new StringBuilder();
         try {
-            MessageDigest mDigest = MessageDigest.getInstance("SHA-256"); // Festlegen des Hash-Algorithmuses.
+            MessageDigest mDigest = MessageDigest.getInstance("SHA-256"); // Festlegen Hash-Algorithmus.
             byte[] hashes = mDigest.digest(passwort.getBytes()); // Zerlegen des Strings in ein Byte-Array und Berechnung der Hashes der einzelnen Bytes.
             for (byte hash : hashes) {
                 sb.append(String.format("%02x",hash)); //Zusammenführung der errechneten Hashwerte zu einem zusammenhängenden String. Alternative Möglichkeit (Integer.toString((hash & 0xff) + 0x100, 16).substring(1)).

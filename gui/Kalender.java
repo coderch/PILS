@@ -81,7 +81,7 @@ public class Kalender extends JPanel {
     private void popUpFunktionen(int x, int y) {
         Nutzer nutzer = null;
         for (Nutzer nutzer1 : soldatenListe) {
-            if (nutzer1.getName().equals(kalender.getValueAt(y, 1))) {
+            if (nutzer1.getName().equals(kalender.getValueAt(y, 1))&& nutzer1.getDienstgrad().equals(kalender.getValueAt(y,0))) {
                 nutzer = nutzer1;
             }
         }
@@ -166,9 +166,9 @@ public class Kalender extends JPanel {
     }
 
     /**
-     * Monatsanzeigepanel stellt das Kopfmenü des Kalenders zur Verfügung
+     * Monatsanzeigepanel stellt das Kopfmenü des Kalenders zur Verfügung.
      *
-     * @return anzeigePanel Panel mit weiter, zurück, refresh und Drucken Button
+     * @return anzeigePanel Panel mit Weiter, Zurück, Refresh und Drucken Button.
      */
     private JPanel monatsAnzeigePanel() {
         JPanel anzeigePanel = new JPanel();
@@ -252,7 +252,7 @@ public class Kalender extends JPanel {
 
 
     /**
-     * Setzt die Breite der zellen
+     * Setzt die Breite der Zellen.
      *
      * @param anzeige Kopfzeile der JTable
      */

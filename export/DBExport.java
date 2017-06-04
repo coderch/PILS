@@ -19,7 +19,7 @@ import java.util.StringJoiner;
  */
 public class DBExport {
     /**
-     * Dieser Konstruktor erstellt ein neues DBExport-Objekt und erstellt gleichzeitig die dump-Dateien mit Hilfe der Metadaten der Datenbank.
+     * Dieser Konstruktor erstellt ein neues DBExport-Objekt und erzeugt die dump-Dateien mit Hilfe der Metadaten der Datenbank.
      */
     public DBExport() {
         List<String> tableNames = getTableNames(); // Alle Tabellen aus der Datenbank holen. Siehe getTableNames().

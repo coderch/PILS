@@ -11,6 +11,7 @@ import java.util.List;
 /**
  * Dieser ActionListener dient dazu um den Druck von übergebenen JComponents zu starten. Dieser Listener funktioniert nur
  * mit statischen vor dem Hinzufügen des ActionListeners fertiggestellten und mit Inhalt gefüllten JComponents.
+ * {@inheritDoc}
  *
  * @author rrose
  */
@@ -23,6 +24,7 @@ public class DruckenListener implements ActionListener {
 
     /**
      * Diesem Konstruktor wird eine Liste mit den zu druckenden JComponents übergeben, welche dann als privates Attribut gespeichert wird.
+     *
      * @param componentList Die Liste der zu druckenden JComponents
      */
     public DruckenListener(List<JComponent> componentList) {
@@ -31,6 +33,7 @@ public class DruckenListener implements ActionListener {
 
     /**
      * Diesem Konstruktor wird eine zu druckende JComponent (vorzugsweise JPanel) übergeben, welche dann als privates Attribut gespeichert wird.
+     *
      * @param component JComponent welche zu drucken ist.
      */
     public DruckenListener(JComponent component) {
@@ -39,8 +42,7 @@ public class DruckenListener implements ActionListener {
     }
 
     /**
-     *
-     * @param actionEvent actionEvent, welches das Drucken bei Aktivierung startet.
+     * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent actionEvent) {
         PrintUtilities.printComponents(this.componentList);

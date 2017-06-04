@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Klasse NutzerFrame. Erstellt ein GUI-Element zur Erstellung neuer Nutzer sowie die Änderung der Informationen der Nutzer
+ * Klasse NutzerFrame. Erstellt ein GUI-Element zur Erstellung neuer Nutzer sowie die Änderung der Informationen der Nutzer.
  *
  * @author ajanzen
  * @version 1.0
@@ -316,7 +316,7 @@ public class NutzerFrame extends JDialog {
             }
         }
 
-        List<Dienstgrad> dienstGradList = Dienstgrad.sortier(diensgradeOhneZusatz);
+        List<Dienstgrad> dienstGradList = Dienstgrad.sortieren(diensgradeOhneZusatz);
         Collections.sort(dienstGradList, new DienstgradComparator());
 
         JComboBox<String> jComboBoxDG = new JComboBox<>();

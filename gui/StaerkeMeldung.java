@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Fenster zum Eintragen der taeglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern
+ * Fenster zum Eintragen der täglichen Stärke abhängig von den in der Datenbank befindlichen Nutzern.
  *
  * @author mwaldau
  * @see Anwesenheit
@@ -31,8 +31,8 @@ public class StaerkeMeldung extends JDialog {
     private JFrame frame;
 
     /**
-     * Der Konstruktor befüllt die Liste soldaten mit Nutzern und schreibt in die Map status zu jedem Nutzer die Anwesenheit des Soldat zum Zeitpunkt des Aufrufs des Dialog
-     * @param frame Jframe dient zur Bindung des Dialogs an die Position
+     * Der Konstruktor befüllt die Liste soldaten mit Nutzern und schreibt in die Map status zu jedem Nutzer die Anwesenheit des Soldat zum Zeitpunkt des Aufrufs des Dialog.
+     * @param frame Jframe dient zur Bindung des Dialogs an die Position.
      */
     public StaerkeMeldung(JFrame frame) {
         this.frame = frame;
@@ -44,7 +44,7 @@ public class StaerkeMeldung extends JDialog {
     }
 
     /**
-     * Setzt die Umgebungsvariablen für den Dialog
+     * Setzt die Umgebungsvariablen für den Dialog.
      */
     private void dialogBauen() {
         this.setModal(true);
@@ -58,9 +58,9 @@ public class StaerkeMeldung extends JDialog {
     }
 
     /**
-     * Erstellt ein JPanel das variabel aufgrund der Anzahl an Nutzern in der Datenbank Zeilen mit Name, dienstgrad und 4 auswählbaren Statuus
+     * Erstellt ein JPanel das variabel aufgrund der Anzahl an Nutzern in der Datenbank Zeilen mit Name, dienstgrad und 4 auswählbaren Statuus.
      *
-     * @return JPanel mit dem Inhalt des Fensters
+     * @return JPanel mit dem Inhalt des Fensters.
      */
     private JPanel createContent() {
         JPanel leeresPanel = new JPanel();
@@ -186,8 +186,8 @@ public class StaerkeMeldung extends JDialog {
     }
 
     /**
-     *  ActionListener für die RadioButtons
-     *  ordnet den ausgewählten Status dem Nutzer in einer Map zu
+     *  ActionListener für die RadioButtons.
+     *  Ordnet den ausgewählten Status dem Nutzer in einer Map zu.
      */
     private class SelektierterSoldat implements ActionListener {
         private Nutzer nutzer;

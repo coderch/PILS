@@ -360,9 +360,9 @@ public class VorhabenAnlegen extends JDialog {
     }
 
     /**
-     * Methode zum Eintragen des Vorhabens
-     * prüft auf Konflikte zwischen Start und Enddatum und löscht das gleichnamige Vorhaben aus der DB(um Änderungen an einem Vorhaben zu realisieren) <br>
-     * danach wird das Vorhaben sowie die Anwesenheit in die Datenbank eingetragen
+     * Methode zum Eintragen des Vorhabens.
+     * Prüft auf Konflikte zwischen Start- und Enddatum und löscht das gleichnamige Vorhaben aus der DB(um Änderungen an einem Vorhaben zu realisieren).
+     * Danach wird das Vorhaben sowie die Anwesenheit in die Datenbank eingetragen.
      */
     private void eintragen() {
         LocalDate beginnDatum = beginn.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
