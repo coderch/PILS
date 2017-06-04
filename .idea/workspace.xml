@@ -7,26 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" afterPath="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/PasswordHash.java" afterPath="$PROJECT_DIR$/datenmodell/PasswordHash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/DBConnect.java" afterPath="$PROJECT_DIR$/db/DBConnect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/RolleDAO.java" afterPath="$PROJECT_DIR$/db/RolleDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/VorhabenDAO.java" afterPath="$PROJECT_DIR$/db/VorhabenDAO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/export/DBExport.java" afterPath="$PROJECT_DIR$/export/DBExport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Frameholder.java" afterPath="$PROJECT_DIR$/gui/Frameholder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Kalender.java" afterPath="$PROJECT_DIR$/gui/Kalender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/LoginFrame.java" afterPath="$PROJECT_DIR$/gui/LoginFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/NutzerFrame.java" afterPath="$PROJECT_DIR$/gui/NutzerFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PersonalUebersicht.java" afterPath="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PwAendern.java" afterPath="$PROJECT_DIR$/gui/PwAendern.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" afterPath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/StaerkeMeldung.java" afterPath="$PROJECT_DIR$/gui/StaerkeMeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/UrlaubEintragen.java" afterPath="$PROJECT_DIR$/gui/UrlaubEintragen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" afterPath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/info.config" afterPath="$PROJECT_DIR$/info.config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/DruckenListener.java" afterPath="$PROJECT_DIR$/listener/DruckenListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java" afterPath="$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -82,11 +65,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PersonalUebersicht.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PersonalUebersicht.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="2788">
               <caret line="183" column="103" lean-forward="false" selection-start-line="183" selection-start-column="103" selection-end-line="183" selection-end-column="103" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Dienstgrad.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DienstgradComparator.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -147,7 +152,6 @@
         <option value="$PROJECT_DIR$/listener/NutzerSpeicherListener.java" />
         <option value="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" />
         <option value="$PROJECT_DIR$/gui/VorhabenUebersicht.java" />
-        <option value="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" />
         <option value="$PROJECT_DIR$/datenmodell/PasswordHash.java" />
         <option value="$PROJECT_DIR$/db/DBConnect.java" />
         <option value="$PROJECT_DIR$/db/RolleDAO.java" />
@@ -165,6 +169,8 @@
         <option value="$PROJECT_DIR$/gui/Kalender.java" />
         <option value="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" />
         <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
+        <option value="$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java" />
+        <option value="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" />
       </list>
     </option>
   </component>
@@ -718,13 +724,6 @@
       <workItem from="1496257323115" duration="476000" />
       <workItem from="1496307528505" duration="222000" />
     </task>
-    <task id="LOCAL-00028" summary="14.02.2017 - Konstruktor VorhabenAnlegen kommentiert&#10;&#10;">
-      <created>1487240869726</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1487240869726</updated>
-    </task>
     <task id="LOCAL-00029" summary="28.02.2017 - Staerkemeldung Actionlistener funktionabel gemacht&#10;&#10;">
       <created>1488289626891</created>
       <option name="number" value="00029" />
@@ -1061,7 +1060,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496307700287</updated>
     </task>
-    <option name="localTasksCounter" value="77" />
+    <task id="LOCAL-00077" summary="04.06.2017 letzte Bug fixes">
+      <created>1496584585797</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1496584585797</updated>
+    </task>
+    <option name="localTasksCounter" value="78" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1145,7 +1151,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="21.03.2017 - Kalenderfunktionen aktualisiert, neuen Status eingefügt (Abwesend), Vorhabenuebersicht finalisiert, PopUpMenu erstellt, Ulraubsverwaltung begonnen" />
     <MESSAGE value="03.05.2017 -Urlaubsverwaltung finalisiert" />
     <MESSAGE value="03.05.2017 -Dienstübersicht beginnen" />
     <MESSAGE value="03.05.2017 -Dienstübersicht begonnen" />
@@ -1170,7 +1175,8 @@
     <MESSAGE value="22.05.2017 -" />
     <MESSAGE value="31.05.2017 Jar.finished" />
     <MESSAGE value="01.06.2017" />
-    <option name="LAST_COMMIT_MESSAGE" value="01.06.2017" />
+    <MESSAGE value="04.06.2017 letzte Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="04.06.2017 letzte Bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1240,22 +1246,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-60">
           <caret line="65" column="15" lean-forward="false" selection-start-line="65" selection-start-column="15" selection-end-line="65" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="18" lean-forward="false" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
           <folding />
         </state>
       </provider>
@@ -1498,8 +1488,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
+        <state relative-caret-position="2788">
           <caret line="183" column="103" lean-forward="false" selection-start-line="183" selection-start-column="103" selection-end-line="183" selection-end-column="103" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
           <folding />
         </state>
       </provider>

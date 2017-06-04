@@ -1,15 +1,20 @@
 package datenmodell.Dienstgrade;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
 /**
  * @author ajanzen
  */
-public class Dienstgrad implements Comparator<Dienstgrad> {
+public class Dienstgrad {
+    /**
+     * Dienstgrad in Listenschreibweise
+     */
     private String bezeichnung;
+    /**
+     * Wertigkeit, welche für das Sortieren dieser Diesntgrad notwendig ist.
+     */
     private int wertigkeit;
 
     public Dienstgrad(String bezeichnung, int wertigkeit) {
@@ -17,20 +22,30 @@ public class Dienstgrad implements Comparator<Dienstgrad> {
         this.wertigkeit = wertigkeit;
     }
 
+    /**
+     * Getter für die Bezeichnung.
+     *
+     * @return String bezeichnung.
+     */
     public String getBezeichnung() {
         return bezeichnung;
     }
 
+    /**
+     * Getter für die Wertigkeit.
+     *
+     * @return Integer wertigkeit.
+     */
     public int getWertigkeit() {
         return wertigkeit;
     }
 
-
-    @Override
-    public int compare(Dienstgrad d1, Dienstgrad d2) {
-        return d1.getWertigkeit() - d2.getWertigkeit();
-    }
-
+    /**
+     * Diese Methode erstellt eine List<Dienstgrad>.
+     *
+     * @param set Übergebenes Set<String> mit den Dienstgraden als String.
+     * @return List<Dienstgrad> mit Dienstgraden und deren festgelegten Wertigkeit.
+     */
     public static List<Dienstgrad> sortieren(Set<String> set) {
         List<Dienstgrad> dienstGradList = new ArrayList<>();
 
