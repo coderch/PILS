@@ -20,7 +20,7 @@ public class DruckenListener implements ActionListener {
     /**
      * Dies ist die Liste mit den zu druckenden JComponents
      */
-    private java.util.List<JComponent> componentList;
+    private final java.util.List<JComponent> componentList;
 
     /**
      * Diesem Konstruktor wird eine Liste mit den zu druckenden JComponents übergeben, welche dann als privates Attribut gespeichert wird.

@@ -73,9 +73,7 @@ public class VorhabenAnlegen extends JDialog {
                 }
             }
         }
-        for (Nutzer nutzer : bufferListe) {
-            soldatenListe.remove(nutzer);
-        }
+        soldatenListe.removeAll(bufferListe);
         this.name.setText(vorhaben.getName());
         this.beschreibung.setText(vorhaben.getBeschreibung());
         this.beginn.setDate(Date.from(vorhaben.getStart().atStartOfDay(ZoneId.systemDefault()).toInstant()));

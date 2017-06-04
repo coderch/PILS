@@ -11,11 +11,11 @@ public class Dienstgrad {
     /**
      * Dienstgrad in Listenschreibweise
      */
-    private String bezeichnung;
+    private final String bezeichnung;
     /**
      * Wertigkeit, welche für das Sortieren dieser Diesntgrad notwendig ist.
      */
-    private int wertigkeit;
+    private final int wertigkeit;
 
     public Dienstgrad(String bezeichnung, int wertigkeit) {
         this.bezeichnung = bezeichnung;

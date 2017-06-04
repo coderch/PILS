@@ -16,7 +16,6 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.text.ParseException;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -317,7 +316,7 @@ public class NutzerFrame extends JDialog {
         }
 
         List<Dienstgrad> dienstGradList = Dienstgrad.sortieren(diensgradeOhneZusatz);
-        Collections.sort(dienstGradList, new DienstgradComparator());
+        dienstGradList.sort(new DienstgradComparator());
 
         JComboBox<String> jComboBoxDG = new JComboBox<>();
 
