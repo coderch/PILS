@@ -8,31 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Runner.java" afterPath="$PROJECT_DIR$/Runner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" afterPath="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Nutzer.java" afterPath="$PROJECT_DIR$/datenmodell/Nutzer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Rolle.java" afterPath="$PROJECT_DIR$/datenmodell/Rolle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datenmodell/Vorhaben.java" afterPath="$PROJECT_DIR$/datenmodell/Vorhaben.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/export/PrintUtilities.java" afterPath="$PROJECT_DIR$/export/PrintUtilities.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Anwesenheit.java" afterPath="$PROJECT_DIR$/gui/Anwesenheit.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Dienstuebersicht.java" afterPath="$PROJECT_DIR$/gui/Dienstuebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Frameholder.java" afterPath="$PROJECT_DIR$/gui/Frameholder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/Kalender.java" afterPath="$PROJECT_DIR$/gui/Kalender.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/KalenderModel.java" afterPath="$PROJECT_DIR$/gui/KalenderModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/LoginFrame.java" afterPath="$PROJECT_DIR$/gui/LoginFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/NutzerFrame.java" afterPath="$PROJECT_DIR$/gui/NutzerFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PersonalUebersicht.java" afterPath="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/PwAendern.java" afterPath="$PROJECT_DIR$/gui/PwAendern.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" afterPath="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/StaerkeMeldung.java" afterPath="$PROJECT_DIR$/gui/StaerkeMeldung.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/UrlaubEintragen.java" afterPath="$PROJECT_DIR$/gui/UrlaubEintragen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" afterPath="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenPanel.java" afterPath="$PROJECT_DIR$/gui/VorhabenPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gui/VorhabenUebersicht.java" afterPath="$PROJECT_DIR$/gui/VorhabenUebersicht.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/NutzerAendernListener.java" afterPath="$PROJECT_DIR$/listener/NutzerAendernListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" afterPath="$PROJECT_DIR$/listener/NutzerLoeschenListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/NutzerSpeicherListener.java" afterPath="$PROJECT_DIR$/listener/NutzerSpeicherListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/listener/PasswordResetListener.java" afterPath="$PROJECT_DIR$/listener/PasswordResetListener.java" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -119,8 +95,8 @@
       <file leaf-file-name="VorhabenUebersicht.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gui/VorhabenUebersicht.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+            <state relative-caret-position="85">
+              <caret line="20" column="118" lean-forward="false" selection-start-line="20" selection-start-column="118" selection-end-line="20" selection-end-column="118" />
               <folding />
             </state>
           </provider>
@@ -757,13 +733,6 @@
       <workItem from="1496257323115" duration="476000" />
       <workItem from="1496307528505" duration="222000" />
     </task>
-    <task id="LOCAL-00031" summary="14.02.2017 - Franeholder kommentiert&#10;&#10;">
-      <created>1488806998237</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1488806998237</updated>
-    </task>
     <task id="LOCAL-00032" summary="06.03.2017 - getParent in Jdialogues eingearbeitet&#10;&#10;">
       <created>1488807661256</created>
       <option name="number" value="00032" />
@@ -1100,7 +1069,14 @@
       <option name="project" value="LOCAL" />
       <updated>1496586459763</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="05.06.2017 letzte Bug fixes">
+      <created>1496660437526</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1496660437527</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1184,7 +1160,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="03.05.2017 -Urlaubsverwaltung finalisiert" />
     <MESSAGE value="03.05.2017 -Dienstübersicht beginnen" />
     <MESSAGE value="03.05.2017 -Dienstübersicht begonnen" />
     <MESSAGE value="11.05.2017 -TODOS eingearbeitet/ Vorhaben Loeschen eingearbeitet" />
@@ -1209,7 +1184,8 @@
     <MESSAGE value="31.05.2017 Jar.finished" />
     <MESSAGE value="01.06.2017" />
     <MESSAGE value="04.06.2017 letzte Bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="04.06.2017 letzte Bug fixes" />
+    <MESSAGE value="05.06.2017 letzte Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="05.06.2017 letzte Bug fixes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1541,8 +1517,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/gui/VorhabenUebersicht.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="24" column="16" lean-forward="false" selection-start-line="24" selection-start-column="16" selection-end-line="24" selection-end-column="16" />
+        <state relative-caret-position="85">
+          <caret line="20" column="118" lean-forward="false" selection-start-line="20" selection-start-column="118" selection-end-line="20" selection-end-column="118" />
           <folding />
         </state>
       </provider>

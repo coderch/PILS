@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Liefert einen Dialog, der dem es ermöglicht Informationen zu Vorhaben in einem Zeitraum zu bekommen und zu drucken
+ * Liefert einen Dialog, der dem es ermöglicht Informationen zu Vorhaben in einem Zeitraum zu bekommen und zu drucken.
  *
  * @author mwaldau
  * @see JDateChooser
