@@ -19,21 +19,19 @@ import java.util.List;
  *
  * @author mwaldau
  */
-public class Kalender extends JPanel {
-    public static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
+class Kalender extends JPanel {
+    private static final DateTimeFormatter MONATJAHRFORMATTER = DateTimeFormatter.ofPattern("MMMM YYYY", Locale.GERMAN);
     public static LocalDate datum = LocalDate.now();
     private static final Dimension PUBUTTONSIZE = new Dimension(25,25);
     private final JTabbedPane kalenderPane = new JTabbedPane();
-    private final JPanel teileinheit = new JPanel(new BorderLayout());
     private final JButton anwesend = new JButton();
     private final JButton krank = new JButton();
     private final JButton urlaub = new JButton();
     private final JButton abwesend = new JButton();
     private List<Nutzer> soldatenListe;
     private JTable kalender;
-    private JScrollPane halter;
     private KalenderModel kalenderModel;
-    private JPopupMenu popupMenu = new JPopupMenu();
+    private final JPopupMenu popupMenu = new JPopupMenu();
 
     /**
      * Konstruktor des Kalenders <br>
@@ -41,9 +39,10 @@ public class Kalender extends JPanel {
      */
     public Kalender() {
         this.setLayout(new BorderLayout());
-        this.teileinheit.add(monatsAnzeigePanel(), BorderLayout.NORTH);
+        JPanel teileinheit = new JPanel(new BorderLayout());
+        teileinheit.add(monatsAnzeigePanel(), BorderLayout.NORTH);
         this.monatsAnzeigeBauen();
-        this.teileinheit.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
+        teileinheit.add(createKalender(datenerzeugen(), monatsAnzeigeBauen().toArray(new String[monatsAnzeigeBauen().size()])), BorderLayout.CENTER);
         this.kalenderPane.add("Teileinheit", teileinheit);
         if (!Frameholder.aktiverNutzer.getRolle().equalsIgnoreCase("Soldat")) {
             popupMenubauen();
@@ -136,7 +135,7 @@ public class Kalender extends JPanel {
         kalender.getTableHeader().setReorderingAllowed(false);
         kalender.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         kalender.setRowHeight(30);
-        halter = new JScrollPane(kalender);
+        JScrollPane halter = new JScrollPane(kalender);
         halter.setPreferredSize(new Dimension(1200, 600));
         halter.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         halter.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

@@ -17,6 +17,7 @@ import java.util.TreeSet;
  * @version 1.0
  * @see ActionListener
  * @see gui.NutzerFrame
+ * {@inheritDoc}
  */
 public class NutzerSpeicherListener implements ActionListener {
     private final JFormattedTextField jTextFieldPersNr;
@@ -26,7 +27,7 @@ public class NutzerSpeicherListener implements ActionListener {
     private final JTextField jTextFieldNachname;
     private final JComboBox<String> jComboBoxDG;
     private final JComboBox<String> jComboBoxDGZusatz;
-    private JList<Nutzer> jListNutzer;
+    private final JList<Nutzer> jListNutzer;
 
     /**
      * Konstruktor für die Klasse NutzerSpeicherListener.
@@ -62,8 +63,6 @@ public class NutzerSpeicherListener implements ActionListener {
     /**
      * Methode aus dem Interface ActionListener.
      *
-     * @param actionEvent
-     * @see ActionListener
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
@@ -114,7 +113,7 @@ public class NutzerSpeicherListener implements ActionListener {
     /**
      * Methode zum Zurücksetzen aller Felder in Frame auf null sowie die Aktualisierung der JList.
      */
-    public void textFieldReset() {
+    private void textFieldReset() {
         jTextFieldPersNr.setText(null);
         jCheckBox.setSelected(false);
         rollenComboBox.setSelectedIndex(0);

@@ -28,19 +28,19 @@ import java.util.List;
  * @see javax.swing.JDialog
  */
 
-public class VorhabenAnlegen extends JDialog {
+class VorhabenAnlegen extends JDialog {
     private final JTextField name = new JTextField(35);
     private final JTextArea beschreibung = new JTextArea(5, 35);
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
-    private List<Nutzer> soldatenListe;
+    private final List<Nutzer> soldatenListe;
     private final List<Nutzer> eingeteilteSoldaten;
     private final List<String> vorhabenListe;
     private Vorhaben vorhaben;
     private final JList<Nutzer> soldatenJlist1 = new JList<>();
     private final JList<Nutzer> soldatenJlist2 = new JList<>();
     private final JCheckBox sonderdienst = new JCheckBox("Sonderdienst");
-    private JFrame frame;
+    private final JFrame frame;
 
     /**
      * Konstruktor zum Anlegen eines Vorhabens aus dem Framholder heraus

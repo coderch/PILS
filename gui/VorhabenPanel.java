@@ -13,11 +13,11 @@ import java.time.format.FormatStyle;
  * Stellt für ein Vorhaben eine Übersicht der dazugehörigen Informationen dar
  * @author mwaldau
  */
-public class VorhabenPanel extends JPanel {
-    private Vorhaben vorhaben;
-    private java.util.List<Nutzer> eingeteilteSoldaten;
+class VorhabenPanel extends JPanel {
+    private final Vorhaben vorhaben;
+    private final java.util.List<Nutzer> eingeteilteSoldaten;
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    private JFrame frame;
+    private final JFrame frame;
     // Setzt die Umgebungsvariablen und ruft die createContent() Methode auf
     public VorhabenPanel(Vorhaben vorhaben, JFrame frame) {
         this.frame = frame;

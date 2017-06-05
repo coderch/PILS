@@ -11,12 +11,13 @@ import java.awt.event.ActionListener;
  * Personalnummer des Nutzers wessen Passwort zurückgesetzt werden soll vorhanden ist.
  * @see java.awt.event.ActionListener
  * @author rrose
+ * {@inheritDoc}
  */
 public class PasswordResetListener implements ActionListener {
     /**
      * Das Textfeld, in dem die Personalnummer des Nutzers vorhanden ist.
      */
-    private JFormattedTextField persNr;
+    private final JFormattedTextField persNr;
 
     /**
      *
@@ -30,7 +31,6 @@ public class PasswordResetListener implements ActionListener {
      * Die Methode, welche bei Betätigung des zugeordneten Buttons ausgeführt wird. In dieser Methode wird mit Hilfe der Methode
      * NutzerDAO.passwordZuruecksetzen(int personalnummer) das Passwort zurückgesetzt.
      * @see NutzerDAO passwordZuruecksetzen().
-     * @param actionEvent
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

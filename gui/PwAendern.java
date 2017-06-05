@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
  * Diese Klasse erstellt einen JDialog mit dessen Hilfe es möglich ist, dass ein Nutzer sein Passwort ändern kann.
  * @author rrose
  */
-public class PwAendern extends JDialog {
+class PwAendern extends JDialog {
     private final JFrame frame;
     private JPasswordField altesPasswort;
     private JPasswordField neuesPasswort;

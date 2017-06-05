@@ -7,7 +7,7 @@ import java.util.Vector;
  * @author mwaldau copyright Major Müller
  * @see javax.swing.table.DefaultTableModel
  */
-public class KalenderModel extends DefaultTableModel {
+class KalenderModel extends DefaultTableModel {
 
 
     /**

@@ -20,7 +20,7 @@ import java.util.List;
  * Dient zum Eintragen von Urlaub für mehrer Nutzer/Soldaten.
  * @author mwaldau
  */
-public class UrlaubEintragen extends JDialog {
+class UrlaubEintragen extends JDialog {
     private final JFrame frame;
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;

@@ -41,14 +41,14 @@ public class PrintUtilities implements Printable {
      *
      * @param componentsToPrint Liste der zu druckenden JComponents.
      */
-    public PrintUtilities(List<JComponent> componentsToPrint) {
+    private PrintUtilities(List<JComponent> componentsToPrint) {
         PrintUtilities.componentsToPrint = componentsToPrint;
     }
 
     /**
      *
      */
-    public void print() {
+    private void print() {
 
         PrinterJob printJob = PrinterJob.getPrinterJob();
 

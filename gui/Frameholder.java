@@ -20,7 +20,7 @@ import java.sql.SQLException;
 public class Frameholder {
     private final JFrame frame;
     private final Kalender kalender;
-    private String userlevel;
+    private final String userlevel;
     private final JMenuBar menuBar;
     private final JMenu nutzerReiter;
     private final JMenu export;
@@ -48,7 +48,7 @@ public class Frameholder {
         frame.add(menuBar, BorderLayout.NORTH);
         frame.add(createContent(), BorderLayout.CENTER);
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(frame.getParent());
         frame.addWindowListener(new WindowAdapter() {
             @Override

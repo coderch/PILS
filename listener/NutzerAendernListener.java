@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
  * @author ajanzen
  * @see gui.NutzerFrame
  * @see java.awt.event.ActionListener
+ * {@inheritDoc}
  */
 public class NutzerAendernListener implements ActionListener {
     private final JFormattedTextField jTextFieldPersNr;
@@ -57,9 +58,6 @@ public class NutzerAendernListener implements ActionListener {
 
     /**
      * Methode aus dem Interface ActionListener zum Ändern der Datensätze aus der Datenbank.
-     *
-     * @param actionEvent
-     * @see ActionListener
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {

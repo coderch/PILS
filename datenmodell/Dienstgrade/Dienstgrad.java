@@ -17,7 +17,7 @@ public class Dienstgrad {
      */
     private final int wertigkeit;
 
-    public Dienstgrad(String bezeichnung, int wertigkeit) {
+    private Dienstgrad(String bezeichnung, int wertigkeit) {
         this.bezeichnung = bezeichnung;
         this.wertigkeit = wertigkeit;
     }

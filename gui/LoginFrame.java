@@ -32,7 +32,7 @@ public class LoginFrame extends JFrame {
         this.add(createContent());
 
         this.pack();
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
         this.setResizable(false);
@@ -136,14 +136,14 @@ public class LoginFrame extends JFrame {
      * Zugriff auf das JTextField jTextFieldUser.
      * @return Gibt die Eingabe aus jTextFieldUser zurück.
      */
-    public int getUser() {
+    private int getUser() {
         return Integer.parseInt(jTextFieldUser.getText().trim());
     }
     /**
      * Zugriff auf das JTextField jTextFieldPassword.
      * @return Gibt die Eingabe aus jTextFieldPassword zurück.
      */
-    public String getPassword() {
+    private String getPassword() {
         return new String(jPasswordFieldPassword.getPassword());
     }
 

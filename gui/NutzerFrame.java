@@ -27,7 +27,7 @@ import java.util.Set;
  * @version 1.0
  * @see JDialog
  */
-public class NutzerFrame extends JDialog {
+class NutzerFrame extends JDialog {
     /**
      * Konstruktor für die Klasse NutzerFrame
      */

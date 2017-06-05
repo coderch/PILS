@@ -29,14 +29,14 @@ import java.util.List;
  * @author mwaldau
  * @see javax.swing.JDialog
  */
-public class PersonalUebersicht extends JDialog {
+class PersonalUebersicht extends JDialog {
 
-    private JTabbedPane centerPanel;
+    private final JTabbedPane centerPanel;
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private final List<Nutzer> ausgNutzer = new ArrayList<>();
     private final List<Nutzer> soldaten;
-    private JFrame frame;
+    private final JFrame frame;
 
     public PersonalUebersicht(JFrame frame) {
         this.frame = frame;

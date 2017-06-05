@@ -22,13 +22,13 @@ import java.util.Map;
  * @author mwaldau
  * @see Anwesenheit
  */
-public class StaerkeMeldung extends JDialog {
+class StaerkeMeldung extends JDialog {
 
-    private List<Nutzer> soldaten;
+    private final List<Nutzer> soldaten;
     private final Map<Nutzer, String> ausgewSoldat = new HashMap<>();
     private final Map<Nutzer, String> status = new HashMap<>();
     private final JPanel contentPanel = new JPanel(new GridBagLayout());
-    private JFrame frame;
+    private final JFrame frame;
 
     /**
      * Der Konstruktor befüllt die Liste soldaten mit Nutzern und schreibt in die Map status zu jedem Nutzer die Anwesenheit des Soldat zum Zeitpunkt des Aufrufs des Dialog.
@@ -190,8 +190,8 @@ public class StaerkeMeldung extends JDialog {
      *  Ordnet den ausgewählten Status dem Nutzer in einer Map zu.
      */
     private class SelektierterSoldat implements ActionListener {
-        private Nutzer nutzer;
-        private String status;
+        private final Nutzer nutzer;
+        private final String status;
 
         public SelektierterSoldat(Nutzer nutzer, String status) {
             this.nutzer = nutzer;

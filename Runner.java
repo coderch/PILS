@@ -15,12 +15,10 @@ import java.util.Timer;
  *
  * @author ajanzen, rrose, mwaldau
  */
-public class Runner {
-
-    private static Properties config;
+class Runner {
 
     public static void main(String[] args) {
-        config = readConfigFile();
+        Properties config = readConfigFile();
         try {
             DBConnect.verbindungAufbauen(config.getProperty("url") + config.getProperty("db"), config);
         } catch (SQLException e) {

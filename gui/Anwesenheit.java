@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * Diese Klasse stellt einen Dialog zur Verfügung der den Anwesenheitsstatus des angemeldeten Benutzers in die Datenbank einträgt
  * @author mwaldau
  */
-public class Anwesenheit extends JDialog {
+class Anwesenheit extends JDialog {
     public static final String ANWESEND = "Anwesend";
     public static final String KRANK = "Krank";
     public static final String URLAUB = "Urlaub";

@@ -14,7 +14,7 @@ public class Rolle {
     /**
      *  Dieser Konstruktor erstellt eine neue Instanz und weist ihr das Attribut beschreibung hinzu.
      *
-     * @param beschreibung
+     * @param beschreibung Name der Rolle.
      */
     public Rolle(String beschreibung) {
         this.beschreibung = beschreibung;

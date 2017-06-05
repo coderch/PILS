@@ -15,16 +15,15 @@ import java.util.List;
 /**
  * @author mwaldau
  */
-public class Dienstuebersicht extends JDialog {
+class Dienstuebersicht extends JDialog {
 
-    private JFrame frame;
-    private List<Nutzer> soldaten;
-    private Map<Nutzer, List<Vorhaben>> vorhabenMap;
-    JPanel contentPanel;
+    private final JFrame frame;
+    private final Map<Nutzer, List<Vorhaben>> vorhabenMap;
+    private final JPanel contentPanel;
 
     public Dienstuebersicht(JFrame frame) {
-        this.soldaten = NutzerDAO.nutzerHolen();
-        this.vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(this.soldaten, LocalDate.of(LocalDate.now().getYear(), 1, 1), LocalDate.of(LocalDate.now().getYear(), 12, 31));
+        List<Nutzer> soldaten = NutzerDAO.nutzerHolen();
+        this.vorhabenMap = NutzerDAO.nutzerVorhabenUebersicht(soldaten, LocalDate.of(LocalDate.now().getYear(), 1, 1), LocalDate.of(LocalDate.now().getYear(), 12, 31));
         this.frame = frame;
         this.contentPanel = new JPanel(new GridLayout(vorhabenMap.size()+1, 1));
         this.dialogBauen();

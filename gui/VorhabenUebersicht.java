@@ -19,19 +19,20 @@ import java.util.List;
 
 /**
  * Liefert einen Dialog, der dem es ermöglicht Informationen zu Vorhaben in einem Zeitraum zu bekommen und zu drucken
+ *
  * @author mwaldau
  * @see JDateChooser
+ * {@inheritDoc}
  */
-public class VorhabenUebersicht extends JDialog {
-    private JTabbedPane centerPanel;
+class VorhabenUebersicht extends JDialog {
+    private final JTabbedPane centerPanel;
     private final JDateChooser beginn = new JDateChooser(Date.from(Instant.now()));
     private final JDateChooser ende = new JDateChooser(Date.from(Instant.now()));
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
-    private JFrame frame;
+    private final JFrame frame;
 
     /**
      * Ruft die Methode dialogbauen() auf
-     * @param frame
      */
     public VorhabenUebersicht(JFrame frame) {
         this.frame = frame;
@@ -53,9 +54,11 @@ public class VorhabenUebersicht extends JDialog {
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
+
     /**
      * Erstellt den Inhalt des Dialogs <br>
      * Übersicht erstellen Button fügt ein ÜbersichtPanel hinzu, sowie ein Übersicht erstellen Button und ein Drucken Button
+     *
      * @return contentPanel JPanel mit Zeitruamauswahl, Übersicht erstellen Button und einem Drucken Button
      */
     private JPanel createContent() {
@@ -142,8 +145,8 @@ public class VorhabenUebersicht extends JDialog {
                 loeschen.addActionListener(actionEvent -> {
                     List<Nutzer> eingeteilteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
                     VorhabenDAO.loescheVorhaben(vorhaben);
-                    for(Nutzer nutzer : eingeteilteSoldaten){
-                        NutzerDAO.anwesenheitLoeschen(nutzer,vorhaben.getStart(),vorhaben.getEnde());
+                    for (Nutzer nutzer : eingeteilteSoldaten) {
+                        NutzerDAO.anwesenheitLoeschen(nutzer, vorhaben.getStart(), vorhaben.getEnde());
                     }
 
                     List<Vorhaben> vorhabenListe1 = VorhabenDAO.holeVorhaben();

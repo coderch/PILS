@@ -12,7 +12,7 @@ public class Vorhaben {
     /**
      * Der Name des jeweiligen Events.
      */
-    private String name;
+    private final String name;
     /**
      * Die Beschreibung des jeweiligen Events.
      */

@@ -17,12 +17,12 @@ import java.util.Map;
  * Stellt eine JPanel zur Verfügung das für den übergebenen Nutzer im Übergebenen Zeitraum eine Übersicht der Vorhaben erstellt.
  * @author mwaldau
  */
-public class SoldatUebersichtPane extends JPanel {
+class SoldatUebersichtPane extends JPanel {
     private static final DateTimeFormatter DTF = DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM);
     private final List<Nutzer> nutzerList = new ArrayList<>();
     private final LocalDate beginn;
     private final LocalDate ende;
-    private JFrame frame;
+    private final JFrame frame;
 
     /**
      * Der Konstruktor befüllt die Nutzerliste, setzt das Layout und ruft die createContent() Methode auf.

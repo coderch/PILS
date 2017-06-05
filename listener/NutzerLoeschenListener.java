@@ -15,6 +15,7 @@ import java.util.List;
  * @author ajanzen
  * @see java.awt.event.ActionListener
  * @see gui.NutzerFrame
+ * {@inheritDoc}
  */
 public class NutzerLoeschenListener implements ActionListener {
     private final JFormattedTextField jTextFieldPersNr;
@@ -59,9 +60,6 @@ public class NutzerLoeschenListener implements ActionListener {
 
     /**
      * Methode aus dem Interface ActionListener zum Löschen der Datensätze aus der Datenbank.
-     *
-     * @param actionEvent
-     * @see ActionListener
      */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
