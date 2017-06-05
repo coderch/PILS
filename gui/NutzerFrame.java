@@ -75,10 +75,10 @@ class NutzerFrame extends JDialog {
         MaskFormatter maskFormatter = null;
         try {
             maskFormatter = new MaskFormatter("########");
-            maskFormatter.setPlaceholderCharacter('_');
         } catch (ParseException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage(), "FEHLER: " + e.getCause(), JOptionPane.ERROR_MESSAGE);
         }
+        maskFormatter.setPlaceholderCharacter('_');
         JFormattedTextField jTextFieldPersNr = new JFormattedTextField(maskFormatter);
 
         jPanelNummer.add(jTextFieldPersNr);
