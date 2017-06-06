@@ -11,7 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/export/PrintUtilities.java" afterPath="$PROJECT_DIR$/export/PrintUtilities.java" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -63,7 +62,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="PrintUtilities.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PrintUtilities.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/export/PrintUtilities.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1360">
@@ -72,6 +71,16 @@
                 <element signature="e#631#632#0" expanded="true" />
                 <element signature="e#699#700#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PersonalUebersicht.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3128">
+              <caret line="203" column="57" selection-start-line="203" selection-start-column="57" selection-end-line="203" selection-end-column="57" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -152,8 +161,8 @@
         <option value="$PROJECT_DIR$/gui/NutzerFrame.java" />
         <option value="$PROJECT_DIR$/info.config" />
         <option value="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
-        <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
         <option value="$PROJECT_DIR$/export/PrintUtilities.java" />
+        <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
       </list>
     </option>
   </component>
@@ -937,14 +946,7 @@
       <workItem from="1496249351817" duration="3809000" />
       <workItem from="1496257323115" duration="476000" />
       <workItem from="1496307528505" duration="222000" />
-      <workItem from="1496737965740" duration="3928000" />
-    </task>
-    <task id="LOCAL-00035" summary="15.03.2017 - Wochendaten entfernt/aktialisierne des Kalenders gesaäubert.&#10;&#10;">
-      <created>1489564264055</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1489564264055</updated>
+      <workItem from="1496737965740" duration="4120000" />
     </task>
     <task id="LOCAL-00036" summary="06.03.2017 - KalenderCellRenderer editiert Properties auf andi angepasst&#10;&#10;">
       <created>1489663418065</created>
@@ -1282,11 +1284,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496739566301</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="06.06.2017 letzte Bug fixes">
+      <created>1496741903078</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1496741903078</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="315621000" />
+    <option name="totallyTimeSpent" value="315813000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1724,14 +1733,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-140">
-          <caret line="203" column="127" selection-start-line="203" selection-start-column="127" selection-end-line="203" selection-end-column="127" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/export/PrintUtilities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
@@ -1740,6 +1741,14 @@
             <element signature="e#631#632#0" expanded="true" />
             <element signature="e#699#700#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3128">
+          <caret line="203" column="57" selection-start-line="203" selection-start-column="57" selection-end-line="203" selection-end-column="57" />
+          <folding />
         </state>
       </provider>
     </entry>
