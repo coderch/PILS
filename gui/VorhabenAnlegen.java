@@ -369,8 +369,9 @@ class VorhabenAnlegen extends JDialog {
             JOptionPane.showMessageDialog(null, "Beginndatum nach Enddatum", "Fehler", JOptionPane.ERROR_MESSAGE);
         } else {
             vorhaben = new Vorhaben(name.getText(), beschreibung.getText(), beginnDatum, endDatum, sonderdienst.isSelected());
+            List<Nutzer> alteSoldaten = VorhabenDAO.holeZugeteilteSoldaten(vorhaben);
             VorhabenDAO.loescheVorhaben(vorhaben);
-            for (Nutzer nutzer : soldatenListe) {
+            for (Nutzer nutzer : alteSoldaten) {
                 for (LocalDate i = beginnDatum; !i.equals(endDatum.plusDays(1)); i = i.plusDays(1)) {
                     if (NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.VORHABEN) || NutzerDAO.hatAnwesenheit(nutzer, i).equals(Anwesenheit.LEHRGANG)) {
                         NutzerDAO.anwesenheitLoeschen(nutzer, beginnDatum, endDatum);
