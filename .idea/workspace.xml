@@ -5,8 +5,14 @@
       <artifact name="PILS:jar" />
     </artifacts-to-build>
   </component>
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/gui/PersonalUebersicht.java" line="203" mnemonic="7" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="" />
+    <list default="true" id="821d4e98-7374-4331-a0ac-93cd66f87b7a" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/export/PrintUtilities.java" afterPath="$PROJECT_DIR$/export/PrintUtilities.java" />
+    </list>
     <ignored path=".idea/dataSources.local.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,92 +63,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="NutzerFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="78" column="98" selection-start-line="78" selection-start-column="98" selection-end-line="78" selection-end-column="98" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PasswordHash.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datenmodell/PasswordHash.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NutzerDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/NutzerDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="298" column="34" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VorhabenAnlegen.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/VorhabenAnlegen.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="281">
-              <caret line="373" column="45" selection-start-line="373" selection-start-column="45" selection-end-line="373" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PrintUtilities.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/export/PrintUtilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="VorhabenUebersicht.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/VorhabenUebersicht.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28">
-              <caret line="148" column="34" selection-start-line="148" selection-start-column="34" selection-end-line="148" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PwAendern.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/PwAendern.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="27" column="51" selection-start-line="27" selection-start-column="51" selection-end-line="27" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/gui/LoginFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2023">
-              <caret line="151" column="51" selection-start-line="151" selection-start-column="51" selection-end-line="151" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="info.config" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/info.config">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="10" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
-              <folding />
+            <state relative-caret-position="1360">
+              <caret line="84" column="3" selection-start-line="84" selection-start-column="3" selection-end-line="84" selection-end-column="3" />
+              <folding>
+                <element signature="e#631#632#0" expanded="true" />
+                <element signature="e#699#700#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -189,7 +118,6 @@
         <option value="$PROJECT_DIR$/gui/KalenderPopUp.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/1b486b7b-3cf6-4462-8073-0e9b3bef0a21/console.sql" />
         <option value="$PROJECT_DIR$/WaldauTestRunner.java" />
-        <option value="$PROJECT_DIR$/export/PrintUtilities.java" />
         <option value="$PROJECT_DIR$/gui/VorhabenPanel.java" />
         <option value="$PROJECT_DIR$/gui/Dienstuebersicht.java" />
         <option value="$PROJECT_DIR$/gui/Anwesenheit.java" />
@@ -213,7 +141,6 @@
         <option value="$PROJECT_DIR$/gui/UrlaubEintragen.java" />
         <option value="$PROJECT_DIR$/gui/Kalender.java" />
         <option value="$PROJECT_DIR$/gui/SoldatUebersichtPane.java" />
-        <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
         <option value="$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java" />
         <option value="$PROJECT_DIR$/datenmodell/Dienstgrade/Dienstgrad.java" />
         <option value="$PROJECT_DIR$/listener/NutzerAendernListener.java" />
@@ -225,6 +152,8 @@
         <option value="$PROJECT_DIR$/gui/NutzerFrame.java" />
         <option value="$PROJECT_DIR$/info.config" />
         <option value="$PROJECT_DIR$/gui/VorhabenAnlegen.java" />
+        <option value="$PROJECT_DIR$/gui/PersonalUebersicht.java" />
+        <option value="$PROJECT_DIR$/export/PrintUtilities.java" />
       </list>
     </option>
   </component>
@@ -1008,14 +937,7 @@
       <workItem from="1496249351817" duration="3809000" />
       <workItem from="1496257323115" duration="476000" />
       <workItem from="1496307528505" duration="222000" />
-      <workItem from="1496737965740" duration="1594000" />
-    </task>
-    <task id="LOCAL-00034" summary="06.03.2017 - Vorhabenübersicht begonnen&#10;&#10;">
-      <created>1488810386983</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1488810386983</updated>
+      <workItem from="1496737965740" duration="3928000" />
     </task>
     <task id="LOCAL-00035" summary="15.03.2017 - Wochendaten entfernt/aktialisierne des Kalenders gesaäubert.&#10;&#10;">
       <created>1489564264055</created>
@@ -1353,11 +1275,18 @@
       <option name="project" value="LOCAL" />
       <updated>1496739428926</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="06.06.2017 letzte Bug fixes">
+      <created>1496739566301</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1496739566301</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="313287000" />
+    <option name="totallyTimeSpent" value="315621000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1593,13 +1522,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/SoldatUebersichtPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="74" column="50" selection-start-line="74" selection-start-column="49" selection-end-line="74" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datenmodell/Dienstgrade/DienstgradComparator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -1611,13 +1533,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2788">
-          <caret line="183" column="103" selection-start-line="183" selection-start-column="103" selection-end-line="183" selection-end-column="103" />
         </state>
       </provider>
     </entry>
@@ -1698,28 +1613,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="78" column="98" selection-start-line="78" selection-start-column="98" selection-end-line="78" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="dbDummy://dbtable:/7556bce6/1b486b7b-3cf6-4462-8073-0e9b3bef0a21/db_PILS.public.t_rolle">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/7556bce6/1b486b7b-3cf6-4462-8073-0e9b3bef0a21/db_PILS.public.t_login">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
@@ -1769,22 +1663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datenmodell/PasswordHash.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/NutzerDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="298" column="34" selection-start-line="298" selection-start-column="34" selection-end-line="298" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/gui/VorhabenUebersicht.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-28">
@@ -1793,19 +1671,75 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datenmodell/PasswordHash.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="33" column="42" selection-start-line="33" selection-start-column="42" selection-end-line="33" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/NutzerFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="78" column="98" selection-start-line="78" selection-start-column="98" selection-end-line="78" selection-end-column="98" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/NutzerDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="314">
+          <caret line="298" column="29" selection-start-line="298" selection-start-column="29" selection-end-line="298" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gui/VorhabenAnlegen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="373" column="45" selection-start-line="373" selection-start-column="45" selection-end-line="373" selection-end-column="45" />
+        <state relative-caret-position="548">
+          <caret line="376" column="34" selection-start-line="376" selection-start-column="34" selection-end-line="376" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/SoldatUebersichtPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="74" column="50" selection-start-line="74" selection-start-column="49" selection-end-line="74" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/7556bce6/1b486b7b-3cf6-4462-8073-0e9b3bef0a21/db_PILS.public.t_login">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gui/PersonalUebersicht.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140">
+          <caret line="203" column="127" selection-start-line="203" selection-start-column="127" selection-end-line="203" selection-end-column="127" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/export/PrintUtilities.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" column="48" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
+        <state relative-caret-position="1360">
+          <caret line="84" column="3" selection-start-line="84" selection-start-column="3" selection-end-line="84" selection-end-column="3" />
+          <folding>
+            <element signature="e#631#632#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

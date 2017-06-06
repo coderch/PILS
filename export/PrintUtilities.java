@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Diese Klasse dient zum Drucken von JComponents.
+ * {@inheritDoc}
  *
  * @author rrose
  */
@@ -16,25 +17,6 @@ public class PrintUtilities implements Printable {
      * Liste mit den zu druckenen JComponents.
      */
     private static List<JComponent> componentsToPrint;
-
-    /**
-     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für die zu druckenden Jcomponents.
-     *
-     * @param componentsToPrint Liste mit den zu druckenden JComponents.
-     */
-    public static void printComponents(List<JComponent> componentsToPrint) {
-        new PrintUtilities(componentsToPrint).print();
-    }
-    /**
-     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für eine einzelne zu druckende Jcomponent.
-     *
-     * @param componentToPrint Die zu druckende JComponent.
-     */
-    public static void printComponent(JComponent componentToPrint) {
-        componentsToPrint = new ArrayList<>();
-        componentsToPrint.add(componentToPrint);
-        new PrintUtilities(componentsToPrint).print();
-    }
 
     /**
      * Der Konstruktor weist der statischen Liste die übergebene Liste zu.
@@ -46,12 +28,31 @@ public class PrintUtilities implements Printable {
     }
 
     /**
+     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für die zu druckenden JComponents.
      *
+     * @param componentsToPrint Liste mit den zu druckenden JComponents.
      */
+    public static void printComponents(List<JComponent> componentsToPrint) {
+        new PrintUtilities(componentsToPrint).print();
+    }
+
+    /**
+     * Diese statische Methode erstellt ein neues PrintUtilities-Objekt und erstellt einen Druckauftrag für eine einzelne zu druckende Jcomponent.
+     *
+     * @param componentToPrint Die zu druckende JComponent.
+     */
+    public static void printComponent(JComponent componentToPrint) {
+        componentsToPrint = new ArrayList<>();
+        componentsToPrint.add(componentToPrint);
+        new PrintUtilities(componentsToPrint).print();
+    }
+
     private void print() {
 
         PrinterJob printJob = PrinterJob.getPrinterJob();
-
+/*
+ * Festlegen eine DIN-A4-Seite und dessen Format.
+ */
         PageFormat pageFormat = printJob.defaultPage();
 
         Paper a4PortraitPaper = new Paper();
@@ -79,10 +80,12 @@ public class PrintUtilities implements Printable {
     }
 
     public int print(Graphics g, PageFormat pageFormat, int pageIndex) {
-
+/*
+Skalierung
+ */
         double width, height;
         int x, y;
-        double scale = 0.0;
+        double scale;
 
         Graphics2D g2d = (Graphics2D) g;
         g2d.translate(pageFormat.getImageableX(), pageFormat.getImageableY());
@@ -97,7 +100,13 @@ public class PrintUtilities implements Printable {
             x = c.getWidth();
             y = c.getHeight();
 
-            scale = width / x;
+            if (x > width) {
+                scale = width / x;
+            } else if (y < height) {
+                scale = height / y;
+            } else {
+                scale = 0;
+            }
 
             g2d.scale(scale, scale);
 
