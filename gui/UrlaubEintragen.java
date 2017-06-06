@@ -32,6 +32,7 @@ class UrlaubEintragen extends JDialog {
     /**
      * Der Konstruktor befüllt die Liste soldaten, übernimmt den übergebenen JFrame und fügt ein Scrollpane mit einer Textarea hinzu.
      * Im Anschluss wird die dialogbauen() Methode aufgerufen
+     * @param frame Das Hauptfenster.
      */
     public UrlaubEintragen(JFrame frame) {
         this.soldaten = NutzerDAO.nutzerHolen();

@@ -29,7 +29,8 @@ import java.util.Set;
  */
 class NutzerFrame extends JDialog {
     /**
-     * Konstruktor für die Klasse NutzerFrame
+     * Konstruktor für die Klasse NutzerFrame.
+     * @param frame Das Hauptfenster.
      */
     public NutzerFrame(JFrame frame) {
         super(new JFrame(), "Soldat erstellen / bearbeiten");

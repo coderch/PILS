@@ -16,7 +16,6 @@ import java.util.TreeSet;
  * @author ajanzen
  * @version 1.0
  * @see ActionListener
- * @see gui.NutzerFrame
  * {@inheritDoc}
  */
 public class NutzerSpeicherListener implements ActionListener {

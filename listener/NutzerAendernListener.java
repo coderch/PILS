@@ -12,7 +12,6 @@ import java.awt.event.ActionListener;
  * AktionListener zum Ändern der Daten aus dem GUI-Element NutzerFrame in der Datenbank.
  *
  * @author ajanzen
- * @see gui.NutzerFrame
  * @see java.awt.event.ActionListener
  * {@inheritDoc}
  */

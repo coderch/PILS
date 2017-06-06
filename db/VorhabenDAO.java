@@ -20,7 +20,7 @@ public class VorhabenDAO {
     }
 
     /**
-     * Diese Methode erstellt eine List<String> mit allen in der Datenbank (t_vorhaben) vorhandenen Vorhabennamen.
+     * Diese Methode erstellt eine String-Liste mit allen in der Datenbank (t_vorhaben) vorhandenen Vorhabennamen.
      *
      * @return Gibt eine Liste mit den bereits in der Datenbank (t_vorhaben) vorhandenen Vorhaben-Namen zurück.
      */
@@ -38,9 +38,9 @@ public class VorhabenDAO {
     }
 
     /**
-     * Erstellt eine List<Vorhaben> mit allen in der Datenbank angelegten und terminierten Vorhaben.
+     * Erstellt eine Vorhaben-Liste mit allen in der Datenbank angelegten und terminierten Vorhaben.
      *
-     * @return Gibt eine List<Vorhaben> der bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
+     * @return Gibt eine Liste mit den bereits terminierten Vorhaben aus der Datenbank (t_hat_vorhaben_im_zeitraum) zurück.
      */
     public static List<Vorhaben> holeVorhaben() {
         String sqlStatement = "SELECT fk_t_vorhaben_pk_t_name, fk_t_zeitraum_pk_von, fk_t_zeitraum_pk_bis, beschreibung,sonderdienst FROM t_hat_vorhaben_im_zeitraum";
@@ -84,7 +84,7 @@ public class VorhabenDAO {
      * Speichert ein übergebenes Vorhaben inkl. der ihm zugeteilten Soldaten in die Datenbank.
      *
      * @param vorhaben            Das übergebene Vorhaben-Objekt
-     * @param eingeteilteSoldaten List<Nutzer> mit den dem übergebenen Vorhaben zugeteilten Nutzern (Soldaten).
+     * @param eingeteilteSoldaten Nutzer-Liste mit den dem übergebenen Vorhaben zugeteilten Nutzern (Soldaten).
      */
     public static void vorhabenSpeichern(Vorhaben vorhaben, List<Nutzer> eingeteilteSoldaten) {
         try {
@@ -134,10 +134,10 @@ public class VorhabenDAO {
     }
 
     /**
-     * Diese Methode liefert eine List<Nutzer> mit den einem Vorhaben zugeteilten Soldaten.
+     * Diese Methode liefert eine Liste  mit den einem Vorhaben zugeteilten Soldaten.
      *
      * @param vorhaben Übergebenes Vorhaben, wessen zugeteilte Nutzer gewünscht werden.
-     * @return Gibt eine List<Nutzer> mit den einem Vorhaben zugeteilten Nutzern (Soldaten) aus der Datenbank zurück.
+     * @return Gibt eine Nutzer-Liste mit den einem Vorhaben zugeteilten Nutzern (Soldaten) aus der Datenbank zurück.
      */
     public static List<Nutzer> holeZugeteilteSoldaten(Vorhaben vorhaben) {
         List<Nutzer> eingeteilteSoldaten = new LinkedList<>();

@@ -80,7 +80,7 @@ public class NutzerDAO {
 
     /**
      * Diese Methode liest die Informationen jedes Eintrages in der Tabelle t_nutzer aus und erzeugt aus jeder Tupel ein Nutzer-Objekt,
-     * welches darauffolgend in eine Liste<Nutzer> hinzugefügt wird.
+     * welches darauffolgend in eine Liste mit Nutzern hinzugefügt wird.
      *
      * @return Gibt eine Liste mit allen in der Datenbank (t_nutzer) abgelegten Nutzern zurück.
      */
@@ -125,7 +125,7 @@ public class NutzerDAO {
      *
      * @param personalnummer Personalnummer des zu löschenden Nutzers.
      */
-    public static void nutzerLöschen(int personalnummer) {
+    public static void nutzerLoeschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_nutzer WHERE pk_personalnummer = ?";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, personalnummer);
@@ -177,7 +177,7 @@ public class NutzerDAO {
      *
      * @param personalnummer Personalnummer / Login der zu löschenden Login-Daten.
      */
-    public static void loginLöschen(int personalnummer) {
+    public static void loginLoeschen(int personalnummer) {
         String sqlStatement = "DELETE FROM t_login WHERE pk_personalnummer = ?";
         try (PreparedStatement pstm = DBConnect.preparedStatement(sqlStatement)) {
             pstm.setInt(1, personalnummer);
@@ -294,7 +294,8 @@ public class NutzerDAO {
      * Löscht einen Anwesenheitsstatus für einen bestimmten Nutzer und einem dazugehörigen Datum.
      *
      * @param nutzer Nutzer für den ein Anwesenheitsstatus gelöscht werden soll.
-     * @param start  Startzeitraum für welches der Anwesenheitsstatus gelöscht werden soll.
+     * @param start  Startzeitpunkt für welches der Anwesenheitsstatus gelöscht werden soll.
+     * @param ende   Endzeitpunkt für welches der Anwesenheitsstatus gelöscht werden soll.
      */
     public static void anwesenheitLoeschen(Nutzer nutzer, LocalDate start, LocalDate ende) {
         try (PreparedStatement pstm = DBConnect.preparedStatement("DELETE FROM t_hat_status_im_zeitraum WHERE fk_t_soldat_pk_personalnummer = ? AND (fk_t_zeitraum_pk_von,fk_t_zeitraum_pk_bis) OVERLAPS (?,?)")) {
@@ -308,12 +309,12 @@ public class NutzerDAO {
     }
 
     /**
-     * Diese Methode erstellt eine Map<Nutzer,List<Vorhaben>>, welche die Vorhaben zu den mitgegebenen Soldaten im angegebenene Zeitraum als Liste<Nutzer> dem entsprechenden Key (Nutzer) als Value zuordnet.
+     * Diese Methode erstellt eine Map, welche die Vorhaben zu den mitgegebenen Soldaten im angegebenene Zeitraum als Nutzer-Liste dem entsprechenden Key (Nutzer) als Value zuordnet.
      *
      * @param nutzer Liste mit den Soldaten, zu welchen die Vorhaben gesucht werden.
      * @param start  Der Anfangszeitpunkt des gewünschten Zeitraumes.
      * @param ende   Der Endzeitpunkt des gewünschten Zeitraumes.
-     * @return Gibt eine Map<Nutzer,List<Vorhaben>> mit den gesuchten Vorhaben zu den jeweiligen Nutzern zurück.
+     * @return Gibt eine Map mit den gesuchten Vorhaben zu den jeweiligen Nutzern zurück.
      */
     public static Map<Nutzer, List<Vorhaben>> nutzerVorhabenUebersicht(List<Nutzer> nutzer, LocalDate start, LocalDate ende) {
         Map<Nutzer, List<Vorhaben>> map = new TreeMap<>();

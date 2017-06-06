@@ -35,7 +35,7 @@ class Dienstuebersicht extends JDialog {
      * Modal
      * Titel
      * Dispose on Close
-     * resizable -> false
+     * resizable = false
      * Preferred Size x = 100, y = 500
      */
     private void dialogBauen() {

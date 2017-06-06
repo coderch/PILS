@@ -32,7 +32,8 @@ class VorhabenUebersicht extends JDialog {
     private final JFrame frame;
 
     /**
-     * Ruft die Methode dialogbauen() auf
+     * Ruft die Methode dialogbauen() auf.
+     * @param frame Das Hauptfenster.
      */
     public VorhabenUebersicht(JFrame frame) {
         this.frame = frame;

@@ -43,7 +43,8 @@ class VorhabenAnlegen extends JDialog {
     private final JFrame frame;
 
     /**
-     * Konstruktor zum Anlegen eines Vorhabens aus dem Framholder heraus
+     * Konstruktor zum Anlegen eines Vorhabens aus dem Framholder heraus.
+     * @param frame Das Hauptfenster.
      */
     public VorhabenAnlegen(JFrame frame) {
         this.frame = frame;
@@ -55,7 +56,9 @@ class VorhabenAnlegen extends JDialog {
     }
 
     /**
-     * Konstruktor zum Editieren
+     * Konstruktor zum Editieren.
+     * @param frame Das Hauptfenster.
+     * @param vorhaben Übergebenes Vorhaben, welches angelegt bzw. editiert werden soll.
      */
     public VorhabenAnlegen(Vorhaben vorhaben, JFrame frame) {
         this.vorhaben = vorhaben;
@@ -268,9 +271,9 @@ class VorhabenAnlegen extends JDialog {
                 soldatenJlist2.setListData(eingeteilteSoldaten.toArray(new Nutzer[0]));
             }
         });
-        JButton prüfen = new JButton("Prüfen");
-        prüfen.setPreferredSize(new Dimension(80, 20));
-        prüfen.addActionListener(new ActionListener() {
+        JButton pruefen = new JButton("Prüfen");
+        pruefen.setPreferredSize(new Dimension(80, 20));
+        pruefen.addActionListener(new ActionListener() {
             //Prüft aufgrund der in der Datenbank hinterlegten Anwesenheitsstatus die Verfügbarkeit für ein Vorhaben innerhalb des Zeitraums
             //und setzt einen neuen ListCellRenderer
             @Override
@@ -302,7 +305,7 @@ class VorhabenAnlegen extends JDialog {
         JPanel soldatenButtonPanel = new JPanel(new GridLayout(3, 1));
         soldatenButtonPanel.add(zu);
         soldatenButtonPanel.add(ab);
-        soldatenButtonPanel.add(prüfen);
+        soldatenButtonPanel.add(pruefen);
         GridBagConstraints buttonPanelContraint = new GridBagConstraints();
         buttonPanelContraint.gridy = 3;
         buttonPanelContraint.gridx = 1;

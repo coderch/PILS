@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * Die Klasse Dienstgrad erzeugt aus den in der Datenbank vorhandenen Dienstgraden Objekte.
  * @author ajanzen
  */
 public class Dienstgrad {
@@ -41,10 +42,10 @@ public class Dienstgrad {
     }
 
     /**
-     * Diese Methode erstellt eine List<Dienstgrad>.
+     * Diese Methode erstellt eine Liste mit Dienstgraden.
      *
-     * @param set Übergebenes Set<String> mit den Dienstgraden als String.
-     * @return List<Dienstgrad> mit Dienstgraden und deren festgelegten Wertigkeit.
+     * @param set Übergebenes String-Set mit den Dienstgraden als String.
+     * @return Liste mit Dienstgraden und deren festgelegten Wertigkeit.
      */
     public static List<Dienstgrad> sortieren(Set<String> set) {
         List<Dienstgrad> dienstGradList = new ArrayList<>();

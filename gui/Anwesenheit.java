@@ -32,7 +32,7 @@ class Anwesenheit extends JDialog {
      * Modal
      * Titel
      * Dispose on Close
-     * resizable -> false
+     * resizable = false
      */
     private void dialogbauen() {
         this.setModal(true);
@@ -47,7 +47,7 @@ class Anwesenheit extends JDialog {
 
     /**
      * Erstellt den Inhalt des Dialogs.
-     * @return  contentPanel    Das JPanel das dem Dialog hinzugefügt wird
+     * @return  contentPanel Das JPanel das dem Dialog hinzugefügt wird.
      */
     private JPanel createContent() {
         JPanel contentPanel = new JPanel();

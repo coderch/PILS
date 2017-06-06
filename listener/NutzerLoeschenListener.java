@@ -14,7 +14,6 @@ import java.util.List;
  *
  * @author ajanzen
  * @see java.awt.event.ActionListener
- * @see gui.NutzerFrame
  * {@inheritDoc}
  */
 public class NutzerLoeschenListener implements ActionListener {
@@ -69,8 +68,8 @@ public class NutzerLoeschenListener implements ActionListener {
             for (Nutzer nutzer : nutzerList) {
                 if (Frameholder.aktiverNutzer.getPersonalnummer() != nutzer.getPersonalnummer()) {
                     sb.append(nutzer).append("\n");
-                    NutzerDAO.loginLöschen(nutzer.getPersonalnummer());
-                    NutzerDAO.nutzerLöschen(nutzer.getPersonalnummer());
+                    NutzerDAO.loginLoeschen(nutzer.getPersonalnummer());
+                    NutzerDAO.nutzerLoeschen(nutzer.getPersonalnummer());
                 } else {
                     JOptionPane.showMessageDialog(null, "Sie können Ihren eigenen Account nicht löschen", "Zugriff verweigert", JOptionPane.INFORMATION_MESSAGE);
                 }
